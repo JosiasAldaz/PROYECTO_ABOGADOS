@@ -9,6 +9,55 @@ package abogados;
  *
  * @author Edisson
  */
-public class Usuario {
+public class Usuario extends Persona {
+    private String idusuario;
+    private String FKestado;
+    private String Fkiabogadoasig;
+    private String Fkcasoasig;
+
+    public Usuario(String idusuario, String FKestado, String Fkiabogadoasig, String Fkcasoasig, String cedula, String PrimerNombre, String SegundoNombre, int edad, String genero, String direccion, String telefono, String Usuario, String password) {
+        super(cedula, PrimerNombre, SegundoNombre, edad, genero, direccion, telefono, Usuario, password);
+        this.idusuario = idusuario;
+        this.FKestado = FKestado;
+        this.Fkiabogadoasig = Fkiabogadoasig;
+        this.Fkcasoasig = Fkcasoasig;
+    }
+
+    public String getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(String idusuario) {
+        this.idusuario = idusuario;
+    }
+
+    public String getFKestado() {
+        return FKestado;
+    }
+
+    public void setFKestado(String FKestado) {
+        this.FKestado = FKestado;
+    }
+
+    public String getFkiabogadoasig() {
+        return Fkiabogadoasig;
+    }
+
+    public void setFkiabogadoasig(String Fkiabogadoasig) {
+        this.Fkiabogadoasig = Fkiabogadoasig;
+    }
+
+    public String getFkcasoasig() {
+        return Fkcasoasig;
+    }
+
+    public void setFkcasoasig(String Fkcasoasig) {
+        this.Fkcasoasig = Fkcasoasig;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idusuario=" + idusuario + ", FKestado=" + FKestado + ", Fkiabogadoasig=" + Fkiabogadoasig + ", Fkcasoasig=" + Fkcasoasig + '}';
+    }
     
 }
