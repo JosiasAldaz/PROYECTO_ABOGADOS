@@ -44,9 +44,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jTextcelular = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasscontra = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        jPasscontra2 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jTextnusu = new javax.swing.JTextField();
@@ -160,11 +160,11 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jPasswordField1))
+                                            .addComponent(jPasscontra))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
-                                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jPasscontra2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jButton1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,8 +234,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextnusu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPasscontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPasscontra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,23 +318,30 @@ public class Regi_Asistente extends javax.swing.JFrame {
         String cel = jTextcelular.getText();
         String corre = jTextcorreo.getText();
         String usu = jTextnusu.getText();
+        String contra = jPasscontra.getText();
+        String contra1 = jPasscontra2.getText();
         if (ced.matches("^[0-9]{10}$")) {
             if (nom.matches("[A-Za-z]+$") && nom2.matches("[A-Za-z]+$")) {
                 if (ape1.matches("[A-Za-z]+$") && ape2.matches("[A-Za-z]+$")) {
                     if (cel.matches("^[0-9]{10}$")) {
                         if (usu.matches("[A-Za-z]+$")) {
-                            if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                                System.out.println(" " + ced);
-                                System.out.println(" " + nom);
-                                System.out.println(" " + nom2);
-                                System.out.println(" " + ape1);
-                                System.out.println(" " + ape2);
-                                System.out.println(" " + cel);
-                                System.out.println(" " + usu);
-                                System.out.println(" " + corre);
-                                System.out.println(" " + jDateChooser1.getDate());
+                            if (contra1.equals(contra1)) {
+                                if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                                    System.out.println(" " + ced);
+                                    System.out.println(" " + nom);
+                                    System.out.println(" " + nom2);
+                                    System.out.println(" " + ape1);
+                                    System.out.println(" " + ape2);
+                                    System.out.println(" " + cel);
+                                    System.out.println(" " + usu);
+                                    System.out.println(" " + corre);
+                                    System.out.println(" " + jDateChooser1.getDate());
+                                    System.out.println(" " + contra);
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Correo invalido");
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(this, "Correo invalido");
+                                JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
                             }
                         } else {
                             JOptionPane.showMessageDialog(this, "Nombre de usuario invalido");
@@ -374,8 +381,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasscontra;
+    private javax.swing.JPasswordField jPasscontra2;
     private javax.swing.JTextField jTextape1;
     private javax.swing.JTextField jTextape2;
     private javax.swing.JTextField jTextcedula;
