@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class Regi_Asistente extends javax.swing.JFrame {
 
+    String selec;
+
     /**
      * Creates new form Regi_Asistente
      */
@@ -37,7 +39,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jTextnom2 = new javax.swing.JTextField();
         jTextape1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCombselec = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jTextape2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -74,7 +76,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Genero:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccionar ", " Masculino", " Femenino", " Sin espesificar" }));
+        jCombselec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccionar ", " Masculino", " Femenino", " Sin espesificar" }));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Apellidos:");
@@ -176,7 +178,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTextcedula, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(jCombselec, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addComponent(jTextnusu, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +205,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCombselec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,7 +272,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextnusuActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:      
+
         ingresar_datos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -320,44 +323,65 @@ public class Regi_Asistente extends javax.swing.JFrame {
         String usu = jTextnusu.getText();
         String contra = jPasscontra.getText();
         String contra1 = jPasscontra2.getText();
-        if (ced.matches("^[0-9]{10}$")) {
-            if (nom.matches("[A-Za-z]+$") && nom2.matches("[A-Za-z]+$")) {
-                if (ape1.matches("[A-Za-z]+$") && ape2.matches("[A-Za-z]+$")) {
-                    if (cel.matches("^[0-9]{10}$")) {
-                        if (usu.matches("[A-Za-z]+$")) {
-                            if (contra1.equals(contra1)) {
-                                if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                                    System.out.println(" " + ced);
-                                    System.out.println(" " + nom);
-                                    System.out.println(" " + nom2);
-                                    System.out.println(" " + ape1);
-                                    System.out.println(" " + ape2);
-                                    System.out.println(" " + cel);
-                                    System.out.println(" " + usu);
-                                    System.out.println(" " + corre);
-                                    System.out.println(" " + jDateChooser1.getDate());
-                                    System.out.println(" " + contra);
-                                } else {
-                                    JOptionPane.showMessageDialog(this, "Correo invalido");
-                                }
-                            } else {
-                                JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
-                            }
+        if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || usu.isEmpty() || contra.isEmpty() || contra1.isEmpty()) {
+            // Mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "Todos los campos son requeridos.");
+        } else {
+            if (ced.matches("^[0-9]{10}$")) {
+                if (nom.matches("[A-Z]{1}[a-z]+$") && nom2.matches("[A-Z]{1}[a-z]+$")) {
+                    if (ape1.matches("[A-Z]{1}[a-z]+$") && ape2.matches("[A-Z]{1}[a-z]+$")) {
+                        if (jCombselec.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(this, "SELECCIONE El GENERO");
                         } else {
-                            JOptionPane.showMessageDialog(this, "Nombre de usuario invalido");
-                        }
+                            if (jCombselec.getSelectedIndex() == 1) {
+                                selec = jCombselec.getItemAt(1);
+                            }
+                            if (jCombselec.getSelectedIndex() == 2) {
+                                selec = jCombselec.getItemAt(2);
+                            }
+                            if (jCombselec.getSelectedIndex() == 3) {
+                                selec = jCombselec.getItemAt(3);
+                            }
+                            if (cel.matches("^[0-9]{10}$")) {
+                                if (usu.matches("[A-Za-z]+$")) {
+                                    if (contra1.equals(contra1)) {
+                                        if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
 
+                                            System.out.println(" " + ced);
+                                            System.out.println(" " + nom);
+                                            System.out.println(" " + nom2);
+                                            System.out.println(" " + ape1);
+                                            System.out.println(" " + ape2);
+                                            System.out.println(" " + selec);
+                                            System.out.println(" " + cel);
+                                            System.out.println(" " + usu);
+                                            System.out.println(" " + corre);
+                                            System.out.println(" " + jDateChooser1.getDate());
+                                            System.out.println(" " + contra);
+
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "Correo invalido");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Nombre de usuario invalido");
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Numero de telefono incorrecto");
+                            }
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(this, "Numero de telefono incorrecto");
+                        JOptionPane.showMessageDialog(this, "Verifique los apellidos");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Verifique los apellidos");
+                    JOptionPane.showMessageDialog(this, "Verifique los nombres");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Verifique los nombres");
+                JOptionPane.showMessageDialog(this, "Cedula invalida");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Cedula invalida");
         }
     }
 
@@ -365,7 +389,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
