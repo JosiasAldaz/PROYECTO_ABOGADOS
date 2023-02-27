@@ -259,7 +259,9 @@
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Bienvenidos a ABOGADOS-ECU, su firma de abogados de &#xa;confianza en Ecuador. Nuestro equipo de profesionales&#xa;altamente capacitados est&#xe1; aqu&#xed; para brindarle el mejor&#xa;servicio legal y asesoramiento en una amplia gama de&#xa;&#xe1;reas, desde derecho penal hasta derecho corporativo y&#xa;m&#xe1;s all&#xe1;.&#xa;Nos enorgullece trabajar incansablemente en nombre de&#xa;nuestros clientes, ofreciendo soluciones pr&#xe1;cticas y&#xa;efectivas para sus problemas legales. En ABOGADOS-ECU,&#xa;creemos en la justicia y en la protecci&#xf3;n de los derechos de&#xa;nuestros clientes, y nos esforzamos por garantizar que&#xa;reciban la mejor representaci&#xf3;n legal posible.&#xa;Navegue por nuestra aplicaci&#xf3;n para obtener m&#xe1;s&#xa;informaci&#xf3;n sobre nuestros servicios y no dude en ponerse&#xa;en contacto con nosotros para programar una consulta&#xa;gratuita. En ABOGADOS-ECU, estamos comprometidos con&#xa;su &#xe9;xito legal y estamos listos para ayudarlo a lograrlo."/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
+                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                        <EmptyBorder bottom="0" left="0" right="0" top="0"/>
+                      </Border>
                     </Property>
                   </Properties>
                 </Component>

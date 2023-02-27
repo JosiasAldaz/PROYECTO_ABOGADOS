@@ -128,7 +128,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         jTextArea1.setForeground(new java.awt.Color(51, 51, 51));
         jTextArea1.setRows(5);
         jTextArea1.setText("Bienvenidos a ABOGADOS-ECU, su firma de abogados de \nconfianza en Ecuador. Nuestro equipo de profesionales\naltamente capacitados está aquí para brindarle el mejor\nservicio legal y asesoramiento en una amplia gama de\náreas, desde derecho penal hasta derecho corporativo y\nmás allá.\nNos enorgullece trabajar incansablemente en nombre de\nnuestros clientes, ofreciendo soluciones prácticas y\nefectivas para sus problemas legales. En ABOGADOS-ECU,\ncreemos en la justicia y en la protección de los derechos de\nnuestros clientes, y nos esforzamos por garantizar que\nreciban la mejor representación legal posible.\nNavegue por nuestra aplicación para obtener más\ninformación sobre nuestros servicios y no dude en ponerse\nen contacto con nosotros para programar una consulta\ngratuita. En ABOGADOS-ECU, estamos comprometidos con\nsu éxito legal y estamos listos para ayudarlo a lograrlo.");
-        jTextArea1.setBorder(null);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
