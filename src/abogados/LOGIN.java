@@ -100,9 +100,10 @@ public class LOGIN extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(188, 143, 143));
         jComboBox1.setEditable(true);
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(188, 143, 143));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo Ususario", "Cliente", "Abogado", "Administrador", "Asistente" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 289, 110, 30));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 150, 30));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 10)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título.jpg"))); // NOI18N
