@@ -10,13 +10,16 @@ package abogados;
  * @author Edisson
  */
 public class Usuario extends Persona {
+
     private String idusuario;
     private String FKestado;
     private String Fkiabogadoasig;
     private String Fkcasoasig;
 
-    public Usuario(String idusuario, String FKestado, String Fkiabogadoasig, String Fkcasoasig, String cedula, String PrimerNombre, String SegundoNombre, int edad, String genero, String direccion, String telefono, String Usuario, String password) {
-        super(cedula, PrimerNombre, SegundoNombre, edad, genero, direccion, telefono, Usuario, password);
+    public Usuario() {
+    }
+
+    public Usuario(String idusuario, String FKestado, String Fkiabogadoasig, String Fkcasoasig) {
         this.idusuario = idusuario;
         this.FKestado = FKestado;
         this.Fkiabogadoasig = Fkiabogadoasig;
@@ -59,5 +62,5 @@ public class Usuario extends Persona {
     public String toString() {
         return "Usuario{" + "idusuario=" + idusuario + ", FKestado=" + FKestado + ", Fkiabogadoasig=" + Fkiabogadoasig + ", Fkcasoasig=" + Fkcasoasig + '}';
     }
-    
+
 }
