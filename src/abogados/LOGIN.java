@@ -36,6 +36,7 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,7 +71,7 @@ public class LOGIN extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 250, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 250, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
@@ -81,7 +82,7 @@ public class LOGIN extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 200, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 200, 40));
 
         jLabel4.setFont(new java.awt.Font("Castellar", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 51));
@@ -96,6 +97,12 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Castellar", 1, 36)); // NOI18N
         jLabel2.setText("BIENVENIDO A ABOGADOS-ECU");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 680, 90));
+
+        jComboBox1.setBackground(new java.awt.Color(188, 143, 143));
+        jComboBox1.setEditable(true);
+        jComboBox1.setForeground(new java.awt.Color(188, 143, 143));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo Ususario", "Cliente", "Abogado", "Administrador", "Asistente" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 289, 110, 30));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 10)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título.jpg"))); // NOI18N
@@ -165,6 +172,7 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

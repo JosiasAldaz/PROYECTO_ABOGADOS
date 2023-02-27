@@ -17,7 +17,7 @@ public class Persona {
     private String SegundoApellido;
     private int edad;
     private String genero;
-    private String direccion;
+    private int FK_direccion;
     private String telefono;
     private String Usuario;
     private String password;
@@ -25,7 +25,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, String genero, String direccion, String telefono, String Usuario, String password) {
+    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, String genero, int FK_direccion, String telefono, String Usuario, String password) {
         this.cedula = cedula;
         this.PrimerNombre = PrimerNombre;
         this.SegundoNombre = SegundoNombre;
@@ -33,7 +33,7 @@ public class Persona {
         this.SegundoApellido = SegundoApellido;
         this.edad = edad;
         this.genero = genero;
-        this.direccion = direccion;
+        this.FK_direccion = FK_direccion;
         this.telefono = telefono;
         this.Usuario = Usuario;
         this.password = password;
@@ -95,12 +95,12 @@ public class Persona {
         this.genero = genero;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public int getDireccion() {
+        return FK_direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccion(int direccion) {
+        this.FK_direccion = FK_direccion;
     }
 
     public String getTelefono() {
@@ -127,9 +127,5 @@ public class Persona {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" + "cedula=" + cedula + ", PrimerNombre=" + PrimerNombre + ", SegundoNombre=" + SegundoNombre + ", NombreApellido=" + NombreApellido + ", SegundoApellido=" + SegundoApellido + ", edad=" + edad + ", genero=" + genero + ", direccion=" + direccion + ", telefono=" + telefono + ", Usuario=" + Usuario + ", password=" + password + '}';
-    }
     
 }

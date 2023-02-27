@@ -10,8 +10,7 @@ package abogados;
  * @author Edisson
  */
 public class Usuario extends Persona {
-
-    private String idusuario;
+    private int idusuario;
     private String FKestado;
     private String Fkiabogadoasig;
     private String Fkcasoasig;
@@ -19,18 +18,18 @@ public class Usuario extends Persona {
     public Usuario() {
     }
 
-    public Usuario(String idusuario, String FKestado, String Fkiabogadoasig, String Fkcasoasig) {
+    public Usuario(int idusuario, String FKestado, String Fkiabogadoasig, String Fkcasoasig) {
         this.idusuario = idusuario;
         this.FKestado = FKestado;
         this.Fkiabogadoasig = Fkiabogadoasig;
         this.Fkcasoasig = Fkcasoasig;
     }
 
-    public String getIdusuario() {
+    public int getIdusuario() {
         return idusuario;
     }
 
-    public void setIdusuario(String idusuario) {
+    public void setIdusuario(int idusuario) {
         this.idusuario = idusuario;
     }
 
