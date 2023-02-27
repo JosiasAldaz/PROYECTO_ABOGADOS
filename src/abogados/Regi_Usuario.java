@@ -29,8 +29,6 @@ public class Regi_Usuario extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jBttnRegistrarse = new javax.swing.JButton();
         jLbllogo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jTxtFldNombre1 = new javax.swing.JTextField();
@@ -53,13 +51,19 @@ public class Regi_Usuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTxtFldEdad = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jTxtFldUsuario = new javax.swing.JTextField();
         jPsswrdFldContraseña = new javax.swing.JPasswordField();
         jLblEdad = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLblContraseña = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -67,36 +71,19 @@ public class Regi_Usuario extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(139, 69, 19));
 
-        jButton1.setText("Guardar");
-
-        jBttnRegistrarse.setText("Registrarse");
-        jBttnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBttnRegistrarseActionPerformed(evt);
-            }
-        });
+        jLbllogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLbllogo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149)
-                .addComponent(jBttnRegistrarse)
-                .addGap(183, 183, 183))
+                .addComponent(jLbllogo)
+                .addGap(0, 812, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBttnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
-            .addComponent(jLbllogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLbllogo, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(211, 211, 211));
@@ -109,19 +96,22 @@ public class Regi_Usuario extends javax.swing.JFrame {
                 jTxtFldNombre1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTxtFldNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 113, 30));
+        jPanel1.add(jTxtFldNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 130, 30));
 
-        jLabel3.setText("Nacionalidad:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Calle secundaria:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 120, -1));
 
         jTxtFldNombre2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
-        jPanel1.add(jTxtFldNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 117, 30));
+        jPanel1.add(jTxtFldNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 117, 30));
 
+        jLblNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLblNombre.setText("Nombres:");
-        jPanel1.add(jLblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 60, -1));
+        jPanel1.add(jLblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 60, -1));
 
+        jLblApellidos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLblApellidos.setText("Apellidos:");
-        jPanel1.add(jLblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel1.add(jLblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         jTxtFldApellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
         jTxtFldApellido1.addActionListener(new java.awt.event.ActionListener() {
@@ -129,50 +119,58 @@ public class Regi_Usuario extends javax.swing.JFrame {
                 jTxtFldApellido1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTxtFldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 113, 30));
+        jPanel1.add(jTxtFldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 130, 30));
 
         jTxtFldApellido2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
-        jPanel1.add(jTxtFldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 117, 30));
+        jPanel1.add(jTxtFldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 117, 30));
 
+        jLblCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLblCedula.setText("Cedula:");
-        jPanel1.add(jLblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 62, -1));
+        jPanel1.add(jLblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 62, -1));
 
-        jTxtFldNacionalidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 255)));
-        jPanel1.add(jTxtFldNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 172, 30));
+        jTxtFldNacionalidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
+        jPanel1.add(jTxtFldNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, 172, 30));
 
         jTxtFldCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
-        jPanel1.add(jTxtFldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 150, 30));
+        jPanel1.add(jTxtFldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 150, 30));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Femenino");
         jRadioButton1.setContentAreaFilled(false);
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, -1, -1));
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Masculino");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, -1, -1));
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Sin Especificar");
-        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, -1, -1));
+        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, -1, -1));
 
         jTxtFldTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
-        jPanel1.add(jTxtFldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 150, 30));
+        jPanel1.add(jTxtFldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 150, 30));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 249, 39));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 200, 39));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Direccion:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 62, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 62, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Genero:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         jTxtFldEdad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
         jPanel1.add(jTxtFldEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 670, 60, 30));
@@ -180,28 +178,71 @@ public class Regi_Usuario extends javax.swing.JFrame {
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 204)));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Divorcio", "Pension", "Accidentes Trafico", "Adopcion", "Homicidio", "Femicidio", "Robo", "Violacion", "Acoso", "Trabajo Infantil", "ETC", " " }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204)));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, -1, 30));
-
-        jTxtFldUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
-        jPanel1.add(jTxtFldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 150, 30));
+        jTxtFldUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
+        jPanel1.add(jTxtFldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, 150, 30));
 
         jPsswrdFldContraseña.setText("jPasswordField1");
-        jPsswrdFldContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
-        jPanel1.add(jPsswrdFldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 150, 30));
+        jPsswrdFldContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
+        jPanel1.add(jPsswrdFldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
 
+        jLblEdad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLblEdad.setText("Edad:");
-        jPanel1.add(jLblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, 30));
+        jPanel1.add(jLblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, -1, 30));
 
-        jLabel6.setText("Caso:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
-
+        jLblContraseña.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLblContraseña.setText("Contraseña:");
-        jPanel1.add(jLblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+        jPanel1.add(jLblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Telefono:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 62, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 62, -1));
+
+        jPanel3.setBackground(new java.awt.Color(245, 222, 179));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("REGISTRAR");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 130, -1));
+        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 60, 40));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Nacionalidad:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(192, 192, 192)));
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 200, 39));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Calle principal:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -214,33 +255,32 @@ public class Regi_Usuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 144, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 661, Short.MAX_VALUE)))
+                    .addGap(0, 576, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTxtFldNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFldNombre1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTxtFldNombre1ActionPerformed
 
     private void jTxtFldApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFldApellido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtFldApellido1ActionPerformed
 
-    private void jBttnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegistrarseActionPerformed
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         
-        LOGIN nuevaVentana = new LOGIN();
-        nuevaVentana.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jBttnRegistrarseActionPerformed
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -264,15 +304,15 @@ public class Regi_Usuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jBttnRegistrarse;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLblApellidos;
     private javax.swing.JLabel jLblCedula;
     private javax.swing.JLabel jLblContraseña;
@@ -281,13 +321,17 @@ public class Regi_Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLbllogo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPsswrdFldContraseña;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTxtFldApellido1;
     private javax.swing.JTextField jTxtFldApellido2;
     private javax.swing.JTextField jTxtFldCedula;
