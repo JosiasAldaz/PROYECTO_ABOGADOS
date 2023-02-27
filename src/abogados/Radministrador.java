@@ -51,6 +51,7 @@ public class Radministrador extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +119,9 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, -1, -1));
         jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 170, -1));
 
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,6 +178,7 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
