@@ -5,6 +5,8 @@
  */
 package abogados;
 
+import java.awt.Color;
+
 /**
  *
  * @author KEVIN SANCHEZ
@@ -16,7 +18,7 @@ public class LOGIN extends javax.swing.JFrame {
      */
     public LOGIN() {
         initComponents();
-         setLocationRelativeTo(this);
+        setLocationRelativeTo(this);
         //this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
@@ -42,10 +44,14 @@ public class LOGIN extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        contraseña.setText("jPasswordField1");
+        contraseña.setForeground(new java.awt.Color(204, 204, 204));
+        contraseña.setText("jPasswor");
         contraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contraseñaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                contraseñaMousePressed(evt);
             }
         });
         contraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -53,8 +59,21 @@ public class LOGIN extends javax.swing.JFrame {
                 contraseñaActionPerformed(evt);
             }
         });
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contraseñaKeyTyped(evt);
+            }
+        });
         getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 210, 30));
 
+        jTextField1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
+        jTextField1.setText("Ingrese su nombre de usuario");
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField1MousePressed(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -99,7 +118,6 @@ public class LOGIN extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 680, 90));
 
         jComboBox1.setBackground(new java.awt.Color(188, 143, 143));
-        jComboBox1.setEditable(true);
         jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(188, 143, 143));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo Ususario", "Cliente", "Abogado", "Administrador", "Asistente" }));
@@ -121,7 +139,7 @@ public class LOGIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VentanaPrincipal1 principal=new VentanaPrincipal1();
+        VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -129,6 +147,25 @@ public class LOGIN extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MousePressed
+        if (jTextField1.getText().equals("Ingrese su nombre de usuario")) {
+            jTextField1.setText("");
+            jTextField1.setForeground(Color.black);
+        }
+        if (String.valueOf(contraseña.getPassword()).isEmpty()) {
+            contraseña.setText("********");
+            contraseña.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_jTextField1MousePressed
+
+    private void contraseñaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMousePressed
+
+    }//GEN-LAST:event_contraseñaMousePressed
+
+    private void contraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseñaKeyTyped
 
     private void contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMouseClicked
         contraseña.setText("");
