@@ -13,6 +13,8 @@ public class Persona {
     private String cedula;
     private String PrimerNombre;
     private String SegundoNombre;
+     private String NombreApellido;
+    private String SegundoApellido;
     private int edad;
     private String genero;
     private String direccion;
@@ -23,10 +25,12 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String cedula, String PrimerNombre, String SegundoNombre, int edad, String genero, String direccion, String telefono, String Usuario, String password) {
+    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, String genero, String direccion, String telefono, String Usuario, String password) {
         this.cedula = cedula;
         this.PrimerNombre = PrimerNombre;
         this.SegundoNombre = SegundoNombre;
+        this.NombreApellido = NombreApellido;
+        this.SegundoApellido = SegundoApellido;
         this.edad = edad;
         this.genero = genero;
         this.direccion = direccion;
@@ -57,6 +61,22 @@ public class Persona {
 
     public void setSegundoNombre(String SegundoNombre) {
         this.SegundoNombre = SegundoNombre;
+    }
+
+    public String getNombreApellido() {
+        return NombreApellido;
+    }
+
+    public void setNombreApellido(String NombreApellido) {
+        this.NombreApellido = NombreApellido;
+    }
+
+    public String getSegundoApellido() {
+        return SegundoApellido;
+    }
+
+    public void setSegundoApellido(String SegundoApellido) {
+        this.SegundoApellido = SegundoApellido;
     }
 
     public int getEdad() {
@@ -109,7 +129,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "cedula=" + cedula + ", PrimerNombre=" + PrimerNombre + ", SegundoNombre=" + SegundoNombre + ", edad=" + edad + ", genero=" + genero + ", direccion=" + direccion + ", telefono=" + telefono + ", Usuario=" + Usuario + ", password=" + password + '}';
+        return "Persona{" + "cedula=" + cedula + ", PrimerNombre=" + PrimerNombre + ", SegundoNombre=" + SegundoNombre + ", NombreApellido=" + NombreApellido + ", SegundoApellido=" + SegundoApellido + ", edad=" + edad + ", genero=" + genero + ", direccion=" + direccion + ", telefono=" + telefono + ", Usuario=" + Usuario + ", password=" + password + '}';
     }
     
 }
