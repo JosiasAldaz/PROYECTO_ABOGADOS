@@ -3,73 +3,70 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package abogados;
+
+import java.util.Date;
 
 /**
  *
  * @author KEVIN SANCHEZ
  */
 public class Especializacion {
-    private String especializacion1;
-    private String especializacion2;
-    private String especializacion3;
-    private String especializacion4;
-    private String especializacion5;
+    private int ID_especializacion1;
+    private int FK_ID_tipo;
+    private String Nombre;
+    private Date fecha_inicio;
+    private Date fecha_fin;
+
+    public Especializacion(int ID_especializacion1, int FK_ID_tipo, String Nombre, Date fecha_inicio, Date fecha_fin) {
+        this.ID_especializacion1 = ID_especializacion1;
+        this.FK_ID_tipo = FK_ID_tipo;
+        this.Nombre = Nombre;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+    }
 
     public Especializacion() {
     }
 
-    public Especializacion(String especializacion1, String especializacion2, String especializacion3, String especializacion4, String especializacion5) {
-        this.especializacion1 = especializacion1;
-        this.especializacion2 = especializacion2;
-        this.especializacion3 = especializacion3;
-        this.especializacion4 = especializacion4;
-        this.especializacion5 = especializacion5;
+    public int getID_especializacion1() {
+        return ID_especializacion1;
     }
 
-    public String getEspecializacion1() {
-        return especializacion1;
+    public void setID_especializacion1(int ID_especializacion1) {
+        this.ID_especializacion1 = ID_especializacion1;
     }
 
-    public void setEspecializacion1(String especializacion1) {
-        this.especializacion1 = especializacion1;
+    public int getFK_ID_tipo() {
+        return FK_ID_tipo;
     }
 
-    public String getEspecializacion2() {
-        return especializacion2;
+    public void setFK_ID_tipo(int FK_ID_tipo) {
+        this.FK_ID_tipo = FK_ID_tipo;
     }
 
-    public void setEspecializacion2(String especializacion2) {
-        this.especializacion2 = especializacion2;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public String getEspecializacion3() {
-        return especializacion3;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
-    public void setEspecializacion3(String especializacion3) {
-        this.especializacion3 = especializacion3;
+    public Date getFecha_inicio() {
+        return fecha_inicio;
     }
 
-    public String getEspecializacion4() {
-        return especializacion4;
+    public void setFecha_inicio(Date fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
     }
 
-    public void setEspecializacion4(String especializacion4) {
-        this.especializacion4 = especializacion4;
+    public Date getFecha_fin() {
+        return fecha_fin;
     }
 
-    public String getEspecializacion5() {
-        return especializacion5;
+    public void setFecha_fin(Date fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
-
-    public void setEspecializacion5(String especializacion5) {
-        this.especializacion5 = especializacion5;
-    }
-
-    @Override
-    public String toString() {
-        return "Especializacion{" + "especializacion1=" + especializacion1 + ", especializacion2=" + especializacion2 + ", especializacion3=" + especializacion3 + ", especializacion4=" + especializacion4 + ", especializacion5=" + especializacion5 + '}';
-    }
-    
+        
 }
