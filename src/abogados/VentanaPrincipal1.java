@@ -116,7 +116,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         );
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1-removebg-preview.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Captura de pantalla_20230226_184025 (1) (1).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -128,16 +128,16 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
                 .addGap(128, 128, 128))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(jLabel4)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 640));
@@ -147,27 +147,27 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseEntered
-        btnIniciar.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_txtIniciarMouseEntered
-
     private void txtIniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseExited
         btnIniciar.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_txtIniciarMouseExited
 
-    private void txtRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRegistrarseMouseEntered
-        btnRegistrarse.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_txtRegistrarseMouseEntered
+    private void txtIniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseEntered
+        btnIniciar.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_txtIniciarMouseEntered
+
+    private void txtIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseClicked
+        LOGIN inicio= new LOGIN();
+        inicio.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_txtIniciarMouseClicked
 
     private void txtRegistrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRegistrarseMouseExited
         btnRegistrarse.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_txtRegistrarseMouseExited
 
-    private void txtIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseClicked
-       LOGIN inicio= new LOGIN();
-       inicio.setVisible(true);
-       dispose();
-    }//GEN-LAST:event_txtIniciarMouseClicked
+    private void txtRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRegistrarseMouseEntered
+        btnRegistrarse.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_txtRegistrarseMouseEntered
 
     /**
      * @param args the command line arguments
