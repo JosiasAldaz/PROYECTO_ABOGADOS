@@ -213,6 +213,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     private javax.swing.JPanel btnRegistrarse;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel txtIniciar;
     private javax.swing.JLabel txtRegistrarse;
