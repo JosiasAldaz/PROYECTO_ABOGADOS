@@ -74,6 +74,9 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
         btnABOGADO.setBackground(new java.awt.Color(102, 102, 102));
         btnABOGADO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnABOGADOMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnABOGADOMouseEntered(evt);
             }
@@ -372,6 +375,12 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         Asistente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnASISTENTEMouseClicked
+
+    private void btnABOGADOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnABOGADOMouseClicked
+        Regi_abogado Abogado = new Regi_abogado();
+        Abogado.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnABOGADOMouseClicked
 
     /**
      * @param args the command line arguments
