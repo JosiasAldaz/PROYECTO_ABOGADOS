@@ -45,6 +45,9 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         btnCLIENTE.setBackground(new java.awt.Color(102, 102, 102));
         btnCLIENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCLIENTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCLIENTEMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCLIENTEMouseEntered(evt);
             }
@@ -98,6 +101,9 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
         btnASISTENTE.setBackground(new java.awt.Color(102, 102, 102));
         btnASISTENTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnASISTENTEMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnASISTENTEMouseEntered(evt);
             }
@@ -326,7 +332,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRegistrarseMouseEntered
 
     private void txtRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRegistrarseMouseClicked
-        LISTA.show(true);
+        LISTA.setVisible(true);
         LISTA.setSize(220, 364);
         LISTA.setLocationRelativeTo(null);
     }//GEN-LAST:event_txtRegistrarseMouseClicked
@@ -354,6 +360,18 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     private void btnASISTENTEMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnASISTENTEMouseExited
         btnASISTENTE.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_btnASISTENTEMouseExited
+
+    private void btnCLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCLIENTEMouseClicked
+        Regi_Usuario Cliente = new Regi_Usuario();
+        Cliente.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCLIENTEMouseClicked
+
+    private void btnASISTENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnASISTENTEMouseClicked
+        Regi_Asistente Asistente = new Regi_Asistente();
+        Asistente.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnASISTENTEMouseClicked
 
     /**
      * @param args the command line arguments
@@ -385,8 +403,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPrincipal1().setLocationRelativeTo(null);
+            public void run() {                
                 new VentanaPrincipal1().setVisible(true);
             }
         });
