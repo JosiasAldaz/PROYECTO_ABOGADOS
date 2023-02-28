@@ -60,6 +60,11 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         txtCLIENTE.setForeground(new java.awt.Color(153, 153, 153));
         txtCLIENTE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtCLIENTE.setText("CLIENTE");
+        txtCLIENTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCLIENTEMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnCLIENTELayout = new javax.swing.GroupLayout(btnCLIENTE);
         btnCLIENTE.setLayout(btnCLIENTELayout);
@@ -362,9 +367,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnASISTENTEMouseExited
 
     private void btnCLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCLIENTEMouseClicked
-        Regi_Usuario Cliente = new Regi_Usuario();
-        Cliente.setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_btnCLIENTEMouseClicked
 
     private void btnASISTENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnASISTENTEMouseClicked
@@ -372,6 +375,12 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         Asistente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnASISTENTEMouseClicked
+
+    private void txtCLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCLIENTEMouseClicked
+        Regi_Usuario Cliente = new Regi_Usuario();
+        Cliente.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_txtCLIENTEMouseClicked
 
     /**
      * @param args the command line arguments

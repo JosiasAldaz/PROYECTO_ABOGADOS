@@ -16,7 +16,7 @@ public class Persona {
      private String NombreApellido;
     private String SegundoApellido;
     private int edad;
-    private String genero;
+    private char genero;
     private int FK_direccion;
     private String telefono;
     private String Usuario;
@@ -25,7 +25,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, String genero, int FK_direccion, String telefono, String Usuario, String password) {
+    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String Usuario, String password) {
         this.cedula = cedula;
         this.PrimerNombre = PrimerNombre;
         this.SegundoNombre = SegundoNombre;
@@ -87,11 +87,11 @@ public class Persona {
         this.edad = edad;
     }
 
-    public String getGenero() {
+    public char getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(char genero) {
         this.genero = genero;
     }
 
