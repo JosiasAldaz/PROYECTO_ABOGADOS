@@ -5,13 +5,17 @@
  */
 package clases;
 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LENOVO
  */
 public class Cliente extends Persona{
     private int ID_cliente;
-
+    private PostgresConexion base;
+    
     public int getID_cliente() {
         return ID_cliente;
     }
@@ -26,7 +30,17 @@ public class Cliente extends Persona{
     }
 
     public Cliente() {
+        
     }
     
-    
+    public void Ingresar(){
+        String sql = "INSERT INTO Cliente(cedula_cli,contraseña_cli,prim_nom_cli,seg_nom_cli,prim_apell_cli,seg_apell_cli,edad_cli,genero_cli,fk_id_direccion)";
+        sql += " VALUES ('"+super.getCedula()+"','"+ super.getPassword() +"','" + super.getPrimerNombre()+ "','"+getTelefono()+"')";
+        if(base.accion(sql) == null){
+            JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
+        }else{
+            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO DE CLIENTES");
+        }
+    }
+
 }

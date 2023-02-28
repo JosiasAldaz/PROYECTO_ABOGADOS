@@ -15,10 +15,12 @@ import java.util.logging.Logger;
  *
  * @author LENOVO
  */
-public class PostgresConexion {
+public class PostgresConexion{
     Connection con;
+    //PONGANLE EL MISMO NOMMBRE A SU BASE
     String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
+    //TIENE QUE PONER SU CONTRASEÑA
     String password = "Nahofumi2001";
     Statement st;
     
@@ -35,7 +37,7 @@ public class PostgresConexion {
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    //SOLO SE USA CON SELECT 
     public ResultSet Consulta(String sql) {
         try {
             st = con.createStatement();
@@ -45,15 +47,15 @@ public class PostgresConexion {
             return null;
         }
     }
-    
-    public SQLException accion(String nsql) {
+    //SOLO SE USA CON DELETE, UPDATE, INSERT INTO
+    public SQLException accion(String nsql){
         System.out.println(nsql);
         try {
             st = con.createStatement();
             st.execute(nsql);
             st.close();
             return null;
-        } catch (SQLException ex) {
+        } catch (SQLException ex){
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }
