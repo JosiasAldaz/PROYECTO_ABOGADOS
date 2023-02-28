@@ -13,7 +13,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
     public VentanaPrincipal1() {
         initComponents();
-
+//        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,8 +24,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnCLIENTE = new javax.swing.JPanel();
         txtCLIENTE = new javax.swing.JLabel();
-        btnABOGADO = new javax.swing.JPanel();
-        txtABOGADO = new javax.swing.JLabel();
         btnASISTENTE = new javax.swing.JPanel();
         txtASISTENTE = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -77,33 +75,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
             .addComponent(txtCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
-        btnABOGADO.setBackground(new java.awt.Color(102, 102, 102));
-        btnABOGADO.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnABOGADOMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnABOGADOMouseExited(evt);
-            }
-        });
-
-        txtABOGADO.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        txtABOGADO.setForeground(new java.awt.Color(153, 153, 153));
-        txtABOGADO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtABOGADO.setText("ABOGADO");
-        txtABOGADO.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout btnABOGADOLayout = new javax.swing.GroupLayout(btnABOGADO);
-        btnABOGADO.setLayout(btnABOGADOLayout);
-        btnABOGADOLayout.setHorizontalGroup(
-            btnABOGADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-        );
-        btnABOGADOLayout.setVerticalGroup(
-            btnABOGADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-        );
-
         btnASISTENTE.setBackground(new java.awt.Color(102, 102, 102));
         btnASISTENTE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,7 +116,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnASISTENTE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
@@ -157,9 +127,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnABOGADO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(113, 113, 113)
                 .addComponent(btnASISTENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -350,14 +318,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         btnCLIENTE.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_btnCLIENTEMouseExited
 
-    private void btnABOGADOMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnABOGADOMouseEntered
-        btnABOGADO.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_btnABOGADOMouseEntered
-
-    private void btnABOGADOMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnABOGADOMouseExited
-        btnABOGADO.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_btnABOGADOMouseExited
-
     private void btnASISTENTEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnASISTENTEMouseEntered
         btnASISTENTE.setBackground(new Color(0, 0, 0));
     }//GEN-LAST:event_btnASISTENTEMouseEntered
@@ -377,7 +337,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnASISTENTEMouseClicked
 
     private void txtCLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCLIENTEMouseClicked
-        Regi_Usuario Cliente = new Regi_Usuario();
+        Registro_u Cliente = new Registro_u();
         Cliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_txtCLIENTEMouseClicked
@@ -420,7 +380,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog LISTA;
-    private javax.swing.JPanel btnABOGADO;
     private javax.swing.JPanel btnASISTENTE;
     private javax.swing.JPanel btnCLIENTE;
     private javax.swing.JPanel btnIniciar;
@@ -433,7 +392,6 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel txtABOGADO;
     private javax.swing.JLabel txtASISTENTE;
     private javax.swing.JLabel txtCLIENTE;
     private javax.swing.JLabel txtIniciar;
