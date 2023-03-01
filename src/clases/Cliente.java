@@ -16,7 +16,7 @@ import java.sql.ResultSet;
  */
 public class Cliente extends Persona{
     private int ID_cliente;
-    private PostgresConexion base;
+    private PostgresConexion base = new PostgresConexion();
     
     public int getID_cliente() {
         return ID_cliente;
@@ -36,8 +36,8 @@ public class Cliente extends Persona{
     }
     
     public void Ingresar(){
-        String sql = "INSERT INTO Cliente(cedula_cli,contraseña_cli,prim_nom_cli,seg_nom_cli,prim_apell_cli,seg_apell_cli,edad_cli,genero_cli,fk_id_direccion)";
-        sql += " VALUES ('"+super.getCedula()+"','"+super.getPassword()+"','"+super.getPrimerNombre()+"','"+super.getSegundoNombre()+"','"+super.getNombreApellido()+"','"+super.getSegundoApellido()+"','"+super.getEdad()+"','"+super.getGenero()+"','"+super.getDireccion() +"')";
+        String sql = "INSERT INTO clientes(cedula_cli,contraseña_cli,prim_nom_cli,seg_nom_cli,prim_apell_cli,seg_apell_cli,edad_cli,genero_cli,fk_id_direccion)";
+        sql += " VALUES (UPPER('"+super.getCedula()+"'),UPPER('"+super.getPassword()+"'),UPPER('"+super.getPrimerNombre()+"'),UPPER('"+super.getSegundoNombre()+"'),UPPER('"+super.getNombreApellido()+"'),UPPER('"+super.getSegundoApellido()+"'),"+super.getEdad()+",UPPER('"+super.getGenero()+"'),"+super.getDireccion()+")";
         if(base.accion(sql) == null){
             JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
         }else{
@@ -46,13 +46,13 @@ public class Cliente extends Persona{
     }
 
     public ArrayList BUSCAR() throws SQLException{
-        String sql = "SELECT * FROM Clientes";
+        String sql = "SELECT * FROM clientes";
         ArrayList <Cliente> listadoCLI = new ArrayList();
         ResultSet objeto = base.Consulta(sql);
         if(objeto == null){
             JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL PROCESO");
         }else{
-            while(!objeto.next()){
+            while(objeto.next()){
                 Cliente registro = new Cliente();
                 registro.setID_cliente(Integer.parseInt(objeto.getString("id_clie")));
                 registro.setCedula(objeto.getString("cedula_cli"));

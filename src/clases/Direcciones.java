@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package clases;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +18,7 @@ public class Direcciones {
     private String calle_secundaria;
     private String barrio;
     private boolean sucursal;
-    PostgresConexion base;
+    PostgresConexion base = new PostgresConexion();
 
     public Direcciones(int Id_direccion, String calle_principal, String calle_secundaria, String barrio) {
         this.Id_direccion = Id_direccion;
@@ -61,7 +62,7 @@ public class Direcciones {
     public Direcciones() {
     }
 
-    public boolean isSucursal() {
+    public boolean getSucursal() {
         return sucursal;
     }
 
@@ -72,12 +73,26 @@ public class Direcciones {
     
     public void Ingresar(){
         String sql = "INSERT INTO direcciones(calle_principal,calle_secundaria,barrio,sucursal)";
-        sql += " VALUES ('"+calle_principal+"','"+calle_secundaria+"','"+barrio+"','"+sucursal+"')";
-        if(base.accion(sql) == null){
-            
-        }else{
-            
-        }
+        sql += " VALUES ('"+this.getCalle_principal()+"','"+this.getCalle_secundaria()+"','"+this.getBarrio()+"','"+this.getSucursal()+"')";
+        base.accion(sql);
     }
+    
+    public int Seleccionar(String select) throws SQLException{
+        int ID_direccion =0; 
+        Direcciones objeto = new Direcciones();
+        ResultSet parseo = base.Consulta(select);
+        if(parseo == null){
+            JOptionPane.showMessageDialog(null, "REVISE LA CONSULTA SELECT");
+        }else{
+            while(parseo.next()){
+            objeto.setId_direccion(Integer.parseInt(parseo.getString("id_direccion")));
+        }
+        ID_direccion = objeto.getId_direccion();
+        return ID_direccion;
+        }
+        
+        return ID_direccion;
+    }
+    
     
 }

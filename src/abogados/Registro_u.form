@@ -88,7 +88,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="150" width="930" height="480"/>
+              <AbsoluteConstraints x="0" y="150" width="930" height="530"/>
             </Constraint>
           </Constraints>
 
@@ -385,7 +385,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telefono:"/>
+                <Property name="text" type="java.lang.String" value="Password:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -422,12 +422,48 @@
                   <Color blue="3f" green="85" red="cd" type="rgb"/>
                 </Property>
                 <Property name="editable" type="boolean" value="true"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Yu Gothic UI Semibold" size="12" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="37">
+                    <StringItem index="0" value="SELECCIONE"/>
+                    <StringItem index="1" value="BELLAVISTA"/>
+                    <StringItem index="2" value="CA&#xd1;ARIBAMBA"/>
+                    <StringItem index="3" value="EL BAT&#xc1;N"/>
+                    <StringItem index="4" value="EL SAGRARIO"/>
+                    <StringItem index="5" value="EL VECINO"/>
+                    <StringItem index="6" value="GIL RAMIREZ D&#xc1;VALOS"/>
+                    <StringItem index="7" value="HERMANO MIGUEL"/>
+                    <StringItem index="8" value="HUAYNAC&#xc1;PAC"/>
+                    <StringItem index="9" value="MACH&#xc1;NGARA"/>
+                    <StringItem index="10" value="MONAY"/>
+                    <StringItem index="11" value="SAN BLAS"/>
+                    <StringItem index="12" value="SAN SEBASTI&#xc1;N"/>
+                    <StringItem index="13" value="SUCRE"/>
+                    <StringItem index="14" value="TOTORACOCHA"/>
+                    <StringItem index="15" value="YANUNCAY"/>
+                    <StringItem index="16" value="BA&#xd1;OS"/>
+                    <StringItem index="17" value="CHAUCHA"/>
+                    <StringItem index="18" value="CHECA"/>
+                    <StringItem index="19" value="CHIQUINTAD"/>
+                    <StringItem index="20" value="CUMBE"/>
+                    <StringItem index="21" value="LLACAO"/>
+                    <StringItem index="22" value="MOLLETURO"/>
+                    <StringItem index="23" value="VICTORIA DEL PORTETE"/>
+                    <StringItem index="24" value="VALLE"/>
+                    <StringItem index="25" value="TURI"/>
+                    <StringItem index="26" value="TARQUI"/>
+                    <StringItem index="27" value="SINICAY"/>
+                    <StringItem index="28" value="SIDCAY"/>
+                    <StringItem index="29" value="SAYAUSI"/>
+                    <StringItem index="30" value="SANTA ANA"/>
+                    <StringItem index="31" value="SAN JOAQUIN"/>
+                    <StringItem index="32" value="RICAURTE"/>
+                    <StringItem index="33" value="QUINGUEO"/>
+                    <StringItem index="34" value="PACCHA"/>
+                    <StringItem index="35" value="OCTAVIO CORDERO"/>
+                    <StringItem index="36" value="NULTI"/>
                   </StringArray>
                 </Property>
               </Properties>

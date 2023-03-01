@@ -7,6 +7,9 @@ package abogados;
 
 import clases.Cliente;
 import clases.Direcciones;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -187,7 +190,7 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 130, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Telefono:");
+        jLabel12.setText("Password:");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 408, 87, 42));
 
         jPsswrdFldContraseña.setText("jPasswordField1");
@@ -199,10 +202,11 @@ public class Registro_u extends javax.swing.JFrame {
 
         JcmbParroquia.setBackground(new java.awt.Color(205, 133, 63));
         JcmbParroquia.setEditable(true);
-        JcmbParroquia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        JcmbParroquia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        JcmbParroquia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE", "BELLAVISTA", "CAÑARIBAMBA", "EL BATÁN", "EL SAGRARIO", "EL VECINO", "GIL RAMIREZ DÁVALOS", "HERMANO MIGUEL", "HUAYNACÁPAC", "MACHÁNGARA", "MONAY", "SAN BLAS", "SAN SEBASTIÁN", "SUCRE", "TOTORACOCHA", "YANUNCAY", "BAÑOS", "CHAUCHA", "CHECA", "CHIQUINTAD", "CUMBE", "LLACAO", "MOLLETURO", "VICTORIA DEL PORTETE", "VALLE", "TURI", "TARQUI", "SINICAY", "SIDCAY", "SAYAUSI", "SANTA ANA", "SAN JOAQUIN", "RICAURTE", "QUINGUEO", "PACCHA", "OCTAVIO CORDERO", "NULTI" }));
         jPanel2.add(JcmbParroquia, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 170, 50));
 
-        Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 480));
+        Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,21 +245,36 @@ public class Registro_u extends javax.swing.JFrame {
                 if(genero == ' ' || contra.equals("")){
                     JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
                 }else{
+                    //INGRESO DE DIRECCION
+                    int id = 0;
+                    Direcciones ubicacion = new Direcciones();
+                    ubicacion.setBarrio(JcmbParroquia.getSelectedItem().toString());
+                    ubicacion.setCalle_principal(JTarcalle_princi.getText());
+                    ubicacion.setCalle_secundaria(JTa_calle_sec.getText());
+                    ubicacion.setSucursal(false);
+                    ubicacion.Ingresar();
+                    //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
+                    String sql = "SELECT id_direccion from direcciones where calle_principal ="+"'"+JTarcalle_princi.getText()+"' " +"and calle_secundaria ="+"'"+JTa_calle_sec.getText()+"'";
+                    try{
+                        id = ubicacion.Seleccionar(sql);
+                        System.out.println(id);
+                        Cliente usuario = new Cliente();
+                        usuario.setCedula(jTxtFldCedula.getText());
+                        usuario.setPrimerNombre(jTxtFldNombre1.getText());
+                        usuario.setSegundoNombre(jTxtFldNombre2.getText());
+                        usuario.setNombreApellido(jTxtFldApellido1.getText());
+                        usuario.setSegundoApellido(jTxtFldNombre2.getText());
+                        usuario.setDireccion(id);
+                        usuario.setEdad(edad);
+                        usuario.setTelefono(jTxtFildTelefono.getText());
+                        usuario.setGenero(genero);
+                        usuario.setPassword(contra);
+                        usuario.Ingresar();
+                    }catch(SQLException ex){
+                        Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //INGRESO DEL CLIENTE
                     
-                    JcmbParroquia.getSelectedItem().toString();
-                    
-                    Direcciones direccion1 = new Direcciones();
-                    direccion1.setCalle_principal(contra);
-                    direccion1.setCalle_secundaria(contra);
-                    
-                    
-                    Cliente usuario = new Cliente();
-                    usuario.setCedula(jTxtFldCedula.getText());
-                    usuario.setPrimerNombre(jTxtFldNombre1.getText());
-                    usuario.setNombreApellido(jTxtFldApellido1.getText());
-                    usuario.setSegundoNombre(jTxtFldNombre2.getText());
-                    
-
                 }
             }
         }

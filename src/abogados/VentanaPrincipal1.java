@@ -1,14 +1,19 @@
 package abogados;
 
+import clases.Cliente;
+import clases.Direcciones;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Steven Zhicay
  */
 public class VentanaPrincipal1 extends javax.swing.JFrame {
-
+    Cliente usuario = new Cliente();
     int xMouse, yMouse;
 
     public VentanaPrincipal1() {
@@ -291,6 +296,17 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIniciarMouseEntered
 
     private void txtIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseClicked
+        int id;
+        Direcciones ubicacion = new Direcciones();
+        String calle1 = "gngbndgn";
+        String calle2 = "tnehndn";
+        String sql = "SELECT id_direccion from direcciones where calle_principal ="+"'"+calle1+"' " +"and calle_secundaria ="+"'"+calle2+"'";
+                    try{
+                        id = ubicacion.Seleccionar(sql);
+                        System.out.println(id);
+                    }catch(SQLException ex){
+                        Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         LOGIN inicio = new LOGIN();
         inicio.setVisible(true);
         dispose();
