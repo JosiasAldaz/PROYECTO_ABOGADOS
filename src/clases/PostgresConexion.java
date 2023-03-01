@@ -23,6 +23,7 @@ public class PostgresConexion{
     //TIENE QUE PONER SU CONTRASEÑA
     String password = "Nahofumi2001";
     Statement st;
+    int id_direccion =0;
     
     public PostgresConexion() {
         try {
@@ -48,7 +49,7 @@ public class PostgresConexion{
         }
     }
     //SOLO SE USA CON DELETE, UPDATE, INSERT INTO
-    public SQLException accion(String nsql){
+    public SQLException accion(String nsql) throws SQLException{
         System.out.println(nsql);
         try {
             st = con.createStatement();
@@ -57,7 +58,13 @@ public class PostgresConexion{
             return null;
         } catch (SQLException ex){
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
+            
             return ex;
         }
+    }
+    
+    
+    public Connection Ingres(){
+        return con;
     }
 }

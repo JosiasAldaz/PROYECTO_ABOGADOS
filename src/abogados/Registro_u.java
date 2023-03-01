@@ -7,6 +7,7 @@ package abogados;
 
 import clases.Cliente;
 import clases.Direcciones;
+import clases.PostgresConexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -245,18 +246,25 @@ public class Registro_u extends javax.swing.JFrame {
                 if(genero == ' ' || contra.equals("")){
                     JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
                 }else{
-                    //INGRESO DE DIRECCION
+//                    INGRESO DE DIRECCION
                     int id = 0;
                     Direcciones ubicacion = new Direcciones();
                     ubicacion.setBarrio(JcmbParroquia.getSelectedItem().toString());
                     ubicacion.setCalle_principal(JTarcalle_princi.getText());
                     ubicacion.setCalle_secundaria(JTa_calle_sec.getText());
                     ubicacion.setSucursal(false);
-                    ubicacion.Ingresar();
+                    try {
+                        ubicacion.Ingresar();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
+                    
+                    
                     String sql = "SELECT id_direccion from direcciones where calle_principal ="+"'"+JTarcalle_princi.getText()+"' " +"and calle_secundaria ="+"'"+JTa_calle_sec.getText()+"'";
                     try{
-                        id = ubicacion.Seleccionar(sql);
+//                        id = ubicacion.Seleccionar(sql);
+                        id  = ubicacion.Seleccionar(sql);
                         System.out.println(id);
                         Cliente usuario = new Cliente();
                         usuario.setCedula(jTxtFldCedula.getText());
@@ -264,7 +272,7 @@ public class Registro_u extends javax.swing.JFrame {
                         usuario.setSegundoNombre(jTxtFldNombre2.getText());
                         usuario.setNombreApellido(jTxtFldApellido1.getText());
                         usuario.setSegundoApellido(jTxtFldNombre2.getText());
-                        usuario.setDireccion(id);
+                        usuario.setFK_direccion(id);
                         usuario.setEdad(edad);
                         usuario.setTelefono(jTxtFildTelefono.getText());
                         usuario.setGenero(genero);

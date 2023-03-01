@@ -95,11 +95,11 @@ public class Persona {
         this.genero = genero;
     }
 
-    public int getDireccion() {
+    public int getFK_direccion() {
         return FK_direccion;
     }
 
-    public void setDireccion(int direccion) {
+    public void setFK_direccion(int FK_direccion) {
         this.FK_direccion = FK_direccion;
     }
 
