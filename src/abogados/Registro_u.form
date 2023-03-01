@@ -166,7 +166,7 @@
             <Component class="javax.swing.JTextField" name="jTxtFldCedula">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="152" y="223" width="118" height="40"/>
+                  <AbsoluteConstraints x="152" y="223" width="130" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -179,14 +179,14 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="60" y="310" width="87" height="41"/>
+                  <AbsoluteConstraints x="60" y="290" width="87" height="41"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="jTxtFildTelefono">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="150" y="310" width="118" height="40"/>
+                  <AbsoluteConstraints x="150" y="290" width="130" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -195,18 +195,18 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Parroquia:"/>
+                <Property name="text" type="java.lang.String" value="Nacionalidad:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="500" y="270" width="90" height="40"/>
+                  <AbsoluteConstraints x="510" y="280" width="110" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JSpinner" name="Spn_Edad">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="570" y="340" width="59" height="43"/>
+                  <AbsoluteConstraints x="580" y="350" width="59" height="43"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -336,7 +336,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="700" y="470" width="130" height="-1"/>
+                  <AbsoluteConstraints x="780" y="470" width="130" height="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -346,20 +346,30 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="jLabel11" min="-2" pref="27" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace pref="18" max="32767" attributes="0"/>
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="14" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabel11" alignment="0" pref="42" max="32767" attributes="0"/>
+                      <Component id="jLabel11" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel10" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel11">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imagenes/disco-flexible.png"/>
+                    </Property>
+                  </Properties>
+                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -371,25 +381,18 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel10MouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel11">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/disco-flexible.png"/>
-                    </Property>
-                  </Properties>
-                </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel12">
+            <Component class="javax.swing.JLabel" name="jLblUsuario">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Password:"/>
+                <Property name="text" type="java.lang.String" value="Usuario:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="61" y="408" width="87" height="42"/>
+                  <AbsoluteConstraints x="60" y="450" width="90" height="42"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -399,20 +402,20 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="152" y="408" width="-1" height="42"/>
+                  <AbsoluteConstraints x="590" y="450" width="100" height="42"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel13">
+            <Component class="javax.swing.JLabel" name="jLblCorreo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Edad:"/>
+                <Property name="text" type="java.lang.String" value="Correo:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="500" y="340" width="63" height="40"/>
+                  <AbsoluteConstraints x="60" y="360" width="63" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -426,44 +429,14 @@
                   <Font name="Yu Gothic UI Semibold" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="37">
+                  <StringArray count="7">
                     <StringItem index="0" value="SELECCIONE"/>
-                    <StringItem index="1" value="BELLAVISTA"/>
-                    <StringItem index="2" value="CA&#xd1;ARIBAMBA"/>
-                    <StringItem index="3" value="EL BAT&#xc1;N"/>
-                    <StringItem index="4" value="EL SAGRARIO"/>
-                    <StringItem index="5" value="EL VECINO"/>
-                    <StringItem index="6" value="GIL RAMIREZ D&#xc1;VALOS"/>
-                    <StringItem index="7" value="HERMANO MIGUEL"/>
-                    <StringItem index="8" value="HUAYNAC&#xc1;PAC"/>
-                    <StringItem index="9" value="MACH&#xc1;NGARA"/>
-                    <StringItem index="10" value="MONAY"/>
-                    <StringItem index="11" value="SAN BLAS"/>
-                    <StringItem index="12" value="SAN SEBASTI&#xc1;N"/>
-                    <StringItem index="13" value="SUCRE"/>
-                    <StringItem index="14" value="TOTORACOCHA"/>
-                    <StringItem index="15" value="YANUNCAY"/>
-                    <StringItem index="16" value="BA&#xd1;OS"/>
-                    <StringItem index="17" value="CHAUCHA"/>
-                    <StringItem index="18" value="CHECA"/>
-                    <StringItem index="19" value="CHIQUINTAD"/>
-                    <StringItem index="20" value="CUMBE"/>
-                    <StringItem index="21" value="LLACAO"/>
-                    <StringItem index="22" value="MOLLETURO"/>
-                    <StringItem index="23" value="VICTORIA DEL PORTETE"/>
-                    <StringItem index="24" value="VALLE"/>
-                    <StringItem index="25" value="TURI"/>
-                    <StringItem index="26" value="TARQUI"/>
-                    <StringItem index="27" value="SINICAY"/>
-                    <StringItem index="28" value="SIDCAY"/>
-                    <StringItem index="29" value="SAYAUSI"/>
-                    <StringItem index="30" value="SANTA ANA"/>
-                    <StringItem index="31" value="SAN JOAQUIN"/>
-                    <StringItem index="32" value="RICAURTE"/>
-                    <StringItem index="33" value="QUINGUEO"/>
-                    <StringItem index="34" value="PACCHA"/>
-                    <StringItem index="35" value="OCTAVIO CORDERO"/>
-                    <StringItem index="36" value="NULTI"/>
+                    <StringItem index="1" value="Ecuatoriano"/>
+                    <StringItem index="2" value="Colombiano"/>
+                    <StringItem index="3" value="Mexicano"/>
+                    <StringItem index="4" value="Ruso"/>
+                    <StringItem index="5" value="Espa&#xf1;ol"/>
+                    <StringItem index="6" value="Peruano"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -473,6 +446,49 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="630" y="270" width="170" height="50"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel14">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Edad:"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="510" y="340" width="50" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTxtFldCorreo">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtFldCorreoActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="150" y="360" width="290" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel13">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="480" y="450" width="90" height="42"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTxtFldUsuario">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="150" y="452" width="290" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
