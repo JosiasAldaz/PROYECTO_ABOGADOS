@@ -5,6 +5,8 @@
  */
 package abogados;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author KEVIN SANCHEZ
@@ -16,6 +18,41 @@ public class Radministrador extends javax.swing.JFrame {
      */
     public Radministrador() {
         initComponents();
+    }
+
+    public void validar() {
+        if (cedula.getText().matches("^[0-9]{10}$")) {
+            if (nombre1.getText().matches("^[A-Z]{1}[a-z]+$") && nombre2.getText().matches("^[A-Z]{1}[a-z]+$")) {
+                if (apellido1.getText().matches("^[A-Z]{1}[a-z]+$") && apellido2.getText().matches("^[A-Z]{1}[a-z]+$")) {
+                    if (correo.getText().matches("^([a-z]+[-_]?[0-9]?)+([@]{1})([a-z]+)(.)[a-z]+||([a-z]*[0-9]+)+([@]{1})([a-z]+)(.)[a-z]+$")) {
+                        if (telefono.getText().matches("^[0-9]{10}$")) {
+                            if (calle1.getText().matches("^[A-Z]?[a-z]+$") && calle2.getText().matches("^[A-Z]?[a-z]+$")) {
+                                if (usuario.getText().matches("^[A-Z]?[a-z]+|[a-z]+$")) {
+                                    if (contraseña.equals(contraseña1)) {
+                                        
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "USUARIO INGRESADO INCORRECTA");
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTA");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
     }
 
     /**
@@ -34,22 +71,20 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        cedula = new javax.swing.JTextField();
+        nombre1 = new javax.swing.JTextField();
+        nombre2 = new javax.swing.JTextField();
+        apellido1 = new javax.swing.JTextField();
+        apellido2 = new javax.swing.JTextField();
+        telefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        usuario = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
+        correo = new javax.swing.JTextField();
+        mostrar = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -61,11 +96,14 @@ public class Radministrador extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel15 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        calle2 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        calle1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        contraseña1 = new javax.swing.JPasswordField();
+        contraseña = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,23 +128,22 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Genero:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 30));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 30));
+        jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 30));
+        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 30));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        nombre2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                nombre2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 160, 30));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 30));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 160, 30));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 140, 30));
+        jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 160, 30));
+        jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 30));
+        jPanel1.add(apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 160, 30));
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Telefono:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Usuario:");
@@ -115,20 +152,24 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Correo:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 200, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Contraseña:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 517, -1, 20));
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 200, 30));
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 200, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Verifar contraseña:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, -1, -1));
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 280, 30));
+        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 280, 30));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, -1, -1));
+        mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
+        mostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
@@ -174,7 +215,7 @@ public class Radministrador extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addGap(96, 96, 96)
                 .addComponent(jLabel1)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,23 +228,23 @@ public class Radministrador extends javax.swing.JFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 860, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 870, 140));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Fecha de Nacimiento:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 170, 20));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 180, 20));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 180, 30));
         jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 50, 30));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Calle principal:");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 118, 30));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 230, 30));
+        jPanel1.add(calle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 230, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Calle Secundaria:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 130, 30));
-        jPanel1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 230, 30));
+        jPanel1.add(calle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 230, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Nacionalidad:");
@@ -212,35 +253,71 @@ public class Radministrador extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, 200, -1));
 
+        contraseña1.setText("jPasswordField1");
+        jPanel1.add(contraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
+
+        contraseña.setText("jPasswordField1");
+        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, 30));
+
+        jButton1.setText("REGISTRARSE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 650, 200, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VentanaPrincipal1 principal=new VentanaPrincipal1();
+        VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void nombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_nombre2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void mostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMouseClicked
+        char i = contraseña.getEchoChar();
+        boolean a = true;
+        if (a == true) {  // a es una variable boolean en true
+            contraseña.setEchoChar((char) 0);
+            contraseña1.setEchoChar((char) 0);
+            mostrar.setVisible(false);
+            a = false;
+        } else {
+            contraseña.setEchoChar(i); // i es el char
+            a = true;
+        }
+
+    }//GEN-LAST:event_mostrarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        validar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,14 +356,22 @@ public class Radministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField apellido1;
+    private javax.swing.JTextField apellido2;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField calle1;
+    private javax.swing.JTextField calle2;
+    private javax.swing.JTextField cedula;
+    private javax.swing.JPasswordField contraseña;
+    private javax.swing.JPasswordField contraseña1;
+    private javax.swing.JTextField correo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -306,17 +391,10 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel mostrar;
+    private javax.swing.JTextField nombre1;
+    private javax.swing.JTextField nombre2;
+    private javax.swing.JTextField telefono;
+    private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }

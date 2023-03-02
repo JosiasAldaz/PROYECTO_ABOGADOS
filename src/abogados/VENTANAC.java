@@ -267,6 +267,9 @@ public class VENTANAC extends javax.swing.JFrame {
     private void btnADMINISTRADORMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnADMINISTRADORMouseClicked
         Radministrador Admin = new Radministrador();
         Admin.setVisible(true);
+          VentanaPrincipal1 principal = new VentanaPrincipal1();
+        principal.setVisible(false);
+        dispose();
         dispose();
     }//GEN-LAST:event_btnADMINISTRADORMouseClicked
 
