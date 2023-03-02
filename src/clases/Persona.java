@@ -19,8 +19,8 @@ public class Persona {
     private char genero;
     private int FK_direccion;
     private String telefono;
-    private String Usuario;
     private String password;
+    private String corre;
 
     public Persona() {
     }
@@ -35,7 +35,6 @@ public class Persona {
         this.genero = genero;
         this.FK_direccion = FK_direccion;
         this.telefono = telefono;
-        this.Usuario = Usuario;
         this.password = password;
     }
 
@@ -111,12 +110,12 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public String getUsuario() {
-        return Usuario;
+    public String getCorre() {
+        return corre;
     }
 
-    public void setUsuario(String Usuario) {
-        this.Usuario = Usuario;
+    public void setCorre(String corre) {
+        this.corre = corre;
     }
 
     public String getPassword() {

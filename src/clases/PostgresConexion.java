@@ -23,7 +23,6 @@ public class PostgresConexion{
     //TIENE QUE PONER SU CONTRASEÑA
     String password = "Nahofumi2001";
     Statement st;
-    int id_direccion =0;
     
     public PostgresConexion() {
         try {
