@@ -50,7 +50,6 @@ public class Registro_u extends javax.swing.JFrame {
         jTxtFldCedula = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTxtFildTelefono = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         Spn_Edad = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -65,14 +64,11 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLblUsuario = new javax.swing.JLabel();
         jPsswrdFldContraseña = new javax.swing.JPasswordField();
         jLblCorreo = new javax.swing.JLabel();
-        JcmbParroquia = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jTxtFldCorreo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTxtFldUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,10 +117,6 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel5.setText("Telefono:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 87, 41));
         jPanel2.add(jTxtFildTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 130, 40));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Nacionalidad:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 110, 40));
         jPanel2.add(Spn_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 59, 43));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -196,22 +188,12 @@ public class Registro_u extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, 130, -1));
 
-        jLblUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLblUsuario.setText("Usuario:");
-        jPanel2.add(jLblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 90, 42));
-
         jPsswrdFldContraseña.setText("jPasswordField1");
         jPanel2.add(jPsswrdFldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, 100, 42));
 
         jLblCorreo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLblCorreo.setText("Correo:");
         jPanel2.add(jLblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 63, 40));
-
-        JcmbParroquia.setBackground(new java.awt.Color(205, 133, 63));
-        JcmbParroquia.setEditable(true);
-        JcmbParroquia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        JcmbParroquia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE", "Ecuatoriano", "Colombiano", "Mexicano", "Ruso", "Español", "Peruano" }));
-        jPanel2.add(JcmbParroquia, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 170, 50));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Edad:");
@@ -222,12 +204,11 @@ public class Registro_u extends javax.swing.JFrame {
                 jTxtFldCorreoActionPerformed(evt);
             }
         });
-        jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 290, 40));
+        jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 200, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Contraseña:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 450, 90, 42));
-        jPanel2.add(jTxtFldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 452, 290, 40));
 
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 530));
 
@@ -271,7 +252,6 @@ public class Registro_u extends javax.swing.JFrame {
 //                    INGRESO DE DIRECCION
                     int id = 0;
                     Direcciones ubicacion = new Direcciones();
-                    ubicacion.setBarrio(JcmbParroquia.getSelectedItem().toString());
                     ubicacion.setCalle_principal(JTarcalle_princi.getText());
                     ubicacion.setCalle_secundaria(JTa_calle_sec.getText());
                     ubicacion.setSucursal(false);
@@ -299,6 +279,7 @@ public class Registro_u extends javax.swing.JFrame {
                         usuario.setTelefono(jTxtFildTelefono.getText());
                         usuario.setGenero(genero);
                         usuario.setPassword(contra);
+                        usuario.setCorre(jTxtFldCorreo.getText());
                         usuario.Ingresar();
                     }catch(SQLException ex){
                         Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
@@ -359,10 +340,9 @@ public class Registro_u extends javax.swing.JFrame {
     String calle_principal = JTarcalle_princi.getText();
     String calle_secundaria = JTa_calle_sec.getText();
     String correo = jTxtFldCorreo.getText();
-    String usuario = jTxtFldUsuario.getText();
     String contraseña = jPsswrdFldContraseña.getText();
     
-    if(cedula.isEmpty() || nombre1.isEmpty() || nombre2.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty() || telefono.isEmpty() || calle_principal.isEmpty() || calle_secundaria.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) {
+    if(cedula.isEmpty() || nombre1.isEmpty() || nombre2.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty() || telefono.isEmpty() || calle_principal.isEmpty() || calle_secundaria.isEmpty() || correo.isEmpty() || contraseña.isEmpty()) {
         
         JOptionPane.showMessageDialog(null, "Ingrese los campos requeridos.");
         
@@ -398,7 +378,6 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JPanel Fondo;
     private javax.swing.JTextArea JTa_calle_sec;
     private javax.swing.JTextArea JTarcalle_princi;
-    private javax.swing.JComboBox<String> JcmbParroquia;
     private javax.swing.JSpinner Spn_Edad;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -411,11 +390,9 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLblCorreo;
-    private javax.swing.JLabel jLblUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -432,6 +409,5 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JTextField jTxtFldCorreo;
     private javax.swing.JTextField jTxtFldNombre1;
     private javax.swing.JTextField jTxtFldNombre2;
-    private javax.swing.JTextField jTxtFldUsuario;
     // End of variables declaration//GEN-END:variables
 }
