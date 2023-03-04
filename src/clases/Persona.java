@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author KEVIN SANCHEZ
@@ -21,11 +23,13 @@ public class Persona {
     private String telefono;
     private String password;
     private String corre;
+    private String foto_perfil;
+    private LocalDateTime fecha_nacimiento;
 
     public Persona() {
     }
 
-    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String Usuario, String password) {
+    public Persona(String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String password, String corre, String foto_perfil, LocalDateTime fecha_nacimiento) {
         this.cedula = cedula;
         this.PrimerNombre = PrimerNombre;
         this.SegundoNombre = SegundoNombre;
@@ -36,7 +40,11 @@ public class Persona {
         this.FK_direccion = FK_direccion;
         this.telefono = telefono;
         this.password = password;
+        this.corre = corre;
+        this.foto_perfil = foto_perfil;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
+
 
     public String getCedula() {
         return cedula;
@@ -126,5 +134,19 @@ public class Persona {
         this.password = password;
     }
 
-    
+    public LocalDateTime getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(LocalDateTime fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public String getFoto_perfil() {
+        return foto_perfil;
+    }
+
+    public void setFoto_perfil(String foto_perfil) {
+        this.foto_perfil = foto_perfil;
+    }
 }

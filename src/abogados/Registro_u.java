@@ -24,6 +24,7 @@ public class Registro_u extends javax.swing.JFrame {
      */
     public Registro_u() {
         initComponents();
+        
     }
 
     /**
@@ -39,6 +40,7 @@ public class Registro_u extends javax.swing.JFrame {
         Fondo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTxtFldNombre1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -50,7 +52,6 @@ public class Registro_u extends javax.swing.JFrame {
         jTxtFldCedula = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTxtFildTelefono = new javax.swing.JTextField();
-        Spn_Edad = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -66,7 +67,6 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPsswrdFldContraseña = new javax.swing.JPasswordField();
         jLblCorreo = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jTxtFldCorreo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
 
@@ -78,6 +78,9 @@ public class Registro_u extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
+        jLabel15.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
+        jLabel15.setText("Registro de clientes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,10 +88,20 @@ public class Registro_u extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 759, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         Fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 150));
@@ -117,7 +130,6 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel5.setText("Telefono:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 87, 41));
         jPanel2.add(jTxtFildTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 130, 40));
-        jPanel2.add(Spn_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 59, 43));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Genero:");
@@ -195,10 +207,6 @@ public class Registro_u extends javax.swing.JFrame {
         jLblCorreo.setText("Correo:");
         jPanel2.add(jLblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 63, 40));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("Edad:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 50, 40));
-
         jTxtFldCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtFldCorreoActionPerformed(evt);
@@ -228,7 +236,7 @@ public class Registro_u extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         char genero = ' ';
-        String contra = new String(jPsswrdFldContraseña.getPassword());      
+        String contra = new String(jPsswrdFldContraseña.getPassword());
         if(jRadioButton3.isSelected()){
             genero = 'X';
         }
@@ -238,13 +246,9 @@ public class Registro_u extends javax.swing.JFrame {
         if(jRadioButton1.isSelected()){
             genero = 'F';
         }
-        int edad = Integer.parseInt(Spn_Edad.getValue().toString());
         if(jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || JTarcalle_princi.getText().equals("") || JTa_calle_sec.getText().equals("") || jTxtFildTelefono.getText().equals("")){
             JOptionPane.showMessageDialog(null,"DEBE LLENAR TODOS LOS DATOS");
         }else{
-            if(edad<=0 || edad >120){
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR UNA EDAD MENOR A 120 Y MAYOR A 0");
-            }else{
                 if(genero == ' ' || contra.equals("")){
                     JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
                 }else{
@@ -274,7 +278,6 @@ public class Registro_u extends javax.swing.JFrame {
                         usuario.setNombreApellido(jTxtFldApellido1.getText());
                         usuario.setSegundoApellido(jTxtFldNombre2.getText());
                         usuario.setFK_direccion(id);
-                        usuario.setEdad(edad);
                         usuario.setTelefono(jTxtFildTelefono.getText());
                         usuario.setGenero(genero);
                         usuario.setPassword(contra);
@@ -286,7 +289,7 @@ public class Registro_u extends javax.swing.JFrame {
                     //INGRESO DEL CLIENTE
                     
                 }
-            }
+            
         }
     }//GEN-LAST:event_jLabel10MouseClicked
 
@@ -377,13 +380,12 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JPanel Fondo;
     private javax.swing.JTextArea JTa_calle_sec;
     private javax.swing.JTextArea JTarcalle_princi;
-    private javax.swing.JSpinner Spn_Edad;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

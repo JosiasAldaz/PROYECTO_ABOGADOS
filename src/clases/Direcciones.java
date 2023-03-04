@@ -72,8 +72,8 @@ public class Direcciones {
     
     
     public void Ingresar() throws SQLException{
-        String sql = "INSERT INTO direcciones(calle_principal,calle_secundaria,barrio,sucursal)";
-        sql += " VALUES ('"+this.getCalle_principal()+"','"+this.getCalle_secundaria()+"','"+this.getBarrio()+"','"+this.getSucursal()+"')";
+        String sql = "INSERT INTO direcciones(calle_principal,calle_secundaria,sucursal)";
+        sql += " VALUES ('"+this.getCalle_principal()+"','"+this.getCalle_secundaria()+"','"+this.getSucursal()+"')";
         base.accion(sql);
     }
     
