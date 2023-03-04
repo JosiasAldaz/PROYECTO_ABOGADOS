@@ -5,6 +5,8 @@
  */
 package abogados;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Steven Zhicay
@@ -16,6 +18,37 @@ public class Regi_abogado extends javax.swing.JFrame {
      */
     public Regi_abogado() {
         initComponents();
+    }
+
+    public void validar() {
+        char genero = ' ';
+        int edad = Integer.parseInt(SpinnerEdad.getValue().toString());
+        if (txtCedula.getText().matches(("^[0-9]{10}$"))) {
+            if (txtPrimerNombre.getText().matches("^[A-Z]{1}[a-z]+$") && txtSegundoNombre.getText().matches("^[A-Z]{1}[a-z]+$")) {
+                if (txtPrimerApellido.getText().matches("^[A-Z]{1}[a-z]+$") && txtSegundoApellido.getText().matches("^[A-Z]{1}[a-z]+$")) {
+                    if (Integer.parseInt(SpinnerEdad.getValue().toString()) < 18 || Integer.parseInt(SpinnerEdad.getValue().toString()) > 90) {
+                        if (Masculino.isSelected()) {
+                            genero = 'M';
+                        }
+                        if (Femenino.isSelected()) {
+                            genero = 'F';
+                        } else {
+                            if (genero == ' ') {
+                                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Tiene que ser mayor de 18 y menor de 90");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Los apellidos solo debe tener letras y empezar con mayuscula");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Los nombre solo debe tener letras y empezar con mayuscula");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Cedula mal ingresada");
+        }
     }
 
     /**
@@ -42,23 +75,23 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtPrimerNombre = new javax.swing.JTextField();
+        txtSegundoNombre = new javax.swing.JTextField();
+        txtSegundoApellido = new javax.swing.JTextField();
+        txtPrimerApellido = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
+        SpinnerEdad = new javax.swing.JSpinner();
+        Masculino = new javax.swing.JRadioButton();
+        Femenino = new javax.swing.JRadioButton();
+        txtDireccion = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
+        Si = new javax.swing.JRadioButton();
+        No = new javax.swing.JRadioButton();
+        txtTitulos = new javax.swing.JTextField();
+        txtNacionalidad = new javax.swing.JTextField();
+        txtAsistente = new javax.swing.JTextField();
+        btnRegistrarse = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -116,72 +149,78 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel12.setText("Asistente:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 143, 33));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtPrimerNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtPrimerNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 127, 33));
+        jPanel1.add(txtPrimerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 143, 33));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtSegundoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtSegundoNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 127, 33));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 143, 33));
+        jPanel1.add(txtSegundoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 150, 33));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtSegundoApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtSegundoApellidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 143, 32));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 55, 33));
+        jPanel1.add(txtSegundoApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 150, 33));
+        jPanel1.add(txtPrimerApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 143, 33));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Maculino");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                txtCedulaActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 93, -1));
+        jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 143, 32));
+        jPanel1.add(SpinnerEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 55, 33));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Femenino");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 93, -1));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, 140, 32));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 105, 33));
-
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(Masculino);
+        Masculino.setText("Maculino");
+        Masculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                MasculinoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 105, 33));
+        jPanel1.add(Masculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 93, -1));
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("SI");
-        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 110, -1));
+        buttonGroup1.add(Femenino);
+        Femenino.setText("Femenino");
+        jPanel1.add(Femenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 93, -1));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, 100, 32));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 105, 33));
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("NO");
-        jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 93, -1));
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 105, 22));
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 105, 33));
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 105, 32));
-
-        jButton1.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
-        jButton1.setText("Registrarse");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtCostoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, -1, 31));
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 105, 33));
+
+        buttonGroup2.add(Si);
+        Si.setText("SI");
+        jPanel1.add(Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 110, -1));
+
+        buttonGroup2.add(No);
+        No.setText("NO");
+        jPanel1.add(No, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 93, -1));
+        jPanel1.add(txtTitulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 140, 30));
+        jPanel1.add(txtNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 105, 33));
+        jPanel1.add(txtAsistente, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 105, 32));
+
+        btnRegistrarse.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, -1, 31));
 
         jPanel2.setBackground(new java.awt.Color(139, 69, 19));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -192,7 +231,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
         jLabel14.setText("Registro de abogados");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 510, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 510, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 160));
 
@@ -201,29 +240,33 @@ public class Regi_abogado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtSegundoApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSegundoApellidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtSegundoApellidoActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void MasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasculinoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_MasculinoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtSegundoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSegundoNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtSegundoNombreActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        validar();
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrimerNombreActionPerformed
+
+    }//GEN-LAST:event_txtPrimerNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,9 +304,14 @@ public class Regi_abogado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Femenino;
+    private javax.swing.JRadioButton Masculino;
+    private javax.swing.JRadioButton No;
+    private javax.swing.JRadioButton Si;
+    private javax.swing.JSpinner SpinnerEdad;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -280,21 +328,16 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtAsistente;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtNacionalidad;
+    private javax.swing.JTextField txtPrimerApellido;
+    private javax.swing.JTextField txtPrimerNombre;
+    private javax.swing.JTextField txtSegundoApellido;
+    private javax.swing.JTextField txtSegundoNombre;
+    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTitulos;
     // End of variables declaration//GEN-END:variables
 }

@@ -228,8 +228,7 @@ public class Registro_u extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         char genero = ' ';
-        String contra = new String(jPsswrdFldContraseña.getPassword());
-        System.out.println(contra);
+        String contra = new String(jPsswrdFldContraseña.getPassword());      
         if(jRadioButton3.isSelected()){
             genero = 'X';
         }
