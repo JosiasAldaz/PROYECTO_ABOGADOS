@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -26,10 +27,12 @@ public class Cliente extends Persona{
         this.ID_cliente = ID_cliente;
     }
 
-    public Cliente(int ID_cliente, String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String Usuario, String password) {
-        super(cedula, PrimerNombre, SegundoNombre, NombreApellido, SegundoApellido, edad, genero, FK_direccion, telefono, Usuario, password);
+    public Cliente(int ID_cliente, String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String password, String corre, String foto_perfil, LocalDateTime fecha_nacimiento) {
+        super(cedula, PrimerNombre, SegundoNombre, NombreApellido, SegundoApellido, edad, genero, FK_direccion, telefono, password, corre, foto_perfil, fecha_nacimiento);
         this.ID_cliente = ID_cliente;
     }
+
+  
 
     public Cliente() {
         
