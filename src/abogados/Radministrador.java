@@ -415,10 +415,10 @@ public class Radministrador extends javax.swing.JFrame {
             genero = 'X';
         }
         if(jRadioButton2.isSelected()){
-            genero = 'M';
+            genero = 'F';
         }
         if(jRadioButton1.isSelected()){
-            genero = 'F';
+            genero = 'M';
         }
         if(dia >31 || dia<1){
             JOptionPane.showMessageDialog(null,"DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
@@ -462,7 +462,7 @@ public class Radministrador extends javax.swing.JFrame {
                         jefe.setGenero(genero);
                         jefe.setPassword(contra);
                         jefe.setCorre(correo.getText());
-                        jefe.setFoto_admin(JFSfoto_admin.getRutaImagen());
+                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
                         jefe.setFecha_nacimiento(fechaHora);
                         jefe.Ingresar();
                     } catch (SQLException ex){
