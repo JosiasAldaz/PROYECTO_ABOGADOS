@@ -27,55 +27,42 @@ public class administradorInterfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonModificarA = new javax.swing.JButton();
+        jButtonModificarA1 = new javax.swing.JButton();
+        jButtonModificarA2 = new javax.swing.JButton();
+        jButtonModificarA3 = new javax.swing.JButton();
+        jButtonModificarA4 = new javax.swing.JButton();
+        jButtonModificarA5 = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(139, 69, 19));
+        jPanel1.setBackground(new java.awt.Color(205, 133, 63));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(139, 69, 19));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 82, -1, -1));
-
-        jButton2.setText("jButton2");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 121, -1, -1));
-
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 160, -1, -1));
-
-        jButton4.setText("jButton4");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 199, -1, -1));
-
-        jButton5.setText("jButton5");
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 238, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 200, 450));
-
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 890, 570));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 920, 550));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 120));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Castellar", 0, 60)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
@@ -84,6 +71,53 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("VICENTE PINZON Y LUIS DE LA CEDA");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 720, 430, 40));
+
+        jPanel2.setBackground(new java.awt.Color(25, 25, 112));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonModificarA.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA.setText("Modificar");
+        jButtonModificarA.setBorder(null);
+        jPanel2.add(jButtonModificarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 180, 50));
+
+        jButtonModificarA1.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA1.setText("ABOGADOS");
+        jButtonModificarA1.setBorder(null);
+        jPanel2.add(jButtonModificarA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 180, 50));
+
+        jButtonModificarA2.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA2.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA2.setText("CLIENTES");
+        jButtonModificarA2.setBorder(null);
+        jPanel2.add(jButtonModificarA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 50));
+
+        jButtonModificarA3.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA3.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA3.setText("ASISTENTES");
+        jButtonModificarA3.setBorder(null);
+        jPanel2.add(jButtonModificarA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
+
+        jButtonModificarA4.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA4.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA4.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA4.setText("Modificar");
+        jButtonModificarA4.setBorder(null);
+        jPanel2.add(jButtonModificarA4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 180, 50));
+
+        jButtonModificarA5.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonModificarA5.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA5.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA5.setText("Modificar");
+        jButtonModificarA5.setBorder(null);
+        jPanel2.add(jButtonModificarA5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 180, 50));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,15 +171,18 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonModificarA;
+    private javax.swing.JButton jButtonModificarA1;
+    private javax.swing.JButton jButtonModificarA2;
+    private javax.swing.JButton jButtonModificarA3;
+    private javax.swing.JButton jButtonModificarA4;
+    private javax.swing.JButton jButtonModificarA5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
