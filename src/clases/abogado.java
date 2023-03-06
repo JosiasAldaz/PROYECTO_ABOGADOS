@@ -6,6 +6,9 @@
 package clases;
 
 import clases.Persona;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +20,8 @@ public class abogado extends Persona{
     private boolean gratuidad;
     private String titulo;
     private int puntuación;
-
+    PostgresConexion conexion = new PostgresConexion();
+    
     public abogado() {
     }
     
@@ -61,5 +65,21 @@ public class abogado extends Persona{
         this.puntuación = puntuación;
     }
 
-    
+    public ArrayList Listar() throws SQLException{
+        String script = "SELECT * FROM ABOGADO";
+        ResultSet contenedor = conexion.Consulta(script);
+        ArrayList retorno = new ArrayList();
+        while(contenedor.next()){
+            abogado insertar = new abogado();
+            insertar.setCedula(contenedor.getString("cedula_abg"));
+            insertar.setCod_abogado(Integer.parseInt(contenedor.getString("id_abg")));
+            insertar.setPrimerNombre(contenedor.getString("prim_nom_abg"));
+            insertar.setNombreApellido(contenedor.getString("prim_ape_abg"));
+            insertar.setTelefono(contenedor.getString("telefono_abg"));
+            insertar.setGratuidad(contenedor.getBoolean("gratuidad"));
+            
+            retorno.add(insertar);
+        }
+        return retorno;
+    }
 }

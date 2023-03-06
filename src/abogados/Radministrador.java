@@ -224,7 +224,7 @@ public class Radministrador extends javax.swing.JFrame {
                 mostrarMouseClicked(evt);
             }
         });
-        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 570, -1, -1));
+        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
@@ -311,7 +311,7 @@ public class Radministrador extends javax.swing.JFrame {
                 ocultarMouseClicked(evt);
             }
         });
-        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 510, 40, 40));
+        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 40, 40));
         jPanel1.add(Jspdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 60, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
