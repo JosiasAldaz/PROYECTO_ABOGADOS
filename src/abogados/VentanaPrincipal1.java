@@ -196,8 +196,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIniciarMouseEntered
 
     private void txtIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIniciarMouseClicked
-        
-        LOGIN inicio = new LOGIN();
+        Login inicio = new Login();
         inicio.setVisible(true);
         dispose();
     }//GEN-LAST:event_txtIniciarMouseClicked
