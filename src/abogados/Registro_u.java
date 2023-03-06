@@ -56,12 +56,8 @@ public class Registro_u extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTarcalle_princi = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        JTa_calle_sec = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -69,6 +65,8 @@ public class Registro_u extends javax.swing.JFrame {
         jLblCorreo = new javax.swing.JLabel();
         jTxtFldCorreo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jTxtFldCallePrincipal = new javax.swing.JTextField();
+        jTxtFldCalleSecundaria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +74,7 @@ public class Registro_u extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(139, 69, 19));
 
+        jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
@@ -108,64 +107,52 @@ public class Registro_u extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(211, 211, 211));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jTxtFldNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 57, 118, 39));
+        jPanel2.add(jTxtFldNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 57, 118, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel2.setText("Nombres:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 66, 87, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel3.setText("Apellidos:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 137, 87, 40));
-        jPanel2.add(jTxtFldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 140, 118, 40));
-        jPanel2.add(jTxtFldNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 57, 118, 40));
-        jPanel2.add(jTxtFldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 118, 40));
+        jPanel2.add(jTxtFldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 140, 118, 30));
+        jPanel2.add(jTxtFldNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 57, 118, 30));
+        jPanel2.add(jTxtFldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 118, 30));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel4.setText("Cedula:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 220, 87, 41));
-        jPanel2.add(jTxtFldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 223, 130, 40));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 87, 20));
+        jPanel2.add(jTxtFldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 130, 20));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel5.setText("Telefono:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 87, 41));
-        jPanel2.add(jTxtFildTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 130, 40));
+        jPanel2.add(jTxtFildTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 130, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel6.setText("Genero:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(497, 54, 67, 41));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 67, 41));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Masculino");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 66, 87, -1));
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 87, -1));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Femenino");
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(673, 66, 87, -1));
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, 87, -1));
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Sin especificar");
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 66, 101, -1));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, 101, -1));
 
-        JTarcalle_princi.setColumns(20);
-        JTarcalle_princi.setRows(5);
-        jScrollPane1.setViewportView(JTarcalle_princi);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 198, 48));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel8.setText("Calle principal:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 118, 41));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Calle principal:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 118, 41));
-
-        JTa_calle_sec.setColumns(20);
-        JTa_calle_sec.setRows(5);
-        jScrollPane2.setViewportView(JTa_calle_sec);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 198, 48));
+        jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
+        jLabel9.setText("Calle secundaria:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, 41));
 
         jPanel3.setBackground(new java.awt.Color(245, 222, 179));
 
@@ -203,7 +190,7 @@ public class Registro_u extends javax.swing.JFrame {
         jPsswrdFldContraseña.setText("jPasswordField1");
         jPanel2.add(jPsswrdFldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, 100, 42));
 
-        jLblCorreo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLblCorreo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLblCorreo.setText("Correo:");
         jPanel2.add(jLblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 63, 40));
 
@@ -212,11 +199,13 @@ public class Registro_u extends javax.swing.JFrame {
                 jTxtFldCorreoActionPerformed(evt);
             }
         });
-        jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 200, 40));
+        jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 230, 20));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel13.setText("Contraseña:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 450, 90, 42));
+        jPanel2.add(jTxtFldCallePrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 150, -1));
+        jPanel2.add(jTxtFldCalleSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 150, -1));
 
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 530));
 
@@ -246,7 +235,7 @@ public class Registro_u extends javax.swing.JFrame {
         if(jRadioButton1.isSelected()){
             genero = 'F';
         }
-        if(jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || JTarcalle_princi.getText().equals("") || JTa_calle_sec.getText().equals("") || jTxtFildTelefono.getText().equals("")){
+        if(jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || jTxtFldCallePrincipal.getText().equals("") || jTxtFldCalleSecundaria.getText().equals("") || jTxtFildTelefono.getText().equals("")){
             JOptionPane.showMessageDialog(null,"DEBE LLENAR TODOS LOS DATOS");
         }else{
                 if(genero == ' ' || contra.equals("")){
@@ -255,8 +244,8 @@ public class Registro_u extends javax.swing.JFrame {
 //                    INGRESO DE DIRECCION
                     int id = 0;
                     Direcciones ubicacion = new Direcciones();
-                    ubicacion.setCalle_principal(JTarcalle_princi.getText());
-                    ubicacion.setCalle_secundaria(JTa_calle_sec.getText());
+                    ubicacion.setCalle_principal(jTxtFldCallePrincipal.getText());
+                    ubicacion.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
                     ubicacion.setSucursal(false);
                     try {
                         ubicacion.Ingresar();
@@ -266,7 +255,7 @@ public class Registro_u extends javax.swing.JFrame {
                     //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
                     
                     
-                    String sql = "SELECT id_direccion from direcciones where calle_principal ="+"'"+JTarcalle_princi.getText()+"' " +"and calle_secundaria ="+"'"+JTa_calle_sec.getText()+"'";
+                    String sql = "SELECT id_direccion from direcciones where calle_principal ="+"'"+jTxtFldCallePrincipal.getText()+"' " +"and calle_secundaria ="+"'"+jTxtFldCalleSecundaria.getText()+"'";
                     try{
 //                        id = ubicacion.Seleccionar(sql);
                         id  = ubicacion.Seleccionar(sql);
@@ -339,8 +328,8 @@ public class Registro_u extends javax.swing.JFrame {
     String apellido1 = jTxtFldApellido1.getText();
     String apellido2 = jTxtFldApellido2.getText();
     String telefono = jTxtFildTelefono.getText();
-    String calle_principal = JTarcalle_princi.getText();
-    String calle_secundaria = JTa_calle_sec.getText();
+    String calle_principal = jTxtFldCallePrincipal.getText();
+    String calle_secundaria = jTxtFldCalleSecundaria.getText();
     String correo = jTxtFldCorreo.getText();
     String contraseña = jPsswrdFldContraseña.getText();
     
@@ -378,8 +367,6 @@ public class Registro_u extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fondo;
-    private javax.swing.JTextArea JTa_calle_sec;
-    private javax.swing.JTextArea JTarcalle_princi;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -401,11 +388,11 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTxtFildTelefono;
     private javax.swing.JTextField jTxtFldApellido1;
     private javax.swing.JTextField jTxtFldApellido2;
+    private javax.swing.JTextField jTxtFldCallePrincipal;
+    private javax.swing.JTextField jTxtFldCalleSecundaria;
     private javax.swing.JTextField jTxtFldCedula;
     private javax.swing.JTextField jTxtFldCorreo;
     private javax.swing.JTextField jTxtFldNombre1;
