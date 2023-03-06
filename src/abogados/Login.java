@@ -1,13 +1,17 @@
 package abogados;
 
+import clases.Administrador;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author RAVEN
  */
 public class Login extends javax.swing.JFrame {
-
+    public static Administrador admin; 
     /**
      * Creates new form Login
      */
@@ -87,17 +91,17 @@ public class Login extends javax.swing.JFrame {
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addContainerGap(311, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                .addContainerGap(329, Short.MAX_VALUE)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addGap(293, 293, 293))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
+                .addGap(111, 111, 111)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,6 +122,22 @@ public class Login extends javax.swing.JFrame {
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         String user = txtUser.getText();
         String pass = String.valueOf(txtPassword.getPassword());
+        Administrador usuario_especial = new Administrador();
+        usuario_especial.setCedula(user);
+        usuario_especial.setPassword(pass);
+        int resul = 0;
+        try{
+            resul =usuario_especial.login();
+            if(resul ==1){
+                administradorInterfaz interfaz_admin = new administradorInterfaz();
+                interfaz_admin.setVisible(true);
+                this.dispose();
+            }
+            admin = usuario_especial;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+        }
+        
         
     }//GEN-LAST:event_cmdLoginActionPerformed
 

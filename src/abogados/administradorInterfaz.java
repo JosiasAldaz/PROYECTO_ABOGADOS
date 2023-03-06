@@ -26,6 +26,7 @@ ArrayList mostrar  = new ArrayList();
      */
     public administradorInterfaz() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
