@@ -38,88 +38,90 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabelLOGO = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLblDireccion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(205, 133, 63));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 1250, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 1050, 510));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1250, 470));
 
-        jPanel3.setBackground(new java.awt.Color(25, 25, 112));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
-        btnModificarAbodagos1.setBackground(new java.awt.Color(102, 153, 255));
+        btnModificarAbodagos1.setBackground(new java.awt.Color(0, 0, 0));
         btnModificarAbodagos1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnModificarAbodagos1.setForeground(new java.awt.Color(255, 255, 255));
         btnModificarAbodagos1.setText("Modificar");
-        btnModificarAbodagos1.setBorder(null);
+        btnModificarAbodagos1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnModificarAbodagos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarAbodagos1ActionPerformed(evt);
             }
         });
 
-        btnContratosEspera.setBackground(new java.awt.Color(102, 153, 255));
+        btnContratosEspera.setBackground(new java.awt.Color(0, 0, 0));
         btnContratosEspera.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnContratosEspera.setForeground(new java.awt.Color(255, 255, 255));
         btnContratosEspera.setText("Contratos en Espera");
-        btnContratosEspera.setBorder(null);
+        btnContratosEspera.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnContratosEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContratosEsperaActionPerformed(evt);
             }
         });
 
-        btnContratosVigentes1.setBackground(new java.awt.Color(102, 153, 255));
+        btnContratosVigentes1.setBackground(new java.awt.Color(0, 0, 0));
         btnContratosVigentes1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnContratosVigentes1.setForeground(new java.awt.Color(255, 255, 255));
         btnContratosVigentes1.setText("Contratos Vigentes");
-        btnContratosVigentes1.setBorder(null);
+        btnContratosVigentes1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnContratosVigentes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContratosVigentes1ActionPerformed(evt);
             }
         });
 
-        btnCasosGratuitos.setBackground(new java.awt.Color(102, 153, 255));
+        btnCasosGratuitos.setBackground(new java.awt.Color(0, 0, 0));
         btnCasosGratuitos.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnCasosGratuitos.setForeground(new java.awt.Color(255, 255, 255));
         btnCasosGratuitos.setText("Casos Gratuitos");
-        btnCasosGratuitos.setBorder(null);
+        btnCasosGratuitos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnCasosGratuitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCasosGratuitosActionPerformed(evt);
             }
         });
 
-        btnAsistenteAsignado.setBackground(new java.awt.Color(102, 153, 255));
+        btnAsistenteAsignado.setBackground(new java.awt.Color(0, 0, 0));
         btnAsistenteAsignado.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnAsistenteAsignado.setForeground(new java.awt.Color(255, 255, 255));
         btnAsistenteAsignado.setText("Asistente Asignado");
-        btnAsistenteAsignado.setBorder(null);
+        btnAsistenteAsignado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnAsistenteAsignado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenteAsignadoActionPerformed(evt);
             }
         });
 
-        btnOficinaAsignada.setBackground(new java.awt.Color(102, 153, 255));
+        btnOficinaAsignada.setBackground(new java.awt.Color(0, 0, 0));
         btnOficinaAsignada.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnOficinaAsignada.setForeground(new java.awt.Color(255, 255, 255));
         btnOficinaAsignada.setText("Oficina Asignada");
-        btnOficinaAsignada.setBorder(null);
+        btnOficinaAsignada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 204)));
         btnOficinaAsignada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOficinaAsignadaActionPerformed(evt);
@@ -130,48 +132,52 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnModificarAbodagos1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addComponent(btnContratosVigentes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnContratosEspera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCasosGratuitos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(btnModificarAbodagos1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(btnContratosVigentes1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnContratosEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(btnModificarAbodagos1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnContratosVigentes1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnContratosEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarAbodagos1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnContratosVigentes1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnContratosEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 510));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1250, 100));
 
-        jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 3, 90)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("ROG Fonts", 3, 56)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 650, -1));
+        jLabel1.setText("ABOGADO");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 370, 60));
 
         jLabelLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
         jPanel1.add(jLabelLOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, -1, 80));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("VICENTE PINZON Y LUIS DE LA CEDA");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 710, 430, 40));
+        jLblDireccion.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLblDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        jLblDireccion.setText("Dirección: Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
+        jPanel1.add(jLblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 750, 800, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,8 +261,8 @@ public class abogadoInterfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnOficinaAsignada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelLOGO;
+    private javax.swing.JLabel jLblDireccion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
