@@ -182,6 +182,11 @@ ArrayList mostrar  = new ArrayList();
         jButtonModificarA1.setForeground(new java.awt.Color(255, 255, 255));
         jButtonModificarA1.setText("ABOGADOS");
         jButtonModificarA1.setBorder(null);
+        jButtonModificarA1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonModificarA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 180, 50));
 
         jButtonModificarA2.setBackground(new java.awt.Color(102, 153, 255));
@@ -222,7 +227,10 @@ ArrayList mostrar  = new ArrayList();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -244,6 +252,10 @@ ArrayList mostrar  = new ArrayList();
             
         }
     }//GEN-LAST:event_jButtonModificarA7ActionPerformed
+
+    private void jButtonModificarA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA1ActionPerformed
 
     /**
      * @param args the command line arguments
