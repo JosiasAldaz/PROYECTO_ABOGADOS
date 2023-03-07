@@ -52,6 +52,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,6 +167,8 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel2.setToolTipText("");
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel2MouseDragged(evt);
@@ -177,7 +180,11 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
             }
         });
 
+        exitBtn.setBackground(new java.awt.Color(0, 0, 102));
+
+        exitTxt.setBackground(new java.awt.Color(255, 255, 255));
         exitTxt.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        exitTxt.setForeground(new java.awt.Color(255, 255, 255));
         exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         exitTxt.setText("X");
         exitTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -299,8 +306,8 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitTxtMouseEntered
 
     private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
-        exitBtn.setBackground(new Color(240,240,240));
-        exitTxt.setForeground(Color.black);
+        exitBtn.setBackground(new Color(0,0,102));
+        exitTxt.setForeground(Color.WHITE);
     }//GEN-LAST:event_exitTxtMouseExited
 
     /**

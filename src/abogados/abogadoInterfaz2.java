@@ -69,6 +69,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtModificar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtModificar.setText("Modificar");
         txtModificar.setBorder(null);
+        txtModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtModificarMouseEntered(evt);
@@ -90,6 +91,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosVigentes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtContratosVigentes.setText("Contratos Vigentes");
         txtContratosVigentes.setBorder(null);
+        txtContratosVigentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosVigentes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtContratosVigentesMouseEntered(evt);
@@ -111,6 +113,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosEspera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtContratosEspera.setText("Contratos en Espera");
         txtContratosEspera.setBorder(null);
+        txtContratosEspera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosEspera.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtContratosEsperaMouseEntered(evt);
@@ -132,6 +135,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtAsistenteAsignado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAsistenteAsignado.setText("Asistente Asignado");
         txtAsistenteAsignado.setBorder(null);
+        txtAsistenteAsignado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtAsistenteAsignado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAsistenteAsignadoMouseEntered(evt);
@@ -153,6 +157,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtOficinaAsignada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtOficinaAsignada.setText("Oficina Asignada");
         txtOficinaAsignada.setBorder(null);
+        txtOficinaAsignada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtOficinaAsignada.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtOficinaAsignadaMouseEntered(evt);
@@ -174,6 +179,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtCasosGratuitos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCasosGratuitos.setText("Casos Gratuitos");
         txtCasosGratuitos.setBorder(null);
+        txtCasosGratuitos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtCasosGratuitos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtCasosGratuitosMouseEntered(evt);
