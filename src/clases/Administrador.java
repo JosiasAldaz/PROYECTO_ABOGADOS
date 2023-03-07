@@ -5,6 +5,7 @@
  */
 package clases;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -54,4 +55,15 @@ public class Administrador extends Persona{
         }
     }
     
+    public int login() throws SQLException{
+        int retorno;
+        String loggin = "SELECT * FROM ADMINISTRADOR WHERE cedula_admin = '"+super.getCedula()+"' and contraseña_admin = '"+super.getPassword()+"'";
+        ResultSet resulset =  conn.Consulta(loggin);
+        if(!resulset.next()){
+            retorno =0;
+        }else{
+            retorno =1;
+        }
+        return retorno;
+    }
 }

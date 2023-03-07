@@ -21,7 +21,7 @@ public class PostgresConexion{
     String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
     //TIENE QUE PONER SU CONTRASEÑA
-    String password = "Nahofumi2001";
+    String password = "1234";
     Statement st;
     
     public PostgresConexion() {
@@ -51,7 +51,7 @@ public class PostgresConexion{
     public SQLException accion(String nsql) throws SQLException{
         System.out.println(nsql);
         try {
-            st = con.createStatement();
+            
             st.execute(nsql);
             st.close();
             return null;
