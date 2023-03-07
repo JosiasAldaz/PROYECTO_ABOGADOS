@@ -175,17 +175,17 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jPanel1.add(jLabelLOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, -1, 80));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, -1, 80));
 
         jLblDireccion.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLblDireccion.setForeground(new java.awt.Color(255, 102, 102));
         jLblDireccion.setText("Direccion:");
-        jPanel1.add(jLblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 750, 100, 40));
+        jPanel1.add(jLblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 720, 100, 40));
 
         jLblDireccion1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLblDireccion1.setForeground(new java.awt.Color(255, 255, 255));
         jLblDireccion1.setText("Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
-        jPanel1.add(jLblDireccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 750, 800, 40));
+        jPanel1.add(jLblDireccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 720, 800, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

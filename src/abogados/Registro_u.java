@@ -155,6 +155,7 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, 41));
 
         jPanel3.setBackground(new java.awt.Color(245, 222, 179));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
 
@@ -173,7 +174,7 @@ public class Registro_u extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addContainerGap())
         );
