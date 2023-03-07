@@ -18,10 +18,11 @@ import java.util.logging.Logger;
 public class PostgresConexion{
     Connection con;
     //PONGANLE EL MISMO NOMMBRE A SU BASE
-    String url = "jdbc:postgresql://localhost:5432/Abogados";
+    String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
     //TIENE QUE PONER SU CONTRASEÑA
-    String password = "1234";
+    String password = "Nahofumi2001";
+    Statement st;
     
     public PostgresConexion() {
         try {
@@ -50,7 +51,7 @@ public class PostgresConexion{
     public SQLException accion(String nsql) throws SQLException{
         System.out.println(nsql);
         try {
-            st = con.createStatement();
+            
             st.execute(nsql);
             st.close();
             return null;
