@@ -5,20 +5,20 @@
  */
 package abogados;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Edisson
  */
-public class Regi_Asistente extends javax.swing.JFrame {
-
+public class Crudasis extends javax.swing.JFrame {
     String selec;
 
     /**
      * Creates new form Regi_Asistente
      */
-    public Regi_Asistente() {
+    public Crudasis() {
         initComponents();
         ocultarasis.setVisible(false);
     }
@@ -62,7 +62,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        JFSfoto_admin = new rojerusan.RSFotoSquare();
+        JFSfoto_asis = new rojerusan.RSFotoSquare();
         jLabel11 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -70,6 +70,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         mostrarasis = new javax.swing.JLabel();
         ocultarasis = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,13 +138,13 @@ public class Regi_Asistente extends javax.swing.JFrame {
         });
         jPanel1.add(jTextnusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 237, 109, -1));
 
-        jButton2.setText("Registrarse");
+        jButton2.setText("ACTUALIZAR DATOS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 509, 145, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 145, 40));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Celular:");
@@ -173,7 +174,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JFSfoto_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(JFSfoto_asis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +185,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(JFSfoto_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JFSfoto_asis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -203,13 +204,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jButton4.setText("PANTALLA PRINCIPAL");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 509, 250, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 50, 40));
 
         mostrarasis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarasis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,6 +229,14 @@ public class Regi_Asistente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ocultarasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 40, 40));
+
+        jButton1.setText("CANCELAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -253,7 +261,6 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:                     
         valced();
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasscontra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasscontra2ActionPerformed
@@ -295,6 +302,13 @@ public class Regi_Asistente extends javax.swing.JFrame {
             a = true;
         }
     }//GEN-LAST:event_ocultarasisMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        asistenteInterfaz2 ad = new asistenteInterfaz2();
+        ad.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     ///////////////////////////metodos///
     public void valced() {
@@ -348,49 +362,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // Si llegamos hasta aquí, la cédula es válida
         return true;
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Regi_Asistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Regi_Asistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Regi_Asistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Regi_Asistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Regi_Asistente().setVisible(true);
-            }
-        });
-    }
-
+    
     public void ingresar_datos() {
         String ced = jTextcedula.getText();
         String nom = jTextnom1.getText();
@@ -426,6 +398,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                 if (usu.matches("[A-Za-z]+$")) {
                                     if (contra1.equals(contra)) {
                                         if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+
                                             System.out.println(" " + ced);
                                             System.out.println(" " + nom);
                                             System.out.println(" " + nom2);
@@ -438,7 +411,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                             System.out.println(" " + jDateChooser1.getDate());
                                             System.out.println(" " + contra);
                                             JOptionPane.showMessageDialog(this, "REGISTRO EXITOSO");
-                                            Login log=new Login();
+                                            Login log = new Login();
                                             log.setVisible(true);
                                             dispose();
                                         } else {
@@ -465,9 +438,59 @@ public class Regi_Asistente extends javax.swing.JFrame {
             }
         }
     }
-
+   
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Crudasis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Crudasis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Crudasis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Crudasis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Crudasis().setVisible(true);
+            }
+        });
+    }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSFotoSquare JFSfoto_admin;
+    private rojerusan.RSFotoSquare JFSfoto_asis;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;

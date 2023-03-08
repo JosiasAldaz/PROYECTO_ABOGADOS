@@ -6,12 +6,16 @@
 package clases;
 
 import clases.abogado;
+import java.beans.Statement;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author KEVIN SANCHEZ
  */
-public class asistente extends abogado{
+public class asistente extends abogado {
+
     private int cod_asist;
     private int cog_caso_asignado;
     private int num_casos;
@@ -48,10 +52,9 @@ public class asistente extends abogado{
     public void setNum_casos(int num_casos) {
         this.num_casos = num_casos;
     }
-
-    @Override
-    public String toString() {
-        return "asistente{" + "cod_asist=" + cod_asist + ", cog_caso_asignado=" + cog_caso_asignado + ", num_casos=" + num_casos + '}';
-    }
-    
+//
+//    @Override
+//    public String toString() {
+//        return "asistente{" + "cod_asist=" + cod_asist + ", cog_caso_asignado=" + cog_caso_asignado + ", num_casos=" + num_casos + '}';
+//    }
 }
