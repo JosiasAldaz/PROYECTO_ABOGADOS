@@ -73,37 +73,57 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(211, 211, 211));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Cedula:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 207, -1, -1));
+
+        jTextcedula.setBackground(new java.awt.Color(211, 211, 211));
+        jTextcedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 237, 163, -1));
+
+        jTextnom1.setBackground(new java.awt.Color(211, 211, 211));
+        jTextnom1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextnom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 237, 86, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Nombres:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 207, -1, -1));
 
+        jTextnom2.setBackground(new java.awt.Color(211, 211, 211));
         jTextnom2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextnom2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextnom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 237, 86, -1));
+
+        jTextape1.setBackground(new java.awt.Color(211, 211, 211));
+        jTextape1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextape1, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 298, 86, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Genero:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 268, -1, -1));
 
+        jCombselec.setBackground(new java.awt.Color(211, 211, 211));
         jCombselec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccionar ", " Masculino", " Femenino", " Sin espesificar" }));
+        jCombselec.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 211, 211)));
         jPanel1.add(jCombselec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 293, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Apellidos:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 268, -1, -1));
+
+        jTextape2.setBackground(new java.awt.Color(211, 211, 211));
+        jTextape2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextape2, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 298, 86, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Fecha  de naciminento:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 342, -1, -1));
+
+        jTextcelular.setBackground(new java.awt.Color(211, 211, 211));
+        jTextcelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextcelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 374, 86, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -113,12 +133,17 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Contraseña:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 342, -1, -1));
+
+        jPasscontra.setBackground(new java.awt.Color(211, 211, 211));
+        jPasscontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jPasscontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 374, 163, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Verificar Contraseña:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 417, -1, -1));
 
+        jPasscontra2.setBackground(new java.awt.Color(211, 211, 211));
+        jPasscontra2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPasscontra2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasscontra2ActionPerformed(evt);
@@ -130,6 +155,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel10.setText("Correo:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 268, -1, -1));
 
+        jTextnusu.setBackground(new java.awt.Color(211, 211, 211));
+        jTextnusu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTextnusu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextnusuActionPerformed(evt);
@@ -137,6 +164,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
         });
         jPanel1.add(jTextnusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 237, 109, -1));
 
+        jButton2.setBackground(new java.awt.Color(245, 222, 179));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jButton2.setText("Registrarse");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,12 +177,22 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Celular:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 342, -1, -1));
+
+        jTextcorreo.setBackground(new java.awt.Color(211, 211, 211));
+        jTextcorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 298, 163, -1));
+
+        jDateChooser1.setBackground(new java.awt.Color(211, 211, 211));
+        jDateChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 211, 211)));
+        jDateChooser1.setForeground(new java.awt.Color(211, 211, 211));
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 374, 144, 23));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel14.setText("Edad:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 342, -1, -1));
+
+        jTextedad.setBackground(new java.awt.Color(211, 211, 211));
+        jTextedad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 379, 39, -1));
 
         jPanel2.setBackground(new java.awt.Color(139, 69, 19));
@@ -162,6 +201,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
         jLabel13.setText("Asistente");
+
+        JFSfoto_admin.setBackground(new java.awt.Color(211, 211, 211));
+        JFSfoto_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,14 +235,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Calle principal");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 419, -1, -1));
+
+        jTextField1.setBackground(new java.awt.Color(211, 211, 211));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 447, 163, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Calle secundaria");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 418, -1, -1));
+
+        jTextField2.setBackground(new java.awt.Color(211, 211, 211));
+        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 447, 149, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
         jButton4.setText("PANTALLA PRINCIPAL");
@@ -240,7 +287,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
 
         pack();
