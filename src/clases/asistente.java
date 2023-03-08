@@ -7,6 +7,7 @@ package clases;
 
 import clases.abogado;
 import java.beans.Statement;
+import java.time.LocalDateTime;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,47 +15,59 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author KEVIN SANCHEZ
  */
-public class asistente extends abogado {
+public class asistente extends Persona {
 
-    private int cod_asist;
-    private int cog_caso_asignado;
-    private int num_casos;
+    private String cod_asist;
+    private Double sueldo ;
+    private int experiencia;
+    private String titudocu;
 
     public asistente() {
     }
 
-    public asistente(int cod_asist, int cog_caso_asignado, int num_casos) {
+    public asistente(String cod_asist, Double sueldo, int experiencia, String titudocu, String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String password, String corre, String foto_perfil, LocalDateTime fecha_nacimiento) {
+        super(cedula, PrimerNombre, SegundoNombre, NombreApellido, SegundoApellido, edad, genero, FK_direccion, telefono, password, corre, foto_perfil, fecha_nacimiento);
         this.cod_asist = cod_asist;
-        this.cog_caso_asignado = cog_caso_asignado;
-        this.num_casos = num_casos;
+        this.sueldo = sueldo;
+        this.experiencia = experiencia;
+        this.titudocu = titudocu;
     }
 
-    public int getCod_asist() {
+    public String getCod_asist() {
         return cod_asist;
     }
 
-    public void setCod_asist(int cod_asist) {
+    public void setCod_asist(String cod_asist) {
         this.cod_asist = cod_asist;
     }
 
-    public int getCog_caso_asignado() {
-        return cog_caso_asignado;
+    public Double getSueldo() {
+        return sueldo;
     }
 
-    public void setCog_caso_asignado(int cog_caso_asignado) {
-        this.cog_caso_asignado = cog_caso_asignado;
+    public void setSueldo(Double sueldo) {
+        this.sueldo = sueldo;
     }
 
-    public int getNum_casos() {
-        return num_casos;
+    public int getExperiencia() {
+        return experiencia;
     }
 
-    public void setNum_casos(int num_casos) {
-        this.num_casos = num_casos;
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "asistente{" + "cod_asist=" + cod_asist + ", cog_caso_asignado=" + cog_caso_asignado + ", num_casos=" + num_casos + '}';
-//    }
+
+    public String getTitudocu() {
+        return titudocu;
+    }
+
+    public void setTitudocu(String titudocu) {
+        this.titudocu = titudocu;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"asistente{" + "cod_asist=" + cod_asist + ", sueldo=" + sueldo + ", experiencia=" + experiencia + ", titudocu=" + titudocu + '}';
+    }
+    
 }

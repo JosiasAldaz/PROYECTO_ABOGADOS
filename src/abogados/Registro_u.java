@@ -24,6 +24,8 @@ public class Registro_u extends javax.swing.JFrame {
      */
     public Registro_u() {
         initComponents();
+        mostrarContra.setVisible(true);
+        ocultarContra.setVisible(false);
         
     }
 
@@ -69,7 +71,6 @@ public class Registro_u extends javax.swing.JFrame {
         jTxtFldCalleSecundaria = new javax.swing.JTextField();
         JFSfoto_Usuario = new rojerusan.RSFotoSquare();
         jLabel12 = new javax.swing.JLabel();
-        jTxtFldEdad = new javax.swing.JTextField();
         jLabelCon = new javax.swing.JLabel();
         jTxtFldNomUser = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -78,6 +79,12 @@ public class Registro_u extends javax.swing.JFrame {
         jBttnRegresarPanPrincipal = new javax.swing.JButton();
         ocultarContra = new javax.swing.JLabel();
         mostrarContra = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        Jspdia = new javax.swing.JSpinner();
+        JBxmes = new javax.swing.JComboBox<>();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +96,7 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 48)); // NOI18N
-        jLabel15.setText("Registro de clientes");
+        jLabel15.setText("CLIENTES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,15 +105,15 @@ public class Registro_u extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 123, Short.MAX_VALUE))
+                .addGap(174, 174, 174)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 289, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel15)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -161,24 +168,27 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 67, 41));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton2.setText("Masculino");
         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 87, -1));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton1.setText("Femenino");
         jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 87, -1));
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton3.setText("Sin especificar");
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 101, -1));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 110, -1));
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel8.setText("Calle principal:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 118, 41));
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
-        jLabel9.setText("Edad:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, 41));
+        jLabel9.setText("Año:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, -1, 41));
 
         jPanel3.setBackground(new java.awt.Color(245, 222, 179));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -244,16 +254,13 @@ public class Registro_u extends javax.swing.JFrame {
         jTxtFldCalleSecundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(jTxtFldCalleSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 150, -1));
 
+        JFSfoto_Usuario.setBackground(new java.awt.Color(211, 211, 211));
         JFSfoto_Usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(JFSfoto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, -1, -1));
+        jPanel2.add(JFSfoto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel12.setText("Calle secundaria:");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, 41));
-
-        jTxtFldEdad.setBackground(new java.awt.Color(211, 211, 211));
-        jTxtFldEdad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jTxtFldEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 30, -1));
 
         jLabelCon.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabelCon.setText("Contraseña:");
@@ -285,7 +292,7 @@ public class Registro_u extends javax.swing.JFrame {
                 jBttnRegresarPanPrincipalActionPerformed(evt);
             }
         });
-        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 170, 50));
+        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 170, 50));
 
         ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -293,7 +300,7 @@ public class Registro_u extends javax.swing.JFrame {
                 ocultarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 50, 50));
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 50, 50));
 
         mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,7 +308,38 @@ public class Registro_u extends javax.swing.JFrame {
                 mostrarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Algerian", 3, 12)); // NOI18N
+        jLabel7.setText("Seleccione una Imagen");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 220, 150, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
+        jLabel13.setText("Dia:");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, 41));
+
+        jLabel14.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
+        jLabel14.setText("Mes:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, 41));
+
+        Jspdia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Jspdia.setBorder(null);
+        jPanel2.add(Jspdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 50, 30));
+
+        JBxmes.setBackground(new java.awt.Color(211, 211, 211));
+        JBxmes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JBxmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        JBxmes.setBorder(null);
+        JBxmes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBxmesMouseClicked(evt);
+            }
+        });
+        jPanel2.add(JBxmes, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 90, 30));
+
+        jYearChooser1.setBackground(new java.awt.Color(211, 211, 211));
+        jYearChooser1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 60, 30));
 
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 480));
 
@@ -385,7 +423,6 @@ public class Registro_u extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtFldCorreoActionPerformed
 
     private void jBttnRegresarPanPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipalActionPerformed
-        // TODO add your handling code here:
         
         VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
@@ -396,10 +433,10 @@ public class Registro_u extends javax.swing.JFrame {
         char i = jPsswrdFldContraseña1.getEchoChar();
         boolean a=true;
         if (a ) {  // a es una variable boolean en true
-            jPsswrdFldContraseña1.setEchoChar((char) '*');
-            jPsswrdFldContraseña2.setEchoChar((char) '*');
-            mostrarContra.setVisible(true);
-            ocultarContra.setVisible(false);
+            jPsswrdFldContraseña1.setEchoChar((char) 0);
+            jPsswrdFldContraseña2.setEchoChar((char) 0);
+            mostrarContra.setVisible(false);
+            ocultarContra.setVisible(true);
             a = true;
         } else {
             jPsswrdFldContraseña1.setEchoChar(i); // i es el char
@@ -422,6 +459,10 @@ public class Registro_u extends javax.swing.JFrame {
             a = true;
         }
     }//GEN-LAST:event_ocultarContraMouseClicked
+
+    private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
+
+    }//GEN-LAST:event_JBxmesMouseClicked
     
     /**
      * @param args the command line arguments
@@ -469,9 +510,9 @@ public class Registro_u extends javax.swing.JFrame {
     String calle_secundaria = jTxtFldCalleSecundaria.getText();
     String correo = jTxtFldCorreo.getText();
     String contraseña = jPsswrdFldContraseña1.getText();
-    String edad = jTxtFldEdad.getText();
     
-    if(cedula.isEmpty() || nombre1.isEmpty() || nombre2.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty() || telefono.isEmpty() || calle_principal.isEmpty() || calle_secundaria.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || edad.isEmpty()) {
+    
+    if(cedula.isEmpty() || nombre1.isEmpty() || nombre2.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty() || telefono.isEmpty() || calle_principal.isEmpty() || calle_secundaria.isEmpty() || correo.isEmpty() || contraseña.isEmpty()) {
         
         JOptionPane.showMessageDialog(null, "Ingrese los campos requeridos.");
         
@@ -481,17 +522,12 @@ public class Registro_u extends javax.swing.JFrame {
                 if (apellido1.matches("[A-Z]{1}[a-z]+$") && apellido2.matches("[A-Z]{1}[a-z]+$")) {
                     if (telefono.matches("^[0-9]{10}$")) {
                         if (correo.matches("^([a-z]+[-_]?[0-9]?)+([@]{1})([a-z]+)(.)[a-z]+||([a-z]*[0-9]+)+([@]{1})([a-z]+)(.)[a-z]+$")) {
-                            if (edad.matches("^[0-9]$")) {
+                             
                                 if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
                                     
                                 }else{
                                     JOptionPane.showMessageDialog(this, "!!!!!!!Las Contraseñas NO coinciden!!!!!!!");
                                 }
-                                
-                            }else{
-                                JOptionPane.showMessageDialog(this, "Edad Incorrecta. Ingresar Numeros");
-                            }
-
                         }else{
                             JOptionPane.showMessageDialog(this, "Correo Incorrecto");
                         }
@@ -520,13 +556,17 @@ public class Registro_u extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fondo;
+    private javax.swing.JComboBox<String> JBxmes;
     private rojerusan.RSFotoSquare JFSfoto_Usuario;
+    private javax.swing.JSpinner Jspdia;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBttnRegresarPanPrincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -534,6 +574,7 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCon;
@@ -555,10 +596,10 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JTextField jTxtFldCalleSecundaria;
     private javax.swing.JTextField jTxtFldCedula;
     private javax.swing.JTextField jTxtFldCorreo;
-    private javax.swing.JTextField jTxtFldEdad;
     private javax.swing.JTextField jTxtFldNomUser;
     private javax.swing.JTextField jTxtFldNombre1;
     private javax.swing.JTextField jTxtFldNombre2;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel mostrarContra;
     private javax.swing.JLabel ocultarContra;
     // End of variables declaration//GEN-END:variables

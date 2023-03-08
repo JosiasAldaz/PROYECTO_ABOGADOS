@@ -28,68 +28,70 @@ public class Radministrador extends javax.swing.JFrame {
         ocultar.setVisible(false);
     }
 
-    public void diasvalidacion(){
-        if(JBxmes.getSelectedItem().toString().equals("Febrero")){
-            if(Integer.valueOf(Jspdia.getValue().toString())>28){
-                JOptionPane.showMessageDialog(null,"FEBRERO NO TIENE MÁS DE 28 DÍAS, PORFAVOR \n"
+    public void diasvalidacion() {
+        if (JBxmes.getSelectedItem().toString().equals("Febrero")) {
+            if (Integer.valueOf(Jspdia.getValue().toString()) > 28) {
+                JOptionPane.showMessageDialog(null, "FEBRERO NO TIENE MÁS DE 28 DÍAS, PORFAVOR \n"
                         + "SELECCIONE DE NUEVO EL DÍA DE SU NACIMIENTO");
                 Jspdia.setValue(0);
             }
         }
     }
-    
-    public String meschoice(String mes){
+
+    public String meschoice(String mes) {
         String retorno = "";
-        switch(mes){
+        switch (mes) {
             case "Enero":
-                retorno="01";
+                retorno = "01";
                 break;
             case "Febrero":
-                retorno="02";
+                retorno = "02";
                 break;
             case "Marzo":
-                retorno="03";
+                retorno = "03";
                 break;
             case "Abril":
-                retorno="04";
+                retorno = "04";
                 break;
             case "Mayo":
-                retorno="05";
+                retorno = "05";
                 break;
             case "Junio":
-                retorno="06";
+                retorno = "06";
                 break;
             case "Julio":
-                retorno="07";
+                retorno = "07";
                 break;
             case "Agosto":
-                retorno="08";
+                retorno = "08";
                 break;
             case "Septiembre":
-                retorno="09";
+                retorno = "09";
                 break;
             case "Octubre":
-                retorno="10";
+                retorno = "10";
                 break;
             case "Noviembre":
-                retorno="11";
+                retorno = "11";
                 break;
             case "Diciembre":
-                retorno="12";
+                retorno = "12";
                 break;
         }
         return retorno;
     }
-    
+
     public void validar() {
         if (cedula.getText().matches("^[0-9]{10}$")) {
             if (nombre1.getText().matches("^[A-Z]{1}[a-z]+$") && nombre2.getText().matches("^[A-Z]{1}[a-z]+$")) {
                 if (apellido1.getText().matches("^[A-Z]{1}[a-z]+$") && apellido2.getText().matches("^[A-Z]{1}[a-z]+$")) {
-                    if (correo.getText().matches("^([a-z]+[-_]?[0-9]?)+([@]{1})([a-z]+)(.)[a-z]+||([a-z]*[0-9]+)+([@]{1})([a-z]+)(.)[a-z]+$")) {
+                    if (correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
                             if (calle1.getText().matches("^[A-Z]?[a-z]+$") && calle2.getText().matches("^[A-Z]?[a-z]+$")) {
-                                    if (contraseña.equals(contraseña1)) {
-                                    }                              
+                                //if (contraseña3.equals(contraseña4)) {
+                                     pru();
+
+                                
                             } else {
                                 JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
                             }
@@ -97,7 +99,7 @@ public class Radministrador extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                        JOptionPane.showMessageDialog(this, "CORREO INGRESADO INCORRECTA");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
@@ -107,6 +109,76 @@ public class Radministrador extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
+    }
+
+    public void pru() {
+        diasvalidacion();
+        int anio = jYearChooser1.getYear();
+        int dia = Integer.parseInt(Jspdia.getValue().toString());
+        char genero = ' ';
+        String contra = new String(contraseña3.getPassword());
+        if (jRadioButton3.isSelected()) {
+            genero = 'X';
+        }
+        if (jRadioButton2.isSelected()) {
+            genero = 'F';
+        }
+        if (jRadioButton1.isSelected()) {
+            genero = 'M';
+        }
+        if (dia > 31 || dia < 1) {
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
+        } else {
+            if (JBxmes.getSelectedItem().toString().equals("SELECCIONE")) {
+                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
+            } else {
+                if (anio >= LocalDate.now().getYear()) {
+                    JOptionPane.showMessageDialog(null, "EL AÑO DE NACIMIENTO ES INCORRECTO");
+                } else {
+                    String diaF = "";
+                    if (Jspdia.getValue().toString().length() == 1) {
+                        diaF = "0" + Jspdia.getValue().toString();
+                    } else {
+                        diaF = Jspdia.getValue().toString();
+                    }
+                    String timechooser = diaF + "/" + meschoice(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser1.getYear();
+                    System.out.println(timechooser);
+                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate fecha = LocalDate.parse(timechooser, formato);
+                    LocalDateTime fechaHora = fecha.atStartOfDay();
+                    Direcciones direccion_admin = new Direcciones();
+                    direccion_admin.setCalle_principal(calle1.getText());
+                    direccion_admin.setCalle_secundaria(calle2.getText());
+                    direccion_admin.setSucursal(false);
+                    try {
+                        int id = 0;
+                        Administrador jefe = new Administrador();
+                        direccion_admin.Ingresar();
+                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
+                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + calle1.getText() + "' and calle_secundaria ='" + calle2.getText() + "'";
+                        id = direccion_admin.Seleccionar(id_direccion);
+                        System.out.println(id);
+                        jefe.setCedula(cedula.getText());
+                        jefe.setPrimerNombre(nombre1.getText());
+                        jefe.setSegundoNombre(nombre2.getText());
+                        jefe.setNombreApellido(apellido1.getText());
+                        jefe.setSegundoApellido(apellido2.getText());
+                        jefe.setFK_direccion(id);
+                        jefe.setTelefono(telefono.getText());
+                        jefe.setGenero(genero);
+                        jefe.setPassword(contra);
+                        jefe.setCorre(correo.getText());
+                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
+                        jefe.setFecha_nacimiento(fechaHora);
+                        jefe.Ingresar();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                    }
+                }
+            }
+
         }
     }
 
@@ -149,8 +221,8 @@ public class Radministrador extends javax.swing.JFrame {
         calle2 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         calle1 = new javax.swing.JTextField();
-        contraseña1 = new javax.swing.JPasswordField();
-        contraseña = new javax.swing.JPasswordField();
+        contraseña4 = new javax.swing.JPasswordField();
+        contraseña3 = new javax.swing.JPasswordField();
         ocultar = new javax.swing.JLabel();
         Jspdia = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
@@ -242,7 +314,7 @@ public class Radministrador extends javax.swing.JFrame {
                 mostrarMouseClicked(evt);
             }
         });
-        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
+        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
@@ -256,6 +328,7 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 50));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton1.setText("Masculino");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,10 +338,12 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton2.setText("Femenino");
         jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton3.setText("Sin Especificar");
         jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, -1, -1));
 
@@ -323,15 +398,15 @@ public class Radministrador extends javax.swing.JFrame {
         calle1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(calle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 230, 30));
 
-        contraseña1.setBackground(new java.awt.Color(211, 211, 211));
-        contraseña1.setText("jPasswordField1");
-        contraseña1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(contraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
+        contraseña4.setBackground(new java.awt.Color(211, 211, 211));
+        contraseña4.setText("jPasswordField1");
+        contraseña4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(contraseña4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
 
-        contraseña.setBackground(new java.awt.Color(211, 211, 211));
-        contraseña.setText("jPasswordField1");
-        contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, 30));
+        contraseña3.setBackground(new java.awt.Color(211, 211, 211));
+        contraseña3.setText("jPasswordField1");
+        contraseña3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(contraseña3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, 30));
 
         ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -339,7 +414,7 @@ public class Radministrador extends javax.swing.JFrame {
                 ocultarMouseClicked(evt);
             }
         });
-        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 570, 40, 40));
+        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 40, 40));
 
         Jspdia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(Jspdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 60, 30));
@@ -370,6 +445,7 @@ public class Radministrador extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(245, 222, 179));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jButton3.setText("REGISTRARSE");
         jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -379,6 +455,7 @@ public class Radministrador extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 150, 50));
 
+        JFSfoto_admin.setBackground(new java.awt.Color(211, 211, 211));
         JFSfoto_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(JFSfoto_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, -1, -1));
 
@@ -392,9 +469,7 @@ public class Radministrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
         );
 
         pack();
@@ -415,109 +490,43 @@ public class Radministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void mostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMouseClicked
-        char i = contraseña.getEchoChar();
+        char i = contraseña3.getEchoChar();
         boolean a = true;
         if (a) {  // a es una variable boolean en true
-            contraseña.setEchoChar((char) 0);
-            contraseña1.setEchoChar((char) 0);
+            contraseña3.setEchoChar((char) 0);
+            contraseña4.setEchoChar((char) 0);
             mostrar.setVisible(false);
             ocultar.setVisible(true);
             a = false;
         } else {
-            contraseña.setEchoChar(i); // i es el char
+            contraseña3.setEchoChar(i); // i es el char
             a = true;
         }
 
     }//GEN-LAST:event_mostrarMouseClicked
 
     private void ocultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarMouseClicked
-        char i = contraseña.getEchoChar();
-        boolean a=true;
-        if (a ) {  // a es una variable boolean en true
-            contraseña.setEchoChar((char) '*');
-            contraseña1.setEchoChar((char) '*');
+        char i = contraseña3.getEchoChar();
+        boolean a = true;
+        if (a) {  // a es una variable boolean en true
+            contraseña3.setEchoChar((char) '*');
+            contraseña4.setEchoChar((char) '*');
             mostrar.setVisible(true);
             ocultar.setVisible(false);
             a = true;
         } else {
-            contraseña.setEchoChar(i); // i es el char
+            contraseña3.setEchoChar(i); // i es el char
             a = true;
         }
     }//GEN-LAST:event_ocultarMouseClicked
 
     private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
-             
+
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         validar();
-        diasvalidacion();
-        int anio = jYearChooser1.getYear();
-        int dia = Integer.parseInt(Jspdia.getValue().toString());
-        char genero = ' ';
-        String contra = new String(contraseña.getPassword());
-        if(jRadioButton3.isSelected()){
-            genero = 'X';
-        }
-        if(jRadioButton2.isSelected()){
-            genero = 'F';
-        }
-        if(jRadioButton1.isSelected()){
-            genero = 'M';
-        }
-        if(dia >31 || dia<1){
-            JOptionPane.showMessageDialog(null,"DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
-        }else{
-            if(JBxmes.getSelectedItem().toString().equals("SELECCIONE")){
-                JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
-            }else{
-                if(anio>=LocalDate.now().getYear()){
-                    JOptionPane.showMessageDialog(null,"EL AÑO DE NACIMIENTO ES INCORRECTO");
-                }else{
-                    String diaF = "";
-                    if(Jspdia.getValue().toString().length()==1){
-                        diaF = "0"+Jspdia.getValue().toString();
-                    }else{
-                        diaF = Jspdia.getValue().toString();
-                    }
-                    String timechooser = diaF+"/"+meschoice(JBxmes.getSelectedItem().toString())+"/"+jYearChooser1.getYear();
-                    System.out.println(timechooser);
-                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate fecha = LocalDate.parse(timechooser, formato);
-                    LocalDateTime fechaHora = fecha.atStartOfDay();
-                    Direcciones direccion_admin = new Direcciones();
-                    direccion_admin.setCalle_principal(calle1.getText());
-                    direccion_admin.setCalle_secundaria(calle2.getText());
-                    direccion_admin.setSucursal(false);
-                    try {
-                        int id = 0;
-                        Administrador jefe = new Administrador();
-                        direccion_admin.Ingresar();
-                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
-                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='"+calle1.getText()+"' and calle_secundaria ='"+calle2.getText()+"'";
-                        id =direccion_admin.Seleccionar(id_direccion);
-                        System.out.println(id);
-                        jefe.setCedula(cedula.getText());
-                        jefe.setPrimerNombre(nombre1.getText());
-                        jefe.setSegundoNombre(nombre2.getText());
-                        jefe.setNombreApellido(apellido1.getText());
-                        jefe.setSegundoApellido(apellido2.getText());
-                        jefe.setFK_direccion(id);
-                        jefe.setTelefono(telefono.getText());
-                        jefe.setGenero(genero);
-                        jefe.setPassword(contra);
-                        jefe.setCorre(correo.getText());
-                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
-                        jefe.setFecha_nacimiento(fechaHora);
-                        jefe.Ingresar();
-                    } catch (SQLException ex){
-                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
-                    }
-                }
-            }
 
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed
@@ -570,8 +579,8 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JTextField calle1;
     private javax.swing.JTextField calle2;
     private javax.swing.JTextField cedula;
-    private javax.swing.JPasswordField contraseña;
-    private javax.swing.JPasswordField contraseña1;
+    private javax.swing.JPasswordField contraseña3;
+    private javax.swing.JPasswordField contraseña4;
     private javax.swing.JTextField correo;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
