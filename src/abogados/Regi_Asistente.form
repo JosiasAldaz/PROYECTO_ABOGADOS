@@ -133,7 +133,7 @@
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jTextField4" alignment="0" pref="149" max="32767" attributes="0"/>
+                                      <Component id="titasiste" alignment="0" pref="149" max="32767" attributes="0"/>
                                       <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
@@ -145,7 +145,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                  <Component id="aniosexpe" min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -239,8 +239,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                      <Component id="aniosexpe" min="-2" max="-2" attributes="0"/>
+                      <Component id="titasiste" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -671,20 +671,14 @@
             <Property name="text" type="java.lang.String" value="A&#xf1;os de Experriencia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField3"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="aniosexpe">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>
             <Property name="text" type="java.lang.String" value="Titulo Obtenido"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField4"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="titasiste">
         </Component>
       </SubComponents>
     </Container>
