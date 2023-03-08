@@ -21,7 +21,7 @@ public class PostgresConexion{
     String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
     //TIENE QUE PONER SU CONTRASEÑA
-    String password = "1234";
+    String password = "Nahofumi2001";
     Statement st;
     
     public PostgresConexion() {
@@ -30,6 +30,7 @@ public class PostgresConexion{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         try {
             con = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
@@ -50,17 +51,16 @@ public class PostgresConexion{
     public SQLException accion(String nsql) throws SQLException{
         System.out.println(nsql);
         try {
-            
+            st = con.createStatement();
             st.execute(nsql);
             st.close();
             return null;
         } catch (SQLException ex){
-            Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
-            
+            Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);            
             return ex;
         }
     }
-     
+       
     public Connection Ingres(){
         return con;
     }
