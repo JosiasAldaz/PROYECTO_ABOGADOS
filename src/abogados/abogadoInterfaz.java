@@ -39,6 +39,7 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jLabelLOGO = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLblDireccion = new javax.swing.JLabel();
+        jLblDireccion1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,7 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1250, 470));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         btnModificarAbodagos1.setBackground(new java.awt.Color(0, 0, 0));
         btnModificarAbodagos1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -139,7 +141,7 @@ public class abogadoInterfaz extends javax.swing.JFrame {
                 .addComponent(btnContratosVigentes1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnContratosEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,15 +160,16 @@ public class abogadoInterfaz extends javax.swing.JFrame {
                     .addComponent(btnAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1250, 100));
 
         jLabel1.setFont(new java.awt.Font("ROG Fonts", 3, 56)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ABOGADO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 370, 60));
+        jLabel1.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel1.setText("Para lo que sea");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 680, 60));
 
         jLabelLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
         jPanel1.add(jLabelLOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
@@ -175,9 +178,14 @@ public class abogadoInterfaz extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, -1, 80));
 
         jLblDireccion.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jLblDireccion.setForeground(new java.awt.Color(255, 255, 255));
-        jLblDireccion.setText("Dirección: Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
-        jPanel1.add(jLblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 750, 800, 40));
+        jLblDireccion.setForeground(new java.awt.Color(255, 102, 102));
+        jLblDireccion.setText("Direccion:");
+        jPanel1.add(jLblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 750, 100, 40));
+
+        jLblDireccion1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLblDireccion1.setForeground(new java.awt.Color(255, 255, 255));
+        jLblDireccion1.setText("Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
+        jPanel1.add(jLblDireccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 750, 800, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,6 +271,7 @@ public class abogadoInterfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLOGO;
     private javax.swing.JLabel jLblDireccion;
+    private javax.swing.JLabel jLblDireccion1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
