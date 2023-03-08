@@ -125,6 +125,11 @@ public class Registro_u extends javax.swing.JFrame {
 
         jTxtFldNombre1.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldNombre1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldNombre1KeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 118, -1));
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -137,14 +142,29 @@ public class Registro_u extends javax.swing.JFrame {
 
         jTxtFldApellido1.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldApellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldApellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldApellido1KeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 118, 20));
 
         jTxtFldNombre2.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldNombre2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldNombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldNombre2KeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 118, 20));
 
         jTxtFldApellido2.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldApellido2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldApellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldApellido2KeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 118, 20));
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -153,6 +173,11 @@ public class Registro_u extends javax.swing.JFrame {
 
         jTxtFldCedula.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldCedulaKeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 130, 20));
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -161,6 +186,11 @@ public class Registro_u extends javax.swing.JFrame {
 
         jTxtFildTelefono.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFildTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        jTxtFildTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFildTelefonoKeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFildTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 182, 130, 20));
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -248,10 +278,20 @@ public class Registro_u extends javax.swing.JFrame {
 
         jTxtFldCallePrincipal.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldCallePrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldCallePrincipal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldCallePrincipalKeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldCallePrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 150, -1));
 
         jTxtFldCalleSecundaria.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldCalleSecundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldCalleSecundaria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldCalleSecundariaKeyTyped(evt);
+            }
+        });
         jPanel2.add(jTxtFldCalleSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 150, -1));
 
         JFSfoto_Usuario.setBackground(new java.awt.Color(211, 211, 211));
@@ -338,7 +378,6 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel2.add(JBxmes, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 90, 30));
 
         jYearChooser1.setBackground(new java.awt.Color(211, 211, 211));
-        jYearChooser1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 60, 30));
 
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 480));
@@ -463,6 +502,80 @@ public class Registro_u extends javax.swing.JFrame {
     private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
 
     }//GEN-LAST:event_JBxmesMouseClicked
+
+    private void jTxtFldNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre1KeyTyped
+        // TODO add your handling code here:
+        
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldNombre1KeyTyped
+
+    private void jTxtFldNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre2KeyTyped
+        
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldNombre2KeyTyped
+
+    private void jTxtFldApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldApellido1KeyTyped
+        
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldApellido1KeyTyped
+
+    private void jTxtFldApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldApellido2KeyTyped
+        
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldApellido2KeyTyped
+
+    private void jTxtFldCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldCedulaKeyTyped
+        // TODO add your handling code here:
+        
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldCedulaKeyTyped
+
+    private void jTxtFildTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFildTelefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFildTelefonoKeyTyped
+
+    private void jTxtFldCallePrincipalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldCallePrincipalKeyTyped
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldCallePrincipalKeyTyped
+
+    private void jTxtFldCalleSecundariaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldCalleSecundariaKeyTyped
+   
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldCalleSecundariaKeyTyped
     
     /**
      * @param args the command line arguments

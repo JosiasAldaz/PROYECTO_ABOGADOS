@@ -83,9 +83,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTextcedula.setBackground(new java.awt.Color(211, 211, 211));
         jTextcedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextcedulaKeyTyped(evt);
+            }
+        });
 
         jTextnom1.setBackground(new java.awt.Color(211, 211, 211));
         jTextnom1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextnom1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextnom1KeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Nombres:");
@@ -93,9 +103,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jTextnom2.setBackground(new java.awt.Color(211, 211, 211));
         jTextnom2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextnom2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextnom2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextnom2KeyTyped(evt);
+            }
+        });
 
         jTextape1.setBackground(new java.awt.Color(211, 211, 211));
         jTextape1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextape1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextape1KeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Genero:");
@@ -109,12 +129,22 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTextape2.setBackground(new java.awt.Color(211, 211, 211));
         jTextape2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextape2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextape2KeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Fecha  de naciminento:");
 
         jTextcelular.setBackground(new java.awt.Color(211, 211, 211));
         jTextcelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextcelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextcelularKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Contraseña:");
@@ -165,6 +195,11 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 jTextedadActionPerformed(evt);
             }
         });
+        jTextedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextedadKeyTyped(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(139, 69, 19));
 
@@ -206,13 +241,24 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTextField1.setBackground(new java.awt.Color(211, 211, 211));
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Calle secundaria");
 
         jTextField2.setBackground(new java.awt.Color(211, 211, 211));
         jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
+        jButton4.setBackground(new java.awt.Color(245, 222, 179));
         jButton4.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
         jButton4.setText("PANTALLA PRINCIPAL");
@@ -244,12 +290,22 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTxtFldAñosExperiencia.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldAñosExperiencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldAñosExperiencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldAñosExperienciaKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Titulo Obtenido");
 
         jTxtFldTituloAsistente.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldTituloAsistente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldTituloAsistente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldTituloAsistenteKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -481,6 +537,105 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextedadActionPerformed
 
+    private void jTextcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcedulaKeyTyped
+     
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextcedulaKeyTyped
+
+    private void jTxtFldAñosExperienciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldAñosExperienciaKeyTyped
+     
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldAñosExperienciaKeyTyped
+
+    private void jTextedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextedadKeyTyped
+      
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextedadKeyTyped
+
+    private void jTextcelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcelularKeyTyped
+     
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextcelularKeyTyped
+
+    private void jTextnom1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextnom1KeyTyped
+       
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextnom1KeyTyped
+
+    private void jTextnom2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextnom2KeyTyped
+      
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextnom2KeyTyped
+
+    private void jTextape1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextape1KeyTyped
+      
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextape1KeyTyped
+
+    private void jTextape2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextape2KeyTyped
+      
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextape2KeyTyped
+
+    private void jTxtFldTituloAsistenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldTituloAsistenteKeyTyped
+      
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldTituloAsistenteKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+       
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
     ///////////////////////////metodos///
     public void valced() {
         String ced = jTextcedula.getText();
@@ -585,7 +740,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         String cel = jTextcelular.getText();
         String edad = jTextedad.getText();
         String corre = jTextcorreo.getText();
-        String usu = jTextnusu.getText();
+        String usu = jTxtFldTituloAsistente.getText();
         String contra = jPasscontra.getText();
         String contra1 = jPasscontra2.getText();
         if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || usu.isEmpty() || contra.isEmpty() || contra1.isEmpty()) {
