@@ -61,7 +61,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         rSFotoSquare1 = new rojerusan.RSFotoSquare();
-        jPanel4 = new javax.swing.JPanel();
+        ContratosVigentes = new javax.swing.JPanel();
+        txtID = new javax.swing.JLabel();
+        txtIdContraro = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        btnAceptar = new javax.swing.JButton();
+        btnRechazar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtModificar = new javax.swing.JTextField();
         txtContratosVigentes = new javax.swing.JTextField();
@@ -286,18 +299,124 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jPanel2.add(VentanaModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+        ContratosVigentes.setBackground(new java.awt.Color(0, 102, 102));
+
+        txtID.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtID.setText("ID de contrato:");
+
+        btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+
+        btnMostrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnMostrar.setText("Mostrar");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Seleccione una opción");
+
+        btnAceptar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnRechazar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnRechazar.setText("Rechazar");
+        btnRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+
+        javax.swing.GroupLayout ContratosVigentesLayout = new javax.swing.GroupLayout(ContratosVigentes);
+        ContratosVigentes.setLayout(ContratosVigentesLayout);
+        ContratosVigentesLayout.setHorizontalGroup(
+            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContratosVigentesLayout.createSequentialGroup()
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                        .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jSeparator1))
+                            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(txtID))
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(31, 31, 31)
+                                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdContraro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addComponent(btnMostrar)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(btnEliminar)))
+                                .addGap(0, 92, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRechazar)
+                        .addGap(113, 113, 113)))
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+        ContratosVigentesLayout.setVerticalGroup(
+            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdContraro))
+                .addGap(43, 43, 43)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(77, 77, 77)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(98, 98, 98))
+            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2))
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
+        jPanel2.add(ContratosVigentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 1050, 510));
 
@@ -337,6 +456,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosVigentes.setBorder(null);
         txtContratosVigentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosVigentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtContratosVigentesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtContratosVigentesMouseEntered(evt);
             }
@@ -584,6 +706,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
         VentanaFondo.setVisible(false);
         VentanaModificar.setVisible(true);
+        ContratosVigentes.setVisible(false);
         //Poner más ventanas
         
     }//GEN-LAST:event_txtModificarMouseClicked
@@ -591,7 +714,22 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         VentanaFondo.setVisible(true);
         VentanaModificar.setVisible(false);
+        ContratosVigentes.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRechazarActionPerformed
+
+    private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
+        VentanaFondo.setVisible(false);
+        VentanaModificar.setVisible(false);
+        ContratosVigentes.setVisible(true);
+    }//GEN-LAST:event_txtContratosVigentesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -630,8 +768,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContratosVigentes;
     private javax.swing.JPanel VentanaFondo;
     private javax.swing.JPanel VentanaModificar;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
@@ -639,14 +783,19 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private rojerusan.RSFotoSquare rSFotoSquare1;
     private javax.swing.JLabel txtApellidos;
     private javax.swing.JTextField txtAsistenteAsignado;
@@ -659,6 +808,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel txtFechaNacimiento;
     private javax.swing.JLabel txtGenero;
     private javax.swing.JLabel txtGratuidad;
+    private javax.swing.JLabel txtID;
+    private javax.swing.JTextField txtIdContraro;
     private javax.swing.JTextField txtModificar;
     private javax.swing.JLabel txtNombres;
     private javax.swing.JTextField txtOficinaAsignada;
