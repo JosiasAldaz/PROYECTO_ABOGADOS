@@ -491,7 +491,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a1">
+        <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a4">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d3" green="d3" red="d3" type="rgb"/>
@@ -509,7 +509,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a">
+        <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d3" green="d3" red="d3" type="rgb"/>
