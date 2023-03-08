@@ -30,7 +30,6 @@ public class PostgresConexion{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         try {
             con = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
@@ -61,8 +60,7 @@ public class PostgresConexion{
             return ex;
         }
     }
-    
-    
+     
     public Connection Ingres(){
         return con;
     }
