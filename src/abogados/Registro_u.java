@@ -24,6 +24,8 @@ public class Registro_u extends javax.swing.JFrame {
      */
     public Registro_u() {
         initComponents();
+        mostrarContra.setVisible(true);
+        ocultarContra.setVisible(false);
         
     }
 
@@ -78,6 +80,7 @@ public class Registro_u extends javax.swing.JFrame {
         jBttnRegresarPanPrincipal = new javax.swing.JButton();
         ocultarContra = new javax.swing.JLabel();
         mostrarContra = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +92,7 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 48)); // NOI18N
-        jLabel15.setText("Registro de clientes");
+        jLabel15.setText("CLIENTES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,15 +101,15 @@ public class Registro_u extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 123, Short.MAX_VALUE))
+                .addGap(174, 174, 174)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 289, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel15)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -161,16 +164,19 @@ public class Registro_u extends javax.swing.JFrame {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 67, 41));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton2.setText("Masculino");
         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 87, -1));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton1.setText("Femenino");
         jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 87, -1));
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton3.setText("Sin especificar");
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 101, -1));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 110, -1));
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel8.setText("Calle principal:");
@@ -244,6 +250,7 @@ public class Registro_u extends javax.swing.JFrame {
         jTxtFldCalleSecundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(jTxtFldCalleSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 150, -1));
 
+        JFSfoto_Usuario.setBackground(new java.awt.Color(211, 211, 211));
         JFSfoto_Usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(JFSfoto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, -1, -1));
 
@@ -285,7 +292,7 @@ public class Registro_u extends javax.swing.JFrame {
                 jBttnRegresarPanPrincipalActionPerformed(evt);
             }
         });
-        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 170, 50));
+        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 170, 50));
 
         ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -293,7 +300,7 @@ public class Registro_u extends javax.swing.JFrame {
                 ocultarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 50, 50));
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 50, 50));
 
         mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,7 +308,11 @@ public class Registro_u extends javax.swing.JFrame {
                 mostrarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Algerian", 3, 12)); // NOI18N
+        jLabel7.setText("Seleccione una Imagen");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, 150, -1));
 
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 930, 480));
 
@@ -385,7 +396,6 @@ public class Registro_u extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtFldCorreoActionPerformed
 
     private void jBttnRegresarPanPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipalActionPerformed
-        // TODO add your handling code here:
         
         VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
@@ -396,10 +406,10 @@ public class Registro_u extends javax.swing.JFrame {
         char i = jPsswrdFldContraseña1.getEchoChar();
         boolean a=true;
         if (a ) {  // a es una variable boolean en true
-            jPsswrdFldContraseña1.setEchoChar((char) '*');
-            jPsswrdFldContraseña2.setEchoChar((char) '*');
-            mostrarContra.setVisible(true);
-            ocultarContra.setVisible(false);
+            jPsswrdFldContraseña1.setEchoChar((char) 0);
+            jPsswrdFldContraseña2.setEchoChar((char) 0);
+            mostrarContra.setVisible(false);
+            ocultarContra.setVisible(true);
             a = true;
         } else {
             jPsswrdFldContraseña1.setEchoChar(i); // i es el char
@@ -534,6 +544,7 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCon;

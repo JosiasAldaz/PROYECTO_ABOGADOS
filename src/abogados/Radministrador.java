@@ -242,7 +242,7 @@ public class Radministrador extends javax.swing.JFrame {
                 mostrarMouseClicked(evt);
             }
         });
-        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
+        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
@@ -256,6 +256,7 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 50));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton1.setText("Masculino");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,10 +266,12 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton2.setText("Femenino");
         jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton3.setText("Sin Especificar");
         jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, -1, -1));
 
@@ -339,7 +342,7 @@ public class Radministrador extends javax.swing.JFrame {
                 ocultarMouseClicked(evt);
             }
         });
-        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 570, 40, 40));
+        jPanel1.add(ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 40, 40));
 
         Jspdia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(Jspdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 60, 30));
@@ -370,6 +373,7 @@ public class Radministrador extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(245, 222, 179));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jButton3.setText("REGISTRARSE");
         jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -379,6 +383,7 @@ public class Radministrador extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 150, 50));
 
+        JFSfoto_admin.setBackground(new java.awt.Color(211, 211, 211));
         JFSfoto_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(JFSfoto_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, -1, -1));
 
@@ -392,9 +397,7 @@ public class Radministrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
         );
 
         pack();
