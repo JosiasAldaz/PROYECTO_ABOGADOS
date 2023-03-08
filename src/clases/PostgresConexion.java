@@ -51,18 +51,16 @@ public class PostgresConexion{
     public SQLException accion(String nsql) throws SQLException{
         System.out.println(nsql);
         try {
-            
+            st = con.createStatement();
             st.execute(nsql);
             st.close();
             return null;
         } catch (SQLException ex){
-            Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
-            
+            Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);            
             return ex;
         }
     }
-    
-    
+       
     public Connection Ingres(){
         return con;
     }
