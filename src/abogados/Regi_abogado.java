@@ -5,6 +5,7 @@
  */
 package abogados;
 
+import static abogados.Regi_Asistente.validarCedula;
 import clases.Direcciones;
 import clases.Especializacion;
 import clases.TIPO_diplomnma;
@@ -84,6 +85,57 @@ public class Regi_abogado extends javax.swing.JFrame {
             }
         }
         return id;
+    }
+
+    public void valced() {
+        String ced = cedula_abogado.getText();
+        boolean esValida = validarCedula(ced);
+        if (esValida) {
+            validar();
+        } else {
+            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
+        }
+    }
+
+    public static boolean validarCedula(String cedula) {
+        // Comprobar que la cédula tenga 10 dígitos
+        if (cedula == null || cedula.length() != 10) {
+            return false;
+        }
+        // Extraer el número de provincia de los primeros dos dígitos
+        int provincia = Integer.parseInt(cedula.substring(0, 2));
+        if (provincia < 1 || provincia > 24) {
+            return false;
+        }
+        // Validar el tercer dígito (debe ser 0, 1, 2 o 3)
+        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+        if (tercerDigito < 0 || tercerDigito > 3) {
+            return false;
+        }
+        // Extraer los nueve primeros dígitos como un número entero
+        int numCedula = Integer.parseInt(cedula.substring(0, 9));
+        // Validar el último dígito usando el algoritmo de validación del Registro Civil
+        int ultimoDigito = Integer.parseInt(cedula.substring(9));
+        int total = 0;
+        int multiplicador = 2;
+        for (int i = 8; i >= 0; i--) {
+            int digito = numCedula % 10;
+            numCedula /= 10;
+            int producto = digito * multiplicador;
+            if (producto > 9) {
+                producto -= 9;
+            }
+            total += producto;
+            multiplicador = (multiplicador == 2) ? 1 : 2;
+        }
+        int digitVerificador = 10 - (total % 10);
+        if (digitVerificador == 10) {
+            digitVerificador = 0;
+        }
+        if (ultimoDigito != digitVerificador) {
+            return false;
+        }
+        return true;
     }
 
     public void validar() {
@@ -515,7 +567,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (cedula_abogado.getText().equals("")||telefono.getText().equals("")||costo.getText().equals("")||titulos.getText().equals("")|| nombre1.getText().equals("") || nombre2.getText().equals("")|| apellido1.getText().equals("")||apellido2.getText().equals("")||direccion1.getText().equals("")||apellido2.getText().equals("")|| genero_abogado.isSelected(null)) {
+        if (cedula_abogado.getText().equals("") || telefono.getText().equals("") || costo.getText().equals("") || titulos.getText().equals("") || nombre1.getText().equals("") || nombre2.getText().equals("") || apellido1.getText().equals("") || apellido2.getText().equals("") || direccion1.getText().equals("") || apellido2.getText().equals("") || genero_abogado.isSelected(null)) {
             JOptionPane.showMessageDialog(null, "CAMPOS VACIOS NO ES POSIBLE GUARDAR");
         } else {
             validar();
