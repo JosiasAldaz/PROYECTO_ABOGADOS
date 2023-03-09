@@ -334,6 +334,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         TIPO_diploma.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+        TIPO_diploma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TIPO_diplomaActionPerformed(evt);
+            }
+        });
         jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 160, 40));
 
         jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
@@ -589,6 +594,10 @@ public class Regi_abogado extends javax.swing.JFrame {
     private void TXT_instituciònActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_instituciònActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_instituciònActionPerformed
+
+    private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIPO_diplomaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TIPO_diplomaActionPerformed
 
     /**
      * @param args the command line arguments
