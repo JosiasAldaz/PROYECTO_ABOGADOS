@@ -23,7 +23,6 @@ public class Direcciones {
     private String barrio;
     private boolean sucursal;
     PostgresConexion base = new PostgresConexion();
-    conexion_kevin conexion1 = new conexion_kevin();
 
     public Direcciones(int Id_direccion, String calle_principal, String calle_secundaria, String barrio) {
         this.Id_direccion = Id_direccion;
@@ -95,21 +94,5 @@ public class Direcciones {
             return ID_direccion;
         }
         return ID_direccion;
-    }
-
-    public void Ingresar1() {
-        try {
-            Connection conexion = conexion1.conectar();
-            Statement st = conexion.createStatement();
-            String sql = "INSERT INTO direcciones(calle_principal,calle_secundaria,sucursal)";
-            sql += " VALUES ('" + getCalle_principal() + "','" + getCalle_secundaria() + "','" + getSucursal() + "')";
-            st.execute(sql);
-            st.cancel();
-            conexion.close();
-            JOptionPane.showMessageDialog(null, "GUARDADO CORRECTAMENTA");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
-        }
     }
 }

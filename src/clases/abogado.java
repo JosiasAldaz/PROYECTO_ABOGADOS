@@ -18,7 +18,6 @@ public class abogado extends Persona {
     private boolean gratuidad;
     private String titulo;
     private int puntuación;
-    conexion_kevin nuevo = new conexion_kevin();
     PostgresConexion conexion = new PostgresConexion();
 
     public abogado() {
@@ -64,22 +63,6 @@ public class abogado extends Persona {
         this.puntuación = puntuación;
     }
 
-    public conexion_kevin getNuevo() {
-        return nuevo;
-    }
-
-    public void setNuevo(conexion_kevin nuevo) {
-        this.nuevo = nuevo;
-    }
-
-    public PostgresConexion getConexion() {
-        return conexion;
-    }
-
-    public void setConexion(PostgresConexion conexion) {
-        this.conexion = conexion;
-    }
-
     public abogado(int cod_abogado, double cost_hora, boolean gratuidad, String titulo, int puntuación) {
         this.cod_abogado = cod_abogado;
         this.cost_hora = cost_hora;
@@ -106,20 +89,25 @@ public class abogado extends Persona {
         return retorno;
     }
 
-    public void Insertar() {
-
-        try {
-            Connection conexion1 = nuevo.conectar();
-            Statement st = conexion1.createStatement();
-            String sql = "INSERT INTO public.abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg, \"contraseña_abg\", prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, edad_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg)"
-                    + "VALUES ('" + getTitulo() + "', '" + getCost_hora() + "','" + isGratuidad() + "', '" + super.getCedula() + "','" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getTelefono() + "' ,'" + super.getFoto_perfil() + "')";
-            st.execute(sql);
-            st.cancel();
-            conexion1.close();
-            JOptionPane.showMessageDialog(null, "GUARDADO CORRECTAMENTA");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + e);
-
+    public void Insertar() throws SQLException {
+        String sql = "INSERT INTO abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg,contraseña_abg, prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, fecha_naci_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg)"
+                + "VALUES ('"+getTitulo()+"',"+getCost_hora()+","+isGratuidad()+",'"+super.getCedula()+"','"+super.getPassword()+"','"+super.getPrimerNombre()+"','"+super.getSegundoNombre()+"','"+super.getNombreApellido()+"','"+super.getSegundoApellido()+"','"+super.getFecha_nacimiento()+"','"+super.getGenero()+"','"+ super.getFK_direccion()+"','"+super.getTelefono()+"','"+super.getFoto_perfil()+"')";
+        conexion.accion(sql);
+    }
+    
+    public int Seleccionar(String select) throws SQLException {
+        int ID_abg = 0;
+        abogado objeto = new abogado();
+        ResultSet parseo = conexion.Consulta(select);
+        if (parseo == null) {
+            JOptionPane.showMessageDialog(null, "REVISE LA CONSULTA SELECT");
+        } else {
+            while (parseo.next()) {
+                objeto.setCod_abogado(Integer.parseInt(parseo.getString("id_abg")));
+            }
+            ID_abg = objeto.getCod_abogado();
+            return ID_abg;
         }
+        return ID_abg;
     }
 }

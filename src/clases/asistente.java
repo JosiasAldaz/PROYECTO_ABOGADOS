@@ -16,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
  * @author KEVIN SANCHEZ
  */
 public class asistente extends Persona {
-
     private String cod_asist;
     private Double sueldo ;
     private int experiencia;

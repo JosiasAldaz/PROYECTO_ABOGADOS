@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abogados;
+package clases;
 
+import clases.PostgresConexion;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -15,16 +17,13 @@ public class Especializacion {
     private int ID_especializacion1;
     private int FK_ID_tipo;
     private String Nombre;
-    private Date fecha_inicio;
-    private Date fecha_fin;
+    private int fecha_inicio;
+    private int fecha_fin;
+    private String univerdadad;
+    private int FK_id_agb;
+    PostgresConexion conn = new PostgresConexion();
 
-    public Especializacion(int ID_especializacion1, int FK_ID_tipo, String Nombre, Date fecha_inicio, Date fecha_fin) {
-        this.ID_especializacion1 = ID_especializacion1;
-        this.FK_ID_tipo = FK_ID_tipo;
-        this.Nombre = Nombre;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
-    }
+
 
     public Especializacion() {
     }
@@ -53,20 +52,42 @@ public class Especializacion {
         this.Nombre = Nombre;
     }
 
-    public Date getFecha_inicio() {
+    public int getFecha_inicio() {
         return fecha_inicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
+    public void setFecha_inicio(int fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_fin() {
+    public int getFecha_fin() {
         return fecha_fin;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
+    public void setFecha_fin(int fecha_fin) {
         this.fecha_fin = fecha_fin;
     }
+
+    public String getUniverdadad() {
+        return univerdadad;
+    }
+
+    public void setUniverdadad(String univerdadad) {
+        this.univerdadad = univerdadad;
+    }
+
+    public int getFK_id_agb() {
+        return FK_id_agb;
+    }
+
+    public void setFK_id_agb(int FK_id_agb) {
+        this.FK_id_agb = FK_id_agb;
+    }
+
         
+    public void Ingresar() throws SQLException{
+        String insert = "INSERT INTO especialidad(nombre_espe,anio_inicio,anio_final,institución,fk_id_agb,fk_id_tipo)";
+        insert += "VALUES('"+getNombre()+"',"+getFecha_inicio()+","+ getFecha_fin()+",'"+getUniverdadad()+"',"+getFK_id_agb()+","+getFK_ID_tipo()+")";
+        conn.accion(insert);
+    }
 }

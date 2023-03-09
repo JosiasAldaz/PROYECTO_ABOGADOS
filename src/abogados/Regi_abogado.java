@@ -6,11 +6,16 @@
 package abogados;
 
 import clases.Direcciones;
+import clases.Especializacion;
+import clases.TIPO_diplomnma;
 import clases.abogado;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +28,9 @@ public class Regi_abogado extends javax.swing.JFrame {
         initComponents();
         Internal.setVisible(false);
     }
-
+    Especializacion estatica = new Especializacion();
+    ArrayList <TIPO_diplomnma> rellenar = new ArrayList();
+    
     public String meschoice(String mes) {
         String retorno = "";
         switch (mes) {
@@ -67,6 +74,19 @@ public class Regi_abogado extends javax.swing.JFrame {
         return retorno;
     }
 
+    public int ID_TIPO (String nombre){
+        int id = 0;
+        for (int i = 0; i < rellenar.size(); i++) {
+            if(rellenar.get(i).getNombre_diplo().equals(nombre)){
+                id = rellenar.get(i).getID_diploma();
+            }else{
+                
+            }
+        }
+        return id;
+    }
+        
+    
     public void InserBase() {
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
@@ -117,7 +137,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                     
                     double auxcost = Double.parseDouble(costo.getText());
                     try {
-                        direccion_admin.Ingresar1();
+                        direccion_admin.Ingresar();
                         int id = 0;
                         String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + direccion1.getText() + "' and calle_secundaria ='" + direccion2.getText() + "'";
                         id = direccion_admin.Seleccionar(id_direccion);
@@ -138,10 +158,17 @@ public class Regi_abogado extends javax.swing.JFrame {
                         nuevo.setFK_direccion(id);
                         nuevo.setTelefono(telefono.getText());
                         nuevo.Insertar();
-
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error: " + e.toString());
-                        System.out.println(e);
+                        String selecABG = "SELECT id_abg FROM abogado WHERE cedula_abg = '"+nuevo.getCedula()+"'";
+                        if(TXT_nombre.getText().equals("")){
+                            
+                        }else{
+                            estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
+                            estatica.Ingresar();
+                        }
+                        JOptionPane.showMessageDialog(null,"BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+                        
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR EN EL INGRESO");
                     }
                 }
             }
@@ -160,20 +187,22 @@ public class Regi_abogado extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         Internal = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jSpinField1 = new com.toedter.components.JSpinField();
-        jSpinField2 = new com.toedter.components.JSpinField();
+        TXT_instituciòn = new javax.swing.JTextField();
+        TXT_nombre = new javax.swing.JTextField();
+        JSp_año_inicio = new com.toedter.components.JSpinField();
+        JSP_año_fin = new com.toedter.components.JSpinField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        TIPO_diploma = new javax.swing.JComboBox<>();
+        jLabel24 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -219,6 +248,10 @@ public class Regi_abogado extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel1.setText("Nombres:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 77, 25));
+
         Internal.setIconifiable(true);
         Internal.setMaximizable(true);
         Internal.setResizable(true);
@@ -230,47 +263,60 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Century", 1, 24)); // NOI18N
         jLabel4.setText("ESPECIALIDAD");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 41, -1, 28));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, 28));
 
         jLabel17.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
-        jLabel17.setText("TIPO:");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 15));
+        jLabel17.setText("INSTITUCIÒN:");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 130, 15));
 
         jLabel21.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
         jLabel21.setText("AÑO DE INICIO:");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, 22));
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, 22));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TXT_instituciòn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TXT_instituciònActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 161, 25));
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 161, 25));
-        jPanel3.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 42, -1));
-        jPanel3.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 42, -1));
+        jPanel3.add(TXT_instituciòn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 190, 30));
+        jPanel3.add(TXT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 115, 190, 30));
+        jPanel3.add(JSp_año_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 70, 30));
+        jPanel3.add(JSP_año_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 70, 30));
 
         jButton3.setText("REGISTRAR");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 114, 33));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 114, 33));
 
         jButton4.setText("REGRESAR");
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 119, 33));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 119, 33));
 
         jLabel23.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
-        jLabel23.setText("AÑO GRADUCION:");
-        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        jLabel23.setText("TIPO DE DIPLOMA:");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, 20));
 
         jLabel22.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel22.setText("NOMBRE:");
-        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+
+        TIPO_diploma.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+        jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 160, 40));
+
+        jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
+        jLabel24.setText("AÑO GRADUCION:");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 500, 360));
-
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel1.setText("Nombres:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 77, 25));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 590, 450));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setText("Apellidos:");
@@ -278,7 +324,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel3.setText("Cédula:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 83, 27));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 60, 27));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setText("Género:");
@@ -378,7 +424,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel14.setText("Registro de abogados");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 510, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 160));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 950, 160));
         jPanel1.add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -428,7 +474,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         contraseña.setText("jPasswordField1");
         jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 580, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 930, 740));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -443,6 +489,21 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Internal.setVisible(true);
+        TIPO_diplomnma combo = new TIPO_diplomnma();
+        
+        try {
+            rellenar = combo.mostrar();
+            rellenar.stream().forEach(tipos -> {
+            if(TIPO_diploma.getItemCount()==0){
+                TIPO_diploma.addItem("SELECCIONE");
+            }
+            TIPO_diploma.addItem(tipos.getNombre_diplo());
+        });
+        } catch (SQLException ex) {
+            Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoActionPerformed
@@ -465,9 +526,38 @@ public class Regi_abogado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")){
+            JOptionPane.showMessageDialog(null,"DEBE LLENAR TODOS LOS CAMPOS");
+            System.out.println();
+        }else{
+            LocalDate fecha = LocalDate.now(); // fecha actual
+            int año = fecha.getYear(); 
+            if(JSp_año_inicio.getValue()== año || JSp_año_inicio.getValue() > año){
+                JOptionPane.showMessageDialog(null,"EL AÑO DE INICIO NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+            }else{
+                if(JSP_año_fin.getValue()== año || JSP_año_fin.getValue() > año){
+                    JOptionPane.showMessageDialog(null,"EL AÑO DE FINALIZACION NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                }else{
+                    estatica.setFK_ID_tipo(ID_TIPO(TIPO_diploma.getSelectedItem().toString()));
+                    estatica.setFecha_fin(JSP_año_fin.getValue());
+                    estatica.setFecha_inicio(JSp_año_inicio.getValue());
+                    estatica.setNombre(TXT_nombre.getText());
+                    estatica.setUniverdadad(TXT_instituciòn.getText());
+                    JOptionPane.showMessageDialog(null,"SE HA INGRESADO SU ESPECIALIZACIÒN");
+                    Internal.setVisible(false);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void TXT_instituciònActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_instituciònActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TXT_instituciònActionPerformed
 
     /**
      * @param args the command line arguments
@@ -507,7 +597,12 @@ public class Regi_abogado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame Internal;
     private javax.swing.JComboBox<String> JBxmes;
+    private com.toedter.components.JSpinField JSP_año_fin;
+    private com.toedter.components.JSpinField JSp_año_inicio;
     private javax.swing.JSpinner Jspdia;
+    private javax.swing.JComboBox<String> TIPO_diploma;
+    private javax.swing.JTextField TXT_instituciòn;
+    private javax.swing.JTextField TXT_nombre;
     private javax.swing.JTextField apellido1;
     private javax.swing.JTextField apellido2;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -538,6 +633,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -548,10 +644,6 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JRadioButton m;
     private javax.swing.JRadioButton n;
