@@ -17,6 +17,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
      */
     public abogadoInterfaz2() {
         initComponents();
+        VentanaModificar.setVisible(false);
     }
 
     /**
