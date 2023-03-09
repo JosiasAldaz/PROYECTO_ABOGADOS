@@ -686,7 +686,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         diasvalidacion();
         int anio = jYearChooser2.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
-        if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || titasis.isEmpty() || contra.isEmpty() || contra1.isEmpty()) {
+        if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || titasis.isEmpty() || contra.isEmpty() || contra1.isEmpty()|| calle1.isEmpty()|| calle2.isEmpty()|| suel.isEmpty()|| expe.isEmpty())  {
             JOptionPane.showMessageDialog(null, "Todos los campos son requeridos.");
         } else {
             if (dia > 31 || dia < 1) {
