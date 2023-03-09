@@ -5,6 +5,7 @@
  */
 package abogados;
 
+import static abogados.Regi_Asistente.validarCedula;
 import clases.Direcciones;
 import clases.Especializacion;
 import clases.TIPO_diplomnma;
@@ -29,8 +30,8 @@ public class Regi_abogado extends javax.swing.JFrame {
         Internal.setVisible(false);
     }
     Especializacion estatica = new Especializacion();
-    ArrayList <TIPO_diplomnma> rellenar = new ArrayList();
-    
+    ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
+
     public String meschoice(String mes) {
         String retorno = "";
         switch (mes) {
@@ -74,19 +75,95 @@ public class Regi_abogado extends javax.swing.JFrame {
         return retorno;
     }
 
-    public int ID_TIPO (String nombre){
+    public int ID_TIPO(String nombre) {
         int id = 0;
         for (int i = 0; i < rellenar.size(); i++) {
-            if(rellenar.get(i).getNombre_diplo().equals(nombre)){
+            if (rellenar.get(i).getNombre_diplo().equals(nombre)) {
                 id = rellenar.get(i).getID_diploma();
-            }else{
-                
+            } else {
+
             }
         }
         return id;
     }
-        
-    
+
+    public void valced() {
+        String ced = cedula_abogado.getText();
+        boolean esValida = validarCedula(ced);
+        if (esValida) {
+            validar();
+        } else {
+            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
+        }
+    }
+
+    public static boolean validarCedula(String cedula) {
+        // Comprobar que la cédula tenga 10 dígitos
+        if (cedula == null || cedula.length() != 10) {
+            return false;
+        }
+        // Extraer el número de provincia de los primeros dos dígitos
+        int provincia = Integer.parseInt(cedula.substring(0, 2));
+        if (provincia < 1 || provincia > 24) {
+            return false;
+        }
+        // Validar el tercer dígito (debe ser 0, 1, 2 o 3)
+        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+        if (tercerDigito < 0 || tercerDigito > 3) {
+            return false;
+        }
+        // Extraer los nueve primeros dígitos como un número entero
+        int numCedula = Integer.parseInt(cedula.substring(0, 9));
+        // Validar el último dígito usando el algoritmo de validación del Registro Civil
+        int ultimoDigito = Integer.parseInt(cedula.substring(9));
+        int total = 0;
+        int multiplicador = 2;
+        for (int i = 8; i >= 0; i--) {
+            int digito = numCedula % 10;
+            numCedula /= 10;
+            int producto = digito * multiplicador;
+            if (producto > 9) {
+                producto -= 9;
+            }
+            total += producto;
+            multiplicador = (multiplicador == 2) ? 1 : 2;
+        }
+        int digitVerificador = 10 - (total % 10);
+        if (digitVerificador == 10) {
+            digitVerificador = 0;
+        }
+        if (ultimoDigito != digitVerificador) {
+            return false;
+        }
+        return true;
+    }
+
+    public void validar() {
+        if (cedula_abogado.getText().matches("^[0-9]{10}$")) {
+            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
+                if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
+
+                    if (telefono.getText().matches("^[0-9]{10}$")) {
+                        if (direccion1.getText().matches("[a-z]+$") && direccion2.getText().matches("[a-z]+$")) {
+                            InserBase();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTA");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
+    }
+
     public void InserBase() {
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
@@ -134,8 +211,9 @@ public class Regi_abogado extends javax.swing.JFrame {
                     direccion_admin.setCalle_principal(direccion1.getText());
                     direccion_admin.setCalle_secundaria(direccion2.getText());
                     direccion_admin.setSucursal(false);
-                    
+
                     double auxcost = Double.parseDouble(costo.getText());
+
                     try {
                         direccion_admin.Ingresar();
                         int id = 0;
@@ -158,17 +236,17 @@ public class Regi_abogado extends javax.swing.JFrame {
                         nuevo.setFK_direccion(id);
                         nuevo.setTelefono(telefono.getText());
                         nuevo.Insertar();
-                        String selecABG = "SELECT id_abg FROM abogado WHERE cedula_abg = '"+nuevo.getCedula()+"'";
-                        if(TXT_nombre.getText().equals("")){
-                            
-                        }else{
+                        String selecABG = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + nuevo.getCedula() + "'";
+                        if (TXT_nombre.getText().equals("")) {
+
+                        } else {
                             estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
                             estatica.Ingresar();
                         }
-                        JOptionPane.showMessageDialog(null,"BIENVENIDO AL SISTEMA ECU-ABOGADOS");
-                        
+                        JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+
                     } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR EN EL INGRESO");
+                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
                     }
                 }
             }
@@ -184,7 +262,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        genero_abogado = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -321,7 +399,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 590, 450));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 590, 450));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setText("Apellidos:");
@@ -378,7 +456,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         });
         jPanel1.add(cedula_abogado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 143, 32));
 
-        buttonGroup1.add(m);
+        genero_abogado.add(m);
         m.setText("Maculino");
         m.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,7 +465,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         });
         jPanel1.add(m, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 93, -1));
 
-        buttonGroup1.add(f);
+        genero_abogado.add(f);
         f.setText("Femenino");
         jPanel1.add(f, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 93, -1));
         jPanel1.add(direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 550, 140, 32));
@@ -489,26 +567,31 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InserBase();
+        if (cedula_abogado.getText().equals("") || telefono.getText().equals("") || costo.getText().equals("") || titulos.getText().equals("") || nombre1.getText().equals("") || nombre2.getText().equals("") || apellido1.getText().equals("") || apellido2.getText().equals("") || direccion1.getText().equals("") || apellido2.getText().equals("") || genero_abogado.isSelected(null)) {
+            JOptionPane.showMessageDialog(null, "CAMPOS VACIOS NO ES POSIBLE GUARDAR");
+        } else {
+            validar();
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Internal.setVisible(true);
         TIPO_diplomnma combo = new TIPO_diplomnma();
-        
+
         try {
             rellenar = combo.mostrar();
             rellenar.stream().forEach(tipos -> {
-            if(TIPO_diploma.getItemCount()==0){
-                TIPO_diploma.addItem("SELECCIONE");
-            }
-            TIPO_diploma.addItem(tipos.getNombre_diplo());
-        });
+                if (TIPO_diploma.getItemCount() == 0) {
+                    TIPO_diploma.addItem("SELECCIONE");
+                }
+                TIPO_diploma.addItem(tipos.getNombre_diplo());
+            });
         } catch (SQLException ex) {
             Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoActionPerformed
@@ -532,24 +615,24 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_nombre2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")){
-            JOptionPane.showMessageDialog(null,"DEBE LLENAR TODOS LOS CAMPOS");
+        if (TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")) {
+            JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
             System.out.println();
-        }else{
+        } else {
             LocalDate fecha = LocalDate.now(); // fecha actual
-            int año = fecha.getYear(); 
-            if(JSp_año_inicio.getValue()== año || JSp_año_inicio.getValue() > año){
-                JOptionPane.showMessageDialog(null,"EL AÑO DE INICIO NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
-            }else{
-                if(JSP_año_fin.getValue()== año || JSP_año_fin.getValue() > año){
-                    JOptionPane.showMessageDialog(null,"EL AÑO DE FINALIZACION NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
-                }else{
+            int año = fecha.getYear();
+            if (JSp_año_inicio.getValue() == año || JSp_año_inicio.getValue() > año) {
+                JOptionPane.showMessageDialog(null, "EL AÑO DE INICIO NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+            } else {
+                if (JSP_año_fin.getValue() == año || JSP_año_fin.getValue() > año) {
+                    JOptionPane.showMessageDialog(null, "EL AÑO DE FINALIZACION NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                } else {
                     estatica.setFK_ID_tipo(ID_TIPO(TIPO_diploma.getSelectedItem().toString()));
                     estatica.setFecha_fin(JSP_año_fin.getValue());
                     estatica.setFecha_inicio(JSp_año_inicio.getValue());
                     estatica.setNombre(TXT_nombre.getText());
                     estatica.setUniverdadad(TXT_instituciòn.getText());
-                    JOptionPane.showMessageDialog(null,"SE HA INGRESADO SU ESPECIALIZACIÒN");
+                    JOptionPane.showMessageDialog(null, "SE HA INGRESADO SU ESPECIALIZACIÒN");
                     Internal.setVisible(false);
                 }
             }
@@ -557,7 +640,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void TXT_instituciònActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_instituciònActionPerformed
@@ -614,7 +697,6 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_nombre;
     private javax.swing.JTextField apellido1;
     private javax.swing.JTextField apellido2;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField cedula_abogado;
     private javax.swing.JPasswordField contraseña;
@@ -623,6 +705,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JTextField direccion2;
     private javax.swing.JRadioButton f;
     private rojerusan.RSFotoSquare foto;
+    private javax.swing.ButtonGroup genero_abogado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

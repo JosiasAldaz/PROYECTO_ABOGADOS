@@ -2,7 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="genero_abogado">
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
     </Component>
@@ -69,7 +69,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="150" y="200" width="590" height="450"/>
+              <AbsoluteConstraints x="170" y="180" width="590" height="450"/>
             </Constraint>
           </Constraints>
 
@@ -405,7 +405,7 @@
         <Component class="javax.swing.JRadioButton" name="m">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="genero_abogado"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Maculino"/>
           </Properties>
@@ -421,7 +421,7 @@
         <Component class="javax.swing.JRadioButton" name="f">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="genero_abogado"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Femenino"/>
           </Properties>
