@@ -83,11 +83,11 @@ public class abogado extends Persona {
             insertar.setNombreApellido(contenedor.getString("prim_ape_abg"));
             insertar.setTelefono(contenedor.getString("telefono_abg"));
             insertar.setGratuidad(contenedor.getBoolean("gratuidad"));
-
             retorno.add(insertar);
         }
         return retorno;
     }
+       
 
     public void Insertar() throws SQLException {
         String sql = "INSERT INTO abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg,contraseña_abg, prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, fecha_naci_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg)"

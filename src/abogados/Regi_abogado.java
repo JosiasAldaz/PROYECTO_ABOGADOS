@@ -214,7 +214,6 @@ public class Regi_abogado extends javax.swing.JFrame {
                     direccion_admin.setSucursal(false);
 
                     double auxcost = Double.parseDouble(costo.getText());
-
                     try {
                         direccion_admin.Ingresar();
                         int id = 0;
@@ -253,7 +252,7 @@ public class Regi_abogado extends javax.swing.JFrame {
             }
         }
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -397,7 +396,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 630, 410));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 630, 410));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel1.setText("Nombres:");
@@ -578,7 +577,6 @@ public class Regi_abogado extends javax.swing.JFrame {
         } else {
             validar();
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
