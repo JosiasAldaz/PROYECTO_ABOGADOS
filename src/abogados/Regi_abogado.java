@@ -226,6 +226,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         direccion1 = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
+        jButton5 = new javax.swing.JButton();
         Internal = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -241,7 +242,6 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         TIPO_diploma = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -287,6 +287,11 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         nombre1.setBackground(new java.awt.Color(211, 211, 211));
         nombre1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre1KeyTyped(evt);
+            }
+        });
         jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 120, 20));
 
         nombre2.setBackground(new java.awt.Color(211, 211, 211));
@@ -294,6 +299,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         nombre2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre2ActionPerformed(evt);
+            }
+        });
+        nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre2KeyTyped(evt);
             }
         });
         jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 120, 20));
@@ -305,10 +315,20 @@ public class Regi_abogado extends javax.swing.JFrame {
                 apellido2ActionPerformed(evt);
             }
         });
+        apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido2KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 120, 20));
 
         apellido1.setBackground(new java.awt.Color(211, 211, 211));
         apellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido1KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, 20));
 
         cedula_abogado.setBackground(new java.awt.Color(211, 211, 211));
@@ -316,6 +336,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         cedula_abogado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedula_abogadoActionPerformed(evt);
+            }
+        });
+        cedula_abogado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cedula_abogadoKeyTyped(evt);
             }
         });
         jPanel1.add(cedula_abogado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 143, 20));
@@ -337,10 +362,20 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         direccion2.setBackground(new java.awt.Color(211, 211, 211));
         direccion2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        direccion2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                direccion2KeyTyped(evt);
+            }
+        });
         jPanel1.add(direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 160, 20));
 
         telefono.setBackground(new java.awt.Color(211, 211, 211));
         telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 140, 20));
 
         costo.setBackground(new java.awt.Color(211, 211, 211));
@@ -348,6 +383,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         costo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 costoActionPerformed(evt);
+            }
+        });
+        costo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                costoKeyTyped(evt);
             }
         });
         jPanel1.add(costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 70, 20));
@@ -385,7 +425,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
         jLabel14.setText("Registro de abogados");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 510, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 510, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 950, 160));
 
@@ -440,12 +480,28 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         direccion1.setBackground(new java.awt.Color(211, 211, 211));
         direccion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        direccion1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                direccion1KeyTyped(evt);
+            }
+        });
         jPanel1.add(direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 160, 20));
 
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
         contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
+
+        jButton5.setBackground(new java.awt.Color(245, 222, 179));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
+        jButton5.setText("Pantalla Principal");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 660, 190, 50));
 
         Internal.setIconifiable(true);
         Internal.setMaximizable(true);
@@ -476,10 +532,20 @@ public class Regi_abogado extends javax.swing.JFrame {
                 TXT_instituciònActionPerformed(evt);
             }
         });
+        TXT_instituciòn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_instituciònKeyTyped(evt);
+            }
+        });
         jPanel3.add(TXT_instituciòn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 190, 30));
 
         TXT_nombre.setBackground(new java.awt.Color(211, 211, 211));
         TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TXT_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_nombreKeyTyped(evt);
+            }
+        });
         jPanel3.add(TXT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 115, 190, 30));
 
         JSp_año_inicio.setBackground(new java.awt.Color(211, 211, 211));
@@ -517,6 +583,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         TIPO_diploma.setBackground(new java.awt.Color(211, 211, 211));
         TIPO_diploma.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
         TIPO_diploma.setBorder(null);
+        TIPO_diploma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TIPO_diplomaActionPerformed(evt);
+            }
+        });
         jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 160, 40));
 
         jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
@@ -525,18 +596,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 610, 470));
-
-        jButton5.setBackground(new java.awt.Color(245, 222, 179));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jButton5.setText("Pantalla Principal");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 660, 190, 50));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 650, 480));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 740));
 
@@ -629,6 +689,105 @@ public class Regi_abogado extends javax.swing.JFrame {
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void cedula_abogadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedula_abogadoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_cedula_abogadoKeyTyped
+
+    private void costoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_costoKeyTyped
+
+    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_telefonoKeyTyped
+
+    private void nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre1KeyTyped
+
+    private void nombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre2KeyTyped
+
+    private void apellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido1KeyTyped
+
+    private void apellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido2KeyTyped
+
+    private void direccion1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_direccion1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_direccion1KeyTyped
+
+    private void direccion2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_direccion2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_direccion2KeyTyped
+
+    private void TXT_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_TXT_nombreKeyTyped
+
+    private void TXT_instituciònKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_instituciònKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_TXT_instituciònKeyTyped
 
     /**
      * @param args the command line arguments

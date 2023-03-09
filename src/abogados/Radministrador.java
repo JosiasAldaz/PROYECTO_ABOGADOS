@@ -256,6 +256,11 @@ public class Radministrador extends javax.swing.JFrame {
 
         cedula.setBackground(new java.awt.Color(211, 211, 211));
         cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 30));
 
         nombre1.setBackground(new java.awt.Color(211, 211, 211));
@@ -263,6 +268,11 @@ public class Radministrador extends javax.swing.JFrame {
         nombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre1ActionPerformed(evt);
+            }
+        });
+        nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre1KeyTyped(evt);
             }
         });
         jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 30));
@@ -274,27 +284,47 @@ public class Radministrador extends javax.swing.JFrame {
                 nombre2ActionPerformed(evt);
             }
         });
+        nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre2KeyTyped(evt);
+            }
+        });
         jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 160, 30));
 
         apellido1.setBackground(new java.awt.Color(211, 211, 211));
         apellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido1KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 30));
 
         apellido2.setBackground(new java.awt.Color(211, 211, 211));
         apellido2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido2KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 160, 30));
 
         telefono.setBackground(new java.awt.Color(211, 211, 211));
         telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Telefono:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Correo:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Contraseña:");
@@ -306,7 +336,7 @@ public class Radministrador extends javax.swing.JFrame {
 
         correo.setBackground(new java.awt.Color(211, 211, 211));
         correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 280, 30));
+        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 280, 30));
 
         mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -388,6 +418,11 @@ public class Radministrador extends javax.swing.JFrame {
 
         calle2.setBackground(new java.awt.Color(211, 211, 211));
         calle2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        calle2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                calle2KeyTyped(evt);
+            }
+        });
         jPanel1.add(calle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 230, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -396,6 +431,11 @@ public class Radministrador extends javax.swing.JFrame {
 
         calle1.setBackground(new java.awt.Color(211, 211, 211));
         calle1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        calle1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                calle1KeyTyped(evt);
+            }
+        });
         jPanel1.add(calle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 230, 30));
 
         contraseña4.setBackground(new java.awt.Color(211, 211, 211));
@@ -525,6 +565,78 @@ public class Radministrador extends javax.swing.JFrame {
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre1ActionPerformed
+
+    private void nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre1KeyTyped
+
+    private void nombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre2KeyTyped
+
+    private void apellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido1KeyTyped
+
+    private void apellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido2KeyTyped
+
+    private void calle1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calle1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_calle1KeyTyped
+
+    private void calle2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calle2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_calle2KeyTyped
+
+    private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_cedulaKeyTyped
+
+    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_telefonoKeyTyped
 
     /**
      * @param args the command line arguments
