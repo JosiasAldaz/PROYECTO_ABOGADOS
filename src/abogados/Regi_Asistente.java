@@ -33,6 +33,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollBar1 = new javax.swing.JScrollBar();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextcedula = new javax.swing.JTextField();
@@ -400,7 +401,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -417,7 +418,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -577,10 +578,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
         String cel = jTextcelular.getText();
         String edad = jTextedad.getText();
         String corre = jTextcorreo.getText();
-        String usu = jTextnusu.getText();
         String contra = jPasscontra.getText();
         String contra1 = jPasscontra2.getText();
-        if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || usu.isEmpty() || contra.isEmpty() || contra1.isEmpty()) {
+        if (ced.isEmpty() || nom.isEmpty() || nom2.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || cel.isEmpty() || corre.isEmpty() || contra.isEmpty() || contra1.isEmpty()) {
             // Mostrar un mensaje de error
             JOptionPane.showMessageDialog(null, "Todos los campos son requeridos.");
         } else {
@@ -600,7 +600,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                         }
                         if (cel.matches("^[0-9]{10}$")) {
                             if (edad.matches("^[0-9]+$")) {
-                                if (usu.matches("[A-Za-z]+$")) {
+                                
                                     if (contra1.equals(contra)) {
                                         if (corre.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                                             System.out.println(" " + ced);
@@ -610,7 +610,6 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                             System.out.println(" " + ape2);
                                             System.out.println(" " + selec);
                                             System.out.println(" " + cel);
-                                            System.out.println(" " + usu);
                                             System.out.println(" " + corre);
                                             System.out.println(" " + jDateChooser1.getDate());
                                             System.out.println(" " + contra);
@@ -624,9 +623,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                     } else {
                                         JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
                                     }
-                                } else {
-                                    JOptionPane.showMessageDialog(this, "Nombre de usuario invalido");
-                                }
+                                
                             } else {
                                 JOptionPane.showMessageDialog(this, "Edad invalida");
                             }
@@ -649,6 +646,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

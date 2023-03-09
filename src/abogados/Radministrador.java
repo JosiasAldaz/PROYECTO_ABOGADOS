@@ -83,11 +83,11 @@ public class Radministrador extends javax.swing.JFrame {
 
     public void validar() {
         if (cedula.getText().matches("^[0-9]{10}$")) {
-            if (nombre1.getText().matches("^[A-Z]{1}[a-z]+$") && nombre2.getText().matches("^[A-Z]{1}[a-z]+$")) {
-                if (apellido1.getText().matches("^[A-Z]{1}[a-z]+$") && apellido2.getText().matches("^[A-Z]{1}[a-z]+$")) {
+            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
+                if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
                     if (correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
-                            if (calle1.getText().matches("^[A-Z]?[a-z]+$") && calle2.getText().matches("^[A-Z]?[a-z]+$")) {
+                            if (calle1.getText().matches("[a-z]+$") && calle2.getText().matches("[a-z]+$")) {
                                 //if (contraseña3.equals(contraseña4)) {
                                      pru();
 
@@ -526,7 +526,6 @@ public class Radministrador extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         validar();
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed

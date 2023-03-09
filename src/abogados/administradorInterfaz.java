@@ -29,6 +29,8 @@ ArrayList mostrar  = new ArrayList();
 //        setLocationRelativeTo(this);
         questnombre.setVisible(false);
         JPcrud_abg.setVisible(false);
+        JP_fondo_especialidad.setVisible(false);
+        JPfondo_Inicial.setVisible(true);
     }
     TIPO_diplomnma change = new TIPO_diplomnma();
     /**
@@ -405,10 +407,13 @@ ArrayList mostrar  = new ArrayList();
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 40));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 40));
 
         jPanel4.setBackground(new java.awt.Color(25, 25, 112));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel4MouseEntered(evt);
             }
@@ -438,7 +443,7 @@ ArrayList mostrar  = new ArrayList();
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 40));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 180, 40));
 
         jPanel5.setBackground(new java.awt.Color(25, 25, 112));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -471,7 +476,7 @@ ArrayList mostrar  = new ArrayList();
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 180, 40));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 180, 40));
 
         jPanel6.setBackground(new java.awt.Color(25, 25, 112));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -488,10 +493,16 @@ ArrayList mostrar  = new ArrayList();
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("ESPECIALIZACIONES");
+        jLabel11.setText("   ESPECIALIZACIONES");
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel11MouseExited(evt);
             }
         });
 
@@ -499,20 +510,14 @@ ArrayList mostrar  = new ArrayList();
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 180, 40));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
@@ -796,21 +801,34 @@ ArrayList mostrar  = new ArrayList();
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
-        jPanel6.setBackground(new Color(135,206,250));
+        
     }//GEN-LAST:event_jPanel6MouseEntered
 
     private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
-        jPanel6.setBackground(new Color(25,25,112));
+        
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        // TODO add your handling code here:
+        JPcrud_abg.setVisible(false);
+        JP_fondo_especialidad.setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        JPcrud_abg.setVisible(false);
-        JP_fondo_especialidad.setVisible(true);
+        
     }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+       JP_fondo_especialidad.setVisible(false);
+       JPcrud_abg.setVisible(true);
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
+        jPanel6.setBackground(new Color(135,206,250));
+    }//GEN-LAST:event_jLabel11MouseEntered
+
+    private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
+        jPanel6.setBackground(new Color(25,25,112));
+    }//GEN-LAST:event_jLabel11MouseExited
 
     /**
      * @param args the command line arguments
