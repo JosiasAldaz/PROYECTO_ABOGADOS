@@ -27,6 +27,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     public Regi_abogado() {
         initComponents();
+        setLocationRelativeTo(null);
         Internal.setVisible(false);
     }
     Especializacion estatica = new Especializacion();
@@ -265,7 +266,6 @@ public class Regi_abogado extends javax.swing.JFrame {
         genero_abogado = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         Internal = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -281,6 +281,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         TIPO_diploma = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -319,16 +320,13 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         direccion1 = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel1.setText("Nombres:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 77, 25));
 
         Internal.setIconifiable(true);
         Internal.setMaximizable(true);
@@ -367,7 +365,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 114, 33));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 114, 33));
 
         jButton4.setText("REGRESAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +373,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 119, 33));
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 119, 33));
 
         jLabel23.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
         jLabel23.setText("TIPO DE DIPLOMA:");
@@ -399,7 +397,11 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 590, 450));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 630, 410));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel1.setText("Nombres:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 77, 25));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setText("Apellidos:");
@@ -418,8 +420,8 @@ public class Regi_abogado extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, 24));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel7.setText("Teléfono:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 600, -1, -1));
+        jLabel7.setText("Contraseña:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel8.setText("Seleccione una foto");
@@ -494,7 +496,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 660, -1, 31));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 670, -1, 31));
 
         jPanel2.setBackground(new java.awt.Color(139, 69, 19));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -555,7 +557,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         jPanel1.add(direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 140, 32));
 
         contraseña.setText("jPasswordField1");
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 580, -1, -1));
+        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, 140, 30));
+
+        jLabel20.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel20.setText("Teléfono:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 600, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 740));
 
@@ -640,7 +646,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        Internal.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void TXT_instituciònActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_instituciònActionPerformed
@@ -722,6 +728,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
