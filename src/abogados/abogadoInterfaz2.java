@@ -18,6 +18,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     public abogadoInterfaz2() {
         initComponents();
         VentanaModificar.setVisible(false);
+        ContratosVigentes.setVisible(false);
     }
 
     /**
@@ -76,6 +77,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnRechazar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        VentanaContratosEspera = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        txtIdContratos = new javax.swing.JLabel();
+        txtTipoContratos = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        TipoContrato = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtModificar = new javax.swing.JTextField();
         txtContratosVigentes = new javax.swing.JTextField();
@@ -419,6 +428,80 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jPanel2.add(ContratosVigentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
+        VentanaContratosEspera.setBackground(new java.awt.Color(0, 102, 102));
+
+        jTable2.setBackground(new java.awt.Color(0, 102, 102));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID Contrato", "Tipo", "Fecha Inicio", "Fecha Final", "Estado"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        txtIdContratos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtIdContratos.setText("ID Contratos: ");
+
+        txtTipoContratos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtTipoContratos.setText("Tipo de Contratos:");
+
+        TipoContrato.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+        TipoContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipoContratoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        jButton1.setText("Actualizar");
+
+        javax.swing.GroupLayout VentanaContratosEsperaLayout = new javax.swing.GroupLayout(VentanaContratosEspera);
+        VentanaContratosEspera.setLayout(VentanaContratosEsperaLayout);
+        VentanaContratosEsperaLayout.setHorizontalGroup(
+            VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaContratosEsperaLayout.createSequentialGroup()
+                .addGroup(VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaContratosEsperaLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIdContratos)
+                            .addComponent(txtTipoContratos))
+                        .addGap(23, 23, 23)
+                        .addGroup(VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(TipoContrato, 0, 136, Short.MAX_VALUE)))
+                    .addGroup(VentanaContratosEsperaLayout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        VentanaContratosEsperaLayout.setVerticalGroup(
+            VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaContratosEsperaLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(VentanaContratosEsperaLayout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addGroup(VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIdContratos)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addGroup(VentanaContratosEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTipoContratos)
+                    .addComponent(TipoContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
+        );
+
+        jPanel2.add(VentanaContratosEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 1050, 510));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 102));
@@ -602,7 +685,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("VICENTE PINZON Y LUIS DE LA CEDA");
+        jLabel3.setText("Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 710, 430, 40));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -732,6 +815,10 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         ContratosVigentes.setVisible(true);
     }//GEN-LAST:event_txtContratosVigentesMouseClicked
 
+    private void TipoContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoContratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TipoContratoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -770,6 +857,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContratosVigentes;
+    private javax.swing.JComboBox<String> TipoContrato;
+    private javax.swing.JPanel VentanaContratosEspera;
     private javax.swing.JPanel VentanaFondo;
     private javax.swing.JPanel VentanaModificar;
     private javax.swing.JButton btnAceptar;
@@ -779,6 +868,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -794,9 +884,12 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private rojerusan.RSFotoSquare rSFotoSquare1;
     private javax.swing.JLabel txtApellidos;
     private javax.swing.JTextField txtAsistenteAsignado;
@@ -811,6 +904,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel txtGratuidad;
     private javax.swing.JLabel txtID;
     private javax.swing.JTextField txtIdContraro;
+    private javax.swing.JLabel txtIdContratos;
     private javax.swing.JTextField txtModificar;
     private javax.swing.JLabel txtNombres;
     private javax.swing.JTextField txtOficinaAsignada;
@@ -825,6 +919,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrimerNombre8;
     private javax.swing.JTextField txtSegundoNombre;
     private javax.swing.JLabel txtTelefono;
+    private javax.swing.JLabel txtTipoContratos;
     private javax.swing.JLabel txtTitulos;
     private javax.swing.JLabel txtfoto;
     // End of variables declaration//GEN-END:variables
