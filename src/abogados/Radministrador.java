@@ -88,7 +88,8 @@ public class Radministrador extends javax.swing.JFrame {
                     if (correo.getText().matches("^([a-z]+[-_]?[0-9]?)+([@]{1})([a-z]+)(.)[a-z]+||([a-z]*[0-9]+)+([@]{1})([a-z]+)(.)[a-z]+$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
                             if (calle1.getText().matches("^[A-Z]?[a-z]+$") && calle2.getText().matches("^[A-Z]?[a-z]+$")) {
-                                    if (contraseña.equals(contraseña1)) {
+                                    if (contraseña.getText().equals(contraseña1.getText())) {
+                                        validar1();
                                     }                              
                             } else {
                                 JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
@@ -107,6 +108,75 @@ public class Radministrador extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
+    }
+    public void validar1(){
+        diasvalidacion();
+        int anio = jYearChooser1.getYear();
+        int dia = Integer.parseInt(Jspdia.getValue().toString());
+        char genero = ' ';
+        String contra = new String(contraseña.getPassword());
+        if(jRadioButton3.isSelected()){
+            genero = 'X';
+        }
+        if(jRadioButton2.isSelected()){
+            genero = 'F';
+        }
+        if(jRadioButton1.isSelected()){
+            genero = 'M';
+        }
+        if(dia >31 || dia<1){
+            JOptionPane.showMessageDialog(null,"DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
+        }else{
+            if(JBxmes.getSelectedItem().toString().equals("SELECCIONE")){
+                JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
+            }else{
+                if(anio>=LocalDate.now().getYear()){
+                    JOptionPane.showMessageDialog(null,"EL AÑO DE NACIMIENTO ES INCORRECTO");
+                }else{
+                    String diaF = "";
+                    if(Jspdia.getValue().toString().length()==1){
+                        diaF = "0"+Jspdia.getValue().toString();
+                    }else{
+                        diaF = Jspdia.getValue().toString();
+                    }
+                    String timechooser = diaF+"/"+meschoice(JBxmes.getSelectedItem().toString())+"/"+jYearChooser1.getYear();
+                    System.out.println(timechooser);
+                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate fecha = LocalDate.parse(timechooser, formato);
+                    LocalDateTime fechaHora = fecha.atStartOfDay();
+                    Direcciones direccion_admin = new Direcciones();
+                    direccion_admin.setCalle_principal(calle1.getText());
+                    direccion_admin.setCalle_secundaria(calle2.getText());
+                    direccion_admin.setSucursal(false);
+                    try {
+                        int id = 0;
+                        Administrador jefe = new Administrador();
+                        direccion_admin.Ingresar();
+                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
+                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='"+calle1.getText()+"' and calle_secundaria ='"+calle2.getText()+"'";
+                        id =direccion_admin.Seleccionar(id_direccion);
+                        System.out.println(id);
+                        jefe.setCedula(cedula.getText());
+                        jefe.setPrimerNombre(nombre1.getText());
+                        jefe.setSegundoNombre(nombre2.getText());
+                        jefe.setNombreApellido(apellido1.getText());
+                        jefe.setSegundoApellido(apellido2.getText());
+                        jefe.setFK_direccion(id);
+                        jefe.setTelefono(telefono.getText());
+                        jefe.setGenero(genero);
+                        jefe.setPassword(contra);
+                        jefe.setCorre(correo.getText());
+                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
+                        jefe.setFecha_nacimiento(fechaHora);
+                        jefe.Ingresar();
+                    } catch (SQLException ex){
+                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                    }
+                }
+            }
+
         }
     }
 
@@ -353,7 +423,7 @@ public class Radministrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -412,73 +482,7 @@ public class Radministrador extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         validar();
-        diasvalidacion();
-        int anio = jYearChooser1.getYear();
-        int dia = Integer.parseInt(Jspdia.getValue().toString());
-        char genero = ' ';
-        String contra = new String(contraseña.getPassword());
-        if(jRadioButton3.isSelected()){
-            genero = 'X';
-        }
-        if(jRadioButton2.isSelected()){
-            genero = 'F';
-        }
-        if(jRadioButton1.isSelected()){
-            genero = 'M';
-        }
-        if(dia >31 || dia<1){
-            JOptionPane.showMessageDialog(null,"DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
-        }else{
-            if(JBxmes.getSelectedItem().toString().equals("SELECCIONE")){
-                JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
-            }else{
-                if(anio>=LocalDate.now().getYear()){
-                    JOptionPane.showMessageDialog(null,"EL AÑO DE NACIMIENTO ES INCORRECTO");
-                }else{
-                    String diaF = "";
-                    if(Jspdia.getValue().toString().length()==1){
-                        diaF = "0"+Jspdia.getValue().toString();
-                    }else{
-                        diaF = Jspdia.getValue().toString();
-                    }
-                    String timechooser = diaF+"/"+meschoice(JBxmes.getSelectedItem().toString())+"/"+jYearChooser1.getYear();
-                    System.out.println(timechooser);
-                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate fecha = LocalDate.parse(timechooser, formato);
-                    LocalDateTime fechaHora = fecha.atStartOfDay();
-                    Direcciones direccion_admin = new Direcciones();
-                    direccion_admin.setCalle_principal(calle1.getText());
-                    direccion_admin.setCalle_secundaria(calle2.getText());
-                    direccion_admin.setSucursal(false);
-                    try {
-                        int id = 0;
-                        Administrador jefe = new Administrador();
-                        direccion_admin.Ingresar();
-                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
-                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='"+calle1.getText()+"' and calle_secundaria ='"+calle2.getText()+"'";
-                        id =direccion_admin.Seleccionar(id_direccion);
-                        System.out.println(id);
-                        jefe.setCedula(cedula.getText());
-                        jefe.setPrimerNombre(nombre1.getText());
-                        jefe.setSegundoNombre(nombre2.getText());
-                        jefe.setNombreApellido(apellido1.getText());
-                        jefe.setSegundoApellido(apellido2.getText());
-                        jefe.setFK_direccion(id);
-                        jefe.setTelefono(telefono.getText());
-                        jefe.setGenero(genero);
-                        jefe.setPassword(contra);
-                        jefe.setCorre(correo.getText());
-                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
-                        jefe.setFecha_nacimiento(fechaHora);
-                        jefe.Ingresar();
-                    } catch (SQLException ex){
-                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
-                    }
-                }
-            }
-
-        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed

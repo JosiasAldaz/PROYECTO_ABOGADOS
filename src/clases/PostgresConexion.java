@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clases;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,19 +12,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author LENOVO
  */
-public class PostgresConexion{
+public class PostgresConexion {
+
     Connection con;
     //PONGANLE EL MISMO NOMMBRE A SU BASE
+    //String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
     //TIENE QUE PONER SU CONTRASEÑA
-    String password = "1234";
+    String password = "sanchez70";
     Statement st;
-    
+
     public PostgresConexion() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -37,6 +41,7 @@ public class PostgresConexion{
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     //SOLO SE USA CON SELECT 
     public ResultSet Consulta(String sql) {
         try {
@@ -47,23 +52,23 @@ public class PostgresConexion{
             return null;
         }
     }
+
     //SOLO SE USA CON DELETE, UPDATE, INSERT INTO
-    public SQLException accion(String nsql) throws SQLException{
+    public SQLException accion(String nsql) throws SQLException {
         System.out.println(nsql);
         try {
-            
+
             st.execute(nsql);
             st.close();
             return null;
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(PostgresConexion.class.getName()).log(Level.SEVERE, null, ex);
-            
+
             return ex;
         }
     }
-    
-    
-    public Connection Ingres(){
+
+    public Connection Ingres() {
         return con;
     }
 }
