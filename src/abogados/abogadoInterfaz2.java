@@ -28,8 +28,53 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        VentanaFondo = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        VentanaModificar = new javax.swing.JPanel();
+        txtNombres = new javax.swing.JLabel();
+        txtApellidos = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JLabel();
+        txtFechaNacimiento = new javax.swing.JLabel();
+        txtGenero = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JLabel();
+        txtfoto = new javax.swing.JLabel();
+        txtCostoHora = new javax.swing.JLabel();
+        txtGratuidad = new javax.swing.JLabel();
+        txtTitulos = new javax.swing.JLabel();
+        txtPrimerNombre = new javax.swing.JTextField();
+        txtSegundoNombre = new javax.swing.JTextField();
+        txtPrimerNombre1 = new javax.swing.JTextField();
+        txtPrimerNombre2 = new javax.swing.JTextField();
+        txtPrimerNombre3 = new javax.swing.JTextField();
+        txtPrimerNombre4 = new javax.swing.JTextField();
+        txtPrimerNombre6 = new javax.swing.JTextField();
+        txtPrimerNombre7 = new javax.swing.JTextField();
+        txtPrimerNombre8 = new javax.swing.JTextField();
+        txtPrimerNombre10 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        rSFotoSquare1 = new rojerusan.RSFotoSquare();
+        ContratosVigentes = new javax.swing.JPanel();
+        txtID = new javax.swing.JLabel();
+        txtIdContraro = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        btnAceptar = new javax.swing.JButton();
+        btnRechazar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtModificar = new javax.swing.JTextField();
         txtContratosVigentes = new javax.swing.JTextField();
@@ -47,16 +92,331 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pexels-august-de-richelieu-4427430 (1).jpg"))); // NOI18N
+
+        javax.swing.GroupLayout VentanaFondoLayout = new javax.swing.GroupLayout(VentanaFondo);
+        VentanaFondo.setLayout(VentanaFondoLayout);
+        VentanaFondoLayout.setHorizontalGroup(
+            VentanaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+        VentanaFondoLayout.setVerticalGroup(
+            VentanaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jPanel2.add(VentanaFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
+
+        VentanaModificar.setBackground(new java.awt.Color(0, 102, 102));
+
+        txtNombres.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtNombres.setText("Nombres:");
+
+        txtApellidos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtApellidos.setText("Apellidos:");
+
+        txtCedula.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtCedula.setText("Cédula:");
+
+        txtFechaNacimiento.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtFechaNacimiento.setText("Fecha de nacimiento:");
+
+        txtGenero.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtGenero.setText("Género:");
+
+        txtDireccion.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtDireccion.setText("Dirección:");
+
+        txtTelefono.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtTelefono.setText("Teléfono:");
+
+        txtfoto.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtfoto.setText("Seleccione una foto:");
+
+        txtCostoHora.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtCostoHora.setText("Costo por hora:");
+
+        txtGratuidad.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtGratuidad.setText("Gratuidad:");
+
+        txtTitulos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtTitulos.setText("Titulos:");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Masculino");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Femenino");
+
+        buttonGroup2.add(jRadioButton3);
+        jRadioButton3.setText("SI");
+
+        buttonGroup2.add(jRadioButton4);
+        jRadioButton4.setText("NO");
+
+        javax.swing.GroupLayout VentanaModificarLayout = new javax.swing.GroupLayout(VentanaModificar);
+        VentanaModificar.setLayout(VentanaModificarLayout);
+        VentanaModificarLayout.setHorizontalGroup(
+            VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombres)
+                            .addComponent(txtApellidos))
+                        .addGap(30, 30, 30)
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addComponent(txtPrimerNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addComponent(txtFechaNacimiento)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPrimerNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addComponent(txtCedula)
+                                .addGap(50, 50, 50)
+                                .addComponent(txtPrimerNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDireccion)
+                                    .addComponent(txtGenero))
+                                .addGap(26, 26, 26)
+                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPrimerNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                        .addComponent(txtTitulos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtPrimerNombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                        .addComponent(txtTelefono)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(txtPrimerNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
+                                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
+                                                .addComponent(txtCostoHora)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                                .addComponent(txtGratuidad)
+                                                .addGap(63, 63, 63)))
+                                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPrimerNombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49))
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addComponent(txtfoto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rSFotoSquare1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))))))
+        );
+        VentanaModificarLayout.setVerticalGroup(
+            VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtPrimerNombre)
+                                .addComponent(txtSegundoNombre))
+                            .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VentanaModificarLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtApellidos)
+                                    .addComponent(txtPrimerNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfoto)
+                                .addGap(17, 17, 17))))
+                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(rSFotoSquare1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCedula)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtPrimerNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrimerNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFechaNacimiento)
+                    .addComponent(txtCostoHora)
+                    .addComponent(txtPrimerNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrimerNombre8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtGenero)
+                                .addComponent(jRadioButton1)
+                                .addComponent(jRadioButton2))
+                            .addComponent(txtGratuidad))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccion)
+                            .addComponent(txtTitulos)
+                            .addComponent(txtPrimerNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimerNombre10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49))
+                    .addGroup(VentanaModificarLayout.createSequentialGroup()
+                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton3)
+                            .addComponent(jRadioButton4))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        jPanel2.add(VentanaModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
+
+        ContratosVigentes.setBackground(new java.awt.Color(0, 102, 102));
+
+        txtID.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtID.setText("ID de contrato:");
+
+        btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+
+        btnMostrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnMostrar.setText("Mostrar");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Seleccione una opción");
+
+        btnAceptar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnRechazar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnRechazar.setText("Rechazar");
+        btnRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+
+        javax.swing.GroupLayout ContratosVigentesLayout = new javax.swing.GroupLayout(ContratosVigentes);
+        ContratosVigentes.setLayout(ContratosVigentesLayout);
+        ContratosVigentesLayout.setHorizontalGroup(
+            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContratosVigentesLayout.createSequentialGroup()
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                        .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jSeparator1))
+                            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(txtID))
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(31, 31, 31)
+                                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdContraro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                                        .addComponent(btnMostrar)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(btnEliminar)))
+                                .addGap(0, 92, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRechazar)
+                        .addGap(113, 113, 113)))
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)))
+        );
+        ContratosVigentesLayout.setVerticalGroup(
+            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdContraro))
+                .addGap(43, 43, 43)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(77, 77, 77)
+                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(98, 98, 98))
+            .addGroup(ContratosVigentesLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2))
+        );
+
+        jPanel2.add(ContratosVigentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 1050, 510));
 
@@ -71,6 +431,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtModificar.setBorder(null);
         txtModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtModificarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtModificarMouseEntered(evt);
             }
@@ -93,6 +456,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosVigentes.setBorder(null);
         txtContratosVigentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosVigentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtContratosVigentesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtContratosVigentesMouseEntered(evt);
             }
@@ -240,6 +606,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 130, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,6 +699,38 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModificarActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
+        VentanaFondo.setVisible(false);
+        VentanaModificar.setVisible(true);
+        ContratosVigentes.setVisible(false);
+        //Poner más ventanas
+        
+    }//GEN-LAST:event_txtModificarMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        VentanaFondo.setVisible(true);
+        VentanaModificar.setVisible(false);
+        ContratosVigentes.setVisible(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRechazarActionPerformed
+
+    private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
+        VentanaFondo.setVisible(false);
+        VentanaModificar.setVisible(false);
+        ContratosVigentes.setVisible(true);
+    }//GEN-LAST:event_txtContratosVigentesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -365,18 +768,63 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContratosVigentes;
+    private javax.swing.JPanel VentanaFondo;
+    private javax.swing.JPanel VentanaModificar;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnRechazar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
+    private rojerusan.RSFotoSquare rSFotoSquare1;
+    private javax.swing.JLabel txtApellidos;
     private javax.swing.JTextField txtAsistenteAsignado;
     private javax.swing.JTextField txtCasosGratuitos;
+    private javax.swing.JLabel txtCedula;
     private javax.swing.JTextField txtContratosEspera;
     private javax.swing.JTextField txtContratosVigentes;
+    private javax.swing.JLabel txtCostoHora;
+    private javax.swing.JLabel txtDireccion;
+    private javax.swing.JLabel txtFechaNacimiento;
+    private javax.swing.JLabel txtGenero;
+    private javax.swing.JLabel txtGratuidad;
+    private javax.swing.JLabel txtID;
+    private javax.swing.JTextField txtIdContraro;
     private javax.swing.JTextField txtModificar;
+    private javax.swing.JLabel txtNombres;
     private javax.swing.JTextField txtOficinaAsignada;
+    private javax.swing.JTextField txtPrimerNombre;
+    private javax.swing.JTextField txtPrimerNombre1;
+    private javax.swing.JTextField txtPrimerNombre10;
+    private javax.swing.JTextField txtPrimerNombre2;
+    private javax.swing.JTextField txtPrimerNombre3;
+    private javax.swing.JTextField txtPrimerNombre4;
+    private javax.swing.JTextField txtPrimerNombre6;
+    private javax.swing.JTextField txtPrimerNombre7;
+    private javax.swing.JTextField txtPrimerNombre8;
+    private javax.swing.JTextField txtSegundoNombre;
+    private javax.swing.JLabel txtTelefono;
+    private javax.swing.JLabel txtTitulos;
+    private javax.swing.JLabel txtfoto;
     // End of variables declaration//GEN-END:variables
 }
