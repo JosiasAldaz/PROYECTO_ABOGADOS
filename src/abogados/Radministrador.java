@@ -117,7 +117,7 @@ public class Radministrador extends javax.swing.JFrame {
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
         char genero = ' ';
-        String contra = new String(contraseña1.getPassword());
+        String contra = new String(contraseña3.getPassword());
         if (jRadioButton3.isSelected()) {
             genero = 'X';
         }
@@ -221,8 +221,8 @@ public class Radministrador extends javax.swing.JFrame {
         calle2 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         calle1 = new javax.swing.JTextField();
-        contraseña1 = new javax.swing.JPasswordField();
-        contraseña = new javax.swing.JPasswordField();
+        contraseña4 = new javax.swing.JPasswordField();
+        contraseña3 = new javax.swing.JPasswordField();
         ocultar = new javax.swing.JLabel();
         Jspdia = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
@@ -235,6 +235,7 @@ public class Radministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(211, 211, 211));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -252,32 +253,78 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Genero:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, -1, -1));
+
+        cedula.setBackground(new java.awt.Color(211, 211, 211));
+        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 30));
 
+        nombre1.setBackground(new java.awt.Color(211, 211, 211));
+        nombre1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         nombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre1ActionPerformed(evt);
             }
         });
+        nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre1KeyTyped(evt);
+            }
+        });
         jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 30));
 
+        nombre2.setBackground(new java.awt.Color(211, 211, 211));
+        nombre2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         nombre2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre2ActionPerformed(evt);
             }
         });
+        nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre2KeyTyped(evt);
+            }
+        });
         jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 160, 30));
+
+        apellido1.setBackground(new java.awt.Color(211, 211, 211));
+        apellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido1KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 30));
+
+        apellido2.setBackground(new java.awt.Color(211, 211, 211));
+        apellido2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellido2KeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 160, 30));
+
+        telefono.setBackground(new java.awt.Color(211, 211, 211));
+        telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Telefono:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Correo:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Contraseña:");
@@ -286,7 +333,10 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Verifar contraseña:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, -1, -1));
-        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 280, 30));
+
+        correo.setBackground(new java.awt.Color(211, 211, 211));
+        correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 280, 30));
 
         mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -296,7 +346,7 @@ public class Radministrador extends javax.swing.JFrame {
         });
         jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBackground(new java.awt.Color(245, 222, 179));
         jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
         jButton2.setText("PANTALLA PRINCIPAL");
@@ -308,6 +358,7 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 270, 50));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRadioButton1.setText("Masculino");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,10 +368,12 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRadioButton2.setText("Femenino");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, -1, -1));
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, -1, -1));
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRadioButton3.setText("Sin Especificar");
         jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, -1, -1));
 
@@ -362,18 +415,38 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Año:");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, 40, 30));
+
+        calle2.setBackground(new java.awt.Color(211, 211, 211));
+        calle2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        calle2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                calle2KeyTyped(evt);
+            }
+        });
         jPanel1.add(calle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 230, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Calle Secundaria:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 130, 30));
+
+        calle1.setBackground(new java.awt.Color(211, 211, 211));
+        calle1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        calle1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                calle1KeyTyped(evt);
+            }
+        });
         jPanel1.add(calle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 230, 30));
 
-        contraseña1.setText("jPasswordField1");
-        jPanel1.add(contraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
+        contraseña4.setBackground(new java.awt.Color(211, 211, 211));
+        contraseña4.setText("jPasswordField1");
+        contraseña4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(contraseña4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 200, 30));
 
-        contraseña.setText("jPasswordField1");
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, 30));
+        contraseña3.setBackground(new java.awt.Color(211, 211, 211));
+        contraseña3.setText("jPasswordField1");
+        contraseña3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(contraseña3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, 30));
 
         ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -405,7 +478,9 @@ public class Radministrador extends javax.swing.JFrame {
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 300, 40, 30));
         jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 60, 30));
 
+        jButton3.setBackground(new java.awt.Color(245, 222, 179));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jButton3.setText("REGISTRARSE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +488,9 @@ public class Radministrador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 150, 50));
+
+        JFSfoto_admin.setBackground(new java.awt.Color(211, 211, 211));
+        JFSfoto_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(JFSfoto_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -425,9 +503,7 @@ public class Radministrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -448,32 +524,32 @@ public class Radministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void mostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMouseClicked
-        char i = contraseña1.getEchoChar();
+        char i = contraseña3.getEchoChar();
         boolean a = true;
         if (a) {  // a es una variable boolean en true
-            contraseña.setEchoChar((char) 0);
-            contraseña1.setEchoChar((char) 0);
+            contraseña3.setEchoChar((char) 0);
+            contraseña4.setEchoChar((char) 0);
             mostrar.setVisible(false);
             ocultar.setVisible(true);
             a = false;
         } else {
-            contraseña1.setEchoChar(i); // i es el char
+            contraseña3.setEchoChar(i); // i es el char
             a = true;
         }
 
     }//GEN-LAST:event_mostrarMouseClicked
 
     private void ocultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarMouseClicked
-        char i = contraseña1.getEchoChar();
+        char i = contraseña3.getEchoChar();
         boolean a = true;
         if (a) {  // a es una variable boolean en true
-            contraseña1.setEchoChar((char) '*');
-            contraseña.setEchoChar((char) '*');
+            contraseña3.setEchoChar((char) '*');
+            contraseña4.setEchoChar((char) '*');
             mostrar.setVisible(true);
             ocultar.setVisible(false);
             a = true;
         } else {
-            contraseña1.setEchoChar(i); // i es el char
+            contraseña3.setEchoChar(i); // i es el char
             a = true;
         }
     }//GEN-LAST:event_ocultarMouseClicked
@@ -489,6 +565,78 @@ public class Radministrador extends javax.swing.JFrame {
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre1ActionPerformed
+
+    private void nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre1KeyTyped
+
+    private void nombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_nombre2KeyTyped
+
+    private void apellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido1KeyTyped
+
+    private void apellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellido2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_apellido2KeyTyped
+
+    private void calle1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calle1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_calle1KeyTyped
+
+    private void calle2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calle2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_calle2KeyTyped
+
+    private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_cedulaKeyTyped
+
+    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_telefonoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -536,8 +684,8 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JTextField calle1;
     private javax.swing.JTextField calle2;
     private javax.swing.JTextField cedula;
-    private javax.swing.JPasswordField contraseña;
-    private javax.swing.JPasswordField contraseña1;
+    private javax.swing.JPasswordField contraseña3;
+    private javax.swing.JPasswordField contraseña4;
     private javax.swing.JTextField correo;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
