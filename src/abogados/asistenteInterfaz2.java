@@ -49,11 +49,16 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPcrud_abg = new javax.swing.JPanel();
         jpclientes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        panelaboga = new javax.swing.JPanel();
+        datasis = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaabogado = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
+        modifiasis = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        panelaboga = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        datosabo = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -65,7 +70,6 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         casoasis = new javax.swing.JButton();
         reserasis = new javax.swing.JButton();
         enviocon = new javax.swing.JButton();
-        modifiasis = new javax.swing.JButton();
         mostraasis = new javax.swing.JButton();
 
         jButtonModificarA10.setBackground(new java.awt.Color(102, 153, 255));
@@ -90,30 +94,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Castellar", 0, 70)); // NOI18N
         jLabel6.setText("REPORTE DE CLIENTES ");
 
-        javax.swing.GroupLayout jpclientesLayout = new javax.swing.GroupLayout(jpclientes);
-        jpclientes.setLayout(jpclientesLayout);
-        jpclientesLayout.setHorizontalGroup(
-            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpclientesLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel6)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        jpclientesLayout.setVerticalGroup(
-            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpclientesLayout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addGap(0, 465, Short.MAX_VALUE))
-        );
-
-        JPcrud_abg.add(jpclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 550));
-
-        panelaboga.setBackground(new java.awt.Color(255, 204, 255));
-        panelaboga.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-        tablaabogado.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -123,26 +104,79 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false
-            };
+        ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(jTable1);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        modifiasis.setBackground(new java.awt.Color(0, 0, 102));
+        modifiasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        modifiasis.setForeground(new java.awt.Color(255, 255, 255));
+        modifiasis.setText("MODIFICAR MIS DATOS");
+        modifiasis.setBorder(null);
+        modifiasis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modifiasisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modifiasisMouseExited(evt);
             }
         });
-        tablaabogado.setEnabled(false);
-        tablaabogado.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tablaabogado);
-        if (tablaabogado.getColumnModel().getColumnCount() > 0) {
-            tablaabogado.getColumnModel().getColumn(0).setResizable(false);
-            tablaabogado.getColumnModel().getColumn(1).setResizable(false);
-            tablaabogado.getColumnModel().getColumn(2).setResizable(false);
-            tablaabogado.getColumnModel().getColumn(3).setResizable(false);
-        }
+        modifiasis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifiasisActionPerformed(evt);
+            }
+        });
 
-        panelaboga.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 940, 240));
+        jButton1.setText("REGRESAR");
+
+        javax.swing.GroupLayout datasisLayout = new javax.swing.GroupLayout(datasis);
+        datasis.setLayout(datasisLayout);
+        datasisLayout.setHorizontalGroup(
+            datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datasisLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 111, Short.MAX_VALUE))
+            .addGroup(datasisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(modifiasis, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        datasisLayout.setVerticalGroup(
+            datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datasisLayout.createSequentialGroup()
+                .addContainerGap(334, Short.MAX_VALUE)
+                .addGroup(datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(modifiasis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jpclientesLayout = new javax.swing.GroupLayout(jpclientes);
+        jpclientes.setLayout(jpclientesLayout);
+        jpclientesLayout.setHorizontalGroup(
+            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpclientesLayout.createSequentialGroup()
+                .addComponent(datasis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpclientesLayout.setVerticalGroup(
+            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpclientesLayout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(datasis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        JPcrud_abg.add(jpclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 550));
+
+        panelaboga.setBackground(new java.awt.Color(255, 204, 255));
+        panelaboga.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Castellar", 0, 70)); // NOI18N
         jLabel4.setText("Datos del ABOGADOS");
@@ -150,6 +184,22 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/CODIGO-RO-388-1 (1).jpg"))); // NOI18N
         panelaboga.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 170, -1));
+
+        datosabo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        datosabo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(datosabo);
+
+        panelaboga.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 930, 270));
 
         JPcrud_abg.add(panelaboga, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 560));
 
@@ -247,6 +297,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 casoasisMouseExited(evt);
             }
         });
+        casoasis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casoasisActionPerformed(evt);
+            }
+        });
         jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 50));
 
         reserasis.setBackground(new java.awt.Color(0, 0, 102));
@@ -278,26 +333,6 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 50));
-
-        modifiasis.setBackground(new java.awt.Color(0, 0, 102));
-        modifiasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        modifiasis.setForeground(new java.awt.Color(255, 255, 255));
-        modifiasis.setText("MODIFICAR MIS DATOS");
-        modifiasis.setBorder(null);
-        modifiasis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                modifiasisMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                modifiasisMouseExited(evt);
-            }
-        });
-        modifiasis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modifiasisActionPerformed(evt);
-            }
-        });
-        jPanel2.add(modifiasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 180, 50));
 
         mostraasis.setBackground(new java.awt.Color(0, 0, 102));
         mostraasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -345,6 +380,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void mostraasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraasisActionPerformed
         // TODO add your handling code here:
+        datasis.setVisible(true);
     }//GEN-LAST:event_mostraasisActionPerformed
 
     private void jButtonModificarA2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseClicked
@@ -363,12 +399,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void jButtonModificarA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA2ActionPerformed
         // TODO add your handling code here:
+        datasis.setVisible(false);
         panelaboga.setVisible(false);
         jpclientes.setVisible(true);
     }//GEN-LAST:event_jButtonModificarA2ActionPerformed
 
     private void datasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datasiActionPerformed
         // TODO add your handling code here:
+        datasis.setVisible(false);
         jpclientes.setVisible(false);
         panelaboga.setVisible(true);
     }//GEN-LAST:event_datasiActionPerformed
@@ -443,6 +481,10 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         mostraasis.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_mostraasisMouseExited
 
+    private void casoasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casoasisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casoasisActionPerformed
+
     asistente asis1 = new asistente();
     DefaultTableModel modeloasis = new DefaultTableModel();
     Object[] datosasi = new Object[10];
@@ -464,7 +506,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         modeloasis.addColumn("DIRECCION");
         modeloasis.addColumn("CARGO");
         modeloasis.addColumn("HORARIO");
-        tablaabogado.setModel(modeloasis);
+        datosabo.setModel(modeloasis);
         columnas();
         listar();
         listar();
@@ -485,26 +527,26 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }
 
     public void columnas() {
-        TableColumnModel columna = tablaabogado.getColumnModel();
-        columna.getColumn(0).setPreferredWidth(125);
-        columna.getColumn(1).setPreferredWidth(175);
-        columna.getColumn(2).setPreferredWidth(200);
-        columna.getColumn(3).setPreferredWidth(185);
-        columna.getColumn(4).setPreferredWidth(200);
-        columna.getColumn(5).setPreferredWidth(65);
-        columna.getColumn(6).setPreferredWidth(65);
-        columna.getColumn(7).setPreferredWidth(115);
-        columna.getColumn(8).setPreferredWidth(500);
-        columna.getColumn(9).setPreferredWidth(500);
+        TableColumnModel columna = datosabo.getColumnModel();
+        columna.getColumn(0).setPreferredWidth(100);
+        columna.getColumn(1).setPreferredWidth(150);
+        columna.getColumn(2).setPreferredWidth(150);
+        columna.getColumn(3).setPreferredWidth(150);
+        columna.getColumn(4).setPreferredWidth(150);
+        columna.getColumn(5).setPreferredWidth(100);
+        columna.getColumn(6).setPreferredWidth(100);
+        columna.getColumn(7).setPreferredWidth(100);
+        columna.getColumn(8).setPreferredWidth(100);
+        columna.getColumn(9).setPreferredWidth(100);
     }
 
     public void listar() {
         asistente p = new asistente();
         datosasi[0] = "0107971244";
         datosasi[1] = "Edisson";
-        datosasi[2] = "0107971244";
-        datosasi[3] = "0107971244";
-        datosasi[4] = "0107971244";
+        datosasi[2] = "Fabian";
+        datosasi[3] = "Leon";
+        datosasi[4] = "Marquez";
         datosasi[5] = "0107971244";
         datosasi[6] = "0107971244";
         datosasi[7] = "0107971244";
@@ -554,7 +596,10 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JButton casoasis;
     private javax.swing.JButton datasi;
+    private javax.swing.JPanel datasis;
+    private javax.swing.JTable datosabo;
     private javax.swing.JButton enviocon;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JButton jButtonModificarA2;
     private javax.swing.JLabel jLabel1;
@@ -567,12 +612,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpclientes;
     private javax.swing.JButton modifiasis;
     private javax.swing.JButton mostraasis;
     private javax.swing.JPanel panelaboga;
     private javax.swing.JButton reserasis;
     private javax.swing.JButton salimenu;
-    private javax.swing.JTable tablaabogado;
     // End of variables declaration//GEN-END:variables
 }
