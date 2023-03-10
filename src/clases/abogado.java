@@ -77,24 +77,32 @@ public class abogado extends Persona {
         ArrayList retorno = new ArrayList();
         while (contenedor.next()) {
             abogado insertar = new abogado();
+
+            insertar.setCod_abogado(contenedor.getInt("id_abg"));
             insertar.setCedula(contenedor.getString("cedula_abg"));
-            insertar.setCod_abogado(Integer.parseInt(contenedor.getString("id_abg")));
             insertar.setPrimerNombre(contenedor.getString("prim_nom_abg"));
-            insertar.setNombreApellido(contenedor.getString("prim_ape_abg"));
+            insertar.setNombreApellido(contenedor.getString("prim_apell_abg"));
             insertar.setTelefono(contenedor.getString("telefono_abg"));
             insertar.setGratuidad(contenedor.getBoolean("gratuidad"));
+            insertar.setEdad(contenedor.getInt("edad_abg"));
+            insertar.setCost_hora(contenedor.getDouble("costo_x_horas"));
             retorno.add(insertar);
         }
         return retorno;
     }
-       
 
     public void Insertar() throws SQLException {
         String sql = "INSERT INTO abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg,contraseña_abg, prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, fecha_naci_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg)"
-                + "VALUES ('"+getTitulo()+"',"+getCost_hora()+","+isGratuidad()+",'"+super.getCedula()+"','"+super.getPassword()+"','"+super.getPrimerNombre()+"','"+super.getSegundoNombre()+"','"+super.getNombreApellido()+"','"+super.getSegundoApellido()+"','"+super.getFecha_nacimiento()+"','"+super.getGenero()+"','"+ super.getFK_direccion()+"','"+super.getTelefono()+"','"+super.getFoto_perfil()+"')";
+                + "VALUES ('" + getTitulo() + "'," + getCost_hora() + "," + isGratuidad() + ",'" + super.getCedula() + "','" + super.getPassword() + "','" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "','" + super.getNombreApellido() + "','" + super.getSegundoApellido() + "','" + super.getFecha_nacimiento() + "','" + super.getGenero() + "','" + super.getFK_direccion() + "','" + super.getTelefono() + "','" + super.getFoto_perfil() + "')";
         conexion.accion(sql);
     }
-    
+
+    public void ELIMINARABOGADO() throws SQLException {
+        String sql = "DELETE FROM public.abogado\n" +
+"	WHERE id_abg="+cod_abogado+"";
+        conexion.accion(sql);
+    }
+
     public int Seleccionar(String select) throws SQLException {
         int ID_abg = 0;
         abogado objeto = new abogado();
