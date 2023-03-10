@@ -26,6 +26,7 @@ public class Radministrador extends javax.swing.JFrame {
     public Radministrador() {
         initComponents();
         ocultar.setVisible(false);
+   
     }
 
     public void diasvalidacion() {
@@ -181,6 +182,7 @@ public class Radministrador extends javax.swing.JFrame {
 
         }
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,7 +211,7 @@ public class Radministrador extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         correo = new javax.swing.JTextField();
         mostrar = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        principalq = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -296,16 +298,16 @@ public class Radministrador extends javax.swing.JFrame {
         });
         jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jButton2.setText("PANTALLA PRINCIPAL");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        principalq.setBackground(new java.awt.Color(255, 255, 255));
+        principalq.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
+        principalq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
+        principalq.setText("PANTALLA PRINCIPAL");
+        principalq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                principalqActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 270, 50));
+        jPanel1.add(principalq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 270, 50));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Masculino");
@@ -433,11 +435,11 @@ public class Radministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void principalqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalqActionPerformed
         VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_principalqActionPerformed
 
     private void nombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre2ActionPerformed
         // TODO add your handling code here:
@@ -539,7 +541,6 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JPasswordField contraseña1;
     private javax.swing.JTextField correo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -567,6 +568,7 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre2;
     private javax.swing.JLabel ocultar;
+    private javax.swing.JButton principalq;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

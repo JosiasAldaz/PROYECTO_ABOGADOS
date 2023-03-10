@@ -29,6 +29,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         Internal.setVisible(false);
+//        prueba.setVisible(false);
     }
     Especializacion estatica = new Especializacion();
     ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
@@ -254,6 +255,12 @@ public class Regi_abogado extends javax.swing.JFrame {
         }
     }
 
+    public void Administrador() {
+        principal.setVisible(false);
+        prueba.setVisible(true);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,7 +316,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         foto = new rojerusan.RSFotoSquare();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        principal = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         Jspdia = new javax.swing.JSpinner();
         jLabel19 = new javax.swing.JLabel();
@@ -321,6 +328,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         direccion1 = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
         jLabel20 = new javax.swing.JLabel();
+        prueba = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -516,14 +524,14 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel11.setText("Costo por hora:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        principal.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
+        principal.setText("Registrarse");
+        principal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                principalActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 670, -1, 31));
+        jPanel1.add(principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 670, -1, 31));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Día:");
@@ -563,6 +571,14 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel20.setText("Teléfono:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 600, -1, -1));
 
+        prueba.setText("regresar");
+        prueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pruebaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(prueba, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 640, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 740));
 
         pack();
@@ -572,14 +588,14 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JBxmesMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalActionPerformed
         if (cedula_abogado.getText().equals("") || telefono.getText().equals("") || costo.getText().equals("") || titulos.getText().equals("") || nombre1.getText().equals("") || nombre2.getText().equals("") || apellido1.getText().equals("") || apellido2.getText().equals("") || direccion1.getText().equals("") || apellido2.getText().equals("") || genero_abogado.isSelected(null)) {
             JOptionPane.showMessageDialog(null, "CAMPOS VACIOS NO ES POSIBLE GUARDAR");
         } else {
             validar();
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_principalActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Internal.setVisible(true);
@@ -657,6 +673,13 @@ public class Regi_abogado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TIPO_diplomaActionPerformed
 
+    private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
+//        administradorInterfaz llamar = new administradorInterfaz();
+//        llamar.setVisible(true);
+//        dispose();
+        this.dispose();
+    }//GEN-LAST:event_pruebaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -713,7 +736,6 @@ public class Regi_abogado extends javax.swing.JFrame {
     private rojerusan.RSFotoSquare foto;
     private javax.swing.ButtonGroup genero_abogado;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -748,6 +770,8 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JRadioButton n;
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre2;
+    private javax.swing.JButton principal;
+    private javax.swing.JButton prueba;
     private javax.swing.JRadioButton s;
     private javax.swing.JTextField telefono;
     private javax.swing.JTextField titulos;
