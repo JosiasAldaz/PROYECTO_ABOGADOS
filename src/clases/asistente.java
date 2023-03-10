@@ -7,8 +7,10 @@ package clases;
 
 import clases.abogado;
 import java.beans.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -70,7 +72,19 @@ public class asistente extends Persona {
 
     public void Ingresar() throws SQLException {
         String sql = "INSERT INTO public.asistente(titulo_asis, years_esperiencia, cedula_asis, contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis,celular, email, foto)"
-                + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil()+ "')";
+        + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
         conexion.accion(sql);
     }
+    
+    public void Consultar() throws SQLException {
+        //String sql="SELECT id_asis, titulo_asis, years_esperiencia, cedula_asis,contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis, celular, email, foto FROM public.asistente";
+        String sql = "SELECT * FROM asistente";
+        conexion.Consulta(sql);
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            String ced1 = contenedor.getString("cedula_asis");
+            System.out.println("Cedula: " + ced1 );
+        }   
+    }
+    
 }
