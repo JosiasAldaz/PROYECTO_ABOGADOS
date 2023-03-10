@@ -377,7 +377,7 @@ public class Radministrador extends javax.swing.JFrame {
         jRadioButton3.setText("Sin Especificar");
         jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(139, 69, 19));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
