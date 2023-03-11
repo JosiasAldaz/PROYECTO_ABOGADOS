@@ -96,10 +96,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
             } else {
                 mostrarabogados(mostrar);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
 
@@ -351,6 +349,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jButtonModificarA8.setForeground(new java.awt.Color(255, 255, 255));
         jButtonModificarA8.setText("BUSCAR");
         jButtonModificarA8.setBorder(null);
+        jButtonModificarA8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA8ActionPerformed(evt);
+            }
+        });
         JPcrud_abg.add(jButtonModificarA8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 140, 50));
 
         jButtonModificarA9.setBackground(new java.awt.Color(128, 0, 0));
@@ -358,6 +361,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jButtonModificarA9.setForeground(new java.awt.Color(255, 255, 255));
         jButtonModificarA9.setText("MODIFICAR");
         jButtonModificarA9.setBorder(null);
+        jButtonModificarA9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA9ActionPerformed(evt);
+            }
+        });
         JPcrud_abg.add(jButtonModificarA9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 140, 50));
 
         jButtonModificarA11.setBackground(new java.awt.Color(128, 0, 0));
@@ -396,7 +404,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -937,6 +945,14 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonModificarA11ActionPerformed
+
+    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
+
+    private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA9ActionPerformed
 
     /**
      * @param args the command line arguments

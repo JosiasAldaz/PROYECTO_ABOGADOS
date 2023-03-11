@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
  */
 public class Cliente extends Persona{
     private int ID_cliente;
+    PostgresConexion conexion = new PostgresConexion();
     private PostgresConexion base = new PostgresConexion();
     
     public int getID_cliente() {
@@ -65,5 +66,28 @@ public class Cliente extends Persona{
             }
         }
         return listadoCLI;
+    }
+    
+    public ArrayList Listar() throws SQLException {
+        String script = "SELECT * FROM CLIENTES     ";
+        ResultSet contenedor = conexion.Consulta(script);
+        ArrayList retorno = new ArrayList();
+        while (contenedor.next()) {
+            Cliente insertar = new Cliente();
+            insertar.setID_cliente(contenedor.getInt("id_clie"));
+            insertar.setCedula(contenedor.getString("cedula_cli"));
+            insertar.setPassword(contenedor.getString("contraseña_cli"));
+            insertar.setPrimerNombre(contenedor.getString("prim_nom_cli"));
+            insertar.setSegundoNombre(contenedor.getString("seg_nom_cli"));
+            insertar.setNombreApellido(contenedor.getString("prim_apell_cli"));
+            insertar.setSegundoApellido(contenedor.getString("seg_apell_cli"));
+            insertar.setEdad(contenedor.getInt("edad_cli"));
+             //insertar.setGenero(contenedor.getCharacterStream("genero_cli"));
+            insertar.setFK_direccion(contenedor.getInt("fk_id_direccion"));
+            insertar.setTelefono(contenedor.getString("telefono_cli"));
+            insertar.setCorre(contenedor.getString("correo_cli"));
+            retorno.add(insertar);
+        }
+        return retorno;
     }
 }

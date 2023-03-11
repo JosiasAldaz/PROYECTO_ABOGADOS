@@ -37,6 +37,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     public Regi_Asistente() {
         initComponents();
         ocultarasis.setVisible(false);
+        Regreso.setVisible(false);
     }
 
     /**
@@ -95,7 +96,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jYearChooser2 = new com.toedter.calendar.JYearChooser();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Regreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -300,10 +301,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jLabel7.setText("gghhgv");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Regreso.setText("Regresar");
+        Regreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RegresoActionPerformed(evt);
             }
         });
 
@@ -397,7 +398,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)))
+                        .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -509,7 +510,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(169, 169, 169))
         );
 
@@ -594,15 +595,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCombselecActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
         // TODO add your handling code here:
-        asistente a1 = new asistente();
-        try {
-            a1.Consultar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_RegresoActionPerformed
 
     ///////////////////////////metodos///
     public void valced() {
@@ -913,10 +909,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JBxmes;
     private javax.swing.JSpinner Jspdia;
+    private javax.swing.JButton Regreso;
     private javax.swing.JTextField calleprinci;
     private javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
