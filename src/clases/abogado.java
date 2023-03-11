@@ -98,8 +98,8 @@ public class abogado extends Persona {
     }
 
     public void ELIMINARABOGADO() throws SQLException {
-        String sql = "DELETE FROM public.abogado\n" +
-"	WHERE id_abg="+cod_abogado+"";
+        String sql = "DELETE FROM public.abogado\n"
+                + "	WHERE id_abg=" + cod_abogado + "";
         conexion.accion(sql);
     }
 
@@ -118,4 +118,24 @@ public class abogado extends Persona {
         }
         return ID_abg;
     }
+
+    public ArrayList buscar() throws SQLException {
+        String sql = "SELECT * FROM ABOGADO WHERE id_abg ='" + cod_abogado + "'";
+        ArrayList registros = new ArrayList();
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            abogado insertar = new abogado();
+            insertar.setCod_abogado(contenedor.getInt("id_abg"));
+            insertar.setCedula(contenedor.getString("cedula_abg"));
+            insertar.setPrimerNombre(contenedor.getString("prim_nom_abg"));
+            insertar.setNombreApellido(contenedor.getString("prim_apell_abg"));
+            insertar.setTelefono(contenedor.getString("telefono_abg"));
+            insertar.setGratuidad(contenedor.getBoolean("gratuidad"));
+            insertar.setEdad(contenedor.getInt("edad_abg"));
+            insertar.setCost_hora(contenedor.getDouble("costo_x_horas"));
+            registros.add(insertar);
+        }
+        return registros;
+    }
+
 }

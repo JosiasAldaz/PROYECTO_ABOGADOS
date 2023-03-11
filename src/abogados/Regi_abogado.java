@@ -27,6 +27,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     public Regi_abogado() {
         initComponents();
         Internal.setVisible(false);
+        regresar1.setVisible(false);
     }
     Especializacion estatica = new Especializacion();
     ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
@@ -84,6 +85,12 @@ public class Regi_abogado extends javax.swing.JFrame {
             }
         }
         return id;
+    }
+
+    public void AdministradorReg() {
+        regresar.setVisible(false);
+        regresar1.setVisible(true);
+
     }
 
     public void InserBase() {
@@ -240,7 +247,9 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         direccion1 = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
-        jButton5 = new javax.swing.JButton();
+        regresar = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        regresar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -300,22 +309,24 @@ public class Regi_abogado extends javax.swing.JFrame {
         jPanel3.add(JSP_año_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 70, 30));
 
         jButton3.setBackground(new java.awt.Color(245, 222, 179));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jButton3.setText("REGISTRAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 114, 33));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 114, 40));
 
         jButton4.setBackground(new java.awt.Color(245, 222, 179));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regrasar.png"))); // NOI18N
         jButton4.setText("REGRESAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 119, 33));
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 119, 40));
 
         jLabel23.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
         jLabel23.setText("TIPO DE DIPLOMA:");
@@ -355,7 +366,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 650, 480));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 650, 480));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel1.setText("Nombres:");
@@ -375,11 +386,11 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel6.setText("Calle secundaria:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 24));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, 24));
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
-        jLabel7.setText("Teléfono:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+        jLabel7.setText(" Contraseña:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Bernard MT Condensed", 3, 14)); // NOI18N
         jLabel8.setText("Seleccione una foto");
@@ -475,7 +486,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 direccion2KeyTyped(evt);
             }
         });
-        jPanel1.add(direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 160, 20));
+        jPanel1.add(direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 160, 20));
 
         telefono.setBackground(new java.awt.Color(211, 211, 211));
         telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -484,7 +495,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 telefonoKeyTyped(evt);
             }
         });
-        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 140, 20));
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 140, 20));
 
         costo.setBackground(new java.awt.Color(211, 211, 211));
         costo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -598,18 +609,32 @@ public class Regi_abogado extends javax.swing.JFrame {
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
         contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
+        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 140, 20));
 
-        jButton5.setBackground(new java.awt.Color(245, 222, 179));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jButton5.setText("Pantalla Principal");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        regresar.setBackground(new java.awt.Color(245, 222, 179));
+        regresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
+        regresar.setText("Pantalla Principal");
+        regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 660, 190, 50));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 660, 190, 50));
+
+        jLabel20.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
+        jLabel20.setText(" Teléfono:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, -1, -1));
+
+        regresar1.setBackground(new java.awt.Color(245, 222, 179));
+        regresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regrasar.png"))); // NOI18N
+        regresar1.setText("REGRESAR");
+        regresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 660, 150, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 740));
 
@@ -696,12 +721,12 @@ public class Regi_abogado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_instituciònActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
         VentanaPrincipal1 principal = new VentanaPrincipal1();
         principal.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_regresarActionPerformed
 
     private void cedula_abogadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedula_abogadoKeyTyped
         // TODO add your handling code here:
@@ -809,8 +834,12 @@ public class Regi_abogado extends javax.swing.JFrame {
     private void TIPO_diplomaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TIPO_diplomaAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_TIPO_diplomaAncestorAdded
+
+    private void regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresar1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_regresar1ActionPerformed
     private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {
-        
+
     }
 
     /**
@@ -872,7 +901,6 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -885,6 +913,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -904,6 +933,8 @@ public class Regi_abogado extends javax.swing.JFrame {
     private javax.swing.JRadioButton n;
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre2;
+    private javax.swing.JButton regresar;
+    private javax.swing.JButton regresar1;
     private javax.swing.JRadioButton s;
     private javax.swing.JTextField telefono;
     private javax.swing.JTextField titulos;

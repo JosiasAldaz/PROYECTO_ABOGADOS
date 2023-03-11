@@ -78,11 +78,138 @@ public class administradorInterfaz extends javax.swing.JFrame {
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getNombreApellido(), tipos.getTelefono(), String.valueOf(tipos.isGratuidad()), String.valueOf(tipos.getPuntuación()), String.valueOf(tipos.getCost_hora())};
+            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getNombreApellido(), tipos.getTelefono(), String.valueOf(tipos.isGratuidad()), String.valueOf(tipos.getPuntuación()), String.valueOf(tipos.getEdad()), String.valueOf(tipos.getCost_hora())};
             mTabla.addRow(filaNueva);
         });
         TablaR.setModel(mTabla);
 
+    }
+
+    public void mostrarAbogados() {
+        abogado abg_usuario = new abogado();
+        DefaultTableModel modelo = (DefaultTableModel) TablaR.getModel();
+        try {
+            ArrayList<abogado> mostrar = new ArrayList();
+            mostrar = abg_usuario.Listar();
+            if (mostrar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTE ABOGADOS REGISTRADOS");
+            } else {
+                mostrarabogados(mostrar);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public void IngresaEspecialidad() {
+        if (JTxt_ingreso_diplo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN TIPO DE DIPLOMA");
+        } else {
+            TIPO_diplomnma tipos = new TIPO_diplomnma();
+            tipos.setNombre_diplo(JTxt_ingreso_diplo.getText());
+            try {
+                tipos.Ingresar();
+                ArrayList<TIPO_diplomnma> lista_tipo = new ArrayList();
+                lista_tipo = tipos.mostrar();
+                mostrarpersonas(lista_tipo);
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void mostrarEspecialidades() {
+        TIPO_diplomnma tipos2 = new TIPO_diplomnma();
+        try {
+            ArrayList<TIPO_diplomnma> lista_tipo = new ArrayList();
+            lista_tipo = tipos2.mostrar();
+            if (lista_tipo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO HAY NINGUNA ESPECIALIDAD REGISTRADA");
+            } else {
+                mostrarpersonas(lista_tipo);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void selecionarEspecialidad() {
+        int seleccionado = -1;
+        seleccionado = Tabla_Tipos.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
+        } else {
+            change.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
+            questnombre.show();
+        }
+    }
+
+    public void modificarEpecialidad() {
+        if (TXT_nuevo_tipo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
+
+        } else {
+            try {
+                change.modificar();
+                mostrarpersonas(change.mostrar());
+                JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
+                questnombre.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR");
+            }
+        }
+
+    }
+
+    public void buscarEspecialidad() {
+        TIPO_diplomnma Buscar = new TIPO_diplomnma();
+        Buscar.setNombre_diplo(JTxt_ingreso_diplo.getText());
+        if (JTxt_ingreso_diplo.getText().equals("NOMBRE")) {
+            JOptionPane.showConfirmDialog(null, "DEBE INGRESAR UN NOMBRE");
+        } else {
+            try {
+                ArrayList<TIPO_diplomnma> recibir = new ArrayList();
+                recibir = Buscar.buscar();
+                System.out.println(recibir.size());
+                if (recibir.isEmpty()) {
+
+                } else {
+                    limpiar();
+                    mostrarpersonas(recibir);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void eliminarEspecializacion() {
+        TIPO_diplomnma eliminar = new TIPO_diplomnma();
+        int seleccionado = -1;
+        seleccionado = Tabla_Tipos.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    System.out.println(Tabla_Tipos.getValueAt(seleccionado, 0).toString());
+                    eliminar.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
+                    eliminar.ELIMINAR();
+                    JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
+            }
+
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -268,12 +395,20 @@ public class administradorInterfaz extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         TablaR.setRowHeight(30);
+        TablaR.getTableHeader().setReorderingAllowed(false);
         jScrollPaneCam.setViewportView(TablaR);
 
         JPcrud_abg.add(jScrollPaneCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 880, 330));
@@ -372,12 +507,20 @@ public class administradorInterfaz extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         Tabla_Tipos.setRowHeight(30);
+        Tabla_Tipos.getTableHeader().setReorderingAllowed(false);
         Tabla_Tipos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tabla_TiposMouseClicked(evt);
@@ -573,50 +716,15 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonModificarA7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA7ActionPerformed
-        abogado abg_usuario = new abogado();
-        DefaultTableModel modelo = (DefaultTableModel) TablaR.getModel();
-        try {
-            ArrayList<abogado> mostrar = new ArrayList();
-            mostrar = abg_usuario.Listar();
-            mostrarabogados(mostrar);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+        mostrarAbogados();
     }//GEN-LAST:event_jButtonModificarA7ActionPerformed
 
     private void jButtonModificarA12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA12ActionPerformed
-        if (JTxt_ingreso_diplo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN TIPO DE DIPLOMA");
-        } else {
-            TIPO_diplomnma tipos = new TIPO_diplomnma();
-            tipos.setNombre_diplo(JTxt_ingreso_diplo.getText());
-            try {
-                tipos.Ingresar();
-                ArrayList<TIPO_diplomnma> lista_tipo = new ArrayList();
-                lista_tipo = tipos.mostrar();
-                mostrarpersonas(lista_tipo);
-            } catch (SQLException ex) {
-                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        IngresaEspecialidad();
     }//GEN-LAST:event_jButtonModificarA12ActionPerformed
 
     private void jButtonModificarA15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA15ActionPerformed
-        TIPO_diplomnma tipos2 = new TIPO_diplomnma();
-        try {
-            ArrayList<TIPO_diplomnma> lista_tipo = new ArrayList();
-            lista_tipo = tipos2.mostrar();
-            if (lista_tipo.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "NO HAY NINGUNA ESPECIALIDAD REGISTRADA");
-            } else {
-                mostrarpersonas(lista_tipo);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        mostrarEspecialidades();
     }//GEN-LAST:event_jButtonModificarA15ActionPerformed
 
     private void jButtonModificarA4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA4ActionPerformed
@@ -633,68 +741,20 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA1MouseExited
 
     private void jButtonModificarA16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA16ActionPerformed
-        TIPO_diplomnma eliminar = new TIPO_diplomnma();
-        int seleccionado = -1;
-        seleccionado = Tabla_Tipos.getSelectedRow();
-        if (seleccionado == -1) {
-            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
-        } else {
-            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.YES_OPTION) {
-                try {
-                    System.out.println(Tabla_Tipos.getValueAt(seleccionado, 0).toString());
-                    eliminar.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
-                    eliminar.ELIMINAR();
-                    JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
-            }
-
-        }
+        eliminarEspecializacion();
     }//GEN-LAST:event_jButtonModificarA16ActionPerformed
 
     private void Tabla_TiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_TiposMouseClicked
-
+        selecionarEspecialidad();
     }//GEN-LAST:event_Tabla_TiposMouseClicked
 
     private void jButtonModificarA14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA14ActionPerformed
-        TIPO_diplomnma Buscar = new TIPO_diplomnma();
-        Buscar.setNombre_diplo(JTxt_ingreso_diplo.getText());
-        if (JTxt_ingreso_diplo.getText().equals("NOMBRE")) {
-            JOptionPane.showConfirmDialog(null, "DEBE INGRESAR UN NOMBRE");
-        } else {
-            try {
-                ArrayList<TIPO_diplomnma> recibir = new ArrayList();
-                recibir = Buscar.buscar();
-                System.out.println(recibir.size());
-                if (recibir.isEmpty()) {
-
-                } else {
-                    limpiar();
-                    mostrarpersonas(recibir);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        buscarEspecialidad();
 
     }//GEN-LAST:event_jButtonModificarA14ActionPerformed
 
     private void jButtonModificarA13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA13ActionPerformed
-
-        int seleccionado = -1;
-        seleccionado = Tabla_Tipos.getSelectedRow();
-        if (seleccionado == -1) {
-            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
-        } else {
-            change.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
-            questnombre.show();
-        }
+        modificarEpecialidad();
     }//GEN-LAST:event_jButtonModificarA13ActionPerformed
 
     private void TXT_nuevo_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_nuevo_tipoActionPerformed
@@ -702,21 +762,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_nuevo_tipoActionPerformed
 
     private void jButtonModificarA10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA10ActionPerformed
-        if (TXT_nuevo_tipo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
-
-        } else {
-            try {
-                change.modificar();
-                mostrarpersonas(change.mostrar());
-                JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
-                questnombre.dispose();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR");
-            }
-        }
-        ;
-
 
     }//GEN-LAST:event_jButtonModificarA10ActionPerformed
 
@@ -860,7 +905,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jButtonModificarA6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA6ActionPerformed
         Regi_abogado nuevo2 = new Regi_abogado();
-  
+        nuevo2.AdministradorReg();
         nuevo2.setVisible(true);
     }//GEN-LAST:event_jButtonModificarA6ActionPerformed
 
