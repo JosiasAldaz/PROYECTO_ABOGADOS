@@ -18,7 +18,8 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
     public VentanaPrincipal1() {
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -29,8 +30,8 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         fondo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnRegistrarse = new javax.swing.JPanel();
         txtRegistrarse = new javax.swing.JLabel();
@@ -75,13 +76,13 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         jTextArea1.setSelectionColor(new java.awt.Color(204, 204, 204));
         jPanel1.add(jTextArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 521, 439));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Principal (1).jpg"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
+
         jLabel1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("ABOGADOS-ECU");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 303, 49));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Principal (1).jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -153,7 +154,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(806, Short.MAX_VALUE)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,7 +165,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                .addGap(87, 87, 87))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));

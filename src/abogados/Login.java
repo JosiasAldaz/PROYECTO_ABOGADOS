@@ -1,6 +1,7 @@
 package abogados;
 
 import clases.Administrador;
+import clases.abogado;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -187,15 +188,32 @@ public class Login extends javax.swing.JFrame {
         String user = txtUser.getText();
         String pass = String.valueOf(txtPassword.getPassword());
         Administrador usuario_especial = new Administrador();
+        abogado abg1 = new abogado();
         usuario_especial.setCedula(user);
         usuario_especial.setPassword(pass);
         int resul = 0;
         try{
+            
             resul =usuario_especial.login();
             if(resul ==1){
                 administradorInterfaz interfaz_admin = new administradorInterfaz();
                 interfaz_admin.setVisible(true);
                 this.dispose();
+                
+            }else{
+                resul =usuario_especial.login();
+                usuario_especial.setCedula(user);
+                usuario_especial.setPassword(pass);
+                if(resul ==2){
+                    abogadoInterfaz2 interabg = new abogadoInterfaz2();
+                    interabg.setVisible(true);
+                    
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                    
+                
+            }
             }
             admin = usuario_especial;
         }catch(SQLException ex){

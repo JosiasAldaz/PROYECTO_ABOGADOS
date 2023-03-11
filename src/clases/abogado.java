@@ -110,4 +110,16 @@ public class abogado extends Persona {
         }
         return ID_abg;
     }
+    
+    public int login() throws SQLException{
+        int retorno;
+        String loggin = "SELECT * FROM abogado WHERE cedula_abg = '"+super.getCedula()+"' and contraseña_abg = '"+super.getPassword()+"'";
+        ResultSet resulset =  conexion.Consulta(loggin);
+        if(!resulset.next()){
+            retorno =0;
+        }else{
+            retorno =2;
+        }
+        return retorno;
+    }
 }
