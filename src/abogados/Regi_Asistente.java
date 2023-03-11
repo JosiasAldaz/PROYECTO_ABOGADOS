@@ -951,7 +951,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextcedula;
     private javax.swing.JTextField jTextcelular;
     private javax.swing.JTextField jTextcorreo;
-    private javax.swing.JTextField jTextnom1;
+    public static javax.swing.JTextField jTextnom1;
     private javax.swing.JTextField jTextnom2;
     private javax.swing.JTextField jTextsueldo;
     private javax.swing.JTextField jTxtFldAñosExperiencia;

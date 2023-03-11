@@ -931,7 +931,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JRadioButton m;
     private javax.swing.JRadioButton n;
-    private javax.swing.JTextField nombre1;
+    public static javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre2;
     private javax.swing.JButton regresar;
     private javax.swing.JButton regresar1;

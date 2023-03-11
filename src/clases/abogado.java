@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import abogados.Regi_abogado;
+import abogados.administradorInterfaz;
 
 /**
  *
@@ -120,7 +122,7 @@ public class abogado extends Persona {
     }
 
     public ArrayList buscar() throws SQLException {
-        String sql = "SELECT * FROM ABOGADO WHERE id_abg ='" + cod_abogado + "'";
+        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + super.getCedula() + "'";
         ArrayList registros = new ArrayList();
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
@@ -136,6 +138,16 @@ public class abogado extends Persona {
             registros.add(insertar);
         }
         return registros;
+    }
+
+    public void Selecionar() throws SQLException {
+        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + super.getCedula() + "'";
+        ArrayList registros1 = new ArrayList();
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Regi_abogado.nombre1.setText(contenedor.getString("prim_nom_abg"));
+        }
+
     }
 
 }
