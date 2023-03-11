@@ -6,6 +6,7 @@
 package abogados;
 
 import clases.Cliente;
+import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
@@ -24,6 +25,8 @@ import javax.swing.table.TableColumnModel;
  * @author KEVIN SANCHEZ
  */
 public final class asistenteInterfaz2 extends javax.swing.JFrame {
+
+    PostgresConexion conexion = new PostgresConexion();
 
     /**
      * Creates new form administradorInterfaz
@@ -132,7 +135,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
             .addGroup(jPanelclientesLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jLabel6)
-                .addContainerGap(466, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
             .addGroup(jPanelclientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1))
@@ -303,7 +306,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 casoasisActionPerformed(evt);
             }
         });
-        jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 50));
+        jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 50));
 
         reserasis.setBackground(new java.awt.Color(0, 0, 102));
         reserasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -318,7 +321,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 reserasisMouseExited(evt);
             }
         });
-        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 50));
+        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
 
         enviocon.setBackground(new java.awt.Color(0, 0, 102));
         enviocon.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -333,7 +336,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 envioconMouseExited(evt);
             }
         });
-        jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 50));
+        jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 180, 50));
 
         mostraasis.setBackground(new java.awt.Color(0, 0, 102));
         mostraasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -353,7 +356,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 mostraasisActionPerformed(evt);
             }
         });
-        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 50));
+        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
@@ -377,7 +380,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 ////////datos abogado//////////////////
-    
+
     public void mostrarabogados(ArrayList<abogado> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
@@ -385,7 +388,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()),String.valueOf(tipos.getTitulo())};
+            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()), String.valueOf(tipos.getTitulo())};
             mTabla.addRow(filaNueva);
         });
         datosabo.setModel(mTabla);
@@ -421,21 +424,22 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         }
     }
     /////////////////////////////////datos cliente//////////////////
-    
-     public void mostrarclientes(ArrayList<Cliente> lista_tipo) {
+
+    public void mostrarclientes(ArrayList<Cliente> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
         mTabla = (DefaultTableModel) tablacli.getModel();
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(),tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(),tipos.getTelefono(),String.valueOf(tipos.getEdad()),tipos.getCorre()};
+            String[] filaNueva = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getEdad()), tipos.getCorre()};
             mTabla.addRow(filaNueva);
         });
         tablacli.setModel(mTabla);
         columnascli();
     }
-     public void columnascli() {
+
+    public void columnascli() {
         TableColumnModel columna = tablacli.getColumnModel();
         columna.getColumn(0).setPreferredWidth(100);
         columna.getColumn(1).setPreferredWidth(100);
@@ -447,7 +451,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         columna.getColumn(7).setPreferredWidth(115);
         columna.getColumn(8).setPreferredWidth(150);
     }
-     
+
     public void listarcli() {
         Cliente cli1 = new Cliente();
         DefaultTableModel modelo = (DefaultTableModel) tablacli.getModel();
@@ -462,15 +466,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
+    }   
 
     private void mostraasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraasisActionPerformed
         // TODO add your handling code here:
-        Regi_Asistente res=new Regi_Asistente();
-        res.setVisible(true);
+        Regi_Asistente res = new Regi_Asistente();
+        res.AsisReg();
+        res.setVisible(true);       
         dispose();
-        
     }//GEN-LAST:event_mostraasisActionPerformed
 
     private void jButtonModificarA2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseClicked

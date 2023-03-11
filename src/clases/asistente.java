@@ -20,13 +20,15 @@ import javax.swing.table.DefaultTableModel;
  * @author KEVIN SANCHEZ
  */
 public class asistente extends Persona {
-    
+
+    PostgresConexion conn = new PostgresConexion();
     PostgresConexion conexion = new PostgresConexion();
 
     private String cod_asist;
     private Double sueldo;
     private int experiencia;
     private String titudocu;
+
     public asistente() {
     }
 
@@ -75,7 +77,7 @@ public class asistente extends Persona {
         ResultSet contenedor = conexion.Consulta(script);
         ArrayList retorno = new ArrayList();
         while (contenedor.next()) {
-            asistente insertar = new asistente();         
+            asistente insertar = new asistente();
             insertar.setCod_asist(contenedor.getString("id_asis"));
             insertar.setTitudocu(contenedor.getString("titulo_asis"));
             insertar.setExperiencia(contenedor.getInt("years_esperiencia"));
@@ -97,22 +99,22 @@ public class asistente extends Persona {
         }
         return retorno;
     }
-    
+
     public void Ingresar() throws SQLException {
         String sql = "INSERT INTO public.asistente(titulo_asis, years_esperiencia, cedula_asis, contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis,celular, email, foto)"
-        + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
+                + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
         conexion.accion(sql);
     }
-    
-    public void Consultar() throws SQLException {
-        //String sql="SELECT id_asis, titulo_asis, years_esperiencia, cedula_asis,contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis, celular, email, foto FROM public.asistente";
-        String sql = "SELECT * FROM asistente";
-        conexion.Consulta(sql);
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-            String ced1 = contenedor.getString("cedula_asis");
-            System.out.println("Cedula: " + ced1 );
-        }   
+
+    public int login() throws SQLException {
+        int retorno;
+        String loggin = "SELECT * FROM asistente WHERE cedula_asis = '" + super.getCedula() + "' and contraseña_asis = '" + super.getPassword() + "'";
+        ResultSet resulset = conn.Consulta(loggin);
+        if (!resulset.next()) {
+            retorno = 0;
+        } else {
+            retorno = 3;
+        }
+        return retorno;
     }
-    
 }
