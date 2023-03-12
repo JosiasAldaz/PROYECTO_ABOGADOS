@@ -90,7 +90,6 @@ public class Regi_abogado extends javax.swing.JFrame {
     public void AdministradorReg() {
         regresar.setVisible(false);
         regresar1.setVisible(true);
-
     }
 
     public void InserBase() {
@@ -169,7 +168,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
                         } else {
                             estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
-                            estatica.Ingresar();
+                            estatica.Ingresar_Especialidad();
                         }
                         JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
 
@@ -366,7 +365,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 650, 480));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 650, 480));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel1.setText("Nombres:");
@@ -620,7 +619,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 660, 190, 50));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 670, 190, 50));
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel20.setText(" Teléfono:");

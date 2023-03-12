@@ -5,15 +5,17 @@
  */
 package abogados;
 
+import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
+import clases.Direcciones;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.synth.Region;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -97,10 +99,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
             } else {
                 mostrarabogados(mostrar);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
 
@@ -155,6 +155,59 @@ public class administradorInterfaz extends javax.swing.JFrame {
         }
     }
 
+    public void moificarAbogado() throws SQLException {
+        int i = -1;
+        i = TablaR.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
+        } else {
+            PostgresConexion conexion = new PostgresConexion();
+            abogado abg = new abogado();
+            abg.setCedula(TablaR.getValueAt(i, 1).toString());
+            String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+            ResultSet contenedor = conexion.Consulta(sql);
+
+            while (contenedor.next()) {
+                modificarAbogado abrir = new modificarAbogado();
+                abrir.setVisible(true);
+                modificarAbogado.cedula.setText(contenedor.getString("cedula_abg"));
+                modificarAbogado.nombre1.setText(contenedor.getString("prim_nom_abg"));
+                modificarAbogado.nombre2.setText(contenedor.getString("seg_nom_abg"));
+                modificarAbogado.apellido1.setText(contenedor.getString("prim_apell_abg"));
+                modificarAbogado.apellido2.setText(contenedor.getString("seg_apell_abg"));
+                modificarAbogado.telefono.setText(contenedor.getString("telefono_abg"));
+                modificarAbogado.titulos.setText(contenedor.getString("titulo_abg"));
+                modificarAbogado.costo.setText(contenedor.getString("costo_x_horas"));
+                int k = contenedor.getInt("fk_id_direcc_abg");
+                Direcciones direc= new Direcciones(); 
+                direc.setId_direccion(k);
+                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                ResultSet contenedor1 = conexion.Consulta(sql1);
+                while (contenedor1.next()) {
+                    modificarAbogado.direccion1.setText(contenedor1.getString("calle_principal"));
+                    modificarAbogado.direccion2.setText(contenedor1.getString("calle_secundaria"));
+                }
+
+                String selecABG = "SELECT *FROM public.especialidad  ";
+                ResultSet contenedor3 = conexion.Consulta(selecABG);
+
+                while (contenedor3.next()) {
+
+                    if (contenedor3.getInt("fk_id_agb") == (contenedor.getInt("id_abg"))) {
+
+                        modificarAbogado.TXT_instituciòn.setText(contenedor3.getString("institución"));
+                        modificarAbogado.TXT_nombre.setText(contenedor3.getString("nombre_espe"));
+                        modificarAbogado.JSp_año_inicio.setValue(Integer.parseInt(contenedor3.getString("anio_inicio")));
+                        modificarAbogado.JSP_año_fin.setValue(Integer.parseInt(contenedor3.getString("anio_final")));
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
     public void IngresaEspecialidad() {
         if (JTxt_ingreso_diplo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN TIPO DE DIPLOMA");
@@ -189,9 +242,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     public void selecionarEspecialidad() {
-        int seleccionado;
+        int seleccionado = -1;
         seleccionado = Tabla_Tipos.getSelectedRow();
-        if (seleccionado >= 0) {
+        if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
         } else {
             change.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
@@ -409,7 +462,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA8ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 140, 50));
+        JPcrud_abg.add(jButtonModificarA8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 140, 50));
 
         jButtonModificarA9.setBackground(new java.awt.Color(128, 0, 0));
         jButtonModificarA9.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -459,7 +512,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -486,7 +539,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 Bucar_abgActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(Bucar_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 170, 40));
+        JPcrud_abg.add(Bucar_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 170, 40));
 
         JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
@@ -982,39 +1035,31 @@ public class administradorInterfaz extends javax.swing.JFrame {
         Regi_abogado nuevo2 = new Regi_abogado();
         nuevo2.AdministradorReg();
         nuevo2.setVisible(true);
-
-
     }//GEN-LAST:event_jButtonModificarA6ActionPerformed
 
     private void jButtonModificarA11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA11ActionPerformed
         eliminarAbogado();
     }//GEN-LAST:event_jButtonModificarA11ActionPerformed
 
-    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
-        buscarAbogado();
-    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
+    private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
+        try {
+            moificarAbogado();
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonModificarA9ActionPerformed
+
+    private void TablaRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaRMouseClicked
 
     private void Bucar_abgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bucar_abgActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Bucar_abgActionPerformed
 
-    private void TablaRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRMouseClicked
-        abogado nuevo = new abogado();
-
-        try {
-            Regi_abogado nuevo2 = new Regi_abogado();
-    
-            nuevo2.AdministradorReg();
-            nuevo2.setVisible(true);
-            nuevo.Selecionar();
-        } catch (SQLException ex) {
-            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_TablaRMouseClicked
-
-    private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModificarA9ActionPerformed
+    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
+        buscarAbogado();
+    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
 
     /**
      * @param args the command line arguments

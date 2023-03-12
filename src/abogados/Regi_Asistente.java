@@ -5,6 +5,8 @@
  */
 package abogados;
 
+import static abogados.Login.admin;
+import static abogados.Login.as;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.PostgresConexion;
@@ -37,6 +39,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
     public Regi_Asistente() {
         initComponents();
         ocultarasis.setVisible(false);
+        Regreso.setVisible(false);
+    }
+
+    public void AsisReg() {
+        Regreso.setVisible(true);
+        registro.setVisible(false);
     }
 
     /**
@@ -68,7 +76,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPasscontra2 = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        registro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextcorreo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -84,9 +92,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         mostrarasis = new javax.swing.JLabel();
         ocultarasis = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jTxtFldAñosExperiencia = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         jTxtFldTituloAsistente = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         Jspdia = new javax.swing.JSpinner();
@@ -95,7 +101,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jYearChooser2 = new com.toedter.calendar.JYearChooser();
         jLabel7 = new javax.swing.JLabel();
+        Regreso = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,9 +115,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTextcedula.setBackground(new java.awt.Color(211, 211, 211));
         jTextcedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextcedulaKeyTyped(evt);
+            }
+        });
 
         jTextnom1.setBackground(new java.awt.Color(211, 211, 211));
         jTextnom1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextnom1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextnom1KeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Nombres:");
@@ -116,9 +135,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jTextnom2.setBackground(new java.awt.Color(211, 211, 211));
         jTextnom2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextnom2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextnom2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextnom2KeyTyped(evt);
+            }
+        });
 
         jTextape1.setBackground(new java.awt.Color(211, 211, 211));
         jTextape1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextape1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextape1KeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Genero:");
@@ -137,12 +166,22 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jTextape2.setBackground(new java.awt.Color(211, 211, 211));
         jTextape2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextape2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextape2KeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Fecha  de naciminento:");
 
         jTextcelular.setBackground(new java.awt.Color(211, 211, 211));
         jTextcelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextcelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextcelularKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Contraseña:");
@@ -164,12 +203,13 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Correo:");
 
-        jButton2.setBackground(new java.awt.Color(245, 222, 179));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        registro.setBackground(new java.awt.Color(245, 222, 179));
+        registro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
+        registro.setText("Registrarse");
+        registro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                registroActionPerformed(evt);
             }
         });
 
@@ -189,15 +229,20 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 jTextsueldoActionPerformed(evt);
             }
         });
+        jTextsueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextsueldoKeyTyped(evt);
+            }
+        });
 
-        jPanel2.setBackground(new java.awt.Color(139, 69, 19));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Constantia", 2, 48)); // NOI18N
         jLabel13.setText("Asistente");
 
-        foto_asis.setBackground(new java.awt.Color(211, 211, 211));
+        foto_asis.setBackground(new java.awt.Color(255, 204, 153));
         foto_asis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,8 +254,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
-                .addComponent(foto_asis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(foto_asis, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,6 +287,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(245, 222, 179));
         jButton4.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
         jButton4.setText("PANTALLA PRINCIPAL");
@@ -268,17 +314,24 @@ public class Regi_Asistente extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setText("Años de Experriencia");
+        jTxtFldAñosExperiencia.setBackground(new java.awt.Color(211, 211, 211));
+        jTxtFldAñosExperiencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTxtFldAñosExperiencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldAñosExperienciaKeyTyped(evt);
+            }
+        });
 
-        jTxtFldAñosExperiencia.setText("jTextField3");
-
-        jLabel17.setText("Titulo");
-        jLabel17.setAutoscrolls(true);
-
-        jTxtFldTituloAsistente.setText("jTextField4");
+        jTxtFldTituloAsistente.setBackground(new java.awt.Color(211, 211, 211));
+        jTxtFldTituloAsistente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTxtFldTituloAsistente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtFldTituloAsistenteActionPerformed(evt);
+            }
+        });
+        jTxtFldTituloAsistente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFldTituloAsistenteKeyTyped(evt);
             }
         });
 
@@ -300,12 +353,29 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jLabel7.setText("gghhgv");
 
+        Regreso.setBackground(new java.awt.Color(245, 222, 179));
+        Regreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Regreso.setText("Regresar");
+        Regreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(245, 222, 179));
         jButton1.setText("jButton1");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel20.setText("Años de Experiencia:");
+
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel22.setText("Titulo:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -313,20 +383,22 @@ public class Regi_Asistente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTxtFldAñosExperiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jTxtFldTituloAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel22)
                                     .addComponent(jCombselec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(68, 68, 68)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton1))
+                                    .addComponent(jLabel20)
+                                    .addComponent(jTxtFldTituloAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTxtFldAñosExperiencia, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(92, 92, 92)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -395,10 +467,11 @@ public class Regi_Asistente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,10 +509,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCombselec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTxtFldTituloAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel22))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -469,8 +540,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel16)
+                        .addComponent(jTxtFldTituloAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtFldAñosExperiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -504,35 +576,35 @@ public class Regi_Asistente extends javax.swing.JFrame {
                         .addComponent(jPasscontra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))))
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(169, 169, 169))
+                    .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
         // TODO add your handling code here:                     
         valced();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_registroActionPerformed
 
     private void jPasscontra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasscontra2ActionPerformed
         // TODO add your handling code here:
@@ -594,15 +666,95 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCombselecActionPerformed
 
+    private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_RegresoActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        asistente a1 = new asistente();
-        try {
-            a1.Consultar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextnom1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextnom1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextnom1KeyTyped
+
+    private void jTextnom2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextnom2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextnom2KeyTyped
+
+    private void jTextape1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextape1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextape1KeyTyped
+
+    private void jTextape2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextape2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextape2KeyTyped
+
+    private void jTextcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcedulaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextcedulaKeyTyped
+
+    private void jTextsueldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextsueldoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextsueldoKeyTyped
+
+    private void jTextcelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcelularKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextcelularKeyTyped
+
+    private void jTxtFldAñosExperienciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldAñosExperienciaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldAñosExperienciaKeyTyped
+
+    private void jTxtFldTituloAsistenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldTituloAsistenteKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldTituloAsistenteKeyTyped
 
     ///////////////////////////metodos///
     public void valced() {
@@ -797,7 +949,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setCorre(corre);
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
                                                                         validarasis();
-                                                                        //asisten1.Ingresar();                                           
+                                                                        asisten1.Ingresar();
+                                                                        Login lof = new Login();
+                                                                        lof.setVisible(true);
+                                                                        dispose();
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -840,21 +995,21 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         }
     }
-    String ced1;
+
     public void validarasis() throws SQLException {
-        //String sql="SELECT id_asis, titulo_asis, years_esperiencia, cedula_asis,contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis, celular, email, foto FROM public.asistente";
-        String sql = "SELECT * FROM asistente";
+        String ced1 = "";
+        String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
         conexion.Consulta(sql);
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            String ced1 = contenedor.getString("cedula_asis");       
+            ced1 = contenedor.getString("cedula_asis");
         }
         if (ced1.equals(jTextcedula.getText())) {
-                JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO");
-            } else {
-                asisten1.Ingresar();
-                JOptionPane.showMessageDialog(this, "REGISTRO EXITOSO");
-            }
+            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
+        } else {
+            JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+            asisten1.Ingresar();
+        }
     }
 
     public void diasvalidacion() {
@@ -913,11 +1068,11 @@ public class Regi_Asistente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JBxmes;
     private javax.swing.JSpinner Jspdia;
+    private javax.swing.JButton Regreso;
     private javax.swing.JTextField calleprinci;
     private javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -928,12 +1083,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -951,7 +1106,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextcedula;
     private javax.swing.JTextField jTextcelular;
     private javax.swing.JTextField jTextcorreo;
-    public static javax.swing.JTextField jTextnom1;
+    private javax.swing.JTextField jTextnom1;
     private javax.swing.JTextField jTextnom2;
     private javax.swing.JTextField jTextsueldo;
     private javax.swing.JTextField jTxtFldAñosExperiencia;
@@ -959,5 +1114,6 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser2;
     private javax.swing.JLabel mostrarasis;
     private javax.swing.JLabel ocultarasis;
+    private javax.swing.JButton registro;
     // End of variables declaration//GEN-END:variables
 }

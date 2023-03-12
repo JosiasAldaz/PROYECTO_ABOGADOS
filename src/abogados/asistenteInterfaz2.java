@@ -5,9 +5,12 @@
  */
 package abogados;
 
+import clases.Cliente;
+import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,14 +26,15 @@ import javax.swing.table.TableColumnModel;
  */
 public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
+    PostgresConexion conexion = new PostgresConexion();
+
     /**
      * Creates new form administradorInterfaz
      */
     public asistenteInterfaz2() {
         initComponents();
         panelaboga.setVisible(false);
-        jpclientes.setVisible(false);
-        tablaAbogado();
+        jPanelclientes.setVisible(false);
     }
 ///////////////
 
@@ -46,14 +50,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jButtonModificarA10 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         JPfondo_Inicial = new javax.swing.JPanel();
-        JPcrud_abg = new javax.swing.JPanel();
-        jpclientes = new javax.swing.JPanel();
+        VentanaPrincipal = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanelclientes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        datasis = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        modifiasis = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        tablacli = new javax.swing.JTable();
+        JPcrud_abg = new javax.swing.JPanel();
         panelaboga = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -64,13 +67,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        salimenu = new javax.swing.JButton();
-        datasi = new javax.swing.JButton();
-        jButtonModificarA2 = new javax.swing.JButton();
-        casoasis = new javax.swing.JButton();
-        reserasis = new javax.swing.JButton();
-        enviocon = new javax.swing.JButton();
-        mostraasis = new javax.swing.JButton();
+        datasi = new javax.swing.JTextField();
+        jButtonModificarA2 = new javax.swing.JTextField();
+        casoasis = new javax.swing.JTextField();
+        reserasis = new javax.swing.JTextField();
+        mostraasis = new javax.swing.JTextField();
+        enviocon = new javax.swing.JTextField();
+        salimenu = new javax.swing.JTextField();
 
         jButtonModificarA10.setBackground(new java.awt.Color(102, 153, 255));
         jButtonModificarA10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -86,134 +89,160 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPfondo_Inicial.setBackground(new java.awt.Color(255, 255, 255));
         JPfondo_Inicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JPcrud_abg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Ima.Asistentes.Fondo.jpg"))); // NOI18N
 
-        jpclientes.setMinimumSize(new java.awt.Dimension(950, 530));
-        jpclientes.setPreferredSize(new java.awt.Dimension(950, 550));
+        javax.swing.GroupLayout VentanaPrincipalLayout = new javax.swing.GroupLayout(VentanaPrincipal);
+        VentanaPrincipal.setLayout(VentanaPrincipalLayout);
+        VentanaPrincipalLayout.setHorizontalGroup(
+            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        VentanaPrincipalLayout.setVerticalGroup(
+            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        JPfondo_Inicial.add(VentanaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+
+        jPanelclientes.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel6.setFont(new java.awt.Font("Castellar", 0, 70)); // NOI18N
-        jLabel6.setText("REPORTE DE CLIENTES ");
+        jLabel6.setText("Datos clientes");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablacli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID_CLIENTE", "CEDULA", "PRIMER NOMBRE", "SEGUNDO NOMBRE", "PRIMER APELLIDO", "SEGUNDO APELLIDO", "TELEFONO", "EDAD", "CORREO"
             }
-        ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
 
-        modifiasis.setBackground(new java.awt.Color(0, 0, 102));
-        modifiasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        modifiasis.setForeground(new java.awt.Color(255, 255, 255));
-        modifiasis.setText("MODIFICAR MIS DATOS");
-        modifiasis.setBorder(null);
-        modifiasis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                modifiasisMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                modifiasisMouseExited(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        modifiasis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modifiasisActionPerformed(evt);
-            }
-        });
+        tablacli.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tablacli.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablacli);
+        if (tablacli.getColumnModel().getColumnCount() > 0) {
+            tablacli.getColumnModel().getColumn(0).setResizable(false);
+            tablacli.getColumnModel().getColumn(1).setResizable(false);
+            tablacli.getColumnModel().getColumn(2).setResizable(false);
+            tablacli.getColumnModel().getColumn(3).setResizable(false);
+            tablacli.getColumnModel().getColumn(4).setResizable(false);
+            tablacli.getColumnModel().getColumn(5).setResizable(false);
+            tablacli.getColumnModel().getColumn(6).setResizable(false);
+            tablacli.getColumnModel().getColumn(7).setResizable(false);
+            tablacli.getColumnModel().getColumn(8).setResizable(false);
+        }
 
-        jButton1.setText("REGRESAR");
-
-        javax.swing.GroupLayout datasisLayout = new javax.swing.GroupLayout(datasis);
-        datasis.setLayout(datasisLayout);
-        datasisLayout.setHorizontalGroup(
-            datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datasisLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 111, Short.MAX_VALUE))
-            .addGroup(datasisLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelclientesLayout = new javax.swing.GroupLayout(jPanelclientes);
+        jPanelclientes.setLayout(jPanelclientesLayout);
+        jPanelclientesLayout.setHorizontalGroup(
+            jPanelclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelclientesLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel6)
+                .addContainerGap(186, Short.MAX_VALUE))
+            .addGroup(jPanelclientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modifiasis, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
-        datasisLayout.setVerticalGroup(
-            datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(datasisLayout.createSequentialGroup()
-                .addContainerGap(334, Short.MAX_VALUE)
-                .addGroup(datasisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(modifiasis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout jpclientesLayout = new javax.swing.GroupLayout(jpclientes);
-        jpclientes.setLayout(jpclientesLayout);
-        jpclientesLayout.setHorizontalGroup(
-            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpclientesLayout.createSequentialGroup()
-                .addComponent(datasis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        jPanelclientesLayout.setVerticalGroup(
+            jPanelclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelclientesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpclientesLayout.setVerticalGroup(
-            jpclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpclientesLayout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(datasis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(321, 321, 321))
         );
 
-        JPcrud_abg.add(jpclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 550));
+        JPfondo_Inicial.add(jPanelclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
-        panelaboga.setBackground(new java.awt.Color(255, 204, 255));
+        JPcrud_abg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelaboga.setBackground(new java.awt.Color(0, 102, 102));
         panelaboga.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Castellar", 0, 70)); // NOI18N
-        jLabel4.setText("Datos del ABOGADOS");
-        panelaboga.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, 940, -1));
+        jLabel4.setText("Datos ABOGADOS");
+        panelaboga.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 780, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/CODIGO-RO-388-1 (1).jpg"))); // NOI18N
-        panelaboga.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 170, -1));
+        panelaboga.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         datosabo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID_ABOGADO", "CEDULA", "PRIMER NOMBRE", "SEGUNDO NOMBRE", "PRIMER APELLIDO", "SEGUNDO APELLIDO", "TELEFONO", "COSTO", "TITULO"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         datosabo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        datosabo.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(datosabo);
+        if (datosabo.getColumnModel().getColumnCount() > 0) {
+            datosabo.getColumnModel().getColumn(0).setResizable(false);
+            datosabo.getColumnModel().getColumn(1).setResizable(false);
+            datosabo.getColumnModel().getColumn(2).setResizable(false);
+            datosabo.getColumnModel().getColumn(3).setResizable(false);
+            datosabo.getColumnModel().getColumn(4).setResizable(false);
+            datosabo.getColumnModel().getColumn(5).setResizable(false);
+            datosabo.getColumnModel().getColumn(6).setResizable(false);
+            datosabo.getColumnModel().getColumn(7).setResizable(false);
+            datosabo.getColumnModel().getColumn(8).setResizable(false);
+        }
 
-        panelaboga.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 930, 270));
+        panelaboga.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 830, 230));
 
-        JPcrud_abg.add(panelaboga, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 560));
+        JPcrud_abg.add(panelaboga, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 550));
 
-        JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 560));
+        JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 560));
 
         jPanel1.add(JPfondo_Inicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, 550));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Castellar", 0, 60)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 920, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
@@ -223,30 +252,21 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jLabel3.setText("VICENTE PINZON Y LUIS DE LA CEDA");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 720, 430, 40));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        salimenu.setBackground(new java.awt.Color(0, 0, 102));
-        salimenu.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        salimenu.setForeground(new java.awt.Color(255, 255, 255));
-        salimenu.setText("SALIR");
-        salimenu.setBorder(null);
-        salimenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                salimenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                salimenuMouseExited(evt);
-            }
-        });
-        jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 180, 50));
-
+        datasi.setEditable(false);
         datasi.setBackground(new java.awt.Color(0, 0, 102));
         datasi.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         datasi.setForeground(new java.awt.Color(255, 255, 255));
+        datasi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         datasi.setText("DATOS ABOGADO");
         datasi.setBorder(null);
+        datasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         datasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                datasiMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 datasiMouseEntered(evt);
             }
@@ -259,13 +279,16 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 datasiActionPerformed(evt);
             }
         });
-        jPanel2.add(datasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 180, 50));
+        jPanel2.add(datasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 50));
 
+        jButtonModificarA2.setEditable(false);
         jButtonModificarA2.setBackground(new java.awt.Color(0, 0, 102));
         jButtonModificarA2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButtonModificarA2.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jButtonModificarA2.setText("LISTA CLIENTES");
         jButtonModificarA2.setBorder(null);
+        jButtonModificarA2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonModificarA2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonModificarA2MouseClicked(evt);
@@ -282,14 +305,20 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 jButtonModificarA2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonModificarA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 50));
+        jPanel2.add(jButtonModificarA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 50));
 
+        casoasis.setEditable(false);
         casoasis.setBackground(new java.awt.Color(0, 0, 102));
         casoasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         casoasis.setForeground(new java.awt.Color(255, 255, 255));
+        casoasis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         casoasis.setText("CASOS");
         casoasis.setBorder(null);
+        casoasis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         casoasis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                casoasisMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 casoasisMouseEntered(evt);
             }
@@ -302,14 +331,20 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 casoasisActionPerformed(evt);
             }
         });
-        jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 50));
+        jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 50));
 
+        reserasis.setEditable(false);
         reserasis.setBackground(new java.awt.Color(0, 0, 102));
         reserasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         reserasis.setForeground(new java.awt.Color(255, 255, 255));
+        reserasis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         reserasis.setText("RESERVACIONES");
         reserasis.setBorder(null);
+        reserasis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reserasis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reserasisMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 reserasisMouseEntered(evt);
             }
@@ -317,29 +352,25 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 reserasisMouseExited(evt);
             }
         });
-        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 50));
-
-        enviocon.setBackground(new java.awt.Color(0, 0, 102));
-        enviocon.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        enviocon.setForeground(new java.awt.Color(255, 255, 255));
-        enviocon.setText("ENVIAR CONTRATO");
-        enviocon.setBorder(null);
-        enviocon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                envioconMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                envioconMouseExited(evt);
+        reserasis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reserasisActionPerformed(evt);
             }
         });
-        jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 180, 50));
+        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 180, 50));
 
+        mostraasis.setEditable(false);
         mostraasis.setBackground(new java.awt.Color(0, 0, 102));
         mostraasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         mostraasis.setForeground(new java.awt.Color(255, 255, 255));
+        mostraasis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         mostraasis.setText("MOSTRAR MIS DATOS");
         mostraasis.setBorder(null);
+        mostraasis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mostraasis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostraasisMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 mostraasisMouseEntered(evt);
             }
@@ -352,7 +383,59 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 mostraasisActionPerformed(evt);
             }
         });
-        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 50));
+        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 180, 50));
+
+        enviocon.setEditable(false);
+        enviocon.setBackground(new java.awt.Color(0, 0, 102));
+        enviocon.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        enviocon.setForeground(new java.awt.Color(255, 255, 255));
+        enviocon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        enviocon.setText("ENVIAR CONTRATO");
+        enviocon.setBorder(null);
+        enviocon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        enviocon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                envioconMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                envioconMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                envioconMouseExited(evt);
+            }
+        });
+        enviocon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                envioconActionPerformed(evt);
+            }
+        });
+        jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 180, 50));
+
+        salimenu.setEditable(false);
+        salimenu.setBackground(new java.awt.Color(0, 0, 102));
+        salimenu.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        salimenu.setForeground(new java.awt.Color(255, 255, 255));
+        salimenu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        salimenu.setText("SALIR");
+        salimenu.setBorder(null);
+        salimenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salimenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salimenuMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                salimenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salimenuMouseExited(evt);
+            }
+        });
+        salimenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salimenuActionPerformed(evt);
+            }
+        });
+        jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
@@ -360,200 +443,239 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1155, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+////////datos abogado//////////////////
 
-    private void modifiasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifiasisActionPerformed
-        // TODO add your handling code here:
-        System.out.println("VVV");
-        Crudasis cud = new Crudasis();
-        cud.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_modifiasisActionPerformed
+    public void mostrarabogados(ArrayList<abogado> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) datosabo.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()), String.valueOf(tipos.getTitulo())};
+            mTabla.addRow(filaNueva);
+        });
+        datosabo.setModel(mTabla);
+        columnasabo();
+    }
 
-    private void mostraasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraasisActionPerformed
+    public void columnasabo() {
+        TableColumnModel columna = datosabo.getColumnModel();
+        columna.getColumn(0).setPreferredWidth(100);
+        columna.getColumn(1).setPreferredWidth(100);
+        columna.getColumn(2).setPreferredWidth(115);
+        columna.getColumn(3).setPreferredWidth(155);
+        columna.getColumn(4).setPreferredWidth(155);
+        columna.getColumn(5).setPreferredWidth(150);
+        columna.getColumn(6).setPreferredWidth(150);
+        columna.getColumn(7).setPreferredWidth(115);
+        columna.getColumn(8).setPreferredWidth(150);
+    }
+
+    public void mosabog() {
+        abogado abg_usuario = new abogado();
+        DefaultTableModel modelo = (DefaultTableModel) datosabo.getModel();
+        try {
+            ArrayList<abogado> mostrar = new ArrayList();
+            mostrar = abg_usuario.Listar();
+            if (mostrar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTE ABOGADOS REGISTRADOS");
+            } else {
+                mostrarabogados(mostrar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /////////////////////////////////datos cliente//////////////////
+
+    public void mostrarclientes(ArrayList<Cliente> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) tablacli.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getEdad()), tipos.getCorre()};
+            mTabla.addRow(filaNueva);
+        });
+        tablacli.setModel(mTabla);
+        columnascli();
+    }
+
+    public void columnascli() {
+        TableColumnModel columna = tablacli.getColumnModel();
+        columna.getColumn(0).setPreferredWidth(100);
+        columna.getColumn(1).setPreferredWidth(100);
+        columna.getColumn(2).setPreferredWidth(115);
+        columna.getColumn(3).setPreferredWidth(155);
+        columna.getColumn(4).setPreferredWidth(155);
+        columna.getColumn(5).setPreferredWidth(150);
+        columna.getColumn(6).setPreferredWidth(150);
+        columna.getColumn(7).setPreferredWidth(115);
+        columna.getColumn(8).setPreferredWidth(150);
+    }
+
+    public void listarcli() {
+        Cliente cli1 = new Cliente();
+        DefaultTableModel modelo = (DefaultTableModel) tablacli.getModel();
+        try {
+            ArrayList<Cliente> mostrar = new ArrayList();
+            mostrar = cli1.Listar();
+            if (mostrar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTE CLIENTES REGISTRADOS");
+            } else {
+                mostrarclientes(mostrar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+
+    private void datasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseClicked
+        jPanelclientes.setVisible(false);
+        panelaboga.setVisible(true);
+        VentanaPrincipal.setVisible(false);
+        mosabog();
+        
+        //mostrarASISTENTE();
+        //Poner más ventanas
+    }//GEN-LAST:event_datasiMouseClicked
+
+    private void datasiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseEntered
+        datasi.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_datasiMouseEntered
+
+    private void datasiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseExited
+        datasi.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_datasiMouseExited
+
+    private void datasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datasiActionPerformed
         // TODO add your handling code here:
-        datasis.setVisible(true);
-    }//GEN-LAST:event_mostraasisActionPerformed
+    }//GEN-LAST:event_datasiActionPerformed
 
     private void jButtonModificarA2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseClicked
-        // TODO add your handling code here:
+        panelaboga.setVisible(false);
+        jPanelclientes.setVisible(true);
+        VentanaPrincipal.setVisible(false);
+        listarcli();
+        
     }//GEN-LAST:event_jButtonModificarA2MouseClicked
 
     private void jButtonModificarA2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseEntered
-        // TODO add your handling code here:
-        jButtonModificarA2.setBackground(new Color(102, 102, 102));
+        jButtonModificarA2.setBackground(new Color(0,0,153));
     }//GEN-LAST:event_jButtonModificarA2MouseEntered
 
     private void jButtonModificarA2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseExited
-        // TODO add your handling code here:
         jButtonModificarA2.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_jButtonModificarA2MouseExited
 
     private void jButtonModificarA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA2ActionPerformed
         // TODO add your handling code here:
-        datasis.setVisible(false);
-        panelaboga.setVisible(false);
-        jpclientes.setVisible(true);
     }//GEN-LAST:event_jButtonModificarA2ActionPerformed
 
-    private void datasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datasiActionPerformed
+    private void casoasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseClicked
         // TODO add your handling code here:
-        datasis.setVisible(false);
-        jpclientes.setVisible(false);
-        panelaboga.setVisible(true);
-    }//GEN-LAST:event_datasiActionPerformed
-
-    private void datasiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseEntered
-        // TODO add your handling code here:
-        datasi.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_datasiMouseEntered
+    }//GEN-LAST:event_casoasisMouseClicked
 
     private void casoasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseEntered
-        // TODO add your handling code here:
-        casoasis.setBackground(new Color(102, 102, 102));
+        casoasis.setBackground(new Color(0,0,153));
     }//GEN-LAST:event_casoasisMouseEntered
 
-    private void reserasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseEntered
-        // TODO add your handling code here:
-        reserasis.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_reserasisMouseEntered
-
-    private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
-        // TODO add your handling code here:
-        mostraasis.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_mostraasisMouseEntered
-
-    private void envioconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseEntered
-        // TODO add your handling code here:
-        enviocon.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_envioconMouseEntered
-
-    private void modifiasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifiasisMouseEntered
-        // TODO add your handling code here:
-        modifiasis.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_modifiasisMouseEntered
-
-    private void salimenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseEntered
-        // TODO add your handling code here:
-        salimenu.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_salimenuMouseEntered
-
     private void casoasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseExited
-        // TODO add your handling code here:
         casoasis.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_casoasisMouseExited
-
-    private void reserasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseExited
-        // TODO add your handling code here:
-        reserasis.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_reserasisMouseExited
-
-    private void datasiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseExited
-        // TODO add your handling code here:
-        datasi.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_datasiMouseExited
-
-    private void salimenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseExited
-        // TODO add your handling code here:
-        salimenu.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_salimenuMouseExited
-
-    private void modifiasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifiasisMouseExited
-        // TODO add your handling code here:
-        modifiasis.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_modifiasisMouseExited
-
-    private void envioconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseExited
-        // TODO add your handling code here:
-        enviocon.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_envioconMouseExited
-
-    private void mostraasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseExited
-        // TODO add your handling code here:
-        mostraasis.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_mostraasisMouseExited
 
     private void casoasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casoasisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_casoasisActionPerformed
 
-    asistente asis1 = new asistente();
-    DefaultTableModel modeloasis = new DefaultTableModel();
-    Object[] datosasi = new Object[10];
+    private void reserasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reserasisMouseClicked
 
-    public void tablaAbogado() {
-        modeloasis = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int fila, int modelo) {
-                return false;
-            }
-        };
-        modeloasis.addColumn("CEDULA");
-        modeloasis.addColumn("PRIMER NOMBRE");
-        modeloasis.addColumn("SEGUNDO NOMBRE");
-        modeloasis.addColumn("PRIMER APELLIDO");
-        modeloasis.addColumn("SEGUNDO APELLIDO");
-        modeloasis.addColumn("EDAD");
-        modeloasis.addColumn("TELEFONO");
-        modeloasis.addColumn("DIRECCION");
-        modeloasis.addColumn("CARGO");
-        modeloasis.addColumn("HORARIO");
-        datosabo.setModel(modeloasis);
-        columnas();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
-        listar();
+    private void reserasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseEntered
+        reserasis.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_reserasisMouseEntered
+
+    private void reserasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseExited
+        reserasis.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_reserasisMouseExited
+
+    private void reserasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserasisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reserasisActionPerformed
+
+    private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
+        Regi_Asistente res = new Regi_Asistente();
+        res.AsisReg();
+        res.setVisible(true);
+        VentanaPrincipal.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_mostraasisMouseClicked
+
+    private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
+        mostraasis.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_mostraasisMouseEntered
+
+    private void mostraasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseExited
+        mostraasis.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_mostraasisMouseExited
+
+    private void mostraasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraasisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mostraasisActionPerformed
+
+    private void envioconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_envioconMouseClicked
+
+    private void envioconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseEntered
+        enviocon.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_envioconMouseEntered
+
+    private void envioconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseExited
+        enviocon.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_envioconMouseExited
+
+    private void envioconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_envioconActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_envioconActionPerformed
+
+    private void salimenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseClicked
+        // TODO add your handling code here:
+        Login ini=new Login();
+        ini.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_salimenuMouseClicked
+
+    private void salimenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseEntered
+       salimenu.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_salimenuMouseEntered
+
+    private void salimenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseExited
+        salimenu.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_salimenuMouseExited
+
+    private void salimenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salimenuActionPerformed
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_salimenuActionPerformed
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        VentanaPrincipal.setVisible(true);
+        jPanelclientes.setVisible(false);
+        panelaboga.setVisible(false);
         
-    }
-
-    public void columnas() {
-        TableColumnModel columna = datosabo.getColumnModel();
-        columna.getColumn(0).setPreferredWidth(100);
-        columna.getColumn(1).setPreferredWidth(150);
-        columna.getColumn(2).setPreferredWidth(150);
-        columna.getColumn(3).setPreferredWidth(150);
-        columna.getColumn(4).setPreferredWidth(150);
-        columna.getColumn(5).setPreferredWidth(100);
-        columna.getColumn(6).setPreferredWidth(100);
-        columna.getColumn(7).setPreferredWidth(100);
-        columna.getColumn(8).setPreferredWidth(100);
-        columna.getColumn(9).setPreferredWidth(100);
-    }
-
-    public void listar() {
-        asistente p = new asistente();
-        datosasi[0] = "0107971244";
-        datosasi[1] = "Edisson";
-        datosasi[2] = "Fabian";
-        datosasi[3] = "Leon";
-        datosasi[4] = "Marquez";
-        datosasi[5] = "0107971244";
-        datosasi[6] = "0107971244";
-        datosasi[7] = "0107971244";
-        datosasi[8] = "0107971244";
-        datosasi[9] = "0107971244";
-        modeloasis.addRow(datosasi);
-    }
+    }//GEN-LAST:event_jLabel13MouseClicked
 
     /**
      * @param args the command line arguments
@@ -594,14 +716,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPcrud_abg;
     private javax.swing.JPanel JPfondo_Inicial;
-    private javax.swing.JButton casoasis;
-    private javax.swing.JButton datasi;
-    private javax.swing.JPanel datasis;
+    private javax.swing.JPanel VentanaPrincipal;
+    private javax.swing.JTextField casoasis;
+    private javax.swing.JTextField datasi;
     private javax.swing.JTable datosabo;
-    private javax.swing.JButton enviocon;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField enviocon;
     private javax.swing.JButton jButtonModificarA10;
-    private javax.swing.JButton jButtonModificarA2;
+    private javax.swing.JTextField jButtonModificarA2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -609,16 +730,16 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelclientes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JPanel jpclientes;
-    private javax.swing.JButton modifiasis;
-    private javax.swing.JButton mostraasis;
+    private javax.swing.JTextField mostraasis;
     private javax.swing.JPanel panelaboga;
-    private javax.swing.JButton reserasis;
-    private javax.swing.JButton salimenu;
+    private javax.swing.JTextField reserasis;
+    private javax.swing.JTextField salimenu;
+    private javax.swing.JTable tablacli;
     // End of variables declaration//GEN-END:variables
 }

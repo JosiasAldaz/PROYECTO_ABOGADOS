@@ -95,4 +95,9 @@ public class Direcciones {
         }
         return ID_direccion;
     }
+
+    public void modificar_direccion() throws SQLException {
+        String sql = "UPDATE public.direcciones SET  calle_principal='" + getCalle_principal() + "', calle_secundaria='" +getCalle_secundaria() + "', sucursal='" + this.getSucursal() + "' where id_direccion=  '"+ getId_direccion()+"'" ;
+        base.accion(sql);
+    }
 }

@@ -5,6 +5,21 @@
  */
 package abogados;
 
+import static abogados.Regi_abogado.nombre1;
+import clases.Administrador;
+import clases.Direcciones;
+import clases.Especializacion;
+import clases.PostgresConexion;
+import clases.TIPO_diplomnma;
+import clases.abogado;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +35,196 @@ public class modificarAbogado extends javax.swing.JFrame {
         initComponents();
     }
 
+    Especializacion estatica = new Especializacion();
+    ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
+
+    public String meschoice(String mes) {
+        String retorno = "";
+        switch (mes) {
+            case "Enero":
+                retorno = "01";
+                break;
+            case "Febrero":
+                retorno = "02";
+                break;
+            case "Marzo":
+                retorno = "03";
+                break;
+            case "Abril":
+                retorno = "04";
+                break;
+            case "Mayo":
+                retorno = "05";
+                break;
+            case "Junio":
+                retorno = "06";
+                break;
+            case "Julio":
+                retorno = "07";
+                break;
+            case "Agosto":
+                retorno = "08";
+                break;
+            case "Septiembre":
+                retorno = "09";
+                break;
+            case "Octubre":
+                retorno = "10";
+                break;
+            case "Noviembre":
+                retorno = "11";
+                break;
+            case "Diciembre":
+                retorno = "12";
+                break;
+        }
+        return retorno;
+    }
+
+    public int ID_TIPO(String nombre) {
+        int id = 0;
+        for (int i = 0; i < rellenar.size(); i++) {
+            if (rellenar.get(i).getNombre_diplo().equals(nombre)) {
+                id = rellenar.get(i).getID_diploma();
+            } else {
+
+            }
+        }
+        return id;
+    }
+
+    public void InserBase() throws SQLException {
+        int anio = jYearChooser1.getYear();
+        int dia = Integer.parseInt(Jspdia.getValue().toString());
+        String contra = new String(contraseña.getPassword());
+        char genero = '\0';
+        boolean auxGratudad = false;
+
+        if (m.isSelected()) {
+            genero = 'F';
+
+        }
+        if (f.isSelected()) {
+            genero = 'F';
+
+        }
+        if (s.isSelected()) {
+            auxGratudad = true;
+
+        }
+        if (n.isSelected()) {
+            auxGratudad = false;
+
+        }
+        if (dia > 31 || dia < 1) {
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
+        } else {
+            if (JBxmes.getSelectedItem().toString().equals("SELECCIONE")) {
+                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
+            } else {
+                if (anio >= LocalDate.now().getYear()) {
+                    JOptionPane.showMessageDialog(null, "EL AÑO DE NACIMIENTO ES INCORRECTO");
+                } else {
+                    String diaF = "";
+                    if (Jspdia.getValue().toString().length() == 1) {
+                        diaF = "0" + Jspdia.getValue().toString();
+                    } else {
+                        diaF = Jspdia.getValue().toString();
+                    }
+                    String timechooser = diaF + "/" + meschoice(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser1.getYear();
+                    System.out.println(timechooser);
+                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate fecha = LocalDate.parse(timechooser, formato);
+                    LocalDateTime fechaHora = fecha.atStartOfDay();
+                    PostgresConexion conexion = new PostgresConexion();
+                    abogado abg = new abogado();
+                    abg.setCedula(cedula.getText());
+                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+                    ResultSet contenedor = conexion.Consulta(sql);
+                    Direcciones direc = new Direcciones();
+                    Especializacion estatica = new Especializacion();
+                    while (contenedor.next()) {
+                        int k = contenedor.getInt("fk_id_direcc_abg");
+                        direc.setId_direccion(k);
+                        String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                        ResultSet contenedor1 = conexion.Consulta(sql1);
+                        while (contenedor1.next()) {
+
+                            direc.setCalle_principal(direccion1.getText());
+                            direc.setCalle_secundaria(direccion2.getText());
+                            direc.setSucursal(false);
+
+                        }
+
+                        double auxcost = Double.parseDouble(costo.getText());
+                        try {
+                            direc.modificar_direccion();
+                            abg.setPrimerNombre(nombre1.getText());
+                            abg.setSegundoNombre(nombre2.getText());
+                            abg.setNombreApellido(apellido1.getText());
+                            abg.setSegundoApellido(apellido2.getText());
+                            abg.setCost_hora(auxcost);
+                            abg.setPassword(contra);
+                            abg.setGenero(genero);
+                            abg.setGratuidad(auxGratudad);
+                            abg.setFecha_nacimiento(fechaHora);
+                            abg.setTitulo(titulos.getText());
+                            abg.setFoto_perfil(foto.getRutaImagen());
+                            abg.setTelefono(telefono.getText());
+                            abg.Modificar_abogado();
+                            String selecABG1 = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + abg.getCedula() + "'";
+
+                            if (Respecialidad.isSelected()) {
+                                if (TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")) {
+                                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
+                                    System.out.println();
+                                } else {
+
+                                    LocalDate fecha1 = LocalDate.now(); // fecha actual
+                                    int año = fecha1.getYear();
+                                    if (JSp_año_inicio.getValue() == año || JSp_año_inicio.getValue() > año) {
+                                        JOptionPane.showMessageDialog(null, "EL AÑO DE INICIO NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                                    } else {
+                                        if (JSP_año_fin.getValue() == año || JSP_año_fin.getValue() > año) {
+                                            JOptionPane.showMessageDialog(null, "EL AÑO DE FINALIZACION NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                                        } else {
+                                            estatica.setFK_ID_tipo(ID_TIPO(TIPO_diploma.getSelectedItem().toString()));
+                                            estatica.setFecha_fin(JSP_año_fin.getValue());
+                                            estatica.setFecha_inicio(JSp_año_inicio.getValue());
+                                            estatica.setNombre(TXT_nombre.getText());
+                                            estatica.setUniverdadad(TXT_instituciòn.getText());
+                                        }
+                                    }
+                                }
+                                estatica.setFK_id_agb(abg.Seleccionar(selecABG1));
+                                estatica.Ingresar_Especialidad();
+                            } else {
+                                String selecABG = "SELECT *FROM public.especialidad  ";
+                                ResultSet contenedor3 = conexion.Consulta(selecABG);
+                                while (contenedor3.next()) {
+                                    if (contenedor3.getInt("fk_id_agb") == (contenedor.getInt("id_abg"))) {
+                                        estatica.setFK_id_agb(contenedor3.getInt("fk_id_agb"));
+                                        estatica.setFecha_fin(JSP_año_fin.getValue());
+                                        estatica.setFecha_inicio(JSp_año_inicio.getValue());
+                                        estatica.setNombre(TXT_nombre.getText());
+                                        estatica.setUniverdadad(TXT_instituciòn.getText());
+                                        estatica.modificarEspecialidad();
+                                    }
+                                }
+
+                            }
+
+                            JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+
+                        } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +234,8 @@ public class modificarAbogado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        geneo = new javax.swing.ButtonGroup();
+        gratis = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -43,7 +250,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         nombre2 = new javax.swing.JTextField();
         apellido2 = new javax.swing.JTextField();
         apellido1 = new javax.swing.JTextField();
-        cedula_abogado = new javax.swing.JTextField();
+        cedula = new javax.swing.JTextField();
         m = new javax.swing.JRadioButton();
         f = new javax.swing.JRadioButton();
         direccion2 = new javax.swing.JTextField();
@@ -80,8 +287,9 @@ public class modificarAbogado extends javax.swing.JFrame {
         JSP_año_fin = new com.toedter.components.JSpinField();
         jLabel23 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        TIPO_diploma = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
+        TIPO_diploma = new javax.swing.JComboBox<>();
+        Respecialidad = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,20 +378,21 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, 20));
 
-        cedula_abogado.setBackground(new java.awt.Color(211, 211, 211));
-        cedula_abogado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cedula_abogado.addActionListener(new java.awt.event.ActionListener() {
+        cedula.setBackground(new java.awt.Color(211, 211, 211));
+        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cedula_abogadoActionPerformed(evt);
+                cedulaActionPerformed(evt);
             }
         });
-        cedula_abogado.addKeyListener(new java.awt.event.KeyAdapter() {
+        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                cedula_abogadoKeyTyped(evt);
+                cedulaKeyTyped(evt);
             }
         });
-        jPanel1.add(cedula_abogado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 143, 20));
+        jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 143, 20));
 
+        geneo.add(m);
         m.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         m.setText("Maculino");
         m.addActionListener(new java.awt.event.ActionListener() {
@@ -191,8 +400,9 @@ public class modificarAbogado extends javax.swing.JFrame {
                 mActionPerformed(evt);
             }
         });
-        jPanel1.add(m, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 93, -1));
+        jPanel1.add(m, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 93, 20));
 
+        geneo.add(f);
         f.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         f.setText("Femenino");
         jPanel1.add(f, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 93, 20));
@@ -229,10 +439,12 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 70, 20));
 
+        gratis.add(s);
         s.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         s.setText("SI");
         jPanel1.add(s, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 40, -1));
 
+        gratis.add(n);
         n.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         n.setText("NO");
         jPanel1.add(n, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 50, -1));
@@ -264,13 +476,13 @@ public class modificarAbogado extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(245, 222, 179));
         jButton2.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        jButton2.setText("Registrarse");
+        jButton2.setText("ACTUALIZAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 630, 140, 50));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 630, 190, 50));
 
         jLabel18.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel18.setText("Día:");
@@ -325,7 +537,7 @@ public class modificarAbogado extends javax.swing.JFrame {
                 regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 630, 190, 50));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, 190, 50));
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel20.setText(" Teléfono:");
@@ -363,6 +575,11 @@ public class modificarAbogado extends javax.swing.JFrame {
 
         TXT_nombre.setBackground(new java.awt.Color(211, 211, 211));
         TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TXT_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_nombreActionPerformed(evt);
+            }
+        });
         TXT_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_nombreKeyTyped(evt);
@@ -384,35 +601,24 @@ public class modificarAbogado extends javax.swing.JFrame {
         jLabel22.setText("NOMBRE:");
         jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        TIPO_diploma.setBackground(new java.awt.Color(211, 211, 211));
+        jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
+        jLabel24.setText("AÑO GRADUCION:");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
         TIPO_diploma.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
-        TIPO_diploma.setBorder(null);
-        TIPO_diploma.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                TIPO_diplomaAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
+        TIPO_diploma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE" }));
+        TIPO_diploma.setSelectedIndex(-1);
         TIPO_diploma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TIPO_diplomaActionPerformed(evt);
             }
         });
-        TIPO_diploma.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TIPO_diplomaKeyReleased(evt);
-            }
-        });
-        jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 160, 40));
-
-        jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
-        jLabel24.setText("AÑO GRADUCION:");
-        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 150, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 370, 280));
+
+        Respecialidad.setText("REGISTRAR  ESPECIALIDAD");
+        jPanel1.add(Respecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -472,18 +678,18 @@ public class modificarAbogado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_apellido1KeyTyped
 
-    private void cedula_abogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_abogadoActionPerformed
+    private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cedula_abogadoActionPerformed
+    }//GEN-LAST:event_cedulaActionPerformed
 
-    private void cedula_abogadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedula_abogadoKeyTyped
+    private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "SOLO SE PERMITEN NUMEROS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_cedula_abogadoKeyTyped
+    }//GEN-LAST:event_cedulaKeyTyped
 
     private void mActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mActionPerformed
         // TODO add your handling code here:
@@ -521,7 +727,11 @@ public class modificarAbogado extends javax.swing.JFrame {
     }//GEN-LAST:event_costoKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+        try {
+            InserBase();
+        } catch (SQLException ex) {
+            Logger.getLogger(modificarAbogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
@@ -566,17 +776,24 @@ public class modificarAbogado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TXT_nombreKeyTyped
 
-    private void TIPO_diplomaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TIPO_diplomaAncestorAdded
+    private void TXT_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TIPO_diplomaAncestorAdded
+    }//GEN-LAST:event_TXT_nombreActionPerformed
 
     private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIPO_diplomaActionPerformed
-        // TODO add your handling code here:
+        TIPO_diplomnma combo = new TIPO_diplomnma();
+        try {
+            rellenar = combo.mostrar();
+            rellenar.stream().forEach(tipos -> {
+                if (TIPO_diploma.getItemCount() == 0) {
+                    TIPO_diploma.addItem("SELECCIONE");
+                }
+                TIPO_diploma.addItem(tipos.getNombre_diplo());
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_TIPO_diplomaActionPerformed
-
-    private void TIPO_diplomaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TIPO_diplomaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TIPO_diplomaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -615,22 +832,25 @@ public class modificarAbogado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> JBxmes;
-    private com.toedter.components.JSpinField JSP_año_fin;
-    private com.toedter.components.JSpinField JSp_año_inicio;
-    private javax.swing.JSpinner Jspdia;
+    public static javax.swing.JComboBox<String> JBxmes;
+    public static com.toedter.components.JSpinField JSP_año_fin;
+    public static com.toedter.components.JSpinField JSp_año_inicio;
+    public static javax.swing.JSpinner Jspdia;
+    private javax.swing.JCheckBox Respecialidad;
     private javax.swing.JComboBox<String> TIPO_diploma;
-    private javax.swing.JTextField TXT_instituciòn;
-    private javax.swing.JTextField TXT_nombre;
-    private javax.swing.JTextField apellido1;
-    private javax.swing.JTextField apellido2;
-    private javax.swing.JTextField cedula_abogado;
-    private javax.swing.JPasswordField contraseña;
-    private javax.swing.JTextField costo;
-    private javax.swing.JTextField direccion1;
-    private javax.swing.JTextField direccion2;
+    public static javax.swing.JTextField TXT_instituciòn;
+    public static javax.swing.JTextField TXT_nombre;
+    public static javax.swing.JTextField apellido1;
+    public static javax.swing.JTextField apellido2;
+    public static javax.swing.JTextField cedula;
+    public static javax.swing.JPasswordField contraseña;
+    public static javax.swing.JTextField costo;
+    public static javax.swing.JTextField direccion1;
+    public static javax.swing.JTextField direccion2;
     private javax.swing.JRadioButton f;
     private rojerusan.RSFotoSquare foto;
+    public static javax.swing.ButtonGroup geneo;
+    private javax.swing.ButtonGroup gratis;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -659,14 +879,14 @@ public class modificarAbogado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
+    public static com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JRadioButton m;
     private javax.swing.JRadioButton n;
     public static javax.swing.JTextField nombre1;
-    private javax.swing.JTextField nombre2;
+    public static javax.swing.JTextField nombre2;
     private javax.swing.JButton regresar;
     private javax.swing.JRadioButton s;
-    private javax.swing.JTextField telefono;
-    private javax.swing.JTextField titulos;
+    public static javax.swing.JTextField telefono;
+    public static javax.swing.JTextField titulos;
     // End of variables declaration//GEN-END:variables
 }

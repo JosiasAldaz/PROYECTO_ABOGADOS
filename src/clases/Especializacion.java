@@ -14,6 +14,7 @@ import java.util.Date;
  * @author KEVIN SANCHEZ
  */
 public class Especializacion {
+
     private int ID_especializacion1;
     private int FK_ID_tipo;
     private String Nombre;
@@ -22,8 +23,6 @@ public class Especializacion {
     private String univerdadad;
     private int FK_id_agb;
     PostgresConexion conn = new PostgresConexion();
-
-
 
     public Especializacion() {
     }
@@ -84,10 +83,15 @@ public class Especializacion {
         this.FK_id_agb = FK_id_agb;
     }
 
-        
-    public void Ingresar() throws SQLException{
+    public void Ingresar_Especialidad() throws SQLException {
         String insert = "INSERT INTO especialidad(nombre_espe,anio_inicio,anio_final,institución,fk_id_agb,fk_id_tipo)";
-        insert += "VALUES('"+getNombre()+"',"+getFecha_inicio()+","+ getFecha_fin()+",'"+getUniverdadad()+"',"+getFK_id_agb()+","+getFK_ID_tipo()+")";
+        insert += "VALUES('" + getNombre() + "'," + getFecha_inicio() + "," + getFecha_fin() + ",'" + getUniverdadad() + "'," + getFK_id_agb() + "," + getFK_ID_tipo() + ")";
+        conn.accion(insert);
+    }
+
+    public void modificarEspecialidad() throws SQLException {
+        String insert = "UPDATE public.especialidad SET   nombre_espe='" + getNombre() + "', anio_inicio='" + getFecha_inicio() + "', anio_final='" + getFecha_fin() + "', institución='" + getUniverdadad() + "' WHERE fk_id_agb= '" + getFK_id_agb() + "'";
+
         conn.accion(insert);
     }
 }
