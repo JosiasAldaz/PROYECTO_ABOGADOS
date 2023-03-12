@@ -1,6 +1,8 @@
 package abogados;
 
 import clases.Administrador;
+import clases.abogado;
+import clases.asistente;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +13,11 @@ import javax.swing.JOptionPane;
  * @author RAVEN
  */
 public class Login extends javax.swing.JFrame {
+
     public static Administrador admin;
+    public static asistente as;
     int xMouse, yMouse;
+
     /**
      * Creates new form Login
      */
@@ -183,26 +188,49 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cedula() {
+        String user = txtUser.getText();
+    }
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         String user = txtUser.getText();
         String pass = String.valueOf(txtPassword.getPassword());
         Administrador usuario_especial = new Administrador();
+        abogado abg1 = new abogado();
+        asistente asi1 = new asistente();
         usuario_especial.setCedula(user);
         usuario_especial.setPassword(pass);
+        asi1.setCedula(user);
+        asi1.setPassword(pass);
         int resul = 0;
-        try{
-            resul =usuario_especial.login();
-            if(resul ==1){
+        try {
+            resul = usuario_especial.login();
+            if (resul == 1) {
                 administradorInterfaz interfaz_admin = new administradorInterfaz();
                 interfaz_admin.setVisible(true);
                 this.dispose();
+            } else {
+                // resul = abg1.login();
+                if (resul == 2) {
+                    abogadoInterfaz2 interabg = new abogadoInterfaz2();
+                    interabg.setVisible(true);
+                    this.dispose();
+                } else {
+                    resul = asi1.login();
+                    if (resul == 3) {
+                        asistenteInterfaz2 interabg = new asistenteInterfaz2();
+                        interabg.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                    }
+                    JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                }
             }
             admin = usuario_especial;
-        }catch(SQLException ex){
+            as = asi1;
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
         }
-        
-        
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
@@ -215,7 +243,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_exitTxtMouseEntered
 
     private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
-        exitBtn.setBackground(new Color(240,240,240));
+        exitBtn.setBackground(new Color(240, 240, 240));
         exitTxt.setForeground(Color.black);
     }//GEN-LAST:event_exitTxtMouseExited
 

@@ -88,9 +88,8 @@ public class Regi_abogado extends javax.swing.JFrame {
     }
 
     public void AdministradorReg() {
-        regresar.setVisible(false);
+        regresar.setVisible(true);
         regresar1.setVisible(true);
-
     }
 
     public void InserBase() {
@@ -366,7 +365,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 650, 480));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 650, 480));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel1.setText("Nombres:");

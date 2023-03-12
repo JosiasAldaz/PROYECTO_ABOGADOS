@@ -37,8 +37,13 @@ public class Regi_Asistente extends javax.swing.JFrame {
     public Regi_Asistente() {
         initComponents();
         ocultarasis.setVisible(false);
+        Regreso.setVisible(false);
     }
-
+    
+        public void AsisReg() {
+        Regreso.setVisible(true);
+        registro.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +73,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPasscontra2 = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        registro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextcorreo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -95,7 +100,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jYearChooser2 = new com.toedter.calendar.JYearChooser();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Regreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,12 +169,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Correo:");
 
-        jButton2.setBackground(new java.awt.Color(245, 222, 179));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        registro.setBackground(new java.awt.Color(245, 222, 179));
+        registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
+        registro.setText("Registrarse");
+        registro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                registroActionPerformed(evt);
             }
         });
 
@@ -300,10 +305,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         jLabel7.setText("gghhgv");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Regreso.setText("Regresar");
+        Regreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RegresoActionPerformed(evt);
             }
         });
 
@@ -395,9 +400,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)))
+                        .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -508,8 +513,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(169, 169, 169))
         );
 
@@ -529,10 +534,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
         // TODO add your handling code here:                     
         valced();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_registroActionPerformed
 
     private void jPasscontra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasscontra2ActionPerformed
         // TODO add your handling code here:
@@ -594,15 +599,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCombselecActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
         // TODO add your handling code here:
-        asistente a1 = new asistente();
-        try {
-            a1.Consultar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_RegresoActionPerformed
 
     ///////////////////////////metodos///
     public void valced() {
@@ -913,11 +913,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JBxmes;
     private javax.swing.JSpinner Jspdia;
+    private javax.swing.JButton Regreso;
     private javax.swing.JTextField calleprinci;
     private javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -951,7 +950,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextcedula;
     private javax.swing.JTextField jTextcelular;
     private javax.swing.JTextField jTextcorreo;
-    public static javax.swing.JTextField jTextnom1;
+    private javax.swing.JTextField jTextnom1;
     private javax.swing.JTextField jTextnom2;
     private javax.swing.JTextField jTextsueldo;
     private javax.swing.JTextField jTxtFldAñosExperiencia;
@@ -959,5 +958,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser2;
     private javax.swing.JLabel mostrarasis;
     private javax.swing.JLabel ocultarasis;
+    private javax.swing.JButton registro;
     // End of variables declaration//GEN-END:variables
 }
+
+
