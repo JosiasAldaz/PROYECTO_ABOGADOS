@@ -653,6 +653,9 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void salimenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseClicked
         // TODO add your handling code here:
+        Login ini=new Login();
+        ini.setVisible(true);
+        dispose();
     }//GEN-LAST:event_salimenuMouseClicked
 
     private void salimenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseEntered
@@ -664,7 +667,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_salimenuMouseExited
 
     private void salimenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salimenuActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
     }//GEN-LAST:event_salimenuActionPerformed
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
