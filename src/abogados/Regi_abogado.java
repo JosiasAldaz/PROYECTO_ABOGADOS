@@ -168,7 +168,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
                         } else {
                             estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
-                            estatica.Ingresar();
+                            estatica.Ingresar_Especialidad();
                         }
                         JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
 

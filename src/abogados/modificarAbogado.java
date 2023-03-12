@@ -9,8 +9,10 @@ import static abogados.Regi_abogado.nombre1;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.Especializacion;
+import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -91,9 +93,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         return id;
     }
 
-  
-
-    public void InserBase() {
+    public void InserBase() throws SQLException {
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
         String contra = new String(contraseña.getPassword());
@@ -136,46 +136,89 @@ public class modificarAbogado extends javax.swing.JFrame {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fecha = LocalDate.parse(timechooser, formato);
                     LocalDateTime fechaHora = fecha.atStartOfDay();
-                    
-                    Direcciones direccion_admin = new Direcciones();
-                    direccion_admin.setCalle_principal(direccion1.getText());
-                    direccion_admin.setCalle_secundaria(direccion2.getText());
-                    direccion_admin.setSucursal(false);
+                    PostgresConexion conexion = new PostgresConexion();
+                    abogado abg = new abogado();
+                    abg.setCedula(cedula.getText());
+                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+                    ResultSet contenedor = conexion.Consulta(sql);
+                    Direcciones direc = new Direcciones();
+                    Especializacion estatica = new Especializacion();
+                    while (contenedor.next()) {
+                        int k = contenedor.getInt("fk_id_direcc_abg");
+                        direc.setId_direccion(k);
+                        String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                        ResultSet contenedor1 = conexion.Consulta(sql1);
+                        while (contenedor1.next()) {
 
-                    double auxcost = Double.parseDouble(costo.getText());
-                    try {
-                        direccion_admin.Ingresar();
-                        int id = 0;
-                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + direccion1.getText() + "' and calle_secundaria ='" + direccion2.getText() + "'";
-                        id = direccion_admin.Seleccionar(id_direccion);
-                        System.out.println(id);
-                        abogado nuevo = new abogado();
-                        nuevo.setCedula(cedula.getText());
-                        nuevo.setPrimerNombre(nombre1.getText());
-                        nuevo.setSegundoNombre(nombre2.getText());
-                        nuevo.setNombreApellido(apellido1.getText());
-                        nuevo.setSegundoApellido(apellido2.getText());
-                        nuevo.setCost_hora(auxcost);
-                        nuevo.setPassword(contra);
-                        nuevo.setGenero(genero);
-                        nuevo.setGratuidad(auxGratudad);
-                        nuevo.setFecha_nacimiento(fechaHora);
-                        nuevo.setTitulo(titulos.getText());
-                        nuevo.setFoto_perfil(foto.getRutaImagen());
-                        nuevo.setFK_direccion(id);
-                        nuevo.setTelefono(telefono.getText());
-                        nuevo.Insertar();
-                        String selecABG = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + nuevo.getCedula() + "'";
-                        if (TXT_nombre.getText().equals("")) {
+                            direc.setCalle_principal(direccion1.getText());
+                            direc.setCalle_secundaria(direccion2.getText());
+                            direc.setSucursal(false);
 
-                        } else {
-                            estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
-                            estatica.Ingresar();
                         }
-                        JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
 
-                    } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
+                        double auxcost = Double.parseDouble(costo.getText());
+                        try {
+                            direc.modificar_direccion();
+                            abg.setPrimerNombre(nombre1.getText());
+                            abg.setSegundoNombre(nombre2.getText());
+                            abg.setNombreApellido(apellido1.getText());
+                            abg.setSegundoApellido(apellido2.getText());
+                            abg.setCost_hora(auxcost);
+                            abg.setPassword(contra);
+                            abg.setGenero(genero);
+                            abg.setGratuidad(auxGratudad);
+                            abg.setFecha_nacimiento(fechaHora);
+                            abg.setTitulo(titulos.getText());
+                            abg.setFoto_perfil(foto.getRutaImagen());
+                            abg.setTelefono(telefono.getText());
+                            abg.Modificar_abogado();
+                            String selecABG1 = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + abg.getCedula() + "'";
+
+                            if (Respecialidad.isSelected()) {
+                                if (TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")) {
+                                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
+                                    System.out.println();
+                                } else {
+
+                                    LocalDate fecha1 = LocalDate.now(); // fecha actual
+                                    int año = fecha1.getYear();
+                                    if (JSp_año_inicio.getValue() == año || JSp_año_inicio.getValue() > año) {
+                                        JOptionPane.showMessageDialog(null, "EL AÑO DE INICIO NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                                    } else {
+                                        if (JSP_año_fin.getValue() == año || JSP_año_fin.getValue() > año) {
+                                            JOptionPane.showMessageDialog(null, "EL AÑO DE FINALIZACION NO PUEDE SER EL MISMO QUE EL PRESENTE AÑO");
+                                        } else {
+                                            estatica.setFK_ID_tipo(ID_TIPO(TIPO_diploma.getSelectedItem().toString()));
+                                            estatica.setFecha_fin(JSP_año_fin.getValue());
+                                            estatica.setFecha_inicio(JSp_año_inicio.getValue());
+                                            estatica.setNombre(TXT_nombre.getText());
+                                            estatica.setUniverdadad(TXT_instituciòn.getText());
+                                        }
+                                    }
+                                }
+                                estatica.setFK_id_agb(abg.Seleccionar(selecABG1));
+                                estatica.Ingresar_Especialidad();
+                            } else {
+                                String selecABG = "SELECT *FROM public.especialidad  ";
+                                ResultSet contenedor3 = conexion.Consulta(selecABG);
+                                while (contenedor3.next()) {
+                                    if (contenedor3.getInt("fk_id_agb") == (contenedor.getInt("id_abg"))) {
+                                        estatica.setFK_id_agb(contenedor3.getInt("fk_id_agb"));
+                                        estatica.setFecha_fin(JSP_año_fin.getValue());
+                                        estatica.setFecha_inicio(JSp_año_inicio.getValue());
+                                        estatica.setNombre(TXT_nombre.getText());
+                                        estatica.setUniverdadad(TXT_instituciòn.getText());
+                                        estatica.modificarEspecialidad();
+                                    }
+                                }
+
+                            }
+
+                            JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+
+                        } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
+                        }
                     }
                 }
             }
@@ -244,8 +287,9 @@ public class modificarAbogado extends javax.swing.JFrame {
         JSP_año_fin = new com.toedter.components.JSpinField();
         jLabel23 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        TIPO_diploma = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
+        TIPO_diploma = new javax.swing.JComboBox<>();
+        Respecialidad = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -557,35 +601,24 @@ public class modificarAbogado extends javax.swing.JFrame {
         jLabel22.setText("NOMBRE:");
         jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        TIPO_diploma.setBackground(new java.awt.Color(211, 211, 211));
+        jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
+        jLabel24.setText("AÑO GRADUCION:");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
         TIPO_diploma.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
-        TIPO_diploma.setBorder(null);
-        TIPO_diploma.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                TIPO_diplomaAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
+        TIPO_diploma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE" }));
+        TIPO_diploma.setSelectedIndex(-1);
         TIPO_diploma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TIPO_diplomaActionPerformed(evt);
             }
         });
-        TIPO_diploma.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TIPO_diplomaKeyReleased(evt);
-            }
-        });
-        jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 160, 40));
-
-        jLabel24.setFont(new java.awt.Font("Century", 1, 12)); // NOI18N
-        jLabel24.setText("AÑO GRADUCION:");
-        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel3.add(TIPO_diploma, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 150, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 370, 280));
+
+        Respecialidad.setText("REGISTRAR  ESPECIALIDAD");
+        jPanel1.add(Respecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -694,7 +727,11 @@ public class modificarAbogado extends javax.swing.JFrame {
     }//GEN-LAST:event_costoKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        try {
+            InserBase();
+        } catch (SQLException ex) {
+            Logger.getLogger(modificarAbogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
@@ -739,21 +776,24 @@ public class modificarAbogado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TXT_nombreKeyTyped
 
-    private void TIPO_diplomaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TIPO_diplomaAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TIPO_diplomaAncestorAdded
-
-    private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIPO_diplomaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TIPO_diplomaActionPerformed
-
-    private void TIPO_diplomaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TIPO_diplomaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TIPO_diplomaKeyReleased
-
     private void TXT_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_nombreActionPerformed
+
+    private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIPO_diplomaActionPerformed
+        TIPO_diplomnma combo = new TIPO_diplomnma();
+        try {
+            rellenar = combo.mostrar();
+            rellenar.stream().forEach(tipos -> {
+                if (TIPO_diploma.getItemCount() == 0) {
+                    TIPO_diploma.addItem("SELECCIONE");
+                }
+                TIPO_diploma.addItem(tipos.getNombre_diplo());
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_TIPO_diplomaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -796,7 +836,8 @@ public class modificarAbogado extends javax.swing.JFrame {
     public static com.toedter.components.JSpinField JSP_año_fin;
     public static com.toedter.components.JSpinField JSp_año_inicio;
     public static javax.swing.JSpinner Jspdia;
-    public static javax.swing.JComboBox<String> TIPO_diploma;
+    private javax.swing.JCheckBox Respecialidad;
+    private javax.swing.JComboBox<String> TIPO_diploma;
     public static javax.swing.JTextField TXT_instituciòn;
     public static javax.swing.JTextField TXT_nombre;
     public static javax.swing.JTextField apellido1;
