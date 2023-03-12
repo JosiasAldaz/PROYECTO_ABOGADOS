@@ -865,19 +865,19 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }
 
     public void validarasis() throws SQLException {
-        String ced1="";
+        String ced1 = "";
         String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
         conexion.Consulta(sql);
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            ced1 = contenedor.getString("cedula_asis");    
+            ced1 = contenedor.getString("cedula_asis");
         }
         if (ced1.equals(jTextcedula.getText())) {
-                JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
-            } else {
-                JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
-                asisten1.Ingresar();         
-            }
+            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
+        } else {
+            JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+            asisten1.Ingresar();
+        }
     }
 
     public void diasvalidacion() {
