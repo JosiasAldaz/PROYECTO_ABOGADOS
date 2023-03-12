@@ -88,7 +88,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }
 
     public void AdministradorReg() {
-        regresar.setVisible(true);
+        regresar.setVisible(false);
         regresar1.setVisible(true);
     }
 
@@ -619,7 +619,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 660, 190, 50));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 670, 190, 50));
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel20.setText(" Teléfono:");
