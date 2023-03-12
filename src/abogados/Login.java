@@ -222,8 +222,7 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
-                    }
-                    JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                    }                    
                 }
             }
             admin = usuario_especial;

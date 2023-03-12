@@ -39,11 +39,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
         ocultarasis.setVisible(false);
         Regreso.setVisible(false);
     }
-    
-        public void AsisReg() {
+
+    public void AsisReg() {
         Regreso.setVisible(true);
         registro.setVisible(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -601,7 +602,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
     private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_RegresoActionPerformed
 
     ///////////////////////////metodos///
@@ -796,8 +797,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-                                                                        validarasis();
-                                                                        //asisten1.Ingresar();                                           
+                                                                        //validarasis();
+                                                                        asisten1.Ingresar();
+                                                                        JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+                                                                        Login lof =new Login();
+                                                                        lof.setVisible(true);
+                                                                        dispose();
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -841,20 +846,21 @@ public class Regi_Asistente extends javax.swing.JFrame {
         }
     }
     String ced1;
+
     public void validarasis() throws SQLException {
         //String sql="SELECT id_asis, titulo_asis, years_esperiencia, cedula_asis,contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis, celular, email, foto FROM public.asistente";
         String sql = "SELECT * FROM asistente";
         conexion.Consulta(sql);
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            String ced1 = contenedor.getString("cedula_asis");       
+            String ced1 = contenedor.getString("cedula_asis");
         }
         if (ced1.equals(jTextcedula.getText())) {
-                JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO");
-            } else {
-                asisten1.Ingresar();
-                JOptionPane.showMessageDialog(this, "REGISTRO EXITOSO");
-            }
+            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO");
+        } else {
+            asisten1.Ingresar();
+            JOptionPane.showMessageDialog(this, "REGISTRO EXITOSO");
+        }
     }
 
     public void diasvalidacion() {
@@ -961,5 +967,3 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JButton registro;
     // End of variables declaration//GEN-END:variables
 }
-
-
