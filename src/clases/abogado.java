@@ -140,14 +140,4 @@ public class abogado extends Persona {
         return registros;
     }
 
-    public void Selecionar() throws SQLException {
-        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + super.getCedula() + "'";
-        ArrayList registros1 = new ArrayList();
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-            Regi_abogado.nombre1.setText(contenedor.getString("prim_nom_abg"));
-        }
-
-    }
-
 }
