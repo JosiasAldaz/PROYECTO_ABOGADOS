@@ -5,9 +5,12 @@
  */
 package abogados;
 
+import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
+import clases.Direcciones;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -98,6 +101,110 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void buscarAbogado() {
+        abogado Buscar = new abogado();
+        Buscar.setCedula(Bucar_abg.getText());
+        if (Bucar_abg.getText().equals("")) {
+            JOptionPane.showConfirmDialog(null, "DEBE INGRESAR UN NOMBRE");
+        } else {
+            try {
+                ArrayList<abogado> recibir = new ArrayList();
+                recibir = Buscar.buscar();
+                System.out.println(recibir.size());
+                if (recibir.isEmpty()) {
+
+                } else {
+                    limpiar();
+                    mostrarabogados(recibir);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void eliminarAbogado() {
+        abogado eliminar = new abogado();
+        int seleccionado = -1;
+        seleccionado = TablaR.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    System.out.println(TablaR.getValueAt(seleccionado, 0).toString());
+                    eliminar.setCod_abogado(Integer.parseInt(TablaR.getValueAt(seleccionado, 0).toString()));
+                    eliminar.ELIMINARABOGADO();
+                    limpiarAbogado();
+                    eliminar.Listar();
+
+                    JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
+            }
+
+        }
+    }
+
+    public void moificarAbogado() throws SQLException {
+        int i = -1;
+        i = TablaR.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
+        } else {
+            PostgresConexion conexion = new PostgresConexion();
+            abogado abg = new abogado();
+            abg.setCedula(TablaR.getValueAt(i, 1).toString());
+            String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+            ResultSet contenedor = conexion.Consulta(sql);
+
+            while (contenedor.next()) {
+                modificarAbogado abrir = new modificarAbogado();
+                abrir.setVisible(true);
+                modificarAbogado.cedula.setText(contenedor.getString("cedula_abg"));
+                modificarAbogado.nombre1.setText(contenedor.getString("prim_nom_abg"));
+                modificarAbogado.nombre2.setText(contenedor.getString("seg_nom_abg"));
+                modificarAbogado.apellido1.setText(contenedor.getString("prim_apell_abg"));
+                modificarAbogado.apellido2.setText(contenedor.getString("seg_apell_abg"));
+                modificarAbogado.telefono.setText(contenedor.getString("telefono_abg"));
+                modificarAbogado.titulos.setText(contenedor.getString("titulo_abg"));
+                modificarAbogado.costo.setText(contenedor.getString("costo_x_horas"));
+                int k = contenedor.getInt("fk_id_direcc_abg");
+                Direcciones direc= new Direcciones(); 
+                direc.setId_direccion(k);
+                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                ResultSet contenedor1 = conexion.Consulta(sql1);
+                while (contenedor1.next()) {
+                    modificarAbogado.direccion1.setText(contenedor1.getString("calle_principal"));
+                    modificarAbogado.direccion2.setText(contenedor1.getString("calle_secundaria"));
+                }
+
+                String selecABG = "SELECT *FROM public.especialidad  ";
+                ResultSet contenedor3 = conexion.Consulta(selecABG);
+
+                while (contenedor3.next()) {
+
+                    if (contenedor3.getInt("fk_id_agb") == (contenedor.getInt("id_abg"))) {
+
+                        modificarAbogado.TXT_instituciòn.setText(contenedor3.getString("institución"));
+                        modificarAbogado.TXT_nombre.setText(contenedor3.getString("nombre_espe"));
+                        modificarAbogado.JSp_año_inicio.setValue(Integer.parseInt(contenedor3.getString("anio_inicio")));
+                        modificarAbogado.JSP_año_fin.setValue(Integer.parseInt(contenedor3.getString("anio_final")));
+                    }
+
+                }
+
+            }
+
         }
     }
 
@@ -229,6 +336,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jButtonModificarA11 = new javax.swing.JButton();
         jScrollPaneCam = new javax.swing.JScrollPane();
         TablaR = new javax.swing.JTable();
+        Bucar_abg = new javax.swing.JTextField();
         JP_fondo_especialidad = new javax.swing.JPanel();
         jButtonModificarA12 = new javax.swing.JButton();
         jButtonModificarA13 = new javax.swing.JButton();
@@ -330,7 +438,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA6ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 140, 50));
+        JPcrud_abg.add(jButtonModificarA6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 140, 50));
 
         jButtonModificarA7.setBackground(new java.awt.Color(128, 0, 0));
         jButtonModificarA7.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -342,7 +450,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA7ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 140, 50));
+        JPcrud_abg.add(jButtonModificarA7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 140, 50));
 
         jButtonModificarA8.setBackground(new java.awt.Color(128, 0, 0));
         jButtonModificarA8.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -354,7 +462,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA8ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 140, 50));
+        JPcrud_abg.add(jButtonModificarA8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 140, 50));
 
         jButtonModificarA9.setBackground(new java.awt.Color(128, 0, 0));
         jButtonModificarA9.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -366,7 +474,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA9ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 140, 50));
+        JPcrud_abg.add(jButtonModificarA9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 140, 50));
 
         jButtonModificarA11.setBackground(new java.awt.Color(128, 0, 0));
         jButtonModificarA11.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -378,7 +486,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 jButtonModificarA11ActionPerformed(evt);
             }
         });
-        JPcrud_abg.add(jButtonModificarA11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 460, 140, 50));
+        JPcrud_abg.add(jButtonModificarA11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 450, 140, 50));
 
         TablaR.setBackground(new java.awt.Color(255, 160, 122));
         TablaR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -417,9 +525,21 @@ public class administradorInterfaz extends javax.swing.JFrame {
         });
         TablaR.setRowHeight(30);
         TablaR.getTableHeader().setReorderingAllowed(false);
+        TablaR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaRMouseClicked(evt);
+            }
+        });
         jScrollPaneCam.setViewportView(TablaR);
 
-        JPcrud_abg.add(jScrollPaneCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 880, 330));
+        JPcrud_abg.add(jScrollPaneCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 880, 290));
+
+        Bucar_abg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bucar_abgActionPerformed(evt);
+            }
+        });
+        JPcrud_abg.add(Bucar_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 170, 40));
 
         JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
@@ -918,41 +1038,28 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA6ActionPerformed
 
     private void jButtonModificarA11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA11ActionPerformed
-        abogado eliminar = new abogado();
-        int seleccionado = -1;
-        seleccionado = TablaR.getSelectedRow();
-        if (seleccionado == -1) {
-            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
-        } else {
-            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.YES_OPTION) {
-                try {
-                    System.out.println(TablaR.getValueAt(seleccionado, 0).toString());
-                    eliminar.setCod_abogado(Integer.parseInt(TablaR.getValueAt(seleccionado, 0).toString()));
-                    eliminar.ELIMINARABOGADO();
-                    limpiarAbogado();
-                    eliminar.Listar();
-
-                    JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
-            }
-
-        }
+        eliminarAbogado();
     }//GEN-LAST:event_jButtonModificarA11ActionPerformed
 
-    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
-
     private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
-        // TODO add your handling code here:
+        try {
+            moificarAbogado();
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonModificarA9ActionPerformed
+
+    private void TablaRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaRMouseClicked
+
+    private void Bucar_abgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bucar_abgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bucar_abgActionPerformed
+
+    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
+        buscarAbogado();
+    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -990,6 +1097,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Bucar_abg;
     private javax.swing.JPanel JP_fondo_especialidad;
     private javax.swing.JPanel JPcrud_abg;
     private javax.swing.JPanel JPfondo_Inicial;

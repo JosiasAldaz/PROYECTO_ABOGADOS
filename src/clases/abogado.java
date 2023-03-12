@@ -122,7 +122,7 @@ public class abogado extends Persona {
     }
 
     public ArrayList buscar() throws SQLException {
-        String sql = "SELECT * FROM ABOGADO WHERE id_abg ='" + cod_abogado + "'";
+        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + getCedula()+ "'";
         ArrayList registros = new ArrayList();
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
