@@ -209,7 +209,7 @@ public class Login extends javax.swing.JFrame {
                 interfaz_admin.setVisible(true);
                 this.dispose();
             } else {
-                // resul = abg1.login();
+                //resul = abg1.login();
                 if (resul == 2) {
                     abogadoInterfaz2 interabg = new abogadoInterfaz2();
                     interabg.setVisible(true);

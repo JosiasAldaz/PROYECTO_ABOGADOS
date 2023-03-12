@@ -5,6 +5,7 @@
  */
 package clases;
 
+import abogados.Login;
 import clases.abogado;
 import java.beans.Statement;
 import java.sql.ResultSet;
@@ -117,4 +118,5 @@ public class asistente extends Persona {
         }
         return retorno;
     }
+
 }

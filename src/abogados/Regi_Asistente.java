@@ -5,6 +5,8 @@
  */
 package abogados;
 
+import static abogados.Login.admin;
+import static abogados.Login.as;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.PostgresConexion;
@@ -102,6 +104,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
         jYearChooser2 = new com.toedter.calendar.JYearChooser();
         jLabel7 = new javax.swing.JLabel();
         Regreso = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -313,6 +316,13 @@ public class Regi_Asistente extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -331,7 +341,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                     .addComponent(jLabel17)
                                     .addComponent(jTxtFldTituloAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jCombselec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton1)))
                                 .addGap(68, 68, 68)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -510,8 +523,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
                         .addComponent(jPasscontra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))))
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -604,6 +619,10 @@ public class Regi_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_RegresoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     ///////////////////////////metodos///
     public void valced() {
@@ -797,10 +816,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-                                                                        //validarasis();
+                                                                        validarasis();
                                                                         asisten1.Ingresar();
-                                                                        JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
-                                                                        Login lof =new Login();
+                                                                        Login lof = new Login();
                                                                         lof.setVisible(true);
                                                                         dispose();
                                                                     } catch (SQLException ex) {
@@ -845,22 +863,21 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         }
     }
-    String ced1;
 
     public void validarasis() throws SQLException {
-        //String sql="SELECT id_asis, titulo_asis, years_esperiencia, cedula_asis,contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis, celular, email, foto FROM public.asistente";
-        String sql = "SELECT * FROM asistente";
+        String ced1="";
+        String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
         conexion.Consulta(sql);
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            String ced1 = contenedor.getString("cedula_asis");
+            ced1 = contenedor.getString("cedula_asis");    
         }
         if (ced1.equals(jTextcedula.getText())) {
-            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO");
-        } else {
-            asisten1.Ingresar();
-            JOptionPane.showMessageDialog(this, "REGISTRO EXITOSO");
-        }
+                JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
+            } else {
+                JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+                asisten1.Ingresar();         
+            }
     }
 
     public void diasvalidacion() {
@@ -923,6 +940,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     private javax.swing.JTextField calleprinci;
     private javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser2;
