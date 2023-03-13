@@ -39,7 +39,7 @@ public class Cliente extends Persona{
         
     }
     
-    public void Ingresar() throws SQLException{
+    public void IngresarCliente() throws SQLException{
         String sql = "INSERT INTO clientes(cedula_cli,contraseña_cli,prim_nom_cli,seg_nom_cli,prim_apell_cli,seg_apell_cli,edad_cli,genero_cli,fk_id_direccion,telefono_cli,correo_cli)";
         sql += " VALUES ('"+super.getCedula()+"','"+super.getPassword()+"',UPPER('"+super.getPrimerNombre()+"'),UPPER('"+super.getSegundoNombre()+"'),UPPER('"+super.getNombreApellido()+"'),UPPER('"+super.getSegundoApellido()+"'),"+super.getEdad()+",UPPER('"+super.getGenero()+"'),"+super.getFK_direccion()+",'"+super.getTelefono()+"','"+super.getCorre()+"')";
         if(base.accion(sql) == null){
@@ -49,7 +49,7 @@ public class Cliente extends Persona{
         }
     }
 
-    public ArrayList BUSCAR() throws SQLException{
+    public ArrayList BUSCARCliente() throws SQLException{
         String sql = "SELECT * FROM clientes";
         ArrayList <Cliente> listadoCLI = new ArrayList();
         ResultSet objeto = base.Consulta(sql);
@@ -68,7 +68,7 @@ public class Cliente extends Persona{
         return listadoCLI;
     }
     
-    public ArrayList Listar() throws SQLException {
+    public ArrayList ListarCliente() throws SQLException {
         String script = "SELECT * FROM CLIENTES     ";
         ResultSet contenedor = conexion.Consulta(script);
         ArrayList retorno = new ArrayList();
@@ -87,6 +87,47 @@ public class Cliente extends Persona{
             insertar.setTelefono(contenedor.getString("telefono_cli"));
             insertar.setCorre(contenedor.getString("correo_cli"));
             retorno.add(insertar);
+        }
+        return retorno;
+    }
+    
+    public void ELIMINARCliente() throws SQLException {
+        String sql = "DELETE FROM public.abogado\n"
+                + "	WHERE id_usu=" + ID_cliente + "";
+        conexion.accion(sql);
+    }
+    
+    public void Modificar_cliente()throws SQLException {
+        String sql = "UPDATE public.Cliente SET prim_nom_usu='" + super.getPrimerNombre() + "', seg_nom_usu='" + super.getSegundoNombre() + "', prim_apell_usu='" + super.getNombreApellido() + "', seg_apell_usu='" + super.getSegundoApellido() + "', edad_usu='" + super.getEdad() + "', genero_usu='" + super.getGenero() + "',  telefono_usu='" + super.getTelefono() + "', foto_usu='" + super.getFoto_perfil() + "' where cedula_usu='" + super.getCedula() + "'";
+        conexion.accion(sql);
+        
+    }
+    
+    public int SeleccionarCliente(String select) throws SQLException {
+        int ID_usu = 0;
+        Cliente objeto = new Cliente();
+        ResultSet parseo = conexion.Consulta(select);
+        if (parseo == null) {
+            JOptionPane.showMessageDialog(null, "REVISE LA CONSULTA SELECT");
+        } else {
+            while (parseo.next()){
+                objeto.setID_cliente(Integer.parseInt(parseo.getString("id_usu")));
+                
+            }
+            ID_usu = objeto.getID_cliente();
+            return ID_usu;
+        }
+        return ID_usu;
+    }
+    
+    public int login_usuario() throws SQLException{
+        int retorno;
+        String loggin = "SELECT * FROM Cliente WHERE cedula_usu = '" + super.getCedula() + "' and contraseña_usu = '" + super.getPassword() + "'";
+        ResultSet resulset = conexion.Consulta(loggin);
+        if (!resulset.next()) {
+            retorno = 0;
+        } else {
+            retorno = 2;
         }
         return retorno;
     }
