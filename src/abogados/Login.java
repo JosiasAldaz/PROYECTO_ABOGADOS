@@ -46,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         exitTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
         background.setBlur(panel);
@@ -230,6 +231,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
         }
+        abogadoInterfaz2.CedulaAbogado.setText(user);
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
