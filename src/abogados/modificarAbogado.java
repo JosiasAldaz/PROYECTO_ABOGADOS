@@ -377,6 +377,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, 20));
 
+        cedula.setEditable(false);
         cedula.setBackground(new java.awt.Color(211, 211, 211));
         cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cedula.addActionListener(new java.awt.event.ActionListener() {
@@ -522,6 +523,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 160, 20));
 
+        contraseña.setEditable(false);
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
         contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

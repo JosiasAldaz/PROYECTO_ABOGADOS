@@ -68,7 +68,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         datosabo = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -79,6 +79,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         mostraasis = new javax.swing.JTextField();
         enviocon = new javax.swing.JTextField();
         salimenu = new javax.swing.JTextField();
+        cedula_aux = new javax.swing.JTextField();
 
         jButtonModificarA10.setBackground(new java.awt.Color(102, 153, 255));
         jButtonModificarA10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -270,11 +271,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 930, -1));
+        label.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
+        label.setForeground(new java.awt.Color(255, 255, 255));
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("ABOGADOS-ECU");
+        jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 930, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
@@ -470,6 +471,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
+
+        cedula_aux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cedula_auxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cedula_aux, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -715,6 +723,10 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cedula_auxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_auxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cedula_auxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -756,13 +768,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JPanel VentanaPrincipal;
     private javax.swing.JTextField casoasis;
+    public static javax.swing.JTextField cedula_aux;
     private javax.swing.JTextField datasi;
     private javax.swing.JTable datosabo;
     private javax.swing.JTextField enviocon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JTextField jButtonModificarA2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -777,6 +789,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelclientes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JLabel label;
     private javax.swing.JTextField mostraasis;
     private javax.swing.JPanel panelaboga;
     private javax.swing.JTextField reserasis;

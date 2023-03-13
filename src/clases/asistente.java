@@ -110,6 +110,7 @@ public class asistente extends Persona {
     }
 
     public void Ingresar() throws SQLException {
+       
         String sql = "INSERT INTO public.asistente(titulo_asis, years_esperiencia, cedula_asis, contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis,celular, email, foto)"
                 + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
         conexion.accion(sql);

@@ -266,6 +266,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="cedula">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d3" green="d3" red="d3" type="rgb"/>
             </Property>
@@ -686,6 +687,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="contrase&#xf1;a">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d3" green="d3" red="d3" type="rgb"/>
             </Property>

@@ -561,7 +561,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
-        // TODO add your handling code here:                     
+
         valced();
     }//GEN-LAST:event_registroActionPerformed
 
@@ -898,11 +898,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-                                                                        validarasis();
+//                                                                        validarasis();
                                                                         asisten1.Ingresar();
-                                                                        Login lof = new Login();
-                                                                        lof.setVisible(true);
-                                                                        dispose();
+//                                                                        Login lof = new Login();
+//                                                                        lof.setVisible(true);
+//                                                                        dispose();
+
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -949,16 +950,15 @@ public class Regi_Asistente extends javax.swing.JFrame {
     public void validarasis() throws SQLException {
         String ced1 = "";
         String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
-        conexion.Consulta(sql);
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            ced1 = contenedor.getString("cedula_asis");
-        }
-        if (ced1.equals(jTextcedula.getText())) {
-            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
-        } else {
-            JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
-            asisten1.Ingresar();
+            if (contenedor.getString("cedula_asis").equals(jTextcedula.getText())) {
+                JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
+            } else {
+
+                asisten1.Ingresar();
+                JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+            }
         }
     }
 
