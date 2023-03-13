@@ -848,7 +848,7 @@ public class modificarAbogado extends javax.swing.JFrame {
     public static javax.swing.JTextField direccion1;
     public static javax.swing.JTextField direccion2;
     private javax.swing.JRadioButton f;
-    private rojerusan.RSFotoSquare foto;
+    public static rojerusan.RSFotoSquare foto;
     public static javax.swing.ButtonGroup geneo;
     private javax.swing.ButtonGroup gratis;
     private javax.swing.JButton jButton2;

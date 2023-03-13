@@ -201,6 +201,8 @@ public class Login extends javax.swing.JFrame {
         usuario_especial.setPassword(pass);
         asi1.setCedula(user);
         asi1.setPassword(pass);
+        abg1.setCedula(user);
+        abg1.setPassword(pass);
         int resul = 0;
         try {
             resul = usuario_especial.login();
@@ -209,7 +211,7 @@ public class Login extends javax.swing.JFrame {
                 interfaz_admin.setVisible(true);
                 this.dispose();
             } else {
-                resul = abg1.login();
+                resul = abg1.login_abogado();
                 if (resul == 2) {
                     abogadoInterfaz2 interabg = new abogadoInterfaz2();
                     interabg.setVisible(true);

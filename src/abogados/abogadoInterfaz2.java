@@ -19,6 +19,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         initComponents();
         VentanaModificar.setVisible(false);
         ContratosVigentes.setVisible(false);
+        VentanaAsistenteAsignado.setVisible(false);
+        VentanaContratosEspera.setVisible(false);
+        
     }
 
     /**
@@ -270,7 +273,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                             .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtPrimerNombre)
                                 .addComponent(txtSegundoNombre))
-                            .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE))
                         .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(VentanaModificarLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
@@ -602,7 +605,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                                         .addComponent(jTextField2))
                                     .addComponent(btnEliminar1))
                                 .addGap(175, 175, 175)))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -842,6 +845,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
