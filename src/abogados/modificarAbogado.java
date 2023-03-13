@@ -173,7 +173,6 @@ public class modificarAbogado extends javax.swing.JFrame {
                             abg.setTelefono(telefono.getText());
                             abg.Modificar_abogado();
                             String selecABG1 = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + abg.getCedula() + "'";
-
                             if (Respecialidad.isSelected()) {
                                 if (TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")) {
                                     JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");

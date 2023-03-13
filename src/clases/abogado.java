@@ -152,7 +152,7 @@ public class abogado extends Persona {
         if (!resulset.next()) {
             retorno = 0;
         } else {
-            retorno = 3;
+            retorno = 2;
         }
         return retorno;
     }
