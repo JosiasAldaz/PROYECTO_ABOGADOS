@@ -12,6 +12,7 @@ import static abogados.Modificari_Asistente.callesecu;
 import static abogados.Modificari_Asistente.jPasscontra;
 import static abogados.Modificari_Asistente.jPasscontra2;
 import static abogados.Modificari_Asistente.jTextcedula;
+import static abogados.Modificari_Asistente.jTextcorreo;
 import static abogados.modificarAbogado.direccion1;
 import static abogados.modificarAbogado.direccion2;
 import java.beans.Statement;
@@ -178,7 +179,7 @@ public class asistente extends Persona {
             Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
             Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
             jTextcedula.setEnabled(false);
-            jTextcedula.setEnabled(false);
+            jTextcorreo.setEnabled(false);
             jPasscontra.setEnabled(false);
             jPasscontra2.setEnabled(false);
         }
