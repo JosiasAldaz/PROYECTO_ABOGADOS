@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import abogados.Regi_abogado;
+import abogados.administradorInterfaz;
 
 /**
  *
@@ -77,16 +79,14 @@ public class abogado extends Persona {
         ArrayList retorno = new ArrayList();
         while (contenedor.next()) {
             abogado insertar = new abogado();
+
             insertar.setCod_abogado(contenedor.getInt("id_abg"));
             insertar.setCedula(contenedor.getString("cedula_abg"));
             insertar.setPrimerNombre(contenedor.getString("prim_nom_abg"));
-            insertar.setSegundoNombre(contenedor.getString("seg_nom_abg"));
             insertar.setNombreApellido(contenedor.getString("prim_apell_abg"));
-            insertar.setSegundoApellido(contenedor.getString("seg_apell_abg"));
             insertar.setTelefono(contenedor.getString("telefono_abg"));
             insertar.setGratuidad(contenedor.getBoolean("gratuidad"));
             insertar.setEdad(contenedor.getInt("edad_abg"));
-            insertar.setTitulo(contenedor.getString("titulo_abg"));
             insertar.setCost_hora(contenedor.getDouble("costo_x_horas"));
             retorno.add(insertar);
         }
@@ -95,7 +95,7 @@ public class abogado extends Persona {
 
     public void Insertar() throws SQLException {
         String sql = "INSERT INTO abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg,contraseña_abg, prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, fecha_naci_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg)"
-                + "VALUES ('" + getTitulo() + "','" + getCost_hora() + "','" + isGratuidad() + "','" + super.getCedula() + "','" + super.getPassword() + "','" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "','" + super.getNombreApellido() + "','" + super.getSegundoApellido() + "','" + super.getFecha_nacimiento() + "','" + super.getGenero() + "','" + super.getFK_direccion() + "','" + super.getTelefono() + "','" + super.getFoto_perfil() + "')";
+                + "VALUES ('" + getTitulo() + "'," + getCost_hora() + "," + isGratuidad() + ",'" + super.getCedula() + "','" + super.getPassword() + "','" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "','" + super.getNombreApellido() + "','" + super.getSegundoApellido() + "','" + super.getFecha_nacimiento() + "','" + super.getGenero() + "','" + super.getFK_direccion() + "','" + super.getTelefono() + "','" + super.getFoto_perfil() + "')";
         conexion.accion(sql);
     }
 
@@ -122,7 +122,7 @@ public class abogado extends Persona {
     }
 
     public ArrayList buscar() throws SQLException {
-        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + getCedula() + "'";
+        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + super.getCedula() + "'";
         ArrayList registros = new ArrayList();
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
@@ -140,8 +140,14 @@ public class abogado extends Persona {
         return registros;
     }
 
-    public void Modificar_abogado() throws SQLException {
-        String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg='" + super.getPrimerNombre() + "', seg_nom_abg='" + super.getSegundoNombre() + "', prim_apell_abg='" + super.getNombreApellido() + "', seg_apell_abg='" + super.getSegundoApellido() + "', edad_abg='" + super.getEdad()+ "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
-        conexion.accion(sql);
+    public void Selecionar() throws SQLException {
+        String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + super.getCedula() + "'";
+        ArrayList registros1 = new ArrayList();
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Regi_abogado.nombre1.setText(contenedor.getString("prim_nom_abg"));
+        }
+
     }
+
 }
