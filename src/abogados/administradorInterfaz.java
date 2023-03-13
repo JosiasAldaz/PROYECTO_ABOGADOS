@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,11 +10,13 @@ import clases.TIPO_diplomnma;
 import clases.abogado;
 import clases.Direcciones;
 import java.awt.Color;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,7 +37,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
         questnombre.setVisible(false);
         JPcrud_abg.setVisible(false);
         JP_fondo_especialidad.setVisible(false);
+        JPcrud_abg1.setVisible(false);
         JPfondo_Inicial.setVisible(true);
+
     }
     TIPO_diplomnma change = new TIPO_diplomnma();
 
@@ -178,8 +182,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 modificarAbogado.telefono.setText(contenedor.getString("telefono_abg"));
                 modificarAbogado.titulos.setText(contenedor.getString("titulo_abg"));
                 modificarAbogado.costo.setText(contenedor.getString("costo_x_horas"));
+
                 int k = contenedor.getInt("fk_id_direcc_abg");
-                Direcciones direc= new Direcciones(); 
+                Direcciones direc = new Direcciones();
                 direc.setId_direccion(k);
                 String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
                 ResultSet contenedor1 = conexion.Consulta(sql1);
@@ -202,7 +207,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     }
 
                 }
-
             }
 
         }
@@ -347,6 +351,15 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JTxt_ingreso_diplo = new javax.swing.JTextField();
         jScrollPaneCam1 = new javax.swing.JScrollPane();
         Tabla_Tipos = new javax.swing.JTable();
+        JPcrud_abg1 = new javax.swing.JPanel();
+        jButtonModificarA17 = new javax.swing.JButton();
+        jButtonModificarA18 = new javax.swing.JButton();
+        jButtonModificarA19 = new javax.swing.JButton();
+        jButtonModificarA20 = new javax.swing.JButton();
+        jButtonModificarA21 = new javax.swing.JButton();
+        jScrollPaneCam2 = new javax.swing.JScrollPane();
+        Tabla_asis = new javax.swing.JTable();
+        Bucar_asis = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -531,6 +544,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         });
         jScrollPaneCam.setViewportView(TablaR);
+        if (TablaR.getColumnModel().getColumnCount() > 0) {
+            TablaR.getColumnModel().getColumn(5).setHeaderValue("GRATUIDAD");
+            TablaR.getColumnModel().getColumn(6).setHeaderValue("PUNTUACIÓN");
+            TablaR.getColumnModel().getColumn(8).setHeaderValue("COSTO X HORAS");
+        }
 
         JPcrud_abg.add(jScrollPaneCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 880, 290));
 
@@ -660,6 +678,128 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         JPfondo_Inicial.add(JP_fondo_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
+        JPcrud_abg1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonModificarA17.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA17.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA17.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA17.setText("INGRESAR");
+        jButtonModificarA17.setBorder(null);
+        jButtonModificarA17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA17ActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(jButtonModificarA17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 140, 50));
+
+        jButtonModificarA18.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA18.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA18.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA18.setText("MOSTRAR");
+        jButtonModificarA18.setBorder(null);
+        jButtonModificarA18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA18ActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(jButtonModificarA18, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 140, 50));
+
+        jButtonModificarA19.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA19.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA19.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA19.setText("BUSCAR");
+        jButtonModificarA19.setBorder(null);
+        jButtonModificarA19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA19ActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(jButtonModificarA19, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 140, 50));
+
+        jButtonModificarA20.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA20.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA20.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA20.setText("MODIFICAR");
+        jButtonModificarA20.setBorder(null);
+        jButtonModificarA20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA20ActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(jButtonModificarA20, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 140, 50));
+
+        jButtonModificarA21.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA21.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA21.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA21.setText("ELIMINAR");
+        jButtonModificarA21.setBorder(null);
+        jButtonModificarA21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA21ActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(jButtonModificarA21, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 450, 140, 50));
+
+        Tabla_asis.setBackground(new java.awt.Color(255, 160, 122));
+        Tabla_asis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        Tabla_asis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_ABG", "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "GRATUIDAD", "PUNTUACIÓN", "EDAD", "COSTO X HORAS"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla_asis.setRowHeight(30);
+        Tabla_asis.getTableHeader().setReorderingAllowed(false);
+        Tabla_asis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla_asisMouseClicked(evt);
+            }
+        });
+        jScrollPaneCam2.setViewportView(Tabla_asis);
+        if (Tabla_asis.getColumnModel().getColumnCount() > 0) {
+            Tabla_asis.getColumnModel().getColumn(5).setHeaderValue("GRATUIDAD");
+            Tabla_asis.getColumnModel().getColumn(6).setHeaderValue("PUNTUACIÓN");
+            Tabla_asis.getColumnModel().getColumn(8).setHeaderValue("COSTO X HORAS");
+        }
+
+        JPcrud_abg1.add(jScrollPaneCam2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 880, 290));
+
+        Bucar_asis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bucar_asisActionPerformed(evt);
+            }
+        });
+        JPcrud_abg1.add(Bucar_asis, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 170, 40));
+
+        JPfondo_Inicial.add(JPcrud_abg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
+
         jPanel1.add(JPfondo_Inicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 980, 550));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
@@ -683,6 +823,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(25, 25, 112));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel3MouseEntered(evt);
             }
@@ -987,6 +1130,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         jPanel3.setBackground(new Color(135, 206, 250));
+
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
@@ -1011,6 +1155,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         JPcrud_abg.setVisible(false);
+        JPcrud_abg1.setVisible(false);
         JP_fondo_especialidad.setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
 
@@ -1020,7 +1165,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         JP_fondo_especialidad.setVisible(false);
+        JPcrud_abg1.setVisible(false);
         JPcrud_abg.setVisible(true);
+
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
@@ -1061,6 +1208,41 @@ public class administradorInterfaz extends javax.swing.JFrame {
         buscarAbogado();
     }//GEN-LAST:event_jButtonModificarA8ActionPerformed
 
+    private void jButtonModificarA17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA17ActionPerformed
+      Regi_Asistente nuevo=new Regi_Asistente();
+      nuevo.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarA17ActionPerformed
+
+    private void jButtonModificarA18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA18ActionPerformed
+
+    private void jButtonModificarA19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA19ActionPerformed
+
+    private void jButtonModificarA20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA20ActionPerformed
+
+    private void jButtonModificarA21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarA21ActionPerformed
+
+    private void Tabla_asisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_asisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla_asisMouseClicked
+
+    private void Bucar_asisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bucar_asisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bucar_asisActionPerformed
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        JP_fondo_especialidad.setVisible(false);
+        JPcrud_abg.setVisible(false);
+        JPcrud_abg1.setVisible(true);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1098,13 +1280,16 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Bucar_abg;
+    private javax.swing.JTextField Bucar_asis;
     private javax.swing.JPanel JP_fondo_especialidad;
     private javax.swing.JPanel JPcrud_abg;
+    private javax.swing.JPanel JPcrud_abg1;
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JTextField JTxt_ingreso_diplo;
     private javax.swing.JTextField TXT_nuevo_tipo;
     private javax.swing.JTable TablaR;
     private javax.swing.JTable Tabla_Tipos;
+    private javax.swing.JTable Tabla_asis;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JButton jButtonModificarA11;
     private javax.swing.JButton jButtonModificarA12;
@@ -1112,6 +1297,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JButton jButtonModificarA14;
     private javax.swing.JButton jButtonModificarA15;
     private javax.swing.JButton jButtonModificarA16;
+    private javax.swing.JButton jButtonModificarA17;
+    private javax.swing.JButton jButtonModificarA18;
+    private javax.swing.JButton jButtonModificarA19;
+    private javax.swing.JButton jButtonModificarA20;
+    private javax.swing.JButton jButtonModificarA21;
     private javax.swing.JButton jButtonModificarA6;
     private javax.swing.JButton jButtonModificarA7;
     private javax.swing.JButton jButtonModificarA8;
@@ -1136,6 +1326,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPaneCam;
     private javax.swing.JScrollPane jScrollPaneCam1;
+    private javax.swing.JScrollPane jScrollPaneCam2;
     private javax.swing.JDialog questnombre;
     // End of variables declaration//GEN-END:variables
 }

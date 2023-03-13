@@ -46,8 +46,8 @@ public class Administrador extends Persona{
     }
     
     public void Ingresar() throws SQLException{
-        String sql = "INSERT INTO administrador (cedula_admin,contraseña_admin,prim_nom_admin,seg_nom_admin,prim_apell_admin,seg_apell_admin,genero_admin,fk_id_direcciones,telefono_admin,correo_admin,fecha_nacimiento,foto_admin)";
-        sql += " VALUES ('"+super.getCedula()+"','"+super.getPassword()+"',UPPER('"+super.getPrimerNombre()+"'),UPPER('"+super.getSegundoNombre()+"'),UPPER('"+super.getNombreApellido()+"'),UPPER('"+super.getSegundoApellido()+"'),UPPER('"+super.getGenero()+"'),"+super.getFK_direccion()+",'"+super.getTelefono()+"','"+super.getCorre()+"','"+super.getFecha_nacimiento()+"','"+super.getFoto_perfil()+"')";
+        String sql = "INSERT INTO administrador (cedula_admin,contraseña_admin,prim_nom_admin,seg_nom_admin,prim_apell_admin,seg_apell_admin,genero_admin,fk_id_direcciones,telefono_admin,correo_admin,fecha_nacimiento,foto_admin,edad_adm)";
+        sql += " VALUES ('"+super.getCedula()+"','"+super.getPassword()+"',UPPER('"+super.getPrimerNombre()+"'),UPPER('"+super.getSegundoNombre()+"'),UPPER('"+super.getNombreApellido()+"'),UPPER('"+super.getSegundoApellido()+"'),UPPER('"+super.getGenero()+"'),"+super.getFK_direccion()+",'"+super.getTelefono()+"','"+super.getCorre()+"','"+super.getFecha_nacimiento()+"','"+super.getFoto_perfil()+"','"+super.getEdad()+"')";
         if(conn.accion(sql) == null){
             JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
         }else{

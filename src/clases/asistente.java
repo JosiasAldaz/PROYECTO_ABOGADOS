@@ -5,8 +5,16 @@
  */
 package clases;
 
-import abogados.Login;
 import clases.abogado;
+import abogados.Modificari_Asistente;
+import static abogados.Modificari_Asistente.calleprinci;
+import static abogados.Modificari_Asistente.callesecu;
+import static abogados.Modificari_Asistente.jPasscontra;
+import static abogados.Modificari_Asistente.jPasscontra2;
+import static abogados.Modificari_Asistente.jTextcedula;
+import static abogados.Modificari_Asistente.jTextcorreo;
+import static abogados.modificarAbogado.direccion1;
+import static abogados.modificarAbogado.direccion2;
 import java.beans.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,6 +110,7 @@ public class asistente extends Persona {
     }
 
     public void Ingresar() throws SQLException {
+       
         String sql = "INSERT INTO public.asistente(titulo_asis, years_esperiencia, cedula_asis, contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis,celular, email, foto)"
                 + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
         conexion.accion(sql);
@@ -119,4 +128,61 @@ public class asistente extends Persona {
         return retorno;
     }
 
+    public void buscarasistente() throws SQLException {
+        String sql = "SELECT * FROM asistente WHERE  cedula_asis='" + super.getCedula() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Modificari_Asistente abrir = new Modificari_Asistente();
+            abrir.setVisible(true);
+            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+            Modificari_Asistente.jTextape2.setText(contenedor.getString("prim_apell_asis"));
+            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+            Direcciones direc = new Direcciones();
+            int k = contenedor.getInt("fk_dir_asis");
+            direc.setId_direccion(k);
+            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+            ResultSet contenedor1 = conexion.Consulta(sql1);
+            while (contenedor1.next()) {
+                direc.setCalle_principal(calleprinci.getText());
+                direc.setCalle_secundaria(callesecu.getText());
+                direc.setSucursal(false);
+
+            }
+        }
+    }
+
+    public void Modificar_asistente() throws SQLException {
+        String sql = "UPDATE public.asistente SET  titulo_asis='" + getTitudocu() + "', years_esperiencia='" + getExperiencia() + "', prim_nom_asis='" + super.getPrimerNombre() + "', seg_nom_abg='" + super.getSegundoNombre() + "', prim_apell_asis='" + super.getNombreApellido() + "', seg_apell_asis='" + super.getSegundoApellido() + "', edad_asis='" + super.getEdad() + "', genero_asis='" + super.getGenero() + "',  celular='" + super.getTelefono() + "', email='" + super.getCorre() + "', foto='" + super.getFoto_perfil() + "' where cedula_asis='" + super.getCedula() + "'";
+        conexion.accion(sql);
+    }
+
+    public void prue() throws SQLException {
+        // Realizar la consulta
+        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'");
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+            Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
+            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+            Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
+            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+            jTextcedula.setEnabled(false);
+            jTextcorreo.setEnabled(false);
+            jPasscontra.setEnabled(false);
+            jPasscontra2.setEnabled(false);
+        }
+    }
 }

@@ -35,6 +35,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         initComponents();
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
+        jPanel3.setVisible(false);
     }
 ///////////////
 
@@ -52,6 +53,10 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPfondo_Inicial = new javax.swing.JPanel();
         VentanaPrincipal = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        usucontra = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         jPanelclientes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,7 +68,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         datosabo = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -74,6 +79,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         mostraasis = new javax.swing.JTextField();
         enviocon = new javax.swing.JTextField();
         salimenu = new javax.swing.JTextField();
+        cedula_aux = new javax.swing.JTextField();
 
         jButtonModificarA10.setBackground(new java.awt.Color(102, 153, 255));
         jButtonModificarA10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -89,19 +95,46 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPfondo_Inicial.setBackground(new java.awt.Color(255, 255, 255));
         JPfondo_Inicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        VentanaPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Ima.Asistentes.Fondo.jpg"))); // NOI18N
+        VentanaPrincipal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout VentanaPrincipalLayout = new javax.swing.GroupLayout(VentanaPrincipal);
-        VentanaPrincipal.setLayout(VentanaPrincipalLayout);
-        VentanaPrincipalLayout.setHorizontalGroup(
-            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLabel8.setText("Contra");
+
+        jButton1.setText("Cargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8)
+                    .addComponent(usucontra, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        VentanaPrincipalLayout.setVerticalGroup(
-            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usucontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        VentanaPrincipal.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 150));
 
         JPfondo_Inicial.add(VentanaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -238,11 +271,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 920, -1));
+        label.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
+        label.setForeground(new java.awt.Color(255, 255, 255));
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("ABOGADOS-ECU");
+        jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 930, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
@@ -439,6 +472,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
+        cedula_aux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cedula_auxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cedula_aux, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 70, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -616,11 +656,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_reserasisActionPerformed
 
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
-        Regi_Asistente res = new Regi_Asistente();
-        res.AsisReg();
-        res.setVisible(true);
-        VentanaPrincipal.setVisible(false);
-        dispose();
+        jPanel3.setVisible(true);
+        panelaboga.setVisible(false);
+        jPanelclientes.setVisible(false);
+        jLabel7.setVisible(false);
+        System.out.println("llega hasta aqui");
     }//GEN-LAST:event_mostraasisMouseClicked
 
     private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
@@ -674,8 +714,18 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         VentanaPrincipal.setVisible(true);
         jPanelclientes.setVisible(false);
         panelaboga.setVisible(false);
+        jPanel3.setVisible(false);
         
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cedula_auxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_auxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cedula_auxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -718,12 +768,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JPanel VentanaPrincipal;
     private javax.swing.JTextField casoasis;
+    public static javax.swing.JTextField cedula_aux;
     private javax.swing.JTextField datasi;
     private javax.swing.JTable datosabo;
     private javax.swing.JTextField enviocon;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JTextField jButtonModificarA2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -731,15 +782,19 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelclientes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JLabel label;
     private javax.swing.JTextField mostraasis;
     private javax.swing.JPanel panelaboga;
     private javax.swing.JTextField reserasis;
     private javax.swing.JTextField salimenu;
     private javax.swing.JTable tablacli;
+    private javax.swing.JPasswordField usucontra;
     // End of variables declaration//GEN-END:variables
 }

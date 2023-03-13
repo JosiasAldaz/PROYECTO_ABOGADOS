@@ -148,6 +148,9 @@ public class Radministrador extends javax.swing.JFrame {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fecha = LocalDate.parse(timechooser, formato);
                     LocalDateTime fechaHora = fecha.atStartOfDay();
+                    LocalDate ahora = LocalDate.now();
+                    Period periodo = Period.between(fecha, ahora);
+                    int auxaedad= periodo.getYears();
                     Direcciones direccion_admin = new Direcciones();
                     direccion_admin.setCalle_principal(calle1.getText());
                     direccion_admin.setCalle_secundaria(calle2.getText());
@@ -168,6 +171,7 @@ public class Radministrador extends javax.swing.JFrame {
                         jefe.setFK_direccion(id);
                         jefe.setTelefono(telefono.getText());
                         jefe.setGenero(genero);
+                        jefe.setEdad(auxaedad);
                         jefe.setPassword(contra);
                         jefe.setCorre(correo.getText());
                         jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
