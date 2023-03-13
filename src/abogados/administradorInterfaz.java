@@ -170,7 +170,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
             abg.setCedula(TablaR.getValueAt(i, 1).toString());
             String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
             ResultSet contenedor = conexion.Consulta(sql);
-
             while (contenedor.next()) {
                 modificarAbogado abrir = new modificarAbogado();
                 abrir.setVisible(true);
@@ -182,7 +181,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 modificarAbogado.telefono.setText(contenedor.getString("telefono_abg"));
                 modificarAbogado.titulos.setText(contenedor.getString("titulo_abg"));
                 modificarAbogado.costo.setText(contenedor.getString("costo_x_horas"));
-
                 int k = contenedor.getInt("fk_id_direcc_abg");
                 Direcciones direc = new Direcciones();
                 direc.setId_direccion(k);
@@ -192,14 +190,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     modificarAbogado.direccion1.setText(contenedor1.getString("calle_principal"));
                     modificarAbogado.direccion2.setText(contenedor1.getString("calle_secundaria"));
                 }
-
                 String selecABG = "SELECT *FROM public.especialidad  ";
                 ResultSet contenedor3 = conexion.Consulta(selecABG);
-
                 while (contenedor3.next()) {
-
                     if (contenedor3.getInt("fk_id_agb") == (contenedor.getInt("id_abg"))) {
-
                         modificarAbogado.TXT_instituciòn.setText(contenedor3.getString("institución"));
                         modificarAbogado.TXT_nombre.setText(contenedor3.getString("nombre_espe"));
                         modificarAbogado.JSp_año_inicio.setValue(Integer.parseInt(contenedor3.getString("anio_inicio")));
@@ -1209,8 +1203,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA8ActionPerformed
 
     private void jButtonModificarA17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA17ActionPerformed
-      Regi_Asistente nuevo=new Regi_Asistente();
-      nuevo.setVisible(true);
+        Regi_Asistente nuevo = new Regi_Asistente();
+        nuevo.setVisible(true);
     }//GEN-LAST:event_jButtonModificarA17ActionPerformed
 
     private void jButtonModificarA18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA18ActionPerformed

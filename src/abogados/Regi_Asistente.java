@@ -561,7 +561,6 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
-
         valced();
     }//GEN-LAST:event_registroActionPerformed
 
@@ -898,12 +897,8 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-//                                                                        validarasis();
+                                                                        validarasis();
                                                                         asisten1.Ingresar();
-//                                                                        Login lof = new Login();
-//                                                                        lof.setVisible(true);
-//                                                                        dispose();
-
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -946,18 +941,20 @@ public class Regi_Asistente extends javax.swing.JFrame {
 
         }
     }
+    Login ven = new Login();
 
     public void validarasis() throws SQLException {
         String ced1 = "";
+        String valor = "";
         String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
-            if (contenedor.getString("cedula_asis").equals(jTextcedula.getText())) {
+            valor = contenedor.getString("cedula_asis");
+            contenedor.getString("id_asis");
+            if (valor.equals(jTextcedula.getText())) {
                 JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
-            } else {
-
-                asisten1.Ingresar();
-                JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
+                ven.setVisible(true);
+                dispose();
             }
         }
     }

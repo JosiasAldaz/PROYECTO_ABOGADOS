@@ -397,7 +397,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                                         .addComponent(jTextField2))
                                     .addComponent(btnEliminar1))
                                 .addGap(175, 175, 175)))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,6 +466,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -655,8 +656,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             .addComponent(txtContratosVigentes, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtModificar)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDesplegableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(txtModificar1)
                 .addContainerGap())
         );
         MenuDesplegableLayout.setVerticalGroup(

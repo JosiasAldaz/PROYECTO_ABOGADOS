@@ -103,7 +103,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         Regreso = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,13 +361,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel22.setText("Titulo:");
 
-        jButton1.setText("Buscar mis datos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -454,9 +446,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                         .addComponent(jYearChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -564,9 +554,8 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -733,20 +722,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         // TODO add your handling code here:
         valced();
     }//GEN-LAST:event_registroActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String ced = jTextcedula.getText();       
-        if (ced.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "INGRESE SU CEDULA PARA MOSTAR SUS DATOS");
-        } else {
-            try {
-                valced1();
-            } catch (SQLException ex) {
-                Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 //////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////metodos///
 
@@ -759,18 +734,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La cédula no es válida.");
         }
     }
-
-    public void valced1() throws SQLException {
-        String ced = jTextcedula.getText();
-        asistente asb = new asistente();
-        boolean esValida = validarCedula(ced);
-        if (esValida) {
-                asb.prue();
-        } else {
-            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
-        }
-    }
-
+ 
     public static boolean validarCedula(String cedula) {
         // Comprobar que la cédula tenga 10 dígitos
         if (cedula == null || cedula.length() != 10) {
@@ -959,12 +923,12 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setSueldo(sueldo);
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
-                                                                        asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-                                                                        validarasis();
-                                                                        asisten1.Ingresar();
-                                                                        Login lof = new Login();
-                                                                        lof.setVisible(true);
-                                                                        dispose();
+                                                                        asisten1.setFoto_perfil(foto_asis.getRutaImagen());                                                 
+                                                                        asisten1.Modificar_asistente();
+                                                                        JOptionPane.showMessageDialog(null, "valio la modificacion");
+                                                                        asistenteInterfaz2 asimod =new asistenteInterfaz2();
+                                                                        asimod.setVisible(true);
+                                                                        dispose();                                                                     
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -1005,22 +969,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
 
             }
 
-        }
-    }
-
-    public void validarasis() throws SQLException {
-        String ced1 = "";
-        String sql = "SELECT * FROM asistente WHERE cedula_asis='" + jTextcedula.getText() + "'";
-        conexion.Consulta(sql);
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-            ced1 = contenedor.getString("cedula_asis");
-        }
-        if (ced1.equals(jTextcedula.getText())) {
-            JOptionPane.showMessageDialog(null, "ASISTENTE YA REGISTRADO INICIE SESION");
-        } else {
-            JOptionPane.showMessageDialog(null, " ASISTENTE REGISTRADO CON EXITO");
-            asisten1.Ingresar();
         }
     }
 
@@ -1084,7 +1032,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     public static javax.swing.JTextField calleprinci;
     public static javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCombselec;
     private com.toedter.calendar.JDateChooser jDateChooser2;
