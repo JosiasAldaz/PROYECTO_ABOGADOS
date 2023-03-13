@@ -21,7 +21,7 @@ public class PostgresConexion{
     String url = "jdbc:postgresql://localhost:5432/ABOGADOS";
     String user = "postgres";
     //TIENE QUE PONER SU CONTRASEÑA
-    String password = "sanchez70";
+    String password = "1234";
     Statement st;
     
     public PostgresConexion() {

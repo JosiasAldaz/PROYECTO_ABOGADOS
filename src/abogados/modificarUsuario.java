@@ -1,45 +1,33 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package abogados;
 
+import static abogados.modificarAbogado.Jspdia;
+import static abogados.modificarAbogado.contraseña;
+import static abogados.modificarAbogado.jYearChooser1;
 import clases.Cliente;
 import clases.Direcciones;
 import clases.PostgresConexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author LENOVO
+ * @author ASUS
  */
-public class Registro_u extends javax.swing.JFrame {
+public class modificarUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form Registro_u
+     * Creates new form modificarUsuario
      */
-    public Registro_u() {
+    public modificarUsuario() {
         initComponents();
-        mostrarContra.setVisible(true);
-        ocultarContra.setVisible(false);
-
-    }
-    
-    public void diasValidacion(){
-        if (JBxmes.getSelectedItem().toString().equals("Febrero")) {
-            if (Integer.valueOf(Jspdia.getValue().toString()) > 28) {
-                JOptionPane.showMessageDialog(null, "FEBRERO NO TIENE MÁS DE 28 DÍAS, PORFAVOR \n"
-                        + "SELECCIONE DE NUEVO EL DÍA DE SU NACIMIENTO");
-                Jspdia.setValue(0);
-            }
-        }
     }
     
     public String SeleccionarMes (String mes){
@@ -85,40 +73,12 @@ public class Registro_u extends javax.swing.JFrame {
         return retorno;
     }
     
-    public void validar(){
-        if (jTxtFldCedula.getText().matches("^[0-9]{10}$")) {
-            if (jTxtFldNombre1.getText().matches("[a-z]+")&& jTxtFldNombre2.getText().matches("[a-z]+")) {
-                if (jTxtFldApellido1.getText().matches("[a-z]+")&& jTxtFldApellido2.getText().matches("[a-z]+")) {
-                    if (jTxtFldCorreo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                        if (jTxtFildTelefono.getText().matches("^[0-9]{10}$")) {
-                            if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
-                                Pru();
-                            }else{
-                                JOptionPane.showMessageDialog(this, "NO COINCIDEN LAS CONTRASEÑAS");
-                            }
-                        }else{
-                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(this, "CORREO INCORRECTO");
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTO"); 
-                }
-            }else{
-                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTO");
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "CEDULA INGRESADA INCORRECTA");
-        }
-    }
-    
-    public void Pru(){
-        diasValidacion();
-        int anio = jYearChooser1.getYear();
+    public void InserBase() throws SQLException {
+       int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
-        char genero = ' ';
         String contra = new String(jPsswrdFldContraseña1.getPassword());
+        char genero = '\0';
+        
         if (jRadioButton3.isSelected()) {
             genero='X';
         }
@@ -148,44 +108,41 @@ public class Registro_u extends javax.swing.JFrame {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fecha = LocalDate.parse(timechooser, formato);
                     LocalDateTime fechaHora = fecha.atStartOfDay();
+                    PostgresConexion conexion = new PostgresConexion();
+                    Cliente USU = new Cliente();
+                    USU.setCedula(jTxtFldCedula.getText());
+                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_usu='" + USU.getCedula() + "'";
+                    ResultSet contenedor = conexion.Consulta(sql);
                     Direcciones direccion_usuario = new Direcciones();
-                    direccion_usuario.setCalle_principal(jTxtFldCallePrincipal.getText());
-                    direccion_usuario.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
-                    direccion_usuario.setSucursal(false);
-                    try{
-                        int id = 0;
-                        Cliente USU = new Cliente();
-                        direccion_usuario.Ingresar();
-                        
-                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + jTxtFldCallePrincipal.getText() + "' and calle_secundaria ='" + jTxtFldCalleSecundaria.getText() + "'";
-                        id = direccion_usuario.Seleccionar(id_direccion);
-                        System.out.println(id);
-                        USU.setCedula(jTxtFldCedula.getText());
-                        USU.setPrimerNombre(jTxtFldNombre1.getText());
-                        USU.setSegundoNombre(jTxtFldNombre2.getText());
-                        USU.setNombreApellido(jTxtFldApellido1.getText());
-                        USU.setSegundoApellido(jTxtFldApellido2.getText());
-                        USU.setFK_direccion(id);
-                        USU.setTelefono(jTxtFildTelefono.getText());
-                        USU.setGenero(genero);
-                        USU.setPassword(contra);
-                        USU.setCorre(jTxtFldCorreo.getText());
-                        USU.setFoto_perfil(JFSfoto_Usuario.getRutaImagen());
-                        USU.setFecha_nacimiento(fechaHora);
-                        USU.IngresarCliente();
-                    }catch(SQLException ex){
-                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
-                        
+                    while (contenedor.next()){
+                        int k = contenedor.getInt("fk_id_direcc_abg");
+                        direccion_usuario.setId_direccion(k);
+                        String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direccion_usuario.getId_direccion() + "'";
+                        ResultSet contenedor1 = conexion.Consulta(sql1);
+                        while (contenedor1.next()){
+                            direccion_usuario.setCalle_principal(jTxtFldCallePrincipal.getText());
+                            direccion_usuario.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
+                            direccion_usuario.setSucursal(false);
+                        }
+                        try {
+                            direccion_usuario.modificar_direccion();
+                            USU.setPrimerNombre(jTxtFldNombre1.getText());
+                            USU.setSegundoNombre(jTxtFldNombre2.getText());
+                            USU.setNombreApellido(jTxtFldApellido1.getText());
+                            USU.setSegundoApellido(jTxtFldApellido2.getText());
+                            USU.setTelefono(jTxtFildTelefono.getText());
+                            USU.setGenero(genero);
+                            USU.setPassword(contra);
+                            USU.setFoto_perfil(JFSfoto_Usuario.getRutaImagen());
+                            USU.Modificar_cliente(); 
+                        }catch (SQLException e){
+                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");    
+                        }
+                        }
                     }
-                }
-            }
+            }              
         }
     }
-        
-    
-    
-    
     
 
     /**
@@ -197,8 +154,6 @@ public class Registro_u extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        Fondo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -219,17 +174,16 @@ public class Registro_u extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jPsswrdFldContraseña2 = new javax.swing.JPasswordField();
         jLblCorreo = new javax.swing.JLabel();
         jTxtFldCorreo = new javax.swing.JTextField();
+        jLblNombreUsuario = new javax.swing.JLabel();
         jTxtFldCallePrincipal = new javax.swing.JTextField();
         jTxtFldCalleSecundaria = new javax.swing.JTextField();
         JFSfoto_Usuario = new rojerusan.RSFotoSquare();
         jLabel12 = new javax.swing.JLabel();
         jLabelCon = new javax.swing.JLabel();
+        jTxtFldNomUser = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jPsswrdFldContraseña1 = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -243,10 +197,10 @@ public class Registro_u extends javax.swing.JFrame {
         JBxmes = new javax.swing.JComboBox<>();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jLabel17 = new javax.swing.JLabel();
+        jBttnRegresarPanPrincipal1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -254,7 +208,7 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zyro-image (1).png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Copperplate Gothic Bold", 2, 48)); // NOI18N
-        jLabel15.setText("CLIENTES");
+        jLabel15.setText("MODIFICAR CLIENTE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -263,20 +217,20 @@ public class Registro_u extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 309, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 170, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel15)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 150));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 150));
 
         jPanel2.setBackground(new java.awt.Color(211, 211, 211));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -355,17 +309,14 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel6.setText("Genero:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 67, 41));
 
-        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton2.setText("Masculino");
         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 87, -1));
 
-        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton1.setText("Femenino");
         jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 87, -1));
 
-        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jRadioButton3.setText("Sin especificar");
         jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 110, -1));
@@ -378,44 +329,10 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel9.setText("Año:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, -1, 41));
 
-        jPanel3.setBackground(new java.awt.Color(245, 222, 179));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("REGISTRAR");
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 130, 50));
-
         jPsswrdFldContraseña2.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña2.setText("jPasswordField1");
         jPsswrdFldContraseña2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
-        jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 100, 20));
+        jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 100, 20));
 
         jLblCorreo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLblCorreo.setText("Correo:");
@@ -429,6 +346,10 @@ public class Registro_u extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 230, 20));
+
+        jLblNombreUsuario.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
+        jLblNombreUsuario.setText("Nombre Usuario:");
+        jPanel2.add(jLblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 120, -1));
 
         jTxtFldCallePrincipal.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldCallePrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -458,31 +379,34 @@ public class Registro_u extends javax.swing.JFrame {
 
         jLabelCon.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabelCon.setText("Contraseña:");
-        jPanel2.add(jLabelCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 90, -1));
+        jPanel2.add(jLabelCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 90, -1));
+
+        jTxtFldNomUser.setBackground(new java.awt.Color(211, 211, 211));
+        jTxtFldNomUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        jPanel2.add(jTxtFldNomUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
 
         jLabel16.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel16.setText("Contraseña:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 90, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 90, -1));
 
         jPsswrdFldContraseña1.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña1.setText("jPasswordField1");
         jPsswrdFldContraseña1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
-        jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 100, 20));
+        jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 100, 20));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 950, 10));
 
         jBttnRegresarPanPrincipal.setBackground(new java.awt.Color(245, 222, 179));
         jBttnRegresarPanPrincipal.setFont(new java.awt.Font("OCR A Extended", 1, 12)); // NOI18N
-        jBttnRegresarPanPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jBttnRegresarPanPrincipal.setText("PANTALLA PRINCIPAL");
+        jBttnRegresarPanPrincipal.setText("ACTUALIZAR");
         jBttnRegresarPanPrincipal.setBorder(null);
         jBttnRegresarPanPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBttnRegresarPanPrincipalActionPerformed(evt);
             }
         });
-        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 170, 50));
+        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 170, 40));
 
         ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -490,7 +414,7 @@ public class Registro_u extends javax.swing.JFrame {
                 ocultarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 50, 50));
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 50, 50));
 
         mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -498,7 +422,7 @@ public class Registro_u extends javax.swing.JFrame {
                 mostrarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, -1, -1));
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Algerian", 3, 12)); // NOI18N
         jLabel7.setText("Seleccione una Imagen");
@@ -534,127 +458,22 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel17.setText("Dia:");
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, 41));
 
-        Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 950, 440));
+        jBttnRegresarPanPrincipal1.setBackground(new java.awt.Color(245, 222, 179));
+        jBttnRegresarPanPrincipal1.setFont(new java.awt.Font("OCR A Extended", 1, 12)); // NOI18N
+        jBttnRegresarPanPrincipal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
+        jBttnRegresarPanPrincipal1.setText("PANTALLA PRINCIPAL");
+        jBttnRegresarPanPrincipal1.setBorder(null);
+        jBttnRegresarPanPrincipal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnRegresarPanPrincipal1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBttnRegresarPanPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 170, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 950, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        char genero = ' ';
-        String contra = new String(jPsswrdFldContraseña2.getPassword());
-        if (jRadioButton3.isSelected()) {
-            genero = 'X';
-        }
-        if (jRadioButton2.isSelected()) {
-            genero = 'M';
-        }
-        if (jRadioButton1.isSelected()) {
-            genero = 'F';
-        }
-        if (jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || jTxtFldCallePrincipal.getText().equals("") || jTxtFldCalleSecundaria.getText().equals("") || jTxtFildTelefono.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS DATOS");
-        } else {
-            if (genero == ' ' || contra.equals("")) {
-                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
-            } else {
-//                    INGRESO DE DIRECCION
-                int id = 0;
-                Direcciones ubicacion = new Direcciones();
-                ubicacion.setCalle_principal(jTxtFldCallePrincipal.getText());
-                ubicacion.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
-                ubicacion.setSucursal(false);
-                try {
-                    ubicacion.Ingresar();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
-                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
-
-                String sql = "SELECT id_direccion from direcciones where calle_principal =" + "'" + jTxtFldCallePrincipal.getText() + "' " + "and calle_secundaria =" + "'" + jTxtFldCalleSecundaria.getText() + "'";
-                try {
-//                        id = ubicacion.Seleccionar(sql);
-                    id = ubicacion.Seleccionar(sql);
-                    System.out.println(id);
-                    Cliente usuario = new Cliente();
-                    usuario.setCedula(jTxtFldCedula.getText());
-                    usuario.setPrimerNombre(jTxtFldNombre1.getText());
-                    usuario.setSegundoNombre(jTxtFldNombre2.getText());
-                    usuario.setNombreApellido(jTxtFldApellido1.getText());
-                    usuario.setSegundoApellido(jTxtFldNombre2.getText());
-                    usuario.setFK_direccion(id);
-                    usuario.setTelefono(jTxtFildTelefono.getText());
-                    usuario.setGenero(genero);
-                    usuario.setPassword(contra);
-                    usuario.setCorre(jTxtFldCorreo.getText());
-                    usuario.IngresarCliente();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //INGRESO DEL CLIENTE
-                //INGRESO DEL CLIENTE
-
-            }
-
-        }
-    }//GEN-LAST:event_jLabel10MouseClicked
-    
-    private void jTxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFldCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtFldCorreoActionPerformed
-
-    private void jBttnRegresarPanPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipalActionPerformed
-
-        VentanaPrincipal1 principal = new VentanaPrincipal1();
-        principal.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jBttnRegresarPanPrincipalActionPerformed
-
-    private void mostrarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarContraMouseClicked
-        char i = jPsswrdFldContraseña1.getEchoChar();
-        boolean a = true;
-        if (a) {  // a es una variable boolean en true
-            jPsswrdFldContraseña1.setEchoChar((char) 0);
-            jPsswrdFldContraseña2.setEchoChar((char) 0);
-            mostrarContra.setVisible(false);
-            ocultarContra.setVisible(true);
-            a = true;
-        } else {
-            jPsswrdFldContraseña1.setEchoChar(i); // i es el char
-            a = true;
-        }
-    }//GEN-LAST:event_mostrarContraMouseClicked
-
-    private void ocultarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarContraMouseClicked
-        // TODO add your handling code here:
-        char i = jPsswrdFldContraseña1.getEchoChar();
-        boolean a = true;
-        if (a) {  // a es una variable boolean en true
-            jPsswrdFldContraseña1.setEchoChar((char) '*');
-            jPsswrdFldContraseña2.setEchoChar((char) '*');
-            mostrarContra.setVisible(true);
-            ocultarContra.setVisible(false);
-            a = true;
-        } else {
-            jPsswrdFldContraseña1.setEchoChar(i); // i es el char
-            a = true;
-        }
-    }//GEN-LAST:event_ocultarContraMouseClicked
-
-    private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
-
-    }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jTxtFldNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre1KeyTyped
         // TODO add your handling code here:
@@ -666,15 +485,6 @@ public class Registro_u extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTxtFldNombre1KeyTyped
 
-    private void jTxtFldNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre2KeyTyped
-
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            evt.consume();
-            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_jTxtFldNombre2KeyTyped
-
     private void jTxtFldApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldApellido1KeyTyped
 
         char c = evt.getKeyChar();
@@ -683,6 +493,15 @@ public class Registro_u extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jTxtFldApellido1KeyTyped
+
+    private void jTxtFldNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre2KeyTyped
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "SOLO SE PERMITAN LETRAS", "ADVERTENCIA ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTxtFldNombre2KeyTyped
 
     private void jTxtFldApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldApellido2KeyTyped
 
@@ -712,6 +531,10 @@ public class Registro_u extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTxtFildTelefonoKeyTyped
 
+    private void jTxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFldCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtFldCorreoActionPerformed
+
     private void jTxtFldCallePrincipalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldCallePrincipalKeyTyped
 
     }//GEN-LAST:event_jTxtFldCallePrincipalKeyTyped
@@ -719,6 +542,52 @@ public class Registro_u extends javax.swing.JFrame {
     private void jTxtFldCalleSecundariaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldCalleSecundariaKeyTyped
 
     }//GEN-LAST:event_jTxtFldCalleSecundariaKeyTyped
+
+    private void jBttnRegresarPanPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipalActionPerformed
+
+        VentanaPrincipal1 principal = new VentanaPrincipal1();
+        principal.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBttnRegresarPanPrincipalActionPerformed
+
+    private void ocultarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarContraMouseClicked
+        // TODO add your handling code here:
+        char i = jPsswrdFldContraseña1.getEchoChar();
+        boolean a = true;
+        if (a) {  // a es una variable boolean en true
+            jPsswrdFldContraseña1.setEchoChar((char) '*');
+            jPsswrdFldContraseña2.setEchoChar((char) '*');
+            mostrarContra.setVisible(true);
+            ocultarContra.setVisible(false);
+            a = true;
+        } else {
+            jPsswrdFldContraseña1.setEchoChar(i); // i es el char
+            a = true;
+        }
+    }//GEN-LAST:event_ocultarContraMouseClicked
+
+    private void mostrarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarContraMouseClicked
+        char i = jPsswrdFldContraseña1.getEchoChar();
+        boolean a = true;
+        if (a) {  // a es una variable boolean en true
+            jPsswrdFldContraseña1.setEchoChar((char) 0);
+            jPsswrdFldContraseña2.setEchoChar((char) 0);
+            mostrarContra.setVisible(false);
+            ocultarContra.setVisible(true);
+            a = true;
+        } else {
+            jPsswrdFldContraseña1.setEchoChar(i); // i es el char
+            a = true;
+        }
+    }//GEN-LAST:event_mostrarContraMouseClicked
+
+    private void JBxmesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBxmesMouseClicked
+
+    }//GEN-LAST:event_JBxmesMouseClicked
+
+    private void jBttnRegresarPanPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipal1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBttnRegresarPanPrincipal1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -737,38 +606,31 @@ public class Registro_u extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registro_u.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registro_u.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registro_u.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registro_u.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registro_u().setVisible(true);
+                new modificarUsuario().setVisible(true);
             }
         });
     }
 
-    
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Fondo;
     private javax.swing.JComboBox<String> JBxmes;
     private rojerusan.RSFotoSquare JFSfoto_Usuario;
     private javax.swing.JSpinner Jspdia;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBttnRegresarPanPrincipal;
+    private javax.swing.JButton jBttnRegresarPanPrincipal1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -785,24 +647,25 @@ public class Registro_u extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCon;
     private javax.swing.JLabel jLblCorreo;
+    private javax.swing.JLabel jLblNombreUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPsswrdFldContraseña1;
     private javax.swing.JPasswordField jPsswrdFldContraseña2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTxtFildTelefono;
-    private javax.swing.JTextField jTxtFldApellido1;
-    private javax.swing.JTextField jTxtFldApellido2;
-    private javax.swing.JTextField jTxtFldCallePrincipal;
-    private javax.swing.JTextField jTxtFldCalleSecundaria;
-    private javax.swing.JTextField jTxtFldCedula;
-    private javax.swing.JTextField jTxtFldCorreo;
-    private javax.swing.JTextField jTxtFldNombre1;
-    private javax.swing.JTextField jTxtFldNombre2;
+    public static javax.swing.JTextField jTxtFildTelefono;
+    public static javax.swing.JTextField jTxtFldApellido1;
+    public static javax.swing.JTextField jTxtFldApellido2;
+    public static javax.swing.JTextField jTxtFldCallePrincipal;
+    public static javax.swing.JTextField jTxtFldCalleSecundaria;
+    public static javax.swing.JTextField jTxtFldCedula;
+    public static javax.swing.JTextField jTxtFldCorreo;
+    private javax.swing.JTextField jTxtFldNomUser;
+    public static javax.swing.JTextField jTxtFldNombre1;
+    public static javax.swing.JTextField jTxtFldNombre2;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel mostrarContra;
     private javax.swing.JLabel ocultarContra;
