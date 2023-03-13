@@ -5,21 +5,17 @@
  */
 package abogados;
 
-import java.awt.Color;
-
 /**
  *
  * @author LENOVO
  */
-public class Paneltest extends javax.swing.JPanel {
+public class Slide3 extends javax.swing.JPanel {
 
     /**
-     * Creates new form Paneltest
+     * Creates new form Slide2
      */
-    public Paneltest(String text,Color color) {
+    public Slide3() {
         initComponents();
-        label_nombre.setText(text);
-        setBackground(color);
     }
 
     /**
@@ -31,34 +27,22 @@ public class Paneltest extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label_nombre = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        label_nombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        label_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_nombre.setText("LEONIDAS MESSI");
+        setBackground(new java.awt.Color(255, 153, 153));
+        setPreferredSize(new java.awt.Dimension(560, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(label_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(label_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+            .addGap(0, 135, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables
 }
