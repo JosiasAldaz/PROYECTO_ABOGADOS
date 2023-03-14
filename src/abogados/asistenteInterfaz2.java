@@ -15,6 +15,11 @@ import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,8 +36,7 @@ import javax.swing.table.TableColumnModel;
  */
 public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
-    PostgresConexion conexion = new PostgresConexion();
-
+    PostgresConexion conexion = new PostgresConexion();    
     /**
      * Creates new form administradorInterfaz
      */
@@ -42,8 +46,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanelclientes.setVisible(false);
         jPanel3.setVisible(false);
     }
-///////////////
-
+//////////////////////////////
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -590,7 +593,8 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     ///////////////////////////////////////ver y modificar los datos del asistente//
     public void prue() throws SQLException {
         // Realizar la consulta
-        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedula_aux11.getText() + "'");
+        String cedulaingre = cedula_aux11.getText();
+        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
             Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
@@ -607,14 +611,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
             Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
             Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
             int k = contenedor.getInt("fk_dir_asis");
-                Direcciones direc = new Direcciones();
-                direc.setId_direccion(k);
-                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
-                ResultSet contenedor1 = conexion.Consulta(sql1);
-                while (contenedor1.next()) {
-                    Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
-                    Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
-                }
+            Direcciones direc = new Direcciones();
+            direc.setId_direccion(k);
+            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+            ResultSet contenedor1 = conexion.Consulta(sql1);
+            while (contenedor1.next()) {
+                Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+                Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+            }
             jTextcedula.setEnabled(false);
             jTextcorreo.setEnabled(false);
             jPasscontra.setEnabled(false);
@@ -696,11 +700,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_reserasisActionPerformed
 
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
+        String cedulaingre = cedula_aux11.getText();
         Modificari_Asistente mod = new Modificari_Asistente();
         jPanel3.setVisible(true);
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
         jLabel7.setVisible(false);
+        System.out.println(""+cedulaingre);
         try {
             prue();
             mod.setVisible(true);

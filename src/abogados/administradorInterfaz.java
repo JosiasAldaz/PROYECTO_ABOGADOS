@@ -95,7 +95,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
         Tabla_Tipos.setModel(mTabla);
 
     }
-
     public void mostrarabogados(ArrayList<abogado> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;

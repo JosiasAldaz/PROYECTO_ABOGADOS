@@ -744,18 +744,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtOficinaAsignada.setBackground(new Color(0,0,153));
     }//GEN-LAST:event_txtOficinaAsignadaMouseEntered
 
-    private void txtAsistenteAsignadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAsistenteAsignadoActionPerformed
-
-    private void txtAsistenteAsignadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseExited
-        txtAsistenteAsignado.setBackground(new Color(0,0,102));
-    }//GEN-LAST:event_txtAsistenteAsignadoMouseExited
-
-    private void txtAsistenteAsignadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseEntered
-        txtAsistenteAsignado.setBackground(new Color(0,0,153));
-    }//GEN-LAST:event_txtAsistenteAsignadoMouseEntered
-
     private void txtContratosEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContratosEsperaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContratosEsperaActionPerformed
@@ -787,25 +775,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosVigentesMouseClicked
-
-    private void txtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModificarActionPerformed
-
-    private void txtModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseExited
-        txtModificar.setBackground(new Color(0,0,102));
-    }//GEN-LAST:event_txtModificarMouseExited
-
-    private void txtModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseEntered
-        txtModificar.setBackground(new Color(0,0,153));
-    }//GEN-LAST:event_txtModificarMouseEntered
-
-    private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
-        modificarAbogado modificarA = new modificarAbogado();
-        modificarA.setVisible(true);
-        //Poner más ventanas
-
-    }//GEN-LAST:event_txtModificarMouseClicked
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         // TODO add your handling code here:
@@ -867,17 +836,47 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosEsperaMouseClicked
 
+    private void CedulaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaAbogadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CedulaAbogadoActionPerformed
+
+    private void txtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModificarActionPerformed
+
+    private void txtModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseExited
+        txtModificar.setBackground(new Color(0,0,102));
+    }//GEN-LAST:event_txtModificarMouseExited
+
+    private void txtModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseEntered
+        txtModificar.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_txtModificarMouseEntered
+
+    private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
+        modificarAbogado modificarA = new modificarAbogado();
+        modificarA.setVisible(true);
+        //Poner más ventanas
+    }//GEN-LAST:event_txtModificarMouseClicked
+
+    private void txtAsistenteAsignadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAsistenteAsignadoActionPerformed
+
+    private void txtAsistenteAsignadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseExited
+        txtAsistenteAsignado.setBackground(new Color(0,0,102));
+    }//GEN-LAST:event_txtAsistenteAsignadoMouseExited
+
+    private void txtAsistenteAsignadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseEntered
+        txtAsistenteAsignado.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_txtAsistenteAsignadoMouseEntered
+
     private void txtAsistenteAsignadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseClicked
         VentanaAsistenteAsignado.setVisible(true);
         VentanaContratosEspera.setVisible(false);
         VentanaFondo.setVisible(false);
-        
+
         ContratosVigentes.setVisible(false);
     }//GEN-LAST:event_txtAsistenteAsignadoMouseClicked
-
-    private void CedulaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaAbogadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -941,7 +940,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    public static javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
