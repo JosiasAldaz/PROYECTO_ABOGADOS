@@ -40,6 +40,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JP_fondo_especialidad.setVisible(false);
         JPcrud_abg1.setVisible(false);
         JPfondo_Inicial.setVisible(true);
+        jPanelUsuario.setVisible(false);
 
     }
     TIPO_diplomnma change = new TIPO_diplomnma();
@@ -64,8 +65,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
             tb.removeRow(tb.getRowCount() - 1);
         }
     }
+
     //BRYAM USUARIO///
-    public void limpiarUsuario(){
+    public void limpiarUsuario() {
         DefaultTableModel tb = (DefaultTableModel) jTableUsuario.getModel();
         int a = jTableUsuario.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -99,17 +101,17 @@ public class administradorInterfaz extends javax.swing.JFrame {
         TablaR.setModel(mTabla);
 
     }
-    
+
     //BRYAM
-    public void listarUsuario(ArrayList<Cliente> lista_tipo){
+    public void listarUsuario(ArrayList<Cliente> lista_tipo) {
         DefaultTableModel UTabla;
         UTabla = (DefaultTableModel) jTableUsuario.getModel();
         UTabla.setNumRows(0);
-        lista_tipo.stream().forEach(tipos ->{
-        String[] filaNuevaUsuario = { String.valueOf(tipos.getID_cliente()),tipos.getCedula(),tipos.getPrimerNombre(),tipos.getSegundoNombre(),tipos.getNombreApellido(),tipos.getSegundoApellido(), tipos.getTelefono(), tipos.getCorre()};
-        
-        UTabla.addRow(filaNuevaUsuario);
-    });
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNuevaUsuario = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), tipos.getCorre()};
+
+            UTabla.addRow(filaNuevaUsuario);
+        });
         jTableUsuario.setModel(UTabla);
     }
 
@@ -128,7 +130,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //BRYAM
     public void mostrarUsuarios() {
         Cliente cliente_usuario = new Cliente();
@@ -138,12 +140,12 @@ public class administradorInterfaz extends javax.swing.JFrame {
             mostrarU = cliente_usuario.ListarCliente();
             if (mostrarU.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "NO EXISTEN CLIENTES REGISTRADOS");
-            }else{
+            } else {
                 listarUsuario(mostrarU);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);//avisa un posible error
-        }    
+        }
     }
 
     public void buscarAbogado() {
@@ -167,28 +169,28 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         }
     }
-    
+
     //BRYAM
-    public void buscarUsuario(){
+    public void buscarUsuario() {
         Cliente BuscarCliente = new Cliente();
         BuscarCliente.setCedula(jTextFieldBuscar_Usuario.getText());
         if (jTextFieldBuscar_Usuario.getText().equals("")) {
             JOptionPane.showConfirmDialog(null, "DEBE INGRESAR UN NOMBRE");
-        }else{
+        } else {
             try {
-                 ArrayList<Cliente> recibirU = new ArrayList();
-                 recibirU = BuscarCliente.BUSCARCliente();
-                 System.out.println(recibirU.size());
-                 if (recibirU.isEmpty()) {
-                    
-                }else{
-                     limpiarAbogado();
-                     listarUsuario(recibirU);
-                 }
-            } catch (SQLException ex){
+                ArrayList<Cliente> recibirU = new ArrayList();
+                recibirU = BuscarCliente.BUSCARCliente();
+                System.out.println(recibirU.size());
+                if (recibirU.isEmpty()) {
+
+                } else {
+                    limpiarAbogado();
+                    listarUsuario(recibirU);
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }    
+        }
     }
 
     public void eliminarAbogado() {
@@ -219,26 +221,26 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         }
     }
-    
+
     //BRYAM
-    public void eliminarUsuario(){
+    public void eliminarUsuario() {
         Cliente eliminarU = new Cliente();
         int seleccionadoU = -1;
         seleccionadoU = jTableUsuario.getSelectedRow();
         if (seleccionadoU == -1) {
             JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
-        }else{
+        } else {
             int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                try{
+                try {
                     System.out.println(jTableUsuario.getValueAt(seleccionadoU, 0).toString());
                     eliminarU.setID_cliente(Integer.parseInt(jTableUsuario.getValueAt(seleccionadoU, 0).toString()));
                     eliminarU.ELIMINARCliente();
                     limpiarUsuario();
                     eliminarU.IngresarCliente();
-                    
+
                     JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
-                } catch(SQLException ex){
+                } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
                 }
@@ -292,21 +294,21 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         }
     }
-    
+
     //BRYAM
-    public void modificarUsuario()throws SQLException{
+    public void modificarUsuario() throws SQLException {
         int i = -1;
         i = jTableUsuario.getSelectedRow();
         if (i == -1) {
             JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
-        }else{
+        } else {
             PostgresConexion conexion = new PostgresConexion();
             Cliente cli = new Cliente();
-            cli.setCedula(jTableUsuario.getValueAt(i,1).toString());
-            String sql = "SELECT * FROM ABOGADO WHERE  cedula_usuario= '"+ cli.getCedula()+ "'";
+            cli.setCedula(jTableUsuario.getValueAt(i, 1).toString());
+            String sql = "SELECT * FROM ABOGADO WHERE  cedula_usuario= '" + cli.getCedula() + "'";
             ResultSet contenedor = conexion.Consulta(sql);
-            while (contenedor.next()){
-                
+            while (contenedor.next()) {
+
                 modificarUsuario abrir = new modificarUsuario();
                 abrir.setVisible(true);
                 modificarUsuario.jTxtFldCedula.setText(contenedor.getString("cedula_usu"));
@@ -316,16 +318,16 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_ape_usu"));
                 modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_usu"));
                 modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_usu"));
-                
+
                 int k = contenedor.getInt("fk_id_direccion");
-                Direcciones direc= new Direcciones();
+                Direcciones direc = new Direcciones();
                 direc.setId_direccion(k);
                 String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
                 ResultSet contenedor1 = conexion.Consulta(sql1);
                 while (contenedor1.next()) {
                     modificarUsuario.jTxtFldCallePrincipal.setText(contenedor1.getString("calle_principal_usu"));
                     modificarUsuario.jTxtFldCalleSecundaria.setText(contenedor1.getString("calle_secundaria_usu"));
-                    
+
                 }
             }
         }
@@ -460,15 +462,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jScrollPaneCam = new javax.swing.JScrollPane();
         TablaR = new javax.swing.JTable();
         Bucar_abg = new javax.swing.JTextField();
-        jPanelUsuario = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextFieldBuscar_Usuario = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableUsuario = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         JP_fondo_especialidad = new javax.swing.JPanel();
         jButtonModificarA12 = new javax.swing.JButton();
         jButtonModificarA13 = new javax.swing.JButton();
@@ -488,6 +481,15 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jScrollPaneCam2 = new javax.swing.JScrollPane();
         Tabla_asis = new javax.swing.JTable();
         Bucar_asis = new javax.swing.JTextField();
+        jPanelUsuario = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jTextFieldBuscar_Usuario = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableUsuario = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -687,127 +689,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         });
         JPcrud_abg.add(Bucar_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 170, 40));
-
-        jPanelUsuario.setBackground(new java.awt.Color(204, 204, 204));
-
-        jButton1.setBackground(new java.awt.Color(102, 0, 255));
-        jButton1.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("BUSCAR");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextFieldBuscar_Usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTableUsuario.setBackground(new java.awt.Color(102, 102, 255));
-        jTableUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
-        jTableUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableUsuario);
-
-        jButton3.setBackground(new java.awt.Color(102, 0, 255));
-        jButton3.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("INGRESAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(102, 0, 255));
-        jButton4.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("MODIFICAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setBackground(new java.awt.Color(102, 0, 255));
-        jButton5.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("ELIMINAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(102, 0, 255));
-        jButton6.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("MOSTRAR");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelUsuarioLayout = new javax.swing.GroupLayout(jPanelUsuario);
-        jPanelUsuario.setLayout(jPanelUsuarioLayout);
-        jPanelUsuarioLayout.setHorizontalGroup(
-            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
-                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                        .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
-            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
-        );
-        jPanelUsuarioLayout.setVerticalGroup(
-            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        JPcrud_abg.add(jPanelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
         JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
@@ -1050,6 +931,128 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         JPfondo_Inicial.add(JPcrud_abg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
+        jPanelUsuario.setBackground(new java.awt.Color(204, 204, 204));
+
+        jButton1.setBackground(new java.awt.Color(102, 0, 255));
+        jButton1.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BUSCAR");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jTextFieldBuscar_Usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTableUsuario.setBackground(new java.awt.Color(102, 102, 255));
+        jTableUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
+        jTableUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID_Cliente", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableUsuario);
+
+        jButton3.setBackground(new java.awt.Color(102, 0, 255));
+        jButton3.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("INGRESAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(102, 0, 255));
+        jButton4.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("MODIFICAR");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(102, 0, 255));
+        jButton5.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("ELIMINAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(102, 0, 255));
+        jButton6.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("MOSTRAR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelUsuarioLayout = new javax.swing.GroupLayout(jPanelUsuario);
+        jPanelUsuario.setLayout(jPanelUsuarioLayout);
+        jPanelUsuarioLayout.setHorizontalGroup(
+            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                .addContainerGap(155, Short.MAX_VALUE)
+                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(240, 240, 240))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
+            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+        );
+        jPanelUsuarioLayout.setVerticalGroup(
+            jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelUsuarioLayout.createSequentialGroup()
+                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        JPfondo_Inicial.add(jPanelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
+
         jPanel1.add(JPfondo_Inicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 980, 550));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
@@ -1145,6 +1148,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(25, 25, 112));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel5MouseEntered(evt);
             }
@@ -1417,6 +1423,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JP_fondo_especialidad.setVisible(false);
         JPcrud_abg1.setVisible(false);
         JPcrud_abg.setVisible(true);
+        jPanelUsuario.setVisible(false);
 
     }//GEN-LAST:event_jPanel4MouseClicked
 
@@ -1491,6 +1498,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JP_fondo_especialidad.setVisible(false);
         JPcrud_abg.setVisible(false);
         JPcrud_abg1.setVisible(true);
+        jPanelUsuario.setVisible(false);
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1499,10 +1507,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-//        Registro_u nuevo2 = new Registro_u();
+         
+        Registro_u nuevo2 = new Registro_u();
 //        nuevo2.AdministradorReg();
-//        nuevo2.setVisible(true);
+        nuevo2.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1523,6 +1531,13 @@ public class administradorInterfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         eliminarUsuario();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        JP_fondo_especialidad.setVisible(false);
+        JPcrud_abg.setVisible(false);
+        JPcrud_abg1.setVisible(false);
+        jPanelUsuario.setVisible(true);
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     /**
      * @param args the command line arguments
