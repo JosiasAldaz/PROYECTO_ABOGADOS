@@ -153,4 +153,16 @@ public class abogado extends Persona {
         String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg='" + super.getPrimerNombre() + "', seg_nom_abg='" + super.getSegundoNombre() + "', prim_apell_abg='" + super.getNombreApellido() + "', seg_apell_abg='" + super.getSegundoApellido() + "', edad_abg='" + super.getEdad()+ "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
         conexion.accion(sql);
     }
+    
+    public int login_abogado() throws SQLException {
+        int retorno;
+        String loggin = "SELECT * FROM abogado WHERE cedula_abg = '" + super.getCedula() + "' and contraseña_abg = '" + super.getPassword() + "'";
+        ResultSet resulset = conexion.Consulta(loggin);
+        if (!resulset.next()) {
+            retorno = 0;
+        } else {
+            retorno = 2;
+        }
+        return retorno;
+    }
 }
