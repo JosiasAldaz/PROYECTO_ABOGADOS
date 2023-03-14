@@ -635,7 +635,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         });
         jPanel1.add(regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 660, 150, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 740));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -90, 940, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
