@@ -572,7 +572,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }
 
     public void listarcli() {
-        asistente cli1 = new asistente();
+        Cliente cli1 = new Cliente();
         DefaultTableModel modelo = (DefaultTableModel) tablacli.getModel();
         try {
             ArrayList<Cliente> mostrar = new ArrayList();

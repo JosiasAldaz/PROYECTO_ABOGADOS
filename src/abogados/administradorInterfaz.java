@@ -5,11 +5,17 @@
  */
 package abogados;
 
+import static abogados.Modificari_Asistente.jPasscontra;
+import static abogados.Modificari_Asistente.jPasscontra2;
+import static abogados.Modificari_Asistente.jTextcedula;
+import static abogados.Modificari_Asistente.jTextcorreo;
+import static abogados.asistenteInterfaz2.cedula_aux11;
 import clases.Cliente;
 import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
 import clases.Direcciones;
+import clases.asistente;
 import java.awt.Color;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -28,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 public class administradorInterfaz extends javax.swing.JFrame {
 
     ArrayList mostrar = new ArrayList();
+    PostgresConexion conexion = new PostgresConexion();
 
     /**
      * Creates new form administradorInterfaz
@@ -306,19 +313,19 @@ public class administradorInterfaz extends javax.swing.JFrame {
             PostgresConexion conexion = new PostgresConexion();
             Cliente cli = new Cliente();
             cli.setCedula(jTableUsuario.getValueAt(i, 1).toString());
-            String sql = "SELECT * FROM ABOGADO WHERE  cedula_usuario= '" + cli.getCedula() + "'";
+            String sql = "SELECT * FROM CLIENTES WHERE  cedula_cli= '" + cli.getCedula() + "'";
             ResultSet contenedor = conexion.Consulta(sql);
             while (contenedor.next()) {
 
                 modificarUsuario abrir = new modificarUsuario();
                 abrir.setVisible(true);
-                modificarUsuario.jTxtFldCedula.setText(contenedor.getString("cedula_usu"));
-                modificarUsuario.jTxtFldNombre1.setText(contenedor.getString("pri_nom_usu"));
-                modificarUsuario.jTxtFldNombre2.setText(contenedor.getString("seg_nom_usu"));
-                modificarUsuario.jTxtFldApellido1.setText(contenedor.getString("pri_ape_usu"));
-                modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_ape_usu"));
-                modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_usu"));
-                modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_usu"));
+                modificarUsuario.jTxtFldCedula.setText(contenedor.getString("cedula_cli"));
+                modificarUsuario.jTxtFldNombre1.setText(contenedor.getString("prim_nom_cli"));
+                modificarUsuario.jTxtFldNombre2.setText(contenedor.getString("seg_nom_cli"));
+                modificarUsuario.jTxtFldApellido1.setText(contenedor.getString("prim_apell_cli"));
+                modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_apell_cli"));
+                modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_cli"));
+                modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_cli"));
 
                 int k = contenedor.getInt("fk_id_direccion");
                 Direcciones direc = new Direcciones();
@@ -326,8 +333,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
                 ResultSet contenedor1 = conexion.Consulta(sql1);
                 while (contenedor1.next()) {
-                    modificarUsuario.jTxtFldCallePrincipal.setText(contenedor1.getString("calle_principal_usu"));
-                    modificarUsuario.jTxtFldCalleSecundaria.setText(contenedor1.getString("calle_secundaria_usu"));
+                    modificarUsuario.jTxtFldCallePrincipal.setText(contenedor1.getString("calle_principal"));
+                    modificarUsuario.jTxtFldCalleSecundaria.setText(contenedor1.getString("calle_secundaria"));
 
                 }
             }
@@ -440,6 +447,77 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
             }
 
+        }
+    }
+
+    public void prue() throws SQLException {
+        // Realizar la consulta
+        int i = -1;
+        i = Tabla_asis.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
+        } else {
+            String auxced = Tabla_asis.getValueAt(i, 1).toString();
+            String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedula_aux11.getText() + "'");
+            ResultSet contenedor = conexion.Consulta(sql);
+            while (contenedor.next()) {
+                Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+                Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+                Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+                Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
+                Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+                Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+                Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+                Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+                Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
+                Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
+                Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
+                Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+                Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
+                int k = contenedor.getInt("fk_dir_asis");
+                Direcciones direc = new Direcciones();
+                direc.setId_direccion(k);
+                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                ResultSet contenedor1 = conexion.Consulta(sql1);
+                while (contenedor1.next()) {
+                    Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+                    Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+                }
+                jTextcedula.setEnabled(false);
+                jTextcorreo.setEnabled(false);
+                jPasscontra.setEnabled(false);
+                jPasscontra2.setEnabled(false);
+            }
+        }
+    }
+
+    public void mostrarclientes(ArrayList<asistente> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) Tabla_asis.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getCod_asist()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getNombreApellido(), tipos.getTelefono(), String.valueOf(tipos.getEdad()), tipos.getCorre()};
+            mTabla.addRow(filaNueva);
+        });
+        Tabla_asis.setModel(mTabla);
+
+    }
+
+    public void listarcli() {
+        asistente cli1 = new asistente();
+        DefaultTableModel modelo = (DefaultTableModel) Tabla_asis.getModel();
+        try {
+            ArrayList<asistente> mostrar = new ArrayList();
+            mostrar = cli1.Listar();
+            if (mostrar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTE CLIENTES REGISTRADOS");
+            } else {
+                mostrarclientes(mostrar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -876,27 +954,27 @@ public class administradorInterfaz extends javax.swing.JFrame {
         Tabla_asis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         Tabla_asis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID_ABG", "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "GRATUIDAD", "PUNTUACIÓN", "EDAD", "COSTO X HORAS"
+                "ID_Asistente", "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "EDAD", "CORREO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -915,11 +993,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         });
         jScrollPaneCam2.setViewportView(Tabla_asis);
-        if (Tabla_asis.getColumnModel().getColumnCount() > 0) {
-            Tabla_asis.getColumnModel().getColumn(5).setHeaderValue("GRATUIDAD");
-            Tabla_asis.getColumnModel().getColumn(6).setHeaderValue("PUNTUACIÓN");
-            Tabla_asis.getColumnModel().getColumn(8).setHeaderValue("COSTO X HORAS");
-        }
 
         JPcrud_abg1.add(jScrollPaneCam2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 880, 290));
 
@@ -1468,11 +1541,12 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jButtonModificarA17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA17ActionPerformed
         Regi_Asistente nuevo = new Regi_Asistente();
+        nuevo.registro_admin();
         nuevo.setVisible(true);
     }//GEN-LAST:event_jButtonModificarA17ActionPerformed
 
     private void jButtonModificarA18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA18ActionPerformed
-        // TODO add your handling code here:
+        listarcli();
     }//GEN-LAST:event_jButtonModificarA18ActionPerformed
 
     private void jButtonModificarA19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA19ActionPerformed
@@ -1508,7 +1582,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         
+
         Registro_u nuevo2 = new Registro_u();
 //        nuevo2.AdministradorReg();
         nuevo2.setVisible(true);
@@ -1523,6 +1597,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             modificarUsuario();
+
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
