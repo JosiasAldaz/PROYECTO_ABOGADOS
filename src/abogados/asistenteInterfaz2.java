@@ -15,6 +15,11 @@ import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,8 +36,7 @@ import javax.swing.table.TableColumnModel;
  */
 public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
-    PostgresConexion conexion = new PostgresConexion();
-
+    PostgresConexion conexion = new PostgresConexion();    
     /**
      * Creates new form administradorInterfaz
      */
@@ -42,8 +46,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanelclientes.setVisible(false);
         jPanel3.setVisible(false);
     }
-///////////////
-
+//////////////////////////////
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,10 +82,8 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         datasi = new javax.swing.JTextField();
         jButtonModificarA2 = new javax.swing.JTextField();
-        casoasis = new javax.swing.JTextField();
         reserasis = new javax.swing.JTextField();
         mostraasis = new javax.swing.JTextField();
-        enviocon = new javax.swing.JTextField();
         salimenu = new javax.swing.JTextField();
         cedula_aux11 = new javax.swing.JTextField();
 
@@ -298,7 +299,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         datasi.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         datasi.setForeground(new java.awt.Color(255, 255, 255));
         datasi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        datasi.setText("DATOS ABOGADO");
+        datasi.setText("DATOS ABOGADOS");
         datasi.setBorder(null);
         datasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         datasi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -345,38 +346,12 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         });
         jPanel2.add(jButtonModificarA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 50));
 
-        casoasis.setEditable(false);
-        casoasis.setBackground(new java.awt.Color(0, 0, 102));
-        casoasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        casoasis.setForeground(new java.awt.Color(255, 255, 255));
-        casoasis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        casoasis.setText("CASOS");
-        casoasis.setBorder(null);
-        casoasis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        casoasis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                casoasisMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                casoasisMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                casoasisMouseExited(evt);
-            }
-        });
-        casoasis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                casoasisActionPerformed(evt);
-            }
-        });
-        jPanel2.add(casoasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 50));
-
         reserasis.setEditable(false);
         reserasis.setBackground(new java.awt.Color(0, 0, 102));
         reserasis.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         reserasis.setForeground(new java.awt.Color(255, 255, 255));
         reserasis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        reserasis.setText("RESERVACIONES");
+        reserasis.setText("PEDIDOS SOLICITADOS");
         reserasis.setBorder(null);
         reserasis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reserasis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -395,7 +370,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 reserasisActionPerformed(evt);
             }
         });
-        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 180, 50));
+        jPanel2.add(reserasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 180, 50));
 
         mostraasis.setEditable(false);
         mostraasis.setBackground(new java.awt.Color(0, 0, 102));
@@ -421,33 +396,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 mostraasisActionPerformed(evt);
             }
         });
-        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 180, 50));
-
-        enviocon.setEditable(false);
-        enviocon.setBackground(new java.awt.Color(0, 0, 102));
-        enviocon.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        enviocon.setForeground(new java.awt.Color(255, 255, 255));
-        enviocon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        enviocon.setText("ENVIAR CONTRATO");
-        enviocon.setBorder(null);
-        enviocon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        enviocon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                envioconMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                envioconMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                envioconMouseExited(evt);
-            }
-        });
-        enviocon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                envioconActionPerformed(evt);
-            }
-        });
-        jPanel2.add(enviocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 180, 50));
+        jPanel2.add(mostraasis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 50));
 
         salimenu.setEditable(false);
         salimenu.setBackground(new java.awt.Color(0, 0, 102));
@@ -473,7 +422,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
                 salimenuActionPerformed(evt);
             }
         });
-        jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 180, 50));
+        jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
@@ -572,11 +521,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }
 
     public void listarcli() {
-        asistente cli1 = new asistente();
+        Cliente cli1 = new Cliente();
         DefaultTableModel modelo = (DefaultTableModel) tablacli.getModel();
         try {
             ArrayList<Cliente> mostrar = new ArrayList();
-            mostrar = cli1.Listar();
+            mostrar = cli1.ListarCliente();
             if (mostrar.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "NO EXISTE CLIENTES REGISTRADOS");
             } else {
@@ -590,7 +539,8 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     ///////////////////////////////////////ver y modificar los datos del asistente//
     public void prue() throws SQLException {
         // Realizar la consulta
-        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedula_aux11.getText() + "'");
+        String cedulaingre = cedula_aux11.getText();
+        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
             Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
@@ -607,14 +557,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
             Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
             Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
             int k = contenedor.getInt("fk_dir_asis");
-                Direcciones direc = new Direcciones();
-                direc.setId_direccion(k);
-                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
-                ResultSet contenedor1 = conexion.Consulta(sql1);
-                while (contenedor1.next()) {
-                    Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
-                    Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
-                }
+            Direcciones direc = new Direcciones();
+            direc.setId_direccion(k);
+            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+            ResultSet contenedor1 = conexion.Consulta(sql1);
+            while (contenedor1.next()) {
+                Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+                Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+            }
             jTextcedula.setEnabled(false);
             jTextcorreo.setEnabled(false);
             jPasscontra.setEnabled(false);
@@ -663,44 +613,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonModificarA2ActionPerformed
 
-    private void casoasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_casoasisMouseClicked
-
-    private void casoasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseEntered
-        casoasis.setBackground(new Color(0, 0, 153));
-    }//GEN-LAST:event_casoasisMouseEntered
-
-    private void casoasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseExited
-        casoasis.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_casoasisMouseExited
-
-    private void casoasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casoasisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_casoasisActionPerformed
-
-    private void reserasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reserasisMouseClicked
-
-    private void reserasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseEntered
-        reserasis.setBackground(new Color(0, 0, 153));
-    }//GEN-LAST:event_reserasisMouseEntered
-
-    private void reserasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseExited
-        reserasis.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_reserasisMouseExited
-
-    private void reserasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserasisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reserasisActionPerformed
-
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
+        String cedulaingre = cedula_aux11.getText();
         Modificari_Asistente mod = new Modificari_Asistente();
         jPanel3.setVisible(true);
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
         jLabel7.setVisible(false);
+        System.out.println(""+cedulaingre);
         try {
             prue();
             mod.setVisible(true);
@@ -721,22 +641,6 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private void mostraasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraasisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mostraasisActionPerformed
-
-    private void envioconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseClicked
-        // TODO add your handling code here:       
-    }//GEN-LAST:event_envioconMouseClicked
-
-    private void envioconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseEntered
-        enviocon.setBackground(new Color(0, 0, 153));
-    }//GEN-LAST:event_envioconMouseEntered
-
-    private void envioconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseExited
-        enviocon.setBackground(new Color(0, 0, 102));
-    }//GEN-LAST:event_envioconMouseExited
-
-    private void envioconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_envioconActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_envioconActionPerformed
 
     private void salimenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseClicked
         // TODO add your handling code here:
@@ -773,6 +677,22 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private void cedula_aux11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_aux11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cedula_aux11ActionPerformed
+
+    private void reserasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserasisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reserasisActionPerformed
+
+    private void reserasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseExited
+        reserasis.setBackground(new Color(0, 0, 102));
+    }//GEN-LAST:event_reserasisMouseExited
+
+    private void reserasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseEntered
+        reserasis.setBackground(new Color(0, 0, 153));
+    }//GEN-LAST:event_reserasisMouseEntered
+
+    private void reserasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reserasisMouseClicked
 
     /**
      * @param args the command line arguments
@@ -814,11 +734,9 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPcrud_abg;
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JPanel VentanaPrincipal;
-    private javax.swing.JTextField casoasis;
     public static javax.swing.JTextField cedula_aux11;
     private javax.swing.JTextField datasi;
     private javax.swing.JTable datosabo;
-    private javax.swing.JTextField enviocon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JTextField jButtonModificarA2;

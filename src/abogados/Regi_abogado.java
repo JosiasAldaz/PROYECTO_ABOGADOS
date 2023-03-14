@@ -634,7 +634,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel25.setText("Título:");
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 740));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -90, 940, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
