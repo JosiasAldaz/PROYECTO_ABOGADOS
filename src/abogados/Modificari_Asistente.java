@@ -7,6 +7,7 @@ package abogados;
 
 import static abogados.Login.admin;
 import static abogados.Login.as;
+import static abogados.asistenteInterfaz2.cedula_aux11;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.PostgresConexion;
@@ -39,14 +40,13 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     public Modificari_Asistente() {
         initComponents();
         ocultarasis.setVisible(false);
-        Regreso.setVisible(false);
     }
 
-    public void AsisReg() {
-        Regreso.setVisible(true);
-        registro.setVisible(false);
+    public void AsisReg() {;
+        Regresarasis.setVisible(false);
     }
 
+    ////////////metodo///
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,7 +76,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPasscontra2 = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
-        registro = new javax.swing.JButton();
+        Regresarasis = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextcorreo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -100,9 +100,9 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         JBxmes = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         jYearChooser2 = new com.toedter.calendar.JYearChooser();
-        Regreso = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,13 +201,13 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Correo:");
 
-        registro.setBackground(new java.awt.Color(245, 222, 179));
-        registro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        registro.setText("Actualizar");
-        registro.addActionListener(new java.awt.event.ActionListener() {
+        Regresarasis.setBackground(new java.awt.Color(245, 222, 179));
+        Regresarasis.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Regresarasis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
+        Regresarasis.setText("Actualizar");
+        Regresarasis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registroActionPerformed(evt);
+                RegresarasisActionPerformed(evt);
             }
         });
 
@@ -346,20 +346,18 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setText("Año:");
 
-        Regreso.setBackground(new java.awt.Color(245, 222, 179));
-        Regreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Regreso.setText("Regresar");
-        Regreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegresoActionPerformed(evt);
-            }
-        });
-
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel20.setText("Años de Experiencia:");
 
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel22.setText("Titulo:");
+
+        buscar.setText("jButton1");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -447,9 +445,9 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(76, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -550,12 +548,16 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -631,11 +633,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     private void jCombselecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombselecActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCombselecActionPerformed
-
-    private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_RegresoActionPerformed
 
     private void jTextnom1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextnom1KeyTyped
         // TODO add your handling code here:
@@ -718,11 +715,62 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTxtFldTituloAsistenteKeyTyped
 
-    private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
+    private void RegresarasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarasisActionPerformed
         // TODO add your handling code here:
-        valced();
-    }//GEN-LAST:event_registroActionPerformed
+        //valced();
+        asistenteInterfaz2 adus = new asistenteInterfaz2();
+        adus.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegresarasisActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        if (jTextcedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "INGRESE SU NUMERO DE CEDULA");
+        } else {
+            try {
+                prue();
+            } catch (SQLException ex) {
+                Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_buscarActionPerformed
 //////////////////////////////////////////////////////////
+
+    public void prue() throws SQLException {
+        // Realizar la consulta
+        String cedulaingre = jTextcedula.getText();
+        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+            Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
+            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+            Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
+            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+            Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
+            int k = contenedor.getInt("fk_dir_asis");
+            Direcciones direc = new Direcciones();
+            direc.setId_direccion(k);
+            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+            ResultSet contenedor1 = conexion.Consulta(sql1);
+            while (contenedor1.next()) {
+                Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+                Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+            }
+            jTextcedula.setEnabled(false);
+            jTextcorreo.setEnabled(false);
+            jPasscontra.setEnabled(false);
+            jPasscontra2.setEnabled(false);
+        }
+    }
 ///////////////////////////////////////////////////metodos///
 
     public void valced() {
@@ -734,7 +782,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La cédula no es válida.");
         }
     }
- 
+
     public static boolean validarCedula(String cedula) {
         // Comprobar que la cédula tenga 10 dígitos
         if (cedula == null || cedula.length() != 10) {
@@ -923,12 +971,12 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setSueldo(sueldo);
                                                                         asisten1.setTelefono(cel);
                                                                         asisten1.setCorre(corre);
-                                                                        asisten1.setFoto_perfil(foto_asis.getRutaImagen());                                                 
+                                                                        asisten1.setFoto_perfil(foto_asis.getRutaImagen());
                                                                         asisten1.Modificar_asistente();
                                                                         JOptionPane.showMessageDialog(null, "valio la modificacion");
-                                                                        asistenteInterfaz2 asimod =new asistenteInterfaz2();
+                                                                        asistenteInterfaz2 asimod = new asistenteInterfaz2();
                                                                         asimod.setVisible(true);
-                                                                        dispose();                                                                     
+                                                                        dispose();
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
@@ -1028,7 +1076,8 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JBxmes;
     private javax.swing.JSpinner Jspdia;
-    private javax.swing.JButton Regreso;
+    private javax.swing.JButton Regresarasis;
+    private javax.swing.JButton buscar;
     public static javax.swing.JTextField calleprinci;
     public static javax.swing.JTextField callesecu;
     private rojerusan.RSFotoSquare foto_asis;
@@ -1072,6 +1121,5 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser2;
     private javax.swing.JLabel mostrarasis;
     private javax.swing.JLabel ocultarasis;
-    private javax.swing.JButton registro;
     // End of variables declaration//GEN-END:variables
 }
