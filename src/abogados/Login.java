@@ -1,6 +1,7 @@
 package abogados;
 
 import clases.Administrador;
+import clases.Cliente;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
@@ -14,7 +15,7 @@ import splashscreen.SplashScreen;
  * @author RAVEN
  */
 public class Login extends javax.swing.JFrame {
-
+    public static Cliente cliente;
     public static Administrador admin;
     public static asistente as;
     int xMouse, yMouse;
@@ -197,6 +198,7 @@ public class Login extends javax.swing.JFrame {
         String user = txtUser.getText();       
         String pass = String.valueOf(txtPassword.getPassword());
         Administrador usuario_especial = new Administrador();
+        Cliente usuario= new Cliente();
         abogado abg1 = new abogado();
         asistente asi1 = new asistente();
         usuario_especial.setCedula(user);
@@ -204,12 +206,13 @@ public class Login extends javax.swing.JFrame {
         abg1.setCedula(user);
         abg1.setPassword(pass);
         asi1.setCedula(user);
-        asi1.setPassword(pass);       
+        asi1.setPassword(pass); 
+        usuario.setCedula(user);
+        usuario.setPassword(pass);
         int resul = 0;
         try {
             resul = usuario_especial.login();
             if (resul == 1) {
-                SplashScreen paginacarga = new SplashScreen();
                 administradorInterfaz interfaz_admin = new administradorInterfaz();
                 interfaz_admin.setVisible(true);
                 this.dispose();
@@ -226,7 +229,15 @@ public class Login extends javax.swing.JFrame {
                         interabg.setVisible(true);
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                        resul = usuario.login_usuario();
+                        if(resul == 4){
+                            cliente = usuario;
+                            menuclientes interfaz4 = new menuclientes();
+                            interfaz4.setVisible(true);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
+                        }
+                        
                     }                    
                 }
             }
@@ -235,7 +246,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
         }
-        asistenteInterfaz2.cedula_aux11.setText(user);
+        
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked

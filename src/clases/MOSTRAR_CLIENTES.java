@@ -22,6 +22,7 @@ public class MOSTRAR_CLIENTES {
     private String telefono;
     private String especialización;
     private String foto;
+    private int ID_abg;
     PostgresConexion conn = new PostgresConexion();
     
     public String getNombrecompleto() {
@@ -79,9 +80,17 @@ public class MOSTRAR_CLIENTES {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public int getID_abg() {
+        return ID_abg;
+    }
+
+    public void setID_abg(int ID_abg) {
+        this.ID_abg = ID_abg;
+    }
     
     public ArrayList mostrarcli(int a) throws SQLException{
-        String select = "SELECT abogado.prim_nom_abg,abogado.prim_apell_abg,abogado.costo_x_horas,abogado.correo_abg,abogado.telefono_abg,abogado.cedula_abg,abogado.foto_abg,especialidad.nombre_espe\n"
+        String select = "SELECT abogado.prim_nom_abg,abogado.prim_apell_abg,abogado.costo_x_horas,abogado.correo_abg,abogado.telefono_abg,abogado.id_abg,abogado.foto_abg,especialidad.nombre_espe\n"
                 + "FROM abogado\n"
                 + "INNER JOIN especialidad ON abogado.id_abg = especialidad.fk_id_agb\n"
                 + "WHERE especialidad.fk_id_tipo ="+a;
@@ -89,6 +98,7 @@ public class MOSTRAR_CLIENTES {
         ResultSet contenedor = conn.Consulta(select);
             while(contenedor.next()){
                 MOSTRAR_CLIENTES item = new MOSTRAR_CLIENTES();
+                item.setID_abg(contenedor.getInt("id_abg"));
                 item.setCorreo(contenedor.getString("correo_abg"));
                 item.setNombrecompleto(contenedor.getString("prim_nom_abg")+" "+contenedor.getString("prim_apell_abg"));
                 item.setTelefono(contenedor.getString("telefono_abg"));
@@ -99,6 +109,7 @@ public class MOSTRAR_CLIENTES {
             }
         return retorno;
     }
+    
     
     
 }

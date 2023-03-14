@@ -122,13 +122,23 @@ public class Cliente extends Persona{
     
     public int login_usuario() throws SQLException{
         int retorno;
-        String loggin = "SELECT * FROM Cliente WHERE cedula_usu = '" + super.getCedula() + "' and contraseña_usu = '" + super.getPassword() + "'";
+        String loggin = "SELECT * FROM Clientes WHERE cedula_cli = '" + super.getCedula() + "' and contraseña_CLI = '" + super.getPassword() + "'";
         ResultSet resulset = conexion.Consulta(loggin);
         if (!resulset.next()) {
             retorno = 0;
         } else {
-            retorno = 2;
+            retorno = 4;
         }
         return retorno;
+    }
+    
+    public int ID_cliente() throws SQLException{
+        String loggin = "SELECT ID_clie FROM Clientes WHERE cedula_cli = '"+super.getCedula()+"'" ;
+        ResultSet resulset = conexion.Consulta(loggin);
+        Cliente retornar = new Cliente();
+        while(resulset.next()){
+            retornar.setID_cliente(resulset.getInt("ID_clie"));
+        }
+        return retornar.getID_cliente();
     }
 }
