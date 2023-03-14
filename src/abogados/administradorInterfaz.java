@@ -95,6 +95,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         Tabla_Tipos.setModel(mTabla);
 
     }
+
     public void mostrarabogados(ArrayList<abogado> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
@@ -457,9 +458,13 @@ public class administradorInterfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
         } else {
             String auxced = Tabla_asis.getValueAt(i, 1).toString();
-            String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedula_aux11.getText() + "'");
+            asistente nuevo2=new asistente();
+            nuevo2.setCedula(auxced);
+            String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + nuevo2.getCedula() + "'");
             ResultSet contenedor = conexion.Consulta(sql);
             while (contenedor.next()) {
+                Modificari_Asistente nuevo1 = new Modificari_Asistente();
+                nuevo1.setVisible(true);
                 Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
                 Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
                 Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
@@ -1553,7 +1558,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA19ActionPerformed
 
     private void jButtonModificarA20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA20ActionPerformed
-        // TODO add your handling code here:
+        try {
+            prue();
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonModificarA20ActionPerformed
 
     private void jButtonModificarA21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA21ActionPerformed
