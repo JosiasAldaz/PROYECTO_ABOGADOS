@@ -173,7 +173,6 @@ public class modificarAbogado extends javax.swing.JFrame {
                             abg.setTelefono(telefono.getText());
                             abg.Modificar_abogado();
                             String selecABG1 = "SELECT id_abg FROM abogado WHERE cedula_abg = '" + abg.getCedula() + "'";
-
                             if (Respecialidad.isSelected()) {
                                 if (TXT_instituciòn.getText().equals("") || TXT_nombre.getText().equals("") || TIPO_diploma.getSelectedItem().toString().equals("SELECCIONE")) {
                                     JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
@@ -378,6 +377,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, 20));
 
+        cedula.setEditable(false);
         cedula.setBackground(new java.awt.Color(211, 211, 211));
         cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cedula.addActionListener(new java.awt.event.ActionListener() {
@@ -523,6 +523,7 @@ public class modificarAbogado extends javax.swing.JFrame {
         });
         jPanel1.add(direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 160, 20));
 
+        contraseña.setEditable(false);
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
         contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -848,7 +849,7 @@ public class modificarAbogado extends javax.swing.JFrame {
     public static javax.swing.JTextField direccion1;
     public static javax.swing.JTextField direccion2;
     private javax.swing.JRadioButton f;
-    private rojerusan.RSFotoSquare foto;
+    public static rojerusan.RSFotoSquare foto;
     public static javax.swing.ButtonGroup geneo;
     private javax.swing.ButtonGroup gratis;
     private javax.swing.JButton jButton2;

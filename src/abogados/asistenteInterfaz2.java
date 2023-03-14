@@ -5,7 +5,12 @@
  */
 package abogados;
 
+import static abogados.Modificari_Asistente.jPasscontra;
+import static abogados.Modificari_Asistente.jPasscontra2;
+import static abogados.Modificari_Asistente.jTextcedula;
+import static abogados.Modificari_Asistente.jTextcorreo;
 import clases.Cliente;
+import clases.Direcciones;
 import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
@@ -35,6 +40,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         initComponents();
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
+        jPanel3.setVisible(false);
     }
 ///////////////
 
@@ -52,6 +58,10 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPfondo_Inicial = new javax.swing.JPanel();
         VentanaPrincipal = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        usucontra = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         jPanelclientes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,7 +73,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         datosabo = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -74,6 +84,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         mostraasis = new javax.swing.JTextField();
         enviocon = new javax.swing.JTextField();
         salimenu = new javax.swing.JTextField();
+        cedula_aux11 = new javax.swing.JTextField();
 
         jButtonModificarA10.setBackground(new java.awt.Color(102, 153, 255));
         jButtonModificarA10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -89,19 +100,46 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         JPfondo_Inicial.setBackground(new java.awt.Color(255, 255, 255));
         JPfondo_Inicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        VentanaPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Ima.Asistentes.Fondo.jpg"))); // NOI18N
+        VentanaPrincipal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout VentanaPrincipalLayout = new javax.swing.GroupLayout(VentanaPrincipal);
-        VentanaPrincipal.setLayout(VentanaPrincipalLayout);
-        VentanaPrincipalLayout.setHorizontalGroup(
-            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLabel8.setText("Contra");
+
+        jButton1.setText("Cargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8)
+                    .addComponent(usucontra, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        VentanaPrincipalLayout.setVerticalGroup(
-            VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usucontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        VentanaPrincipal.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 150));
 
         JPfondo_Inicial.add(VentanaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -238,11 +276,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 920, -1));
+        label.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
+        label.setForeground(new java.awt.Color(255, 255, 255));
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("ABOGADOS-ECU");
+        jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 930, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
@@ -416,7 +454,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         salimenu.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         salimenu.setForeground(new java.awt.Color(255, 255, 255));
         salimenu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        salimenu.setText("SALIR");
+        salimenu.setText("CERRAR SESION");
         salimenu.setBorder(null);
         salimenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salimenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -438,6 +476,14 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanel2.add(salimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
+
+        cedula_aux11.setEditable(false);
+        cedula_aux11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cedula_aux11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cedula_aux11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 0, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -526,7 +572,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }
 
     public void listarcli() {
-        Cliente cli1 = new Cliente();
+        asistente cli1 = new asistente();
         DefaultTableModel modelo = (DefaultTableModel) tablacli.getModel();
         try {
             ArrayList<Cliente> mostrar = new ArrayList();
@@ -539,20 +585,54 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
+    }
+
+    ///////////////////////////////////////ver y modificar los datos del asistente//
+    public void prue() throws SQLException {
+        // Realizar la consulta
+        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedula_aux11.getText() + "'");
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+            Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
+            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+            Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
+            Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
+            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+            Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
+            int k = contenedor.getInt("fk_dir_asis");
+                Direcciones direc = new Direcciones();
+                direc.setId_direccion(k);
+                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                ResultSet contenedor1 = conexion.Consulta(sql1);
+                while (contenedor1.next()) {
+                    Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+                    Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+                }
+            jTextcedula.setEnabled(false);
+            jTextcorreo.setEnabled(false);
+            jPasscontra.setEnabled(false);
+            jPasscontra2.setEnabled(false);
+        }
+    }
 
     private void datasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseClicked
         jPanelclientes.setVisible(false);
         panelaboga.setVisible(true);
         VentanaPrincipal.setVisible(false);
         mosabog();
-        
         //mostrarASISTENTE();
         //Poner más ventanas
     }//GEN-LAST:event_datasiMouseClicked
 
     private void datasiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseEntered
-        datasi.setBackground(new Color(0,0,153));
+        datasi.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_datasiMouseEntered
 
     private void datasiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datasiMouseExited
@@ -568,11 +648,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanelclientes.setVisible(true);
         VentanaPrincipal.setVisible(false);
         listarcli();
-        
+
     }//GEN-LAST:event_jButtonModificarA2MouseClicked
 
     private void jButtonModificarA2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseEntered
-        jButtonModificarA2.setBackground(new Color(0,0,153));
+        jButtonModificarA2.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_jButtonModificarA2MouseEntered
 
     private void jButtonModificarA2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarA2MouseExited
@@ -588,7 +668,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_casoasisMouseClicked
 
     private void casoasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseEntered
-        casoasis.setBackground(new Color(0,0,153));
+        casoasis.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_casoasisMouseEntered
 
     private void casoasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casoasisMouseExited
@@ -604,7 +684,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_reserasisMouseClicked
 
     private void reserasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseEntered
-        reserasis.setBackground(new Color(0,0,153));
+        reserasis.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_reserasisMouseEntered
 
     private void reserasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseExited
@@ -616,15 +696,22 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_reserasisActionPerformed
 
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
-        Regi_Asistente res = new Regi_Asistente();
-        res.AsisReg();
-        res.setVisible(true);
-        VentanaPrincipal.setVisible(false);
-        dispose();
+        Modificari_Asistente mod = new Modificari_Asistente();
+        jPanel3.setVisible(true);
+        panelaboga.setVisible(false);
+        jPanelclientes.setVisible(false);
+        jLabel7.setVisible(false);
+        try {
+            prue();
+            mod.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(asistenteInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_mostraasisMouseClicked
 
     private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
-        mostraasis.setBackground(new Color(0,0,153));
+        mostraasis.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_mostraasisMouseEntered
 
     private void mostraasisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseExited
@@ -636,11 +723,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_mostraasisActionPerformed
 
     private void envioconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
     }//GEN-LAST:event_envioconMouseClicked
 
     private void envioconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseEntered
-        enviocon.setBackground(new Color(0,0,153));
+        enviocon.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_envioconMouseEntered
 
     private void envioconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_envioconMouseExited
@@ -653,13 +740,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void salimenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseClicked
         // TODO add your handling code here:
-        Login ini=new Login();
+        Login ini = new Login();
         ini.setVisible(true);
         dispose();
     }//GEN-LAST:event_salimenuMouseClicked
 
     private void salimenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseEntered
-       salimenu.setBackground(new Color(0,0,153));
+        salimenu.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_salimenuMouseEntered
 
     private void salimenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salimenuMouseExited
@@ -674,8 +761,18 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         VentanaPrincipal.setVisible(true);
         jPanelclientes.setVisible(false);
         panelaboga.setVisible(false);
-        
+        jPanel3.setVisible(false);
+
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cedula_aux11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_aux11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cedula_aux11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -718,12 +815,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPfondo_Inicial;
     private javax.swing.JPanel VentanaPrincipal;
     private javax.swing.JTextField casoasis;
+    public static javax.swing.JTextField cedula_aux11;
     private javax.swing.JTextField datasi;
     private javax.swing.JTable datosabo;
     private javax.swing.JTextField enviocon;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModificarA10;
     private javax.swing.JTextField jButtonModificarA2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -731,15 +829,19 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelclientes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JLabel label;
     private javax.swing.JTextField mostraasis;
     private javax.swing.JPanel panelaboga;
     private javax.swing.JTextField reserasis;
     private javax.swing.JTextField salimenu;
     private javax.swing.JTable tablacli;
+    private javax.swing.JPasswordField usucontra;
     // End of variables declaration//GEN-END:variables
 }

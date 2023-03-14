@@ -47,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         exitTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
         background.setBlur(panel);
@@ -193,15 +194,17 @@ public class Login extends javax.swing.JFrame {
         String user = txtUser.getText();
     }
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
-        String user = txtUser.getText();
+        String user = txtUser.getText();       
         String pass = String.valueOf(txtPassword.getPassword());
         Administrador usuario_especial = new Administrador();
         abogado abg1 = new abogado();
         asistente asi1 = new asistente();
         usuario_especial.setCedula(user);
         usuario_especial.setPassword(pass);
+        abg1.setCedula(user);
+        abg1.setPassword(pass);
         asi1.setCedula(user);
-        asi1.setPassword(pass);
+        asi1.setPassword(pass);       
         int resul = 0;
         try {
             resul = usuario_especial.login();
@@ -211,7 +214,7 @@ public class Login extends javax.swing.JFrame {
                 interfaz_admin.setVisible(true);
                 this.dispose();
             } else {
-                //resul = abg1.login();
+                resul = abg1.login_abogado();
                 if (resul == 2) {
                     abogadoInterfaz2 interabg = new abogadoInterfaz2();
                     interabg.setVisible(true);
@@ -232,6 +235,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
         }
+        asistenteInterfaz2.cedula_aux11.setText(user);
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked

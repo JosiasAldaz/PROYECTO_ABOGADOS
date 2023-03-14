@@ -4,6 +4,7 @@
  */
 package abogados;
 
+import desplazable.Desface;
 import java.awt.Color;
 
 /**
@@ -15,10 +16,15 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     /**
      * Creates new form abogadoInterfaz
      */
+    Desface desplace;
     public abogadoInterfaz2() {
         initComponents();
-        VentanaModificar.setVisible(false);
+       
         ContratosVigentes.setVisible(false);
+        VentanaContratosEspera.setVisible(false);
+        VentanaAsistenteAsignado.setVisible(false);
+         desplace = new Desface();
+         desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
     }
 
     /**
@@ -36,33 +42,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         VentanaFondo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        VentanaModificar = new javax.swing.JPanel();
-        txtNombres = new javax.swing.JLabel();
-        txtApellidos = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JLabel();
-        txtFechaNacimiento = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JLabel();
-        txtfoto = new javax.swing.JLabel();
-        txtCostoHora = new javax.swing.JLabel();
-        txtGratuidad = new javax.swing.JLabel();
-        txtTitulos = new javax.swing.JLabel();
-        txtPrimerNombre = new javax.swing.JTextField();
-        txtSegundoNombre = new javax.swing.JTextField();
-        txtPrimerNombre1 = new javax.swing.JTextField();
-        txtPrimerNombre2 = new javax.swing.JTextField();
-        txtPrimerNombre3 = new javax.swing.JTextField();
-        txtPrimerNombre4 = new javax.swing.JTextField();
-        txtPrimerNombre6 = new javax.swing.JTextField();
-        txtPrimerNombre7 = new javax.swing.JTextField();
-        txtPrimerNombre8 = new javax.swing.JTextField();
-        txtPrimerNombre10 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        rSFotoSquare1 = new rojerusan.RSFotoSquare();
         ContratosVigentes = new javax.swing.JPanel();
         txtID = new javax.swing.JLabel();
         txtIdContraro = new javax.swing.JTextField();
@@ -98,17 +77,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtGmail = new javax.swing.JLabel();
         txtWhatsapp = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        MenuDesplegable = new javax.swing.JPanel();
         txtModificar = new javax.swing.JTextField();
         txtContratosVigentes = new javax.swing.JTextField();
         txtContratosEspera = new javax.swing.JTextField();
         txtAsistenteAsignado = new javax.swing.JTextField();
         txtOficinaAsignada = new javax.swing.JTextField();
         txtCasosGratuitos = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtModificar1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        CedulaAbogado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,203 +106,16 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaFondo.setLayout(VentanaFondoLayout);
         VentanaFondoLayout.setHorizontalGroup(
             VentanaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(VentanaFondoLayout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addGap(0, 170, Short.MAX_VALUE))
         );
         VentanaFondoLayout.setVerticalGroup(
             VentanaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel2.add(VentanaFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
-
-        VentanaModificar.setBackground(new java.awt.Color(0, 102, 102));
-
-        txtNombres.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtNombres.setText("Nombres:");
-
-        txtApellidos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtApellidos.setText("Apellidos:");
-
-        txtCedula.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtCedula.setText("Cédula:");
-
-        txtFechaNacimiento.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtFechaNacimiento.setText("Fecha de nacimiento:");
-
-        txtGenero.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtGenero.setText("Género:");
-
-        txtDireccion.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtDireccion.setText("Dirección:");
-
-        txtTelefono.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtTelefono.setText("Teléfono:");
-
-        txtfoto.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtfoto.setText("Seleccione una foto:");
-
-        txtCostoHora.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtCostoHora.setText("Costo por hora:");
-
-        txtGratuidad.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtGratuidad.setText("Gratuidad:");
-
-        txtTitulos.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtTitulos.setText("Titulos:");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Masculino");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Femenino");
-
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("SI");
-
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("NO");
-
-        javax.swing.GroupLayout VentanaModificarLayout = new javax.swing.GroupLayout(VentanaModificar);
-        VentanaModificar.setLayout(VentanaModificarLayout);
-        VentanaModificarLayout.setHorizontalGroup(
-            VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombres)
-                            .addComponent(txtApellidos))
-                        .addGap(30, 30, 30)
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addComponent(txtPrimerNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addComponent(txtFechaNacimiento)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPrimerNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addComponent(txtCedula)
-                                .addGap(50, 50, 50)
-                                .addComponent(txtPrimerNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDireccion)
-                                    .addComponent(txtGenero))
-                                .addGap(26, 26, 26)
-                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtPrimerNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                        .addComponent(txtTitulos)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtPrimerNombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                        .addComponent(txtTelefono)
-                                        .addGap(71, 71, 71)
-                                        .addComponent(txtPrimerNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
-                                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
-                                                .addComponent(txtCostoHora)
-                                                .addGap(18, 18, 18))
-                                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                                .addComponent(txtGratuidad)
-                                                .addGap(63, 63, 63)))
-                                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPrimerNombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addComponent(txtfoto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rSFotoSquare1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40))))))
-        );
-        VentanaModificarLayout.setVerticalGroup(
-            VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtPrimerNombre)
-                                .addComponent(txtSegundoNombre))
-                            .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VentanaModificarLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtApellidos)
-                                    .addComponent(txtPrimerNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaModificarLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfoto)
-                                .addGap(17, 17, 17))))
-                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(rSFotoSquare1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCedula)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtPrimerNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrimerNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFechaNacimiento)
-                    .addComponent(txtCostoHora)
-                    .addComponent(txtPrimerNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrimerNombre8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtGenero)
-                                .addComponent(jRadioButton1)
-                                .addComponent(jRadioButton2))
-                            .addComponent(txtGratuidad))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtTitulos)
-                            .addComponent(txtPrimerNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrimerNombre10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49))
-                    .addGroup(VentanaModificarLayout.createSequentialGroup()
-                        .addGroup(VentanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        jPanel2.add(VentanaModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
+        jPanel2.add(VentanaFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 510));
 
         ContratosVigentes.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -602,7 +397,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                                         .addComponent(jTextField2))
                                     .addComponent(btnEliminar1))
                                 .addGap(175, 175, 175)))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -656,14 +451,37 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 1050, 510));
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 102));
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("ABOGADOS-ECU");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 700, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 710, 710, 40));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 130, 150));
+
+        MenuDesplegable.setBackground(new java.awt.Color(0, 0, 102));
 
         txtModificar.setEditable(false);
         txtModificar.setBackground(new java.awt.Color(0, 0, 102));
         txtModificar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtModificar.setForeground(new java.awt.Color(255, 255, 255));
-        txtModificar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtModificar.setText("Modificar");
+        txtModificar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtModificar.setText("     Modificar");
         txtModificar.setBorder(null);
         txtModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtModificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -687,8 +505,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosVigentes.setBackground(new java.awt.Color(0, 0, 102));
         txtContratosVigentes.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtContratosVigentes.setForeground(new java.awt.Color(255, 255, 255));
-        txtContratosVigentes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContratosVigentes.setText("Contratos Vigentes");
+        txtContratosVigentes.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtContratosVigentes.setText("     Contratos Vigentes");
         txtContratosVigentes.setBorder(null);
         txtContratosVigentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosVigentes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -712,11 +530,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosEspera.setBackground(new java.awt.Color(0, 0, 102));
         txtContratosEspera.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtContratosEspera.setForeground(new java.awt.Color(255, 255, 255));
-        txtContratosEspera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContratosEspera.setText("Contratos en Espera");
+        txtContratosEspera.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtContratosEspera.setText("     Contratos en Espera");
         txtContratosEspera.setBorder(null);
         txtContratosEspera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosEspera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtContratosEsperaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtContratosEsperaMouseEntered(evt);
             }
@@ -734,11 +555,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtAsistenteAsignado.setBackground(new java.awt.Color(0, 0, 102));
         txtAsistenteAsignado.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtAsistenteAsignado.setForeground(new java.awt.Color(255, 255, 255));
-        txtAsistenteAsignado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtAsistenteAsignado.setText("Asistente Asignado");
+        txtAsistenteAsignado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtAsistenteAsignado.setText("     Asistente Asignado");
         txtAsistenteAsignado.setBorder(null);
         txtAsistenteAsignado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtAsistenteAsignado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAsistenteAsignadoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAsistenteAsignadoMouseEntered(evt);
             }
@@ -756,8 +580,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtOficinaAsignada.setBackground(new java.awt.Color(0, 0, 102));
         txtOficinaAsignada.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtOficinaAsignada.setForeground(new java.awt.Color(255, 255, 255));
-        txtOficinaAsignada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOficinaAsignada.setText("Oficina Asignada");
+        txtOficinaAsignada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtOficinaAsignada.setText("     Oficina Asignada");
         txtOficinaAsignada.setBorder(null);
         txtOficinaAsignada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtOficinaAsignada.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -778,8 +602,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtCasosGratuitos.setBackground(new java.awt.Color(0, 0, 102));
         txtCasosGratuitos.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtCasosGratuitos.setForeground(new java.awt.Color(255, 255, 255));
-        txtCasosGratuitos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCasosGratuitos.setText("Casos Gratuitos");
+        txtCasosGratuitos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtCasosGratuitos.setText("     Casos Gratuitos");
         txtCasosGratuitos.setBorder(null);
         txtCasosGratuitos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtCasosGratuitos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -796,21 +620,52 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        txtModificar1.setEditable(false);
+        txtModificar1.setBackground(new java.awt.Color(0, 0, 102));
+        txtModificar1.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        txtModificar1.setForeground(new java.awt.Color(255, 255, 255));
+        txtModificar1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtModificar1.setText("=");
+        txtModificar1.setBorder(null);
+        txtModificar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtModificar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtModificar1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtModificar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtModificar1MouseExited(evt);
+            }
+        });
+        txtModificar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModificar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MenuDesplegableLayout = new javax.swing.GroupLayout(MenuDesplegable);
+        MenuDesplegable.setLayout(MenuDesplegableLayout);
+        MenuDesplegableLayout.setHorizontalGroup(
+            MenuDesplegableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(txtContratosEspera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(txtAsistenteAsignado)
             .addComponent(txtCasosGratuitos, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtOficinaAsignada, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtContratosVigentes, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtModificar)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDesplegableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtModificar1)
+                .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+        MenuDesplegableLayout.setVerticalGroup(
+            MenuDesplegableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDesplegableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(txtModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtContratosVigentes, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -822,32 +677,26 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                 .addComponent(txtOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 510));
+        jPanel1.add(MenuDesplegable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 510));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 700, -1));
+        jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Usuario");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 50, 70, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Octavio Chacón Moscoso 1-98 y Primera Transversal (Parque industrial)");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 710, 430, 40));
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+        CedulaAbogado.setEditable(false);
+        CedulaAbogado.setBackground(new java.awt.Color(0, 153, 153));
+        CedulaAbogado.setBorder(null);
+        CedulaAbogado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CedulaAbogadoActionPerformed(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 130, 150));
+        jPanel1.add(CedulaAbogado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -865,8 +714,10 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         VentanaFondo.setVisible(true);
-        VentanaModificar.setVisible(false);
+        
         ContratosVigentes.setVisible(false);
+        VentanaContratosEspera.setVisible(false);
+        VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void txtCasosGratuitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCasosGratuitosActionPerformed
@@ -931,8 +782,10 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
         VentanaFondo.setVisible(false);
-        VentanaModificar.setVisible(false);
+        
         ContratosVigentes.setVisible(true);
+        VentanaContratosEspera.setVisible(false);
+        VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosVigentesMouseClicked
 
     private void txtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificarActionPerformed
@@ -948,9 +801,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModificarMouseEntered
 
     private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
-        VentanaFondo.setVisible(false);
-        VentanaModificar.setVisible(true);
-        ContratosVigentes.setVisible(false);
+        modificarAbogado modificarA = new modificarAbogado();
+        modificarA.setVisible(true);
         //Poner más ventanas
 
     }//GEN-LAST:event_txtModificarMouseClicked
@@ -987,9 +839,45 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdContraroActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void txtModificar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificar1MouseClicked
+        if (MenuDesplegable.getX() == 0) {
+            desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 10);
+        } else if (MenuDesplegable.getX() == -160) {
+            desplace.desplazarDerecha(MenuDesplegable, MenuDesplegable.getX(), 0, 10, 10);
+        }
+    }//GEN-LAST:event_txtModificar1MouseClicked
+
+    private void txtModificar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificar1MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_txtModificar1MouseEntered
+
+    private void txtModificar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificar1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModificar1MouseExited
+
+    private void txtModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModificar1ActionPerformed
+
+    private void txtContratosEsperaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseClicked
+        VentanaContratosEspera.setVisible(true);
+        VentanaFondo.setVisible(false);
+        
+        ContratosVigentes.setVisible(false);
+        VentanaAsistenteAsignado.setVisible(false);
+    }//GEN-LAST:event_txtContratosEsperaMouseClicked
+
+    private void txtAsistenteAsignadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseClicked
+        VentanaAsistenteAsignado.setVisible(true);
+        VentanaContratosEspera.setVisible(false);
+        VentanaFondo.setVisible(false);
+        
+        ContratosVigentes.setVisible(false);
+    }//GEN-LAST:event_txtAsistenteAsignadoMouseClicked
+
+    private void CedulaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaAbogadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CedulaAbogadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1028,13 +916,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField CedulaAbogado;
     private javax.swing.JPanel ContratosVigentes;
+    private javax.swing.JPanel MenuDesplegable;
     private javax.swing.JComboBox<String> TipoContrato;
     private javax.swing.JComboBox<String> TipoContrato1;
     private javax.swing.JPanel VentanaAsistenteAsignado;
     private javax.swing.JPanel VentanaContratosEspera;
     private javax.swing.JPanel VentanaFondo;
-    private javax.swing.JPanel VentanaModificar;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnBuscar;
@@ -1052,13 +941,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1071,41 +956,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private rojerusan.RSFotoSquare rSFotoSquare1;
-    private javax.swing.JLabel txtApellidos;
     private javax.swing.JTextField txtAsistenteAsignado;
     private javax.swing.JTextField txtCasosGratuitos;
-    private javax.swing.JLabel txtCedula;
     private javax.swing.JTextField txtContratosEspera;
     private javax.swing.JTextField txtContratosVigentes;
-    private javax.swing.JLabel txtCostoHora;
-    private javax.swing.JLabel txtDireccion;
-    private javax.swing.JLabel txtFechaNacimiento;
-    private javax.swing.JLabel txtGenero;
     private javax.swing.JLabel txtGmail;
-    private javax.swing.JLabel txtGratuidad;
     private javax.swing.JLabel txtID;
     private javax.swing.JLabel txtIdAsistente;
     private javax.swing.JTextField txtIdContraro;
     private javax.swing.JLabel txtIdContratos;
     private javax.swing.JTextField txtModificar;
-    private javax.swing.JLabel txtNombres;
+    private javax.swing.JTextField txtModificar1;
     private javax.swing.JTextField txtOficinaAsignada;
-    private javax.swing.JTextField txtPrimerNombre;
-    private javax.swing.JTextField txtPrimerNombre1;
-    private javax.swing.JTextField txtPrimerNombre10;
-    private javax.swing.JTextField txtPrimerNombre2;
-    private javax.swing.JTextField txtPrimerNombre3;
-    private javax.swing.JTextField txtPrimerNombre4;
-    private javax.swing.JTextField txtPrimerNombre6;
-    private javax.swing.JTextField txtPrimerNombre7;
-    private javax.swing.JTextField txtPrimerNombre8;
-    private javax.swing.JTextField txtSegundoNombre;
-    private javax.swing.JLabel txtTelefono;
     private javax.swing.JLabel txtTipoContratos;
     private javax.swing.JLabel txtTipoContratos1;
-    private javax.swing.JLabel txtTitulos;
     private javax.swing.JLabel txtWhatsapp;
-    private javax.swing.JLabel txtfoto;
     // End of variables declaration//GEN-END:variables
 }
