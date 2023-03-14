@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import splashscreen.SplashScreen;
 
 /**
  *
@@ -205,6 +206,7 @@ public class Login extends javax.swing.JFrame {
         try {
             resul = usuario_especial.login();
             if (resul == 1) {
+                SplashScreen paginacarga = new SplashScreen();
                 administradorInterfaz interfaz_admin = new administradorInterfaz();
                 interfaz_admin.setVisible(true);
                 this.dispose();

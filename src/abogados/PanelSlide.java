@@ -31,6 +31,17 @@ public class PanelSlide extends javax.swing.JPanel {
     private int currentShowing;
     private boolean animateRight;
     
+    public void primerelemento(Component com){
+        com.setSize(getSize());
+        com.setVisible(false);
+        list.add(com);
+        this.add(com);
+        if (list.size() == 1) { // Si es el primer componente, mostrarlo
+            com.setVisible(true);
+            com.setLocation(0, 0);
+        }
+    }
+            
     public void init (Component ...com){
         if(com.length>0){
             for (Component c:com) {
@@ -48,7 +59,7 @@ public class PanelSlide extends javax.swing.JPanel {
     
     public void show(int index){
         if(!tiempo.isRunning()){
-            if(list.size()>2 && index<list.size() && index != currentShowing){
+            if(list.size()>1 && index<=list.size() && index != currentShowing){
                 comeShow = list.get(index);
                 comeExit  = list.get(currentShowing);
                 animateRight = index < currentShowing;
@@ -84,6 +95,14 @@ public class PanelSlide extends javax.swing.JPanel {
                 comeExit.setVisible(false);
             }
         }
+    }
+    
+    public void borrarelementos(){
+        
+    }
+    
+    public int tamaño(){
+        return list.size();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
