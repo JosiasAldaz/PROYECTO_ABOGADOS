@@ -5,6 +5,12 @@
  */
 package clases;
 
+import abogados.Modificari_Asistente;
+import static abogados.Modificari_Asistente.calleprinci;
+import static abogados.Modificari_Asistente.callesecu;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,7 +22,7 @@ public class Casos {
     private String nombre_caso;
     private Date fecha_inicio;
     private int ID_cli;
-
+    PostgresConexion conexion = new PostgresConexion();
     public Casos(int cod_casos, String nombre_caso, Date fecha_inicio, int ID_cli) {
         this.cod_casos = cod_casos;
         this.nombre_caso = nombre_caso;
@@ -60,5 +66,5 @@ public class Casos {
         this.ID_cli = ID_cli;
     }
     
-    
+     
 }

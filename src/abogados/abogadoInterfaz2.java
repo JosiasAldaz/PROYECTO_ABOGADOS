@@ -4,8 +4,16 @@
  */
 package abogados;
 
+import clases.abogado;
 import desplazable.Desface;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -26,7 +34,46 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
          desplace = new Desface();
          desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
     }
+    ////////////////////////////datos de casos/////////////////////////////////////////////
+        public void mostrarabogados(ArrayList<abogado> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) contra.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()), String.valueOf(tipos.getTitulo())};
+            mTabla.addRow(filaNueva);
+        });
+        contra.setModel(mTabla);
+        columnascontra();
+    }
 
+    public void columnascontra() {
+        TableColumnModel columna = contra.getColumnModel();
+        columna.getColumn(0).setPreferredWidth(100);
+        columna.getColumn(1).setPreferredWidth(100);
+        columna.getColumn(2).setPreferredWidth(115);
+        columna.getColumn(3).setPreferredWidth(155);
+        columna.getColumn(4).setPreferredWidth(155);
+        columna.getColumn(5).setPreferredWidth(150);
+    }
+
+    public void moscontra() {
+        abogado abg_usuario = new abogado();
+        DefaultTableModel modelo = (DefaultTableModel) contra.getModel();
+        try {
+            ArrayList<abogado> mostrar = new ArrayList();
+            mostrar = abg_usuario.Listar();
+            if (mostrar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTE CONTRATOS REGISTRADOS");
+            } else {
+                mostrarabogados(mostrar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +95,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnMostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        contra = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnEliminar = new javax.swing.JButton();
@@ -87,10 +134,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosEspera = new javax.swing.JTextField();
         txtAsistenteAsignado = new javax.swing.JTextField();
         txtOficinaAsignada = new javax.swing.JTextField();
-        txtCasosGratuitos = new javax.swing.JTextField();
+        sesion = new javax.swing.JTextField();
         txtModificar1 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        CedulaAbogado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,82 +163,71 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jPanel2.add(VentanaFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 510));
 
         ContratosVigentes.setBackground(new java.awt.Color(0, 102, 102));
+        ContratosVigentes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtID.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        txtID.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         txtID.setText("ID de contrato:");
+        ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 70));
 
         txtIdContraro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdContraroActionPerformed(evt);
             }
         });
+        ContratosVigentes.add(txtIdContraro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 190, 40));
 
         btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        ContratosVigentes.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, 40));
 
         btnMostrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnMostrar.setText("Mostrar");
+        ContratosVigentes.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 264, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        contra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "null", "null"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        contra.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(contra);
+        if (contra.getColumnModel().getColumnCount() > 0) {
+            contra.getColumnModel().getColumn(0).setResizable(false);
+            contra.getColumnModel().getColumn(1).setResizable(false);
+            contra.getColumnModel().getColumn(2).setResizable(false);
+            contra.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        ContratosVigentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 660, 188));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        ContratosVigentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 330, 110));
+
         btnEliminar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
-
-        javax.swing.GroupLayout ContratosVigentesLayout = new javax.swing.GroupLayout(ContratosVigentes);
-        ContratosVigentes.setLayout(ContratosVigentesLayout);
-        ContratosVigentesLayout.setHorizontalGroup(
-            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContratosVigentesLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtID)
-                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIdContraro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
-                        .addComponent(btnMostrar)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnEliminar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)))
-        );
-        ContratosVigentesLayout.setVerticalGroup(
-            ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ContratosVigentesLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                    .addGroup(ContratosVigentesLayout.createSequentialGroup()
-                        .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtIdContraro))
-                        .addGap(43, 43, 43)
-                        .addGroup(ContratosVigentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        );
+        ContratosVigentes.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 264, -1, -1));
 
         jPanel2.add(ContratosVigentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
@@ -480,8 +514,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtModificar.setBackground(new java.awt.Color(0, 0, 102));
         txtModificar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtModificar.setForeground(new java.awt.Color(255, 255, 255));
-        txtModificar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtModificar.setText("     Modificar");
+        txtModificar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtModificar.setText("MIS DATOS");
         txtModificar.setBorder(null);
         txtModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtModificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -505,8 +539,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosVigentes.setBackground(new java.awt.Color(0, 0, 102));
         txtContratosVigentes.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtContratosVigentes.setForeground(new java.awt.Color(255, 255, 255));
-        txtContratosVigentes.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtContratosVigentes.setText("     Contratos Vigentes");
+        txtContratosVigentes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContratosVigentes.setText("CONTRATOS");
         txtContratosVigentes.setBorder(null);
         txtContratosVigentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosVigentes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -530,8 +564,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtContratosEspera.setBackground(new java.awt.Color(0, 0, 102));
         txtContratosEspera.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtContratosEspera.setForeground(new java.awt.Color(255, 255, 255));
-        txtContratosEspera.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtContratosEspera.setText("     Contratos en Espera");
+        txtContratosEspera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContratosEspera.setText("TAREAS ASISTENTE");
         txtContratosEspera.setBorder(null);
         txtContratosEspera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtContratosEspera.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -555,8 +589,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtAsistenteAsignado.setBackground(new java.awt.Color(0, 0, 102));
         txtAsistenteAsignado.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtAsistenteAsignado.setForeground(new java.awt.Color(255, 255, 255));
-        txtAsistenteAsignado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtAsistenteAsignado.setText("     Asistente Asignado");
+        txtAsistenteAsignado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAsistenteAsignado.setText("GENERAR FACTURA");
         txtAsistenteAsignado.setBorder(null);
         txtAsistenteAsignado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtAsistenteAsignado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -598,25 +632,25 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             }
         });
 
-        txtCasosGratuitos.setEditable(false);
-        txtCasosGratuitos.setBackground(new java.awt.Color(0, 0, 102));
-        txtCasosGratuitos.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        txtCasosGratuitos.setForeground(new java.awt.Color(255, 255, 255));
-        txtCasosGratuitos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtCasosGratuitos.setText("     Casos Gratuitos");
-        txtCasosGratuitos.setBorder(null);
-        txtCasosGratuitos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        txtCasosGratuitos.addMouseListener(new java.awt.event.MouseAdapter() {
+        sesion.setEditable(false);
+        sesion.setBackground(new java.awt.Color(0, 0, 102));
+        sesion.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        sesion.setForeground(new java.awt.Color(255, 255, 255));
+        sesion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sesion.setText("CERRAR SESION");
+        sesion.setBorder(null);
+        sesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtCasosGratuitosMouseEntered(evt);
+                sesionMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtCasosGratuitosMouseExited(evt);
+                sesionMouseExited(evt);
             }
         });
-        txtCasosGratuitos.addActionListener(new java.awt.event.ActionListener() {
+        sesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCasosGratuitosActionPerformed(evt);
+                sesionActionPerformed(evt);
             }
         });
 
@@ -651,7 +685,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             MenuDesplegableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(txtContratosEspera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(txtAsistenteAsignado)
-            .addComponent(txtCasosGratuitos, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(sesion, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtOficinaAsignada, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtContratosVigentes, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(txtModificar)
@@ -675,28 +709,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                 .addComponent(txtAsistenteAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtOficinaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtCasosGratuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(MenuDesplegable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 510));
-
-        jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Usuario");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 50, 70, 20));
-
-        CedulaAbogado.setEditable(false);
-        CedulaAbogado.setBackground(new java.awt.Color(0, 153, 153));
-        CedulaAbogado.setBorder(null);
-        CedulaAbogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CedulaAbogadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(CedulaAbogado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -720,17 +737,17 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void txtCasosGratuitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCasosGratuitosActionPerformed
+    private void sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sesionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCasosGratuitosActionPerformed
+    }//GEN-LAST:event_sesionActionPerformed
 
-    private void txtCasosGratuitosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCasosGratuitosMouseExited
-        txtCasosGratuitos.setBackground(new Color(0,0,102));
-    }//GEN-LAST:event_txtCasosGratuitosMouseExited
+    private void sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseExited
+        sesion.setBackground(new Color(0,0,102));
+    }//GEN-LAST:event_sesionMouseExited
 
-    private void txtCasosGratuitosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCasosGratuitosMouseEntered
-        txtCasosGratuitos.setBackground(new Color(0,0,153));
-    }//GEN-LAST:event_txtCasosGratuitosMouseEntered
+    private void sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseEntered
+        sesion.setBackground(new Color(0,0,153));
+    }//GEN-LAST:event_sesionMouseEntered
 
     private void txtOficinaAsignadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaActionPerformed
         // TODO add your handling code here:
@@ -836,10 +853,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosEsperaMouseClicked
 
-    private void CedulaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaAbogadoActionPerformed
-
     private void txtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModificarActionPerformed
@@ -878,6 +891,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         ContratosVigentes.setVisible(false);
     }//GEN-LAST:event_txtAsistenteAsignadoMouseClicked
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -915,7 +933,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField CedulaAbogado;
     private javax.swing.JPanel ContratosVigentes;
     private javax.swing.JPanel MenuDesplegable;
     private javax.swing.JComboBox<String> TipoContrato;
@@ -932,6 +949,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JTable contra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -940,7 +958,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    public static javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -948,15 +965,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField sesion;
     private javax.swing.JTextField txtAsistenteAsignado;
-    private javax.swing.JTextField txtCasosGratuitos;
     private javax.swing.JTextField txtContratosEspera;
     private javax.swing.JTextField txtContratosVigentes;
     private javax.swing.JLabel txtGmail;
