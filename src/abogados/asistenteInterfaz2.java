@@ -615,19 +615,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
         String cedulaingre = cedula_aux11.getText();
-        Modificari_Asistente mod = new Modificari_Asistente();
+        Datos_asis mod = new Datos_asis();
         jPanel3.setVisible(true);
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
         jLabel7.setVisible(false);
-        System.out.println(""+cedulaingre);
-        try {
-            prue();
             mod.setVisible(true);
             dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(asistenteInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_mostraasisMouseClicked
 
     private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
