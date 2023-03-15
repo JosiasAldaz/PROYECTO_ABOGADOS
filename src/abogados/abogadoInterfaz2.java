@@ -4,10 +4,15 @@
  */
 package abogados;
 
+import static abogados.Datos_asis.jTextcedula;
+import static abogados.Datos_asis.validarCedula;
 import static abogados.Modificari_Asistente.jTextcedula;
+import clases.PostgresConexion;
 import clases.abogado;
+import clases.contrato;
 import desplazable.Desface;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -26,55 +31,67 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
      * Creates new form abogadoInterfaz
      */
     Desface desplace;
+    PostgresConexion conexion = new PostgresConexion();
+
     public abogadoInterfaz2() {
         initComponents();
-       
+
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
-         desplace = new Desface();
-         desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
+        desplace = new Desface();
+        desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
     }
-    ////////////////////////////datos de casos/////////////////////////////////////////////
-        public void mostrarabogados(ArrayList<abogado> lista_tipo) {
-        // Para darle forma al modelo de la tabla
+
+    ///////////TABLA DE CONTRATOS///
+    public void mostrarcontratos(ArrayList<contrato> lista_tipo) {
+
         DefaultTableModel mTabla;
         mTabla = (DefaultTableModel) contra.getModel();
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()), String.valueOf(tipos.getTitulo())};
+            String[] filaNueva = {String.valueOf(tipos.getId_contra()), tipos.getDescripcion(), String.valueOf(tipos.getFecha_caso()), String.valueOf(tipos.getFK_ID_abg()), String.valueOf(tipos.getID_cli())};
             mTabla.addRow(filaNueva);
         });
         contra.setModel(mTabla);
-        columnascontra();
+        columnascontratos();
     }
 
-    public void columnascontra() {
+    public void columnascontratos() {
         TableColumnModel columna = contra.getColumnModel();
         columna.getColumn(0).setPreferredWidth(100);
         columna.getColumn(1).setPreferredWidth(100);
         columna.getColumn(2).setPreferredWidth(115);
         columna.getColumn(3).setPreferredWidth(155);
         columna.getColumn(4).setPreferredWidth(155);
-        columna.getColumn(5).setPreferredWidth(150);
     }
 
-    public void moscontra() {
-        abogado abg_usuario = new abogado();
+    public void moscontratos() throws SQLException {
+        contrato c1 = new contrato();
         DefaultTableModel modelo = (DefaultTableModel) contra.getModel();
-        try {
-            ArrayList<abogado> mostrar = new ArrayList();
-            mostrar = abg_usuario.Listar();
-            if (mostrar.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "NO EXISTE CONTRATOS REGISTRADOS");
-            } else {
-                mostrarabogados(mostrar);
+        String cedula = numced.getText();
+        abogado nuevo = new abogado();
+        nuevo.setCedula(cedula);
+        String sql = "SELECT id_abg  FROM public.abogado WHERE cedula_abg ='" + nuevo.getCedula() + "'";
+        ResultSet resulset = conexion.Consulta(sql);
+        while (resulset.next()) {
+            int auxid_abg = resulset.getInt("id_abg");
+            try {
+                ArrayList<contrato> mostrarcon = new ArrayList();
+                c1.setId_contra(auxid_abg);
+                mostrarcon = c1.Listarcon();
+                if (mostrarcon.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "NO EXISTE CONTRATOS REGISTRADOS");
+                } else {
+                    mostrarcontratos(mostrarcon);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +109,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         ContratosVigentes = new javax.swing.JPanel();
         txtID = new javax.swing.JLabel();
-        txtIdContraro = new javax.swing.JTextField();
+        numced = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnMostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -170,12 +187,12 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtID.setText("BUSCAR CONTRATOS");
         ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 70));
 
-        txtIdContraro.addActionListener(new java.awt.event.ActionListener() {
+        numced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdContraroActionPerformed(evt);
+                numcedActionPerformed(evt);
             }
         });
-        ContratosVigentes.add(txtIdContraro, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 280, 40));
+        ContratosVigentes.add(numced, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 280, 40));
 
         btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -732,7 +749,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         VentanaFondo.setVisible(true);
-        
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -743,11 +759,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_sesionActionPerformed
 
     private void sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseExited
-        sesion.setBackground(new Color(0,0,102));
+        sesion.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_sesionMouseExited
 
     private void sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseEntered
-        sesion.setBackground(new Color(0,0,153));
+        sesion.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_sesionMouseEntered
 
     private void txtOficinaAsignadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaActionPerformed
@@ -755,11 +771,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOficinaAsignadaActionPerformed
 
     private void txtOficinaAsignadaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaMouseExited
-        txtOficinaAsignada.setBackground(new Color(0,0,102));
+        txtOficinaAsignada.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtOficinaAsignadaMouseExited
 
     private void txtOficinaAsignadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaMouseEntered
-        txtOficinaAsignada.setBackground(new Color(0,0,153));
+        txtOficinaAsignada.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtOficinaAsignadaMouseEntered
 
     private void txtContratosEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContratosEsperaActionPerformed
@@ -767,11 +783,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContratosEsperaActionPerformed
 
     private void txtContratosEsperaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseExited
-        txtContratosEspera.setBackground(new Color(0,0,102));
+        txtContratosEspera.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtContratosEsperaMouseExited
 
     private void txtContratosEsperaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseEntered
-        txtContratosEspera.setBackground(new Color(0,0,153));
+        txtContratosEspera.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtContratosEsperaMouseEntered
 
     private void txtContratosVigentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContratosVigentesActionPerformed
@@ -779,16 +795,15 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContratosVigentesActionPerformed
 
     private void txtContratosVigentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseExited
-        txtContratosVigentes.setBackground(new Color(0,0,102));
+        txtContratosVigentes.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtContratosVigentesMouseExited
 
     private void txtContratosVigentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseEntered
-        txtContratosVigentes.setBackground(new Color(0,0,153));
+        txtContratosVigentes.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtContratosVigentesMouseEntered
 
     private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
         VentanaFondo.setVisible(false);
-        
         ContratosVigentes.setVisible(true);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -822,9 +837,9 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TipoContratoActionPerformed
 
-    private void txtIdContraroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdContraroActionPerformed
+    private void numcedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numcedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdContraroActionPerformed
+    }//GEN-LAST:event_numcedActionPerformed
 
     private void txtModificar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificar1MouseClicked
         if (MenuDesplegable.getX() == 0) {
@@ -849,7 +864,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private void txtContratosEsperaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseClicked
         VentanaContratosEspera.setVisible(true);
         VentanaFondo.setVisible(false);
-        
+
         ContratosVigentes.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosEsperaMouseClicked
@@ -859,11 +874,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModificarActionPerformed
 
     private void txtModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseExited
-        txtModificar.setBackground(new Color(0,0,102));
+        txtModificar.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtModificarMouseExited
 
     private void txtModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseEntered
-        txtModificar.setBackground(new Color(0,0,153));
+        txtModificar.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtModificarMouseEntered
 
     private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
@@ -877,11 +892,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAsistenteAsignadoActionPerformed
 
     private void txtAsistenteAsignadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseExited
-        txtAsistenteAsignado.setBackground(new Color(0,0,102));
+        txtAsistenteAsignado.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtAsistenteAsignadoMouseExited
 
     private void txtAsistenteAsignadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseEntered
-        txtAsistenteAsignado.setBackground(new Color(0,0,153));
+        txtAsistenteAsignado.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtAsistenteAsignadoMouseEntered
 
     private void txtAsistenteAsignadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseClicked
@@ -894,13 +909,69 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        if (jTextcedula.getText().isEmpty()) {
+        if (numced.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "INGRESE SU NUMERO DE CEDULA");
         } else {
-                prue();
+            try {
+                valced();
+            } catch (SQLException ex) {
+                Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    public void valced() throws SQLException {
+        String ced = numced.getText();
+        boolean esValida = validarCedula(ced);
+        if (esValida) {
+            moscontratos();
+        } else {
+            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
+        }
+    }
+
+    public static boolean validarCedula(String cedula) {
+        // Comprobar que la cédula tenga 10 dígitos
+        if (cedula == null || cedula.length() != 10) {
+            return false;
+        }
+        // Extraer el número de provincia de los primeros dos dígitos
+        int provincia = Integer.parseInt(cedula.substring(0, 2));
+        if (provincia < 1 || provincia > 24) {
+            return false;
+        }
+        // Validar el tercer dígito (debe ser 0, 1, 2 o 3)
+        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+        if (tercerDigito < 0 || tercerDigito > 3) {
+            return false;
+        }
+        // Extraer los nueve primeros dígitos como un número entero
+        int numCedula = Integer.parseInt(cedula.substring(0, 9));
+        // Validar el último dígito usando el algoritmo de validación del Registro Civil
+        int ultimoDigito = Integer.parseInt(cedula.substring(9));
+        int total = 0;
+        int multiplicador = 2;
+        for (int i = 8; i >= 0; i--) {
+            int digito = numCedula % 10;
+            numCedula /= 10;
+            int producto = digito * multiplicador;
+            if (producto > 9) {
+                producto -= 9;
+            }
+            total += producto;
+            multiplicador = (multiplicador == 2) ? 1 : 2;
+        }
+        int digitVerificador = 10 - (total % 10);
+        if (digitVerificador == 10) {
+            digitVerificador = 0;
+        }
+        if (ultimoDigito != digitVerificador) {
+            return false;
+        }
+        // Si llegamos hasta aquí, la cédula es válida
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -977,6 +1048,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField numced;
     private javax.swing.JTextField sesion;
     private javax.swing.JTextField txtAsistenteAsignado;
     private javax.swing.JTextField txtContratosEspera;
@@ -984,7 +1056,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel txtGmail;
     private javax.swing.JLabel txtID;
     private javax.swing.JLabel txtIdAsistente;
-    private javax.swing.JTextField txtIdContraro;
     private javax.swing.JLabel txtIdContratos;
     private javax.swing.JTextField txtModificar;
     private javax.swing.JTextField txtModificar1;
