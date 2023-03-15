@@ -4,6 +4,7 @@
  */
 package abogados;
 
+import static abogados.Modificari_Asistente.jTextcedula;
 import clases.abogado;
 import desplazable.Desface;
 import java.awt.Color;
@@ -166,15 +167,15 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         ContratosVigentes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtID.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
-        txtID.setText("ID de contrato:");
-        ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 70));
+        txtID.setText("BUSCAR CONTRATOS");
+        ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 70));
 
         txtIdContraro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdContraroActionPerformed(evt);
             }
         });
-        ContratosVigentes.add(txtIdContraro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 190, 40));
+        ContratosVigentes.add(txtIdContraro, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 280, 40));
 
         btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -183,7 +184,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        ContratosVigentes.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, 40));
+        ContratosVigentes.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 100, 40));
 
         btnMostrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnMostrar.setText("Mostrar");
@@ -893,6 +894,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        if (jTextcedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "INGRESE SU NUMERO DE CEDULA");
+        } else {
+                prue();
+        }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
