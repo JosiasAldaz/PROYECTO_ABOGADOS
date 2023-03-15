@@ -8,9 +8,12 @@ package abogados;
 import static abogados.Login.admin;
 import static abogados.Login.as;
 import static abogados.asistenteInterfaz2.cedula_aux11;
+import static abogados.modificarAbogado.cedula;
 import clases.Administrador;
 import clases.Direcciones;
+import clases.Especializacion;
 import clases.PostgresConexion;
+import clases.abogado;
 import clases.asistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -444,8 +447,9 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jYearChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142)
+                        .addGap(67, 67, 67)
                         .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -482,7 +486,6 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -513,16 +516,14 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCombselec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(mostrarasis))
-                            .addComponent(ocultarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(mostrarasis))
+                        .addComponent(ocultarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jLabel8)
@@ -550,11 +551,15 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtFldAñosExperiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -722,55 +727,55 @@ public class Modificari_Asistente extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-        if (jTextcedula.getText().isEmpty()) {
+        if (cedula_aux11.getText().equals("") || jTextnom1.getText().equals("") || jTextnom2.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "INGRESE SU NUMERO DE CEDULA");
         } else {
             try {
-                prue();
+                ingresar_datos();
             } catch (SQLException ex) {
                 Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_BuscarActionPerformed
 //////////////////////////////////////////////////////////
-
-    public void prue() throws SQLException {
-        // Realizar la consulta
-        String cedulaingre = jTextcedula.getText();
-        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
-            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
-            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
-            Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
-            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
-            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
-            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
-            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
-            Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
-            Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
-            Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
-            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
-            Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
-            int k = contenedor.getInt("fk_dir_asis");
-            Direcciones direc = new Direcciones();
-            direc.setId_direccion(k);
-            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
-            ResultSet contenedor1 = conexion.Consulta(sql1);
-            while (contenedor1.next()) {
-                Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
-                Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
-            }
-            jTextcedula.setEnabled(false);
-            jTextcorreo.setEnabled(false);
-            jPasscontra.setEnabled(false);
-            jPasscontra2.setEnabled(false);
-        }
-    }
+//
+//    public void prue() throws SQLException {
+//        // Realizar la consulta
+//        String cedulaingre = jTextcedula.getText();
+//        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
+//        ResultSet contenedor = conexion.Consulta(sql);
+//        while (contenedor.next()) {
+//            Modificari_Asistente.jTextcedula.setText(contenedor.getString("cedula_asis"));
+//            Modificari_Asistente.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
+//            Modificari_Asistente.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
+//            Modificari_Asistente.jTextape1.setText(contenedor.getString("prim_apell_asis"));
+//            Modificari_Asistente.jTextape2.setText(contenedor.getString("seg_apell_asis"));
+//            Modificari_Asistente.jTextcorreo.setText(contenedor.getString("email"));
+//            Modificari_Asistente.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
+//            Modificari_Asistente.jTextcelular.setText(contenedor.getString("celular"));
+//            Modificari_Asistente.jPasscontra.setText(contenedor.getString("contraseña_asis"));
+//            Modificari_Asistente.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
+//            Modificari_Asistente.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
+//            Modificari_Asistente.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
+//            Modificari_Asistente.calleprinci.setText(contenedor.getString("titulo_asis"));
+//            int k = contenedor.getInt("fk_dir_asis");
+//            Direcciones direc = new Direcciones();
+//            direc.setId_direccion(k);
+//            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+//            ResultSet contenedor1 = conexion.Consulta(sql1);
+//            while (contenedor1.next()) {
+//                Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
+//                Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
+//            }
+//            jTextcedula.setEnabled(false);
+//            jTextcorreo.setEnabled(false);
+//            jPasscontra.setEnabled(false);
+//            jPasscontra2.setEnabled(false);
+//        }
+//    }
 ///////////////////////////////////////////////////metodos///
 
-    public void valced() {
+    public void valced() throws SQLException {
         String ced = jTextcedula.getText();
         boolean esValida = validarCedula(ced);
         if (esValida) {
@@ -872,7 +877,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         });
     }
 
-    public void ingresar_datos() {
+    public void ingresar_datos() throws SQLException {
         String ced = jTextcedula.getText();
         String nom = jTextnom1.getText();
         String nom2 = jTextnom2.getText();
@@ -938,46 +943,59 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                         if (calle1.matches("^[\\w\\s.,-]+$")) {
                                                             if (calle2.matches("^[\\w\\s.,-]+$")) {
                                                                 if (expe.matches("^[0-9]+$")) {
-                                                                    Direcciones direccion_asis = new Direcciones();
-                                                                    direccion_asis.setCalle_principal(calleprinci.getText());
-                                                                    direccion_asis.setCalle_secundaria(callesecu.getText());
-                                                                    direccion_asis.setSucursal(false);
-                                                                    try {
-                                                                        int id = 0;
-                                                                        asistente asisten1 = new asistente();
-                                                                        direccion_asis.Ingresar();
-                                                                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
-                                                                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + calleprinci.getText() + "' and calle_secundaria ='" + callesecu.getText() + "'";
-                                                                        id = direccion_asis.Seleccionar(id_direccion);
-                                                                        System.out.println(id);
-                                                                        double sueldo = Double.parseDouble(suel);
-                                                                        int ex = Integer.parseInt(expe);
-                                                                        asisten1.setCod_asist(ced);
-                                                                        asisten1.setTitudocu(titasis);
-                                                                        asisten1.setExperiencia(ex);
-                                                                        asisten1.setCedula(ced);
-                                                                        asisten1.setPassword(contra);
-                                                                        asisten1.setPrimerNombre(nom);
-                                                                        asisten1.setSegundoNombre(nom2);
-                                                                        asisten1.setNombreApellido(ape1);
-                                                                        asisten1.setSegundoApellido(ape2);
-                                                                        asisten1.setEdad(ex);
-                                                                        asisten1.setGenero(gen);
-                                                                        asisten1.setFK_direccion(id);
-                                                                        asisten1.setFecha_nacimiento(fechaHora);
-                                                                        asisten1.setSueldo(sueldo);
-                                                                        asisten1.setTelefono(cel);
-                                                                        asisten1.setCorre(corre);
-                                                                        asisten1.setFoto_perfil(foto_asis.getRutaImagen());
-                                                                        asisten1.Modificar_asistente();
-                                                                        JOptionPane.showMessageDialog(null, "valio la modificacion");
-                                                                        asistenteInterfaz2 asimod = new asistenteInterfaz2();
-                                                                        asimod.setVisible(true);
-                                                                        dispose();
-                                                                    } catch (SQLException ex) {
-                                                                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
-                                                                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                                                                    PostgresConexion conexion = new PostgresConexion();
+                                                                    abogado abg = new abogado();
+                                                                    abg.setCedula(jTextcedula.getText());
+                                                                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+                                                                    ResultSet contenedor = conexion.Consulta(sql);
+                                                                    Direcciones direc = new Direcciones();
+                                                                    Especializacion estatica = new Especializacion();
+                                                                    while (contenedor.next()) {
+                                                                        int k = contenedor.getInt("fk_id_direcc_abg");
+                                                                        direc.setId_direccion(k);
+                                                                        String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                                                                        ResultSet contenedor1 = conexion.Consulta(sql1);
+                                                                        while (contenedor1.next()) {
+                                                                            direc.setCalle_principal(calleprinci.getText());
+                                                                            direc.setCalle_secundaria(callesecu.getText());
+                                                                            direc.setSucursal(false);
+                                                                            try {
+                                                                                int id = 0;
+                                                                                asistente asisten1 = new asistente();
+                                                                                direc.modificar_direccion();
+                                                                                //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
+                                                                                String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + calleprinci.getText() + "' and calle_secundaria ='" + callesecu.getText() + "'";
+                                                                                id = direc.Seleccionar(id_direccion);
+                                                                                System.out.println(id);
+                                                                                double sueldo = Double.parseDouble(suel);
+                                                                                int ex = Integer.parseInt(expe);
+                                                                                asisten1.setCod_asist(ced);
+                                                                                asisten1.setTitudocu(titasis);
+                                                                                asisten1.setExperiencia(ex);
+                                                                                asisten1.setCedula(ced);
+                                                                                asisten1.setPassword(contra);
+                                                                                asisten1.setPrimerNombre(nom);
+                                                                                asisten1.setSegundoNombre(nom2);
+                                                                                asisten1.setNombreApellido(ape1);
+                                                                                asisten1.setSegundoApellido(ape2);
+                                                                                asisten1.setEdad(ex);
+                                                                                asisten1.setGenero(gen);
+                                                                                asisten1.setFK_direccion(id);
+                                                                                asisten1.setFecha_nacimiento(fechaHora);
+                                                                                asisten1.setSueldo(sueldo);
+                                                                                asisten1.setTelefono(cel);
+                                                                                asisten1.setCorre(corre);
+                                                                                asisten1.setFoto_perfil(foto_asis.getRutaImagen());
+                                                                                asisten1.Modificar_asistente();
+                                                                                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS");                                                                         
+                                                                      
+                                                                            } catch (SQLException ex) {
+                                                                                Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                                                                            }
+                                                                        }
                                                                     }
+
                                                                 } else {
                                                                     JOptionPane.showMessageDialog(this, "AÑOS DE EXPERIENCIA INVALIDOS");
                                                                 }
