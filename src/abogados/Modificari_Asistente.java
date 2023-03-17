@@ -207,7 +207,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         Regresarasis.setBackground(new java.awt.Color(245, 222, 179));
         Regresarasis.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Regresarasis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        Regresarasis.setText("REGRESAR");
+        Regresarasis.setText("ACTUALIZAR");
         Regresarasis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegresarasisActionPerformed(evt);
@@ -288,7 +288,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(245, 222, 179));
         jButton4.setFont(new java.awt.Font("Castellar", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jButton4.setText("PANTALLA PRINCIPAL");
+        jButton4.setText("REGRESAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -447,9 +447,9 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jYearChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(113, 113, 113)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
+                        .addGap(29, 29, 29)
                         .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -551,15 +551,11 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(callesecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtFldAñosExperiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Regresarasis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -718,11 +714,13 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtFldTituloAsistenteKeyTyped
 
     private void RegresarasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarasisActionPerformed
-        // TODO add your handling code here:
-        //valced();
-        asistenteInterfaz2 adus = new asistenteInterfaz2();
-        adus.setVisible(true);
-        dispose();
+        try {
+            // TODO add your handling code here:
+            //valced();
+            ingresar_datos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_RegresarasisActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -913,11 +911,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                         } else {
                             diaF = Jspdia.getValue().toString();
                         }
-                        String timechooser = diaF + "/" + meschoice(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser2.getYear();
-                        System.out.println(timechooser);
-                        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate fecha = LocalDate.parse(timechooser, formato);
-                        LocalDateTime fechaHora = fecha.atStartOfDay();
+
                         if (nom.matches("[A-Z]{1}[a-z]+$") && nom2.matches("[A-Z]{1}[a-z]+$")) {
                             if (ape1.matches("[A-Z]{1}[a-z]+$") && ape2.matches("[A-Z]{1}[a-z]+$")) {
                                 if (jCombselec.getSelectedIndex() == 0) {
@@ -943,15 +937,20 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                         if (calle1.matches("^[\\w\\s.,-]+$")) {
                                                             if (calle2.matches("^[\\w\\s.,-]+$")) {
                                                                 if (expe.matches("^[0-9]+$")) {
+                                                                    String timechooser = diaF + "/" + meschoice(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser2.getYear();
+                                                                    System.out.println(timechooser);
+                                                                    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                                                    LocalDate fecha = LocalDate.parse(timechooser, formato);
+                                                                    LocalDateTime fechaHora = fecha.atStartOfDay();
                                                                     PostgresConexion conexion = new PostgresConexion();
-                                                                    abogado abg = new abogado();
+                                                                    asistente abg = new asistente();
                                                                     abg.setCedula(jTextcedula.getText());
-                                                                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_abg='" + abg.getCedula() + "'";
+                                                                    String sql = "SELECT * FROM ASISTENTE WHERE  cedula_asis='" + abg.getCedula() + "'";
                                                                     ResultSet contenedor = conexion.Consulta(sql);
                                                                     Direcciones direc = new Direcciones();
                                                                     Especializacion estatica = new Especializacion();
                                                                     while (contenedor.next()) {
-                                                                        int k = contenedor.getInt("fk_id_direcc_abg");
+                                                                        int k = contenedor.getInt("fk_dir_asis");
                                                                         direc.setId_direccion(k);
                                                                         String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
                                                                         ResultSet contenedor1 = conexion.Consulta(sql1);
@@ -987,8 +986,8 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                                                 asisten1.setCorre(corre);
                                                                                 asisten1.setFoto_perfil(foto_asis.getRutaImagen());
                                                                                 asisten1.Modificar_asistente();
-                                                                                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS");                                                                         
-                                                                      
+                                                                                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS");
+
                                                                             } catch (SQLException ex) {
                                                                                 Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                                 JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");

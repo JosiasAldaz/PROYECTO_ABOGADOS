@@ -85,6 +85,7 @@ int indice =0;
         jLabel2 = new javax.swing.JLabel();
         jButtonActualizar2 = new javax.swing.JButton();
         jButtonActualizar3 = new javax.swing.JButton();
+        jButtonActualizar4 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -215,7 +216,7 @@ int indice =0;
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
                         .addComponent(jButtonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(210, 105, 30));
@@ -244,6 +245,17 @@ int indice =0;
             }
         });
 
+        jButtonActualizar4.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonActualizar4.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonActualizar4.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonActualizar4.setText("INFORMACION GENERAL");
+        jButtonActualizar4.setBorder(null);
+        jButtonActualizar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizar4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -254,6 +266,7 @@ int indice =0;
                 .addContainerGap(48, Short.MAX_VALUE))
             .addComponent(jButtonActualizar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonActualizar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonActualizar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +277,9 @@ int indice =0;
                 .addComponent(jButtonActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131)
                 .addComponent(jButtonActualizar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jButtonActualizar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -400,7 +415,7 @@ int indice =0;
                     contrato.setFecha_caso(LocalDateTime.now());
                     contrato.Insert();
                     JOptionPane.showMessageDialog(null, "SE SOLICITÓ EL CONTRATO AL ABOGADO,"
-                            + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
+                            + "EN UN PERIODO MÁXIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
                 } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
@@ -419,6 +434,10 @@ int indice =0;
     private void jButtonActualizar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonActualizar3ActionPerformed
+
+    private void jButtonActualizar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActualizar4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,6 +487,7 @@ int indice =0;
     private javax.swing.JButton jButtonActualizar1;
     private javax.swing.JButton jButtonActualizar2;
     private javax.swing.JButton jButtonActualizar3;
+    private javax.swing.JButton jButtonActualizar4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
