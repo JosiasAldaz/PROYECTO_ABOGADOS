@@ -5,28 +5,36 @@
  */
 package clases;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
  * @author KEVIN SANCHEZ
  */
-public class contrato {
+public class contrato extends Persona{
     private int cod_casos;
     private String descripcion;
     private int FK_ID_abg;
     private LocalDateTime fecha_caso;
     private int ID_cli;
+    private int id_contra;
     PostgresConexion conn = new PostgresConexion();
-
-    public contrato(int cod_casos,int ID_cli) {
-        this.cod_casos = cod_casos;
-        this.ID_cli = ID_cli;
-    }
+    PostgresConexion conexion = new PostgresConexion();
 
     public contrato() {
+    }
+
+    public contrato(int cod_casos, String descripcion, int FK_ID_abg, LocalDateTime fecha_caso, int ID_cli, int id_contra) {
+        this.cod_casos = cod_casos;
+        this.descripcion = descripcion;
+        this.FK_ID_abg = FK_ID_abg;
+        this.fecha_caso = fecha_caso;
+        this.ID_cli = ID_cli;
+        this.id_contra = id_contra;
     }
 
     public int getCod_casos() {
@@ -68,10 +76,50 @@ public class contrato {
     public void setID_cli(int ID_cli) {
         this.ID_cli = ID_cli;
     }
-    
+
+    public int getId_contra() {
+        return id_contra;
+    }
+
+    public void setId_contra(int id_contra) {
+        this.id_contra = id_contra;
+    }
+
+    public PostgresConexion getConn() {
+        return conn;
+    }
+
+    public void setConn(PostgresConexion conn) {
+        this.conn = conn;
+    }
+
+    public PostgresConexion getConexion() {
+        return conexion;
+    }
+
+    public void setConexion(PostgresConexion conexion) {
+        this.conexion = conexion;
+    }
+
     public void Insert() throws SQLException{
         String sql = "INSERT INTO contrato(fecha_cont,descripcón,fk_ida_bg,fk_id_cliente)"
                 +"VALUES('"+getFecha_caso()+"','"+getDescripcion()+"',"+getFK_ID_abg()+","+getID_cli()+")";
         conn.accion(sql);
+    }
+    
+    public ArrayList Listarcon() throws SQLException {
+        String sql = "SELECT * FROM CONTRATO WHERE  fk_ida_bg='" +FK_ID_abg+"'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        ArrayList retorno = new ArrayList();
+        while (contenedor.next()) {
+            contrato insertar = new contrato();
+            insertar.setId_contra(contenedor.getInt("id_contrato"));
+            insertar.setDescripcion(contenedor.getString("descripcon"));
+            insertar.setFK_ID_abg(contenedor.getInt("fk_ida_bg"));
+            insertar.setID_cli(contenedor.getInt("fk_id_cliente"));
+            retorno.add(insertar);
+        }
+        
+        return retorno;
     }
 }
