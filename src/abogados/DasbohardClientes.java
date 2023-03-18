@@ -27,37 +27,39 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class DasbohardClientes extends javax.swing.JFrame {
-    
+
     TIPO_diplomnma combo = new TIPO_diplomnma();
     ArrayList<TIPO_diplomnma> combobox = combo.mostrar();
     ArrayList<MOSTRAR_CLIENTES> interfaz = combo.mostrar();
     int indice = 0;
+
     public DasbohardClientes() throws SQLException {
         initComponents();
         cargarcombo();
         jPanel5.setVisible(false);
     }
-    
-    public void cargarcombo() throws SQLException{
+
+    public void cargarcombo() throws SQLException {
         combobox = combo.mostrar();
-            combobox.stream().forEach(tipos -> {
-                if (JCB_tipos.getItemCount() == 0) {
-                    JCB_tipos.addItem("SELECCIONE");
-                }
-                JCB_tipos.addItem(tipos.getNombre_diplo());
-            });
+        combobox.stream().forEach(tipos -> {
+            if (JCB_tipos.getItemCount() == 0) {
+                JCB_tipos.addItem("SELECCIONE");
+            }
+            JCB_tipos.addItem(tipos.getNombre_diplo());
+        });
     }
-    
-    public int buscarID_diploma(){
-        int retorno=0;
+
+    public int buscarID_diploma() {
+        int retorno = 0;
         for (TIPO_diplomnma diploma : combobox) {
-    if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
-        retorno = diploma.getID_diploma();
-    }
-    }
+            if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
+                retorno = diploma.getID_diploma();
+            }
+        }
         return retorno;
     }
-      public void modificarUsuario() throws SQLException {
+
+    public void modificarUsuario() throws SQLException {
         PostgresConexion conexion = new PostgresConexion();
         Cliente cli = new Cliente();
         cli.setID_cliente(Login.cliente.ID_cliente());
@@ -183,6 +185,9 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(34, 45, 49));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel7MouseEntered(evt);
             }
@@ -199,6 +204,12 @@ public class DasbohardClientes extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel22MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel22MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel22MouseExited(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -206,9 +217,8 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,6 +317,14 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("BUSCAR");
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel23MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel23MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -627,77 +645,76 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         indice = indice - 1;
-        if(indice <0){
-            JOptionPane.showMessageDialog(null,"ESTE ES EL PRIMER ABOGADO");
-        }else{
+        if (indice < 0) {
+            JOptionPane.showMessageDialog(null, "ESTE ES EL PRIMER ABOGADO");
+        } else {
             panelSlide.show(indice);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        indice = indice +1;
-        if(indice == interfaz.size()){
+        indice = indice + 1;
+        if (indice == interfaz.size()) {
 
-            JOptionPane.showMessageDialog(null,"ESTE ES EL ÚLTIMO ABOGADO");
-        }else{
-            if(indice >= panelSlide.tamaño()){
+            JOptionPane.showMessageDialog(null, "ESTE ES EL ÚLTIMO ABOGADO");
+        } else {
+            if (indice >= panelSlide.tamaño()) {
                 String nombre = interfaz.get(indice).getNombrecompleto();
                 String especializacion = interfaz.get(indice).getEspecialización();
                 String ruta = interfaz.get(indice).getFoto();
                 String telefono = interfaz.get(indice).getTelefono();
                 String correo = interfaz.get(indice).getCorreo();
                 double costo = interfaz.get(indice).getCostohoras();
-                if (indice % 2 == 0){
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188,143,143), especializacion, ruta, costo, telefono, correo));
-                }else{
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218,165,32), especializacion, ruta, costo, telefono, correo));
+                if (indice % 2 == 0) {
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188, 143, 143), especializacion, ruta, costo, telefono, correo));
+                } else {
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218, 165, 32), especializacion, ruta, costo, telefono, correo));
                 }
 
                 panelSlide.show(indice);
-            }else{
+            } else {
                 panelSlide.show(indice);
             }
 
             //        if(indice % 2 =0){
-                //
-                //        }
-
+            //
+            //        }
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        if(JCB_tipos.getSelectedIndex()== 0){
-            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD");
-        }else{
+        if (JCB_tipos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD");
+        } else {
             MOSTRAR_CLIENTES objeto = new MOSTRAR_CLIENTES();
 
             try {
                 interfaz = objeto.mostrarcli(buscarID_diploma());
-                if(interfaz.size()==0){
-                    JOptionPane.showMessageDialog(null,"NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
-                }else{
-                    String nombre =interfaz.get(indice).getNombrecompleto();
+                if (interfaz.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
+                } else {
+                    String nombre = interfaz.get(indice).getNombrecompleto();
                     String especializacion = interfaz.get(indice).getEspecialización();
                     String ruta = interfaz.get(indice).getFoto();
                     String telefono = interfaz.get(indice).getTelefono();
                     String correo = interfaz.get(indice).getCorreo();
                     double costo = interfaz.get(indice).getCostohoras();
-                    JOptionPane.showMessageDialog(null,"TENEMOS DISPONIBLES "+interfaz.size()+" ABOGADOS CON ESTA ESPECIALIDAD");
-                    panelSlide.init(new Paneltest(nombre,new Color(255,228,196),especializacion,ruta,costo,telefono,correo));
+                    JOptionPane.showMessageDialog(null, "TENEMOS DISPONIBLES " + interfaz.size() + " ABOGADOS CON ESTA ESPECIALIDAD");
+                    panelSlide.init(new Paneltest(nombre, new Color(255, 228, 196), especializacion, ruta, costo, telefono, correo));
                 }
 
-            } catch (SQLException ex){
+            } catch (SQLException ex) {
                 Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
-        if(interfaz.size()==0){
-            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD ");
-        }else{
+        if (interfaz.size() == 0) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD ");
+        } else {
 
             int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE CONTRATAR A ESTE ABOGADO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
@@ -709,7 +726,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
                     contrato.setFecha_caso(LocalDateTime.now());
                     contrato.Insert();
                     JOptionPane.showMessageDialog(null, "SE SOLICITÓ EL CONTRATO AL ABOGADO,"
-                        + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
+                            + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
                 } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
@@ -722,19 +739,19 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void JPanel_explorarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel_explorarMouseEntered
-        
+
     }//GEN-LAST:event_JPanel_explorarMouseEntered
 
     private void JPanel_explorarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel_explorarMouseExited
-        
+
     }//GEN-LAST:event_JPanel_explorarMouseExited
 
     private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
-        jPanel9.setBackground(new Color(145,145,145));
+        jPanel9.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jPanel9MouseEntered
 
     private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
-        jPanel9.setBackground(new Color(34,45,49));
+        jPanel9.setBackground(new Color(34, 45, 49));
     }//GEN-LAST:event_jPanel9MouseExited
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -742,11 +759,11 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel20MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseEntered
-        JPanel_explorar.setBackground(new Color(145,145,145));
+        JPanel_explorar.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jLabel20MouseEntered
 
     private void jLabel20MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseExited
-        JPanel_explorar.setBackground(new Color(34,45,49));
+        JPanel_explorar.setBackground(new Color(34, 45, 49));
     }//GEN-LAST:event_jLabel20MouseExited
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
@@ -758,20 +775,43 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
-        jPanel8.setBackground(new Color(145,145,145));
+        jPanel8.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jPanel8MouseEntered
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-        jPanel7.setBackground(new Color(145,145,145));
+        jPanel7.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jPanel7MouseEntered
 
     private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
-        jPanel8.setBackground(new Color(34,45,49));
+        jPanel8.setBackground(new Color(34, 45, 49));
     }//GEN-LAST:event_jPanel8MouseExited
 
     private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
-        jPanel7.setBackground(new Color(34,45,49));
+        jPanel7.setBackground(new Color(34, 45, 49));
     }//GEN-LAST:event_jPanel7MouseExited
+
+    private void jLabel22MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseEntered
+        jPanel7.setBackground(new Color(145, 145, 145));
+    }//GEN-LAST:event_jLabel22MouseEntered
+
+    private void jLabel23MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseEntered
+        jPanel8.setBackground(new Color(145, 145, 145));
+    }//GEN-LAST:event_jLabel23MouseEntered
+
+    private void jLabel23MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseExited
+        jPanel8.setBackground(new Color(34, 45, 49));
+    }//GEN-LAST:event_jLabel23MouseExited
+
+    private void jLabel22MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseExited
+        jPanel7.setBackground(new Color(34, 45, 49));    }//GEN-LAST:event_jLabel22MouseExited
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        try {
+            modificarUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jPanel7MouseClicked
 
     /**
      * @param args the command line arguments
