@@ -15,6 +15,7 @@ import splashscreen.SplashScreen;
  * @author RAVEN
  */
 public class Login extends javax.swing.JFrame {
+
     public static Cliente cliente;
     public static Administrador admin;
     public static asistente as;
@@ -43,6 +44,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new swing.PasswordField();
         jLabel1 = new javax.swing.JLabel();
         cmdLogin = new swing.Button();
+        cmdLogin1 = new swing.Button();
         jPanel2 = new javax.swing.JPanel();
         exitBtn = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
@@ -72,18 +74,28 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        cmdLogin1.setForeground(new java.awt.Color(231, 231, 231));
+        cmdLogin1.setText("MENU PRINCIPAL");
+        cmdLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLogin1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmdLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +108,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(cmdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cmdLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -162,7 +176,7 @@ public class Login extends javax.swing.JFrame {
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
+                .addGap(53, 329, Short.MAX_VALUE)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(293, 293, 293))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,10 +209,10 @@ public class Login extends javax.swing.JFrame {
         String user = txtUser.getText();
     }
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
-        String user = txtUser.getText();       
+        String user = txtUser.getText();
         String pass = String.valueOf(txtPassword.getPassword());
         Administrador usuario_especial = new Administrador();
-        Cliente usuario= new Cliente();
+        Cliente usuario = new Cliente();
         abogado abg1 = new abogado();
         asistente asi1 = new asistente();
         usuario_especial.setCedula(user);
@@ -206,7 +220,7 @@ public class Login extends javax.swing.JFrame {
         abg1.setCedula(user);
         abg1.setPassword(pass);
         asi1.setCedula(user);
-        asi1.setPassword(pass); 
+        asi1.setPassword(pass);
         usuario.setCedula(user);
         usuario.setPassword(pass);
         int resul = 0;
@@ -230,16 +244,16 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();
                     } else {
                         resul = usuario.login_usuario();
-                        if(resul == 4){
+                        if (resul == 4) {
                             cliente = usuario;
                             DasbohardClientes interfaz4 = new DasbohardClientes();
                             interfaz4.setVisible(true);
                             dispose();
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
                         }
-                        
-                    }                    
+
+                    }
                 }
             }
             admin = usuario_especial;
@@ -247,7 +261,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
         }
-        
+
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
@@ -274,6 +288,12 @@ public class Login extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
+
+    private void cmdLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogin1ActionPerformed
+        VentanaPrincipal1 nueva = new VentanaPrincipal1();
+        nueva.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cmdLogin1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +334,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private login.Background background;
     private swing.Button cmdLogin;
+    private swing.Button cmdLogin1;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JLabel jLabel1;
