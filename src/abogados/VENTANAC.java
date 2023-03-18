@@ -18,6 +18,7 @@ public class VENTANAC extends javax.swing.JFrame {
      */
     public VENTANAC() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**
@@ -37,13 +38,12 @@ public class VENTANAC extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnABOGADO = new javax.swing.JPanel();
         txtABOGADO = new javax.swing.JLabel();
-        btnADMINISTRADOR = new javax.swing.JPanel();
-        txtADMINISTRADOR = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCLIENTE.setBackground(new java.awt.Color(102, 102, 102));
         btnCLIENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -62,18 +62,24 @@ public class VENTANAC extends javax.swing.JFrame {
         txtCLIENTE.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         txtCLIENTE.setForeground(new java.awt.Color(153, 153, 153));
         txtCLIENTE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtCLIENTE.setText("CLIENTE");
+        txtCLIENTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atencion-al-cliente.png"))); // NOI18N
+        txtCLIENTE.setText("   CLIENTE");
 
         javax.swing.GroupLayout btnCLIENTELayout = new javax.swing.GroupLayout(btnCLIENTE);
         btnCLIENTE.setLayout(btnCLIENTELayout);
         btnCLIENTELayout.setHorizontalGroup(
             btnCLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtCLIENTE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btnCLIENTELayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(57, 57, 57))
         );
         btnCLIENTELayout.setVerticalGroup(
             btnCLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(txtCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
+
+        jPanel3.add(btnCLIENTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 190, 60));
 
         btnASISTENTE.setBackground(new java.awt.Color(102, 102, 102));
         btnASISTENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -92,23 +98,33 @@ public class VENTANAC extends javax.swing.JFrame {
         txtASISTENTE.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         txtASISTENTE.setForeground(new java.awt.Color(153, 153, 153));
         txtASISTENTE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtASISTENTE.setText("ASISTENTE");
+        txtASISTENTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/asistente-virtual.png"))); // NOI18N
+        txtASISTENTE.setText("  ASISTENTE");
         txtASISTENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout btnASISTENTELayout = new javax.swing.GroupLayout(btnASISTENTE);
         btnASISTENTE.setLayout(btnASISTENTELayout);
         btnASISTENTELayout.setHorizontalGroup(
             btnASISTENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtASISTENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+            .addGroup(btnASISTENTELayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(txtASISTENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addContainerGap())
         );
         btnASISTENTELayout.setVerticalGroup(
             btnASISTENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtASISTENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addGroup(btnASISTENTELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtASISTENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Roboto Medium", 1, 16)); // NOI18N
+        jPanel3.add(btnASISTENTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 190, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("¿Desea registrarse como?");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 310, 36));
 
         btnABOGADO.setBackground(new java.awt.Color(102, 102, 102));
         btnABOGADO.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,98 +142,50 @@ public class VENTANAC extends javax.swing.JFrame {
         txtABOGADO.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         txtABOGADO.setForeground(new java.awt.Color(153, 153, 153));
         txtABOGADO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtABOGADO.setText("ABOGADO");
+        txtABOGADO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ley (1).png"))); // NOI18N
+        txtABOGADO.setText("   ABOGADO");
         txtABOGADO.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout btnABOGADOLayout = new javax.swing.GroupLayout(btnABOGADO);
         btnABOGADO.setLayout(btnABOGADOLayout);
         btnABOGADOLayout.setHorizontalGroup(
             btnABOGADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnABOGADOLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         btnABOGADOLayout.setVerticalGroup(
             btnABOGADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-        );
-
-        btnADMINISTRADOR.setBackground(new java.awt.Color(102, 102, 102));
-        btnADMINISTRADOR.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnADMINISTRADORMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnADMINISTRADORMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnADMINISTRADORMouseExited(evt);
-            }
-        });
-
-        txtADMINISTRADOR.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        txtADMINISTRADOR.setForeground(new java.awt.Color(153, 153, 153));
-        txtADMINISTRADOR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtADMINISTRADOR.setText("ADMINISTRADOR");
-        txtADMINISTRADOR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout btnADMINISTRADORLayout = new javax.swing.GroupLayout(btnADMINISTRADOR);
-        btnADMINISTRADOR.setLayout(btnADMINISTRADORLayout);
-        btnADMINISTRADORLayout.setHorizontalGroup(
-            btnADMINISTRADORLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtADMINISTRADOR, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-        );
-        btnADMINISTRADORLayout.setVerticalGroup(
-            btnADMINISTRADORLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtADMINISTRADOR, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnADMINISTRADOR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnASISTENTE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(btnABOGADOLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btnCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnABOGADO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnASISTENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btnADMINISTRADOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(txtABOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jPanel3.add(btnABOGADO, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 190, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCLIENTEMouseClicked
+
         Registro_u Cliente = new Registro_u();
         Cliente.setVisible(true);
         dispose();
+   
+        
     }//GEN-LAST:event_btnCLIENTEMouseClicked
 
     private void btnCLIENTEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCLIENTEMouseEntered
@@ -229,6 +197,7 @@ public class VENTANAC extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCLIENTEMouseExited
 
     private void btnASISTENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnASISTENTEMouseClicked
+        
         Regi_Asistente Asistente = new Regi_Asistente();
         Asistente.setVisible(true);
         dispose();
@@ -243,6 +212,7 @@ public class VENTANAC extends javax.swing.JFrame {
     }//GEN-LAST:event_btnASISTENTEMouseExited
 
     private void btnABOGADOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnABOGADOMouseClicked
+     
         Regi_abogado Abogado = new Regi_abogado();
         Abogado.setVisible(true);
         dispose();
@@ -255,23 +225,6 @@ public class VENTANAC extends javax.swing.JFrame {
     private void btnABOGADOMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnABOGADOMouseExited
         btnABOGADO.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_btnABOGADOMouseExited
-
-    private void btnADMINISTRADORMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnADMINISTRADORMouseEntered
-        btnADMINISTRADOR.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_btnADMINISTRADORMouseEntered
-
-    private void btnADMINISTRADORMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnADMINISTRADORMouseExited
-        btnADMINISTRADOR.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_btnADMINISTRADORMouseExited
-
-    private void btnADMINISTRADORMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnADMINISTRADORMouseClicked
-        Radministrador Admin = new Radministrador();
-        Admin.setVisible(true);
-          VentanaPrincipal1 principal = new VentanaPrincipal1();
-        principal.setVisible(false);
-        dispose();
-        dispose();
-    }//GEN-LAST:event_btnADMINISTRADORMouseClicked
 
     /**
      * @param args the command line arguments
@@ -310,13 +263,11 @@ public class VENTANAC extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnABOGADO;
-    private javax.swing.JPanel btnADMINISTRADOR;
     private javax.swing.JPanel btnASISTENTE;
     private javax.swing.JPanel btnCLIENTE;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel txtABOGADO;
-    private javax.swing.JLabel txtADMINISTRADOR;
     private javax.swing.JLabel txtASISTENTE;
     private javax.swing.JLabel txtCLIENTE;
     // End of variables declaration//GEN-END:variables

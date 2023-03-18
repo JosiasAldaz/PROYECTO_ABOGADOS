@@ -46,7 +46,7 @@ public class TIPO_diplomnma {
     }
     
     public ArrayList mostrar() throws SQLException{
-        String sql = "SELECT * FROM TIPO_DIPLOMA";
+        String sql = "SELECT * FROM TIPO_DIPLOMA ORDER BY id_tipo";
         ArrayList registros = new ArrayList();
         ResultSet contenedor =conn.Consulta(sql);
         while(contenedor.next()){
@@ -77,7 +77,7 @@ public class TIPO_diplomnma {
     }
     
     public SQLException modificar() throws SQLException{
-        String sql = "UPDATE * SET tipo_diploma ='"+getNombre_diplo()+"' WHERE id_tipo = "+getID_diploma();
+        String sql = "UPDATE  public.tipo_diploma SET nombre_tipo ='"+getNombre_diplo()+"' WHERE id_tipo = "+getID_diploma();
         return conn.accion(sql);
     }
         

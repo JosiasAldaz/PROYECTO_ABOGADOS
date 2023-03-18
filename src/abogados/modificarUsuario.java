@@ -14,7 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,9 +31,10 @@ public class modificarUsuario extends javax.swing.JFrame {
      */
     public modificarUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-    
-    public String SeleccionarMes (String mes){
+
+    public String SeleccionarMes(String mes) {
         String retorno = "";
         switch (mes) {
             case "Enero":
@@ -72,35 +76,62 @@ public class modificarUsuario extends javax.swing.JFrame {
         }
         return retorno;
     }
-    
+        public void validar() throws SQLException {
+        if (jTxtFldCedula.getText().matches("^[0-9]{10}$")) {
+            if (jTxtFldNombre1.getText().matches("[a-z]+") && jTxtFldNombre2.getText().matches("[a-z]+")) {
+                if (jTxtFldApellido1.getText().matches("[a-z]+") && jTxtFldApellido2.getText().matches("[a-z]+")) {
+                    if (jTxtFldCorreo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                        if (jTxtFildTelefono.getText().matches("^[0-9]{10}$")) {
+                            if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
+                               InserBase();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "NO COINCIDEN LAS CONTRASEÑAS");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CORREO INCORRECTO");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTO");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INGRESADA INCORRECTA");
+        }
+    }
+
     public void InserBase() throws SQLException {
-       int anio = jYearChooser1.getYear();
+        int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
         String contra = new String(jPsswrdFldContraseña1.getPassword());
         char genero = '\0';
-        
+
         if (jRadioButton3.isSelected()) {
-            genero='X';
+            genero = 'X';
         }
         if (jRadioButton1.isSelected()) {
-            genero ='F';
+            genero = 'F';
         }
         if (jRadioButton2.isSelected()) {
             genero = 'M';
         }
         if (dia > 31 || dia < 1) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
-        }else{
+        } else {
             if (JBxmes.getSelectedItem().toString().equals("SELECCIONE")) {
                 JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
-            }else{
+            } else {
                 if (anio >= LocalDate.now().getYear()) {
                     JOptionPane.showMessageDialog(null, "EL AÑO DE NACIMIENTO ES INCORRECTO");
-                }else{
+                } else {
                     String diaF = "";
                     if (Jspdia.getValue().toString().length() == 1) {
-                        diaF = "0"+ Jspdia.getValue().toString();
-                    }else{
+                        diaF = "0" + Jspdia.getValue().toString();
+                    } else {
                         diaF = Jspdia.getValue().toString();
                     }
                     String timechooser = diaF + "/" + SeleccionarMes(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser1.getYear();
@@ -108,18 +139,21 @@ public class modificarUsuario extends javax.swing.JFrame {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fecha = LocalDate.parse(timechooser, formato);
                     LocalDateTime fechaHora = fecha.atStartOfDay();
+                    LocalDate ahora = LocalDate.now();
+                    Period periodo = Period.between(fecha, ahora);
+                    int auxaedad = periodo.getYears();
                     PostgresConexion conexion = new PostgresConexion();
                     Cliente USU = new Cliente();
                     USU.setCedula(jTxtFldCedula.getText());
-                    String sql = "SELECT * FROM ABOGADO WHERE  cedula_usu='" + USU.getCedula() + "'";
+                    String sql = "SELECT * FROM CLIENTES WHERE  cedula_cli='" + USU.getCedula() + "'";
                     ResultSet contenedor = conexion.Consulta(sql);
                     Direcciones direccion_usuario = new Direcciones();
-                    while (contenedor.next()){
-                        int k = contenedor.getInt("fk_id_direcc_abg");
+                    while (contenedor.next()) {
+                        int k = contenedor.getInt("fk_id_direccion");
                         direccion_usuario.setId_direccion(k);
                         String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direccion_usuario.getId_direccion() + "'";
                         ResultSet contenedor1 = conexion.Consulta(sql1);
-                        while (contenedor1.next()){
+                        while (contenedor1.next()) {
                             direccion_usuario.setCalle_principal(jTxtFldCallePrincipal.getText());
                             direccion_usuario.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
                             direccion_usuario.setSucursal(false);
@@ -132,18 +166,21 @@ public class modificarUsuario extends javax.swing.JFrame {
                             USU.setSegundoApellido(jTxtFldApellido2.getText());
                             USU.setTelefono(jTxtFildTelefono.getText());
                             USU.setGenero(genero);
+                            USU.setEdad(auxaedad);
                             USU.setPassword(contra);
+                            USU.setFecha_nacimiento(fechaHora);
                             USU.setFoto_perfil(JFSfoto_Usuario.getRutaImagen());
-                            USU.Modificar_cliente(); 
-                        }catch (SQLException e){
-                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");    
-                        }
+                            USU.Modificar_cliente();
+                            dispose();
+                            JOptionPane.showMessageDialog(null, "SE ACTUALIZO SU INFORMACION");
+                        } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
                         }
                     }
-            }              
+                }
+            }
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,13 +214,11 @@ public class modificarUsuario extends javax.swing.JFrame {
         jPsswrdFldContraseña2 = new javax.swing.JPasswordField();
         jLblCorreo = new javax.swing.JLabel();
         jTxtFldCorreo = new javax.swing.JTextField();
-        jLblNombreUsuario = new javax.swing.JLabel();
         jTxtFldCallePrincipal = new javax.swing.JTextField();
         jTxtFldCalleSecundaria = new javax.swing.JTextField();
         JFSfoto_Usuario = new rojerusan.RSFotoSquare();
         jLabel12 = new javax.swing.JLabel();
         jLabelCon = new javax.swing.JLabel();
-        jTxtFldNomUser = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jPsswrdFldContraseña1 = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -199,7 +234,7 @@ public class modificarUsuario extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jBttnRegresarPanPrincipal1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -332,7 +367,7 @@ public class modificarUsuario extends javax.swing.JFrame {
         jPsswrdFldContraseña2.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña2.setText("jPasswordField1");
         jPsswrdFldContraseña2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
-        jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 100, 20));
+        jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 100, 20));
 
         jLblCorreo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLblCorreo.setText("Correo:");
@@ -346,10 +381,6 @@ public class modificarUsuario extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTxtFldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 230, 20));
-
-        jLblNombreUsuario.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
-        jLblNombreUsuario.setText("Nombre Usuario:");
-        jPanel2.add(jLblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 120, -1));
 
         jTxtFldCallePrincipal.setBackground(new java.awt.Color(211, 211, 211));
         jTxtFldCallePrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -379,26 +410,23 @@ public class modificarUsuario extends javax.swing.JFrame {
 
         jLabelCon.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabelCon.setText("Contraseña:");
-        jPanel2.add(jLabelCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 90, -1));
-
-        jTxtFldNomUser.setBackground(new java.awt.Color(211, 211, 211));
-        jTxtFldNomUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
-        jPanel2.add(jTxtFldNomUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
+        jPanel2.add(jLabelCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 90, -1));
 
         jLabel16.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel16.setText("Contraseña:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 90, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 90, -1));
 
         jPsswrdFldContraseña1.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña1.setText("jPasswordField1");
         jPsswrdFldContraseña1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
-        jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 100, 20));
+        jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 100, 20));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 950, 10));
 
         jBttnRegresarPanPrincipal.setBackground(new java.awt.Color(245, 222, 179));
         jBttnRegresarPanPrincipal.setFont(new java.awt.Font("OCR A Extended", 1, 12)); // NOI18N
+        jBttnRegresarPanPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
         jBttnRegresarPanPrincipal.setText("ACTUALIZAR");
         jBttnRegresarPanPrincipal.setBorder(null);
         jBttnRegresarPanPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -406,7 +434,7 @@ public class modificarUsuario extends javax.swing.JFrame {
                 jBttnRegresarPanPrincipalActionPerformed(evt);
             }
         });
-        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 170, 40));
+        jPanel2.add(jBttnRegresarPanPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 170, 40));
 
         ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ocultar.png"))); // NOI18N
         ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,7 +442,7 @@ public class modificarUsuario extends javax.swing.JFrame {
                 ocultarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 50, 50));
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 50, 50));
 
         mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -422,7 +450,7 @@ public class modificarUsuario extends javax.swing.JFrame {
                 mostrarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Algerian", 3, 12)); // NOI18N
         jLabel7.setText("Seleccione una Imagen");
@@ -460,17 +488,17 @@ public class modificarUsuario extends javax.swing.JFrame {
 
         jBttnRegresarPanPrincipal1.setBackground(new java.awt.Color(245, 222, 179));
         jBttnRegresarPanPrincipal1.setFont(new java.awt.Font("OCR A Extended", 1, 12)); // NOI18N
-        jBttnRegresarPanPrincipal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hame.png"))); // NOI18N
-        jBttnRegresarPanPrincipal1.setText("PANTALLA PRINCIPAL");
+        jBttnRegresarPanPrincipal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regrasar.png"))); // NOI18N
+        jBttnRegresarPanPrincipal1.setText("REGRESAR");
         jBttnRegresarPanPrincipal1.setBorder(null);
         jBttnRegresarPanPrincipal1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBttnRegresarPanPrincipal1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jBttnRegresarPanPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 170, 40));
+        jPanel2.add(jBttnRegresarPanPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, 170, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 950, 480));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 950, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -544,10 +572,19 @@ public class modificarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtFldCalleSecundariaKeyTyped
 
     private void jBttnRegresarPanPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipalActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESE HACER ESTOS CAMBIO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == 0) {
 
-        VentanaPrincipal1 principal = new VentanaPrincipal1();
-        principal.setVisible(true);
-        dispose();
+            try {
+                InserBase();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(modificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            dispose();
+        }
+
     }//GEN-LAST:event_jBttnRegresarPanPrincipalActionPerformed
 
     private void ocultarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarContraMouseClicked
@@ -586,7 +623,7 @@ public class modificarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jBttnRegresarPanPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipal1ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBttnRegresarPanPrincipal1ActionPerformed
 
     /**
@@ -647,7 +684,6 @@ public class modificarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCon;
     private javax.swing.JLabel jLblCorreo;
-    private javax.swing.JLabel jLblNombreUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPsswrdFldContraseña1;
@@ -663,7 +699,6 @@ public class modificarUsuario extends javax.swing.JFrame {
     public static javax.swing.JTextField jTxtFldCalleSecundaria;
     public static javax.swing.JTextField jTxtFldCedula;
     public static javax.swing.JTextField jTxtFldCorreo;
-    private javax.swing.JTextField jTxtFldNomUser;
     public static javax.swing.JTextField jTxtFldNombre1;
     public static javax.swing.JTextField jTxtFldNombre2;
     private com.toedter.calendar.JYearChooser jYearChooser1;

@@ -5,8 +5,11 @@
  */
 package abogados;
 
+import static abogados.Regi_Asistente.jTextcedula;
 import clases.Administrador;
 import clases.Direcciones;
+import clases.PostgresConexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -25,8 +28,9 @@ public class Radministrador extends javax.swing.JFrame {
      */
     public Radministrador() {
         initComponents();
+        this.setLocationRelativeTo(this);
         ocultar.setVisible(false);
-   
+
     }
 
     public void diasvalidacion() {
@@ -81,6 +85,17 @@ public class Radministrador extends javax.swing.JFrame {
         }
         return retorno;
     }
+     public void Verificar() throws SQLException {
+          PostgresConexion conexion = new PostgresConexion();
+        String sql = "SELECT FROM ADMINISTRADOR WHERE cedula_admin='" + cedula.getText() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        System.out.println(contenedor.toString());
+        if (contenedor.next()) {
+            JOptionPane.showMessageDialog(this, "ADMINISTRADOR YA EXISTE");
+        } else {
+          validar();
+        }
+    }
 
     public void validar() {
         if (cedula.getText().matches("^[0-9]{10}$")) {
@@ -90,9 +105,8 @@ public class Radministrador extends javax.swing.JFrame {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
                             if (calle1.getText().matches("[a-z]+$") && calle2.getText().matches("[a-z]+$")) {
                                 //if (contraseña3.equals(contraseña4)) {
-                                     pru();
+                                pru();
 
-                                
                             } else {
                                 JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
                             }
@@ -150,7 +164,7 @@ public class Radministrador extends javax.swing.JFrame {
                     LocalDateTime fechaHora = fecha.atStartOfDay();
                     LocalDate ahora = LocalDate.now();
                     Period periodo = Period.between(fecha, ahora);
-                    int auxaedad= periodo.getYears();
+                    int auxaedad = periodo.getYears();
                     Direcciones direccion_admin = new Direcciones();
                     direccion_admin.setCalle_principal(calle1.getText());
                     direccion_admin.setCalle_secundaria(calle2.getText());
@@ -186,7 +200,6 @@ public class Radministrador extends javax.swing.JFrame {
 
         }
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -489,7 +502,11 @@ public class Radministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        validar();
+        try {
+            Verificar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre1ActionPerformed

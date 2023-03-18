@@ -101,7 +101,11 @@ public class abogado extends Persona {
     public void ELIMINARABOGADO() throws SQLException {
         String sql = "DELETE FROM public.abogado\n"
                 + "	WHERE id_abg=" + cod_abogado + "";
-        conexion.accion(sql);
+        if(conexion.accion(sql) == null){
+            JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO");
+        }
     }
 
     public int Seleccionar(String select) throws SQLException {

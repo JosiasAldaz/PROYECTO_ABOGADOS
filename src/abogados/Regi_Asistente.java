@@ -38,8 +38,9 @@ public class Regi_Asistente extends javax.swing.JFrame {
      */
     public Regi_Asistente() {
         initComponents();
+        this.setLocationRelativeTo(this);
         ocultarasis.setVisible(false);
-       Regreso.setVisible(false);
+        Regreso.setVisible(false);
     }
 
     public void AsisReg() {
@@ -49,7 +50,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
     public void registro_admin() {
         jButton4.setVisible(false);
         Regreso.setVisible(true);
-        
+
     }
 
     /**
@@ -428,7 +429,12 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
-        valced();
+
+        try {
+            Verificar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_registroActionPerformed
 
     private void jPasscontra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasscontra2ActionPerformed
@@ -671,6 +677,17 @@ public class Regi_Asistente extends javax.swing.JFrame {
         });
     }
 
+    public void Verificar() throws SQLException {
+        String sql = "SELECT FROM ASISTENTE WHERE cedula_asis='" + jTextcedula.getText() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        System.out.println(contenedor.toString());
+        if (contenedor.next()) {
+            JOptionPane.showMessageDialog(this, "ASISTENTE YA REGISTRADO");
+        } else {
+            valced();
+        }
+    }
+
     public void ingresar_datos() {
         String ced = jTextcedula.getText();
         String nom = jTextnom1.getText();
@@ -751,7 +768,6 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         System.out.println(id);
                                                                         double sueldo = Double.parseDouble(suel);
                                                                         int ex = Integer.parseInt(expe);
-                                                                        asisten1.setCod_asist(ced);
                                                                         asisten1.setTitudocu(titasis);
                                                                         asisten1.setExperiencia(ex);
                                                                         asisten1.setCedula(ced);
@@ -770,6 +786,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                                                                         asisten1.setFoto_perfil(foto_asis.getRutaImagen());
                                                                         validarasis();
                                                                         asisten1.Ingresar();
+
                                                                     } catch (SQLException ex) {
                                                                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                                                                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");

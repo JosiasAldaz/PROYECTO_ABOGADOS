@@ -714,12 +714,15 @@ public class Modificari_Asistente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtFldTituloAsistenteKeyTyped
 
     private void RegresarasisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarasisActionPerformed
-        try {
-            // TODO add your handling code here:
-            //valced();
-            ingresar_datos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+        int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESE HACER ESTOS CAMBIO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == 0) {
+            try {
+                // TODO add your handling code here:
+                //valced();
+                ingresar_datos();
+            } catch (SQLException ex) {
+                Logger.getLogger(Modificari_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_RegresarasisActionPerformed
 
@@ -968,7 +971,7 @@ public class Modificari_Asistente extends javax.swing.JFrame {
                                                                                 System.out.println(id);
                                                                                 double sueldo = Double.parseDouble(suel);
                                                                                 int ex = Integer.parseInt(expe);
-                                                                                asisten1.setCod_asist(ced);
+                                                                               
                                                                                 asisten1.setTitudocu(titasis);
                                                                                 asisten1.setExperiencia(ex);
                                                                                 asisten1.setCedula(ced);
