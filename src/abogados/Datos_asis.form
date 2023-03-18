@@ -159,9 +159,8 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                           <Component id="jButton4" min="-2" pref="250" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                           <Component id="Regresarasis" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -254,7 +253,7 @@
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -305,8 +304,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Regresarasis" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jButton4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Regresarasis" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
@@ -559,7 +558,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagenes/disco-flexible.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
+            <Property name="text" type="java.lang.String" value="REGRESAR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegresarasisActionPerformed"/>
@@ -738,7 +737,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagenes/hame.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="REGRESAR"/>
+            <Property name="text" type="java.lang.String" value="PANTALLA PRINCIPAL"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>

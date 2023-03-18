@@ -15,11 +15,14 @@ import clases.PostgresConexion;
 import clases.abogado;
 import clases.asistente;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,7 +39,8 @@ import javax.swing.table.TableColumnModel;
  */
 public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
-    PostgresConexion conexion = new PostgresConexion();    
+    PostgresConexion conexion = new PostgresConexion();
+
     /**
      * Creates new form administradorInterfaz
      */
@@ -47,6 +51,7 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanel3.setVisible(false);
     }
 //////////////////////////////
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,6 +289,11 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
         jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 930, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
@@ -615,19 +625,13 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
 
     private void mostraasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseClicked
         String cedulaingre = cedula_aux11.getText();
-        Modificari_Asistente mod = new Modificari_Asistente();
+        Datos_asis mod = new Datos_asis();
         jPanel3.setVisible(true);
         panelaboga.setVisible(false);
         jPanelclientes.setVisible(false);
         jLabel7.setVisible(false);
-        System.out.println(""+cedulaingre);
-        try {
-            prue();
-            mod.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(asistenteInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        mod.setVisible(true);
+        dispose();
     }//GEN-LAST:event_mostraasisMouseClicked
 
     private void mostraasisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostraasisMouseEntered
@@ -693,6 +697,18 @@ public final class asistenteInterfaz2 extends javax.swing.JFrame {
     private void reserasisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserasisMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_reserasisMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        String url = "https://goo.gl/maps/UoBFEarK47ZhZvQU9";
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (URISyntaxException ex) {
+
+        } catch (IOException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments

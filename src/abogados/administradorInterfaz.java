@@ -17,6 +17,10 @@ import clases.abogado;
 import clases.Direcciones;
 import clases.asistente;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -1142,6 +1146,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
@@ -1622,6 +1631,17 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg1.setVisible(false);
         jPanelUsuario.setVisible(true);
     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+             String url = "https://goo.gl/maps/UoBFEarK47ZhZvQU9";
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (URISyntaxException ex) {
+      
+    }   catch (IOException ex) { 
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments

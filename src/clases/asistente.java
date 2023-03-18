@@ -97,7 +97,7 @@ public class asistente extends Persona {
             insertar.setNombreApellido(contenedor.getString("prim_apell_asis"));
             insertar.setSegundoApellido(contenedor.getString("seg_apell_asis"));
             insertar.setEdad(contenedor.getInt("edad_asis"));
-            //insertar.setGenero(contenedor.getCharacterStream("seg_apell_asis"));
+            //insertar.setGenero((char)contenedor.getString("seg_apell_asis"));           
             insertar.setFK_direccion(contenedor.getInt("fk_dir_asis"));
             //insertar.setFecha_nacimiento(contenedor.getString("seg_apell_asis"));          
             insertar.setSueldo(contenedor.getDouble("sueldo_asis"));

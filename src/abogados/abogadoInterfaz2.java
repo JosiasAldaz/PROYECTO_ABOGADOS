@@ -7,6 +7,10 @@ package abogados;
 import clases.abogado;
 import desplazable.Desface;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,17 +29,19 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
      * Creates new form abogadoInterfaz
      */
     Desface desplace;
+
     public abogadoInterfaz2() {
         initComponents();
-       
+
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
-         desplace = new Desface();
-         desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
+        desplace = new Desface();
+        desplace.desplazarIzquierda(MenuDesplegable, MenuDesplegable.getX(), -160, 10, 0);
     }
+
     ////////////////////////////datos de casos/////////////////////////////////////////////
-        public void mostrarabogados(ArrayList<abogado> lista_tipo) {
+    public void mostrarabogados(ArrayList<abogado> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
         mTabla = (DefaultTableModel) contra.getModel();
@@ -74,6 +80,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -491,6 +498,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 860, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
@@ -731,7 +743,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         VentanaFondo.setVisible(true);
-        
+
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -742,11 +754,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_sesionActionPerformed
 
     private void sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseExited
-        sesion.setBackground(new Color(0,0,102));
+        sesion.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_sesionMouseExited
 
     private void sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesionMouseEntered
-        sesion.setBackground(new Color(0,0,153));
+        sesion.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_sesionMouseEntered
 
     private void txtOficinaAsignadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaActionPerformed
@@ -754,11 +766,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOficinaAsignadaActionPerformed
 
     private void txtOficinaAsignadaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaMouseExited
-        txtOficinaAsignada.setBackground(new Color(0,0,102));
+        txtOficinaAsignada.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtOficinaAsignadaMouseExited
 
     private void txtOficinaAsignadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOficinaAsignadaMouseEntered
-        txtOficinaAsignada.setBackground(new Color(0,0,153));
+        txtOficinaAsignada.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtOficinaAsignadaMouseEntered
 
     private void txtContratosEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContratosEsperaActionPerformed
@@ -766,11 +778,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContratosEsperaActionPerformed
 
     private void txtContratosEsperaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseExited
-        txtContratosEspera.setBackground(new Color(0,0,102));
+        txtContratosEspera.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtContratosEsperaMouseExited
 
     private void txtContratosEsperaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseEntered
-        txtContratosEspera.setBackground(new Color(0,0,153));
+        txtContratosEspera.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtContratosEsperaMouseEntered
 
     private void txtContratosVigentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContratosVigentesActionPerformed
@@ -778,16 +790,16 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContratosVigentesActionPerformed
 
     private void txtContratosVigentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseExited
-        txtContratosVigentes.setBackground(new Color(0,0,102));
+        txtContratosVigentes.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtContratosVigentesMouseExited
 
     private void txtContratosVigentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseEntered
-        txtContratosVigentes.setBackground(new Color(0,0,153));
+        txtContratosVigentes.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtContratosVigentesMouseEntered
 
     private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
         VentanaFondo.setVisible(false);
-        
+
         ContratosVigentes.setVisible(true);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -848,7 +860,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private void txtContratosEsperaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosEsperaMouseClicked
         VentanaContratosEspera.setVisible(true);
         VentanaFondo.setVisible(false);
-        
+
         ContratosVigentes.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosEsperaMouseClicked
@@ -858,11 +870,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModificarActionPerformed
 
     private void txtModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseExited
-        txtModificar.setBackground(new Color(0,0,102));
+        txtModificar.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtModificarMouseExited
 
     private void txtModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseEntered
-        txtModificar.setBackground(new Color(0,0,153));
+        txtModificar.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtModificarMouseEntered
 
     private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
@@ -876,11 +888,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAsistenteAsignadoActionPerformed
 
     private void txtAsistenteAsignadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseExited
-        txtAsistenteAsignado.setBackground(new Color(0,0,102));
+        txtAsistenteAsignado.setBackground(new Color(0, 0, 102));
     }//GEN-LAST:event_txtAsistenteAsignadoMouseExited
 
     private void txtAsistenteAsignadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseEntered
-        txtAsistenteAsignado.setBackground(new Color(0,0,153));
+        txtAsistenteAsignado.setBackground(new Color(0, 0, 153));
     }//GEN-LAST:event_txtAsistenteAsignadoMouseEntered
 
     private void txtAsistenteAsignadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoMouseClicked
@@ -893,8 +905,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        String url = "https://goo.gl/maps/UoBFEarK47ZhZvQU9";
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (URISyntaxException ex) {
+
+        } catch (IOException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
