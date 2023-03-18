@@ -232,7 +232,7 @@ public class Login extends javax.swing.JFrame {
                         resul = usuario.login_usuario();
                         if(resul == 4){
                             cliente = usuario;
-                            menuclientes interfaz4 = new menuclientes();
+                            DasbohardClientes interfaz4 = new DasbohardClientes();
                             interfaz4.setVisible(true);
                         }else{
                             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
