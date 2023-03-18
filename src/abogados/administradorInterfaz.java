@@ -417,28 +417,32 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     public void modificarEpecialidad() {
-        int seleccionado=-1;
-        seleccionado = Tabla_Tipos.getRowCount();
-        if (seleccionado == -1) {
-            if (JTxt_ingreso_diplo.getText().equals("NOMBRE")||JTxt_ingreso_diplo.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
+        int seleccionado = -1;
+        seleccionado = Tabla_Tipos.getSelectedRow();
+        if (JTxt_ingreso_diplo.getText().equals("NOMBRE") || JTxt_ingreso_diplo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
 
+        } else {
+            if (seleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA FILA");
             } else {
                 try {
 
                     TIPO_diplomnma nuevo = new TIPO_diplomnma();
                     nuevo.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
-                    nuevo.setNombre_diplo(JTxt_ingreso_diplo.getText());
-                    change.modificar();
-                    mostrarpersonas(change.mostrar());
-                    JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
-                    questnombre.dispose();
+                    String sql = "SELECT FROM TIPO_DIPLOMA WHERE id_tipo='" + nuevo.getID_diploma() + "'";
+                    ResultSet contenedor1 = conexion.Consulta(sql);
+                    while (contenedor1.next()) {
+                        nuevo.setNombre_diplo(JTxt_ingreso_diplo.getText());
+                        nuevo.modificar();
+
+                        JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
+                    }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR");
+
                 }
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA FILA");
         }
 
     }
@@ -816,6 +820,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         JPfondo_Inicial.add(JPcrud_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
+        JP_fondo_especialidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JP_fondo_especialidadKeyTyped(evt);
+            }
+        });
         JP_fondo_especialidad.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonModificarA12.setBackground(new java.awt.Color(128, 0, 0));
@@ -929,7 +938,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         });
         jScrollPaneCam1.setViewportView(Tabla_Tipos);
 
-        JP_fondo_especialidad.add(jScrollPaneCam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 470, 330));
+        JP_fondo_especialidad.add(jScrollPaneCam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 470, 330));
 
         JPfondo_Inicial.add(JP_fondo_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
@@ -1156,7 +1165,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1391,11 +1400,12 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private void jButtonModificarA16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA16ActionPerformed
 
         eliminarEspecializacion();
+        
 
     }//GEN-LAST:event_jButtonModificarA16ActionPerformed
 
     private void Tabla_TiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_TiposMouseClicked
-        selecionarEspecialidad();
+
     }//GEN-LAST:event_Tabla_TiposMouseClicked
 
     private void jButtonModificarA14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA14ActionPerformed
@@ -1405,6 +1415,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     private void jButtonModificarA13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA13ActionPerformed
         modificarEpecialidad();
+        limpiar();
+        mostrarEspecialidades();
     }//GEN-LAST:event_jButtonModificarA13ActionPerformed
 
     private void TXT_nuevo_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_nuevo_tipoActionPerformed
@@ -1684,6 +1696,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void JP_fondo_especialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JP_fondo_especialidadKeyTyped
+
+    }//GEN-LAST:event_JP_fondo_especialidadKeyTyped
 
     /**
      * @param args the command line arguments

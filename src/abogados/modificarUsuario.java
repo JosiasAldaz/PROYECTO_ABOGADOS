@@ -76,6 +76,33 @@ public class modificarUsuario extends javax.swing.JFrame {
         }
         return retorno;
     }
+        public void validar() throws SQLException {
+        if (jTxtFldCedula.getText().matches("^[0-9]{10}$")) {
+            if (jTxtFldNombre1.getText().matches("[a-z]+") && jTxtFldNombre2.getText().matches("[a-z]+")) {
+                if (jTxtFldApellido1.getText().matches("[a-z]+") && jTxtFldApellido2.getText().matches("[a-z]+")) {
+                    if (jTxtFldCorreo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                        if (jTxtFildTelefono.getText().matches("^[0-9]{10}$")) {
+                            if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
+                               InserBase();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "NO COINCIDEN LAS CONTRASEÑAS");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CORREO INCORRECTO");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTO");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INGRESADA INCORRECTA");
+        }
+    }
 
     public void InserBase() throws SQLException {
         int anio = jYearChooser1.getYear();

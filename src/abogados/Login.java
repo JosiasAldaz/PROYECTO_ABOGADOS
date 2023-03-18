@@ -234,6 +234,7 @@ public class Login extends javax.swing.JFrame {
                             cliente = usuario;
                             DasbohardClientes interfaz4 = new DasbohardClientes();
                             interfaz4.setVisible(true);
+                            dispose();
                         }else{
                             JOptionPane.showMessageDialog(null, "USTED NO SE ENCUENTRA REGISTRADO");
                         }

@@ -401,6 +401,9 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="JP_fondo_especialidad">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JP_fondo_especialidadKeyTyped"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="550"/>
@@ -565,7 +568,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="460" y="80" width="470" height="330"/>
+                      <AbsoluteConstraints x="470" y="60" width="470" height="330"/>
                     </Constraint>
                   </Constraints>
 
