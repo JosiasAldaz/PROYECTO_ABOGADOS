@@ -92,7 +92,35 @@ public class modificarAbogado extends javax.swing.JFrame {
         }
         return id;
     }
+public void validar() throws SQLException {
+        if (cedula.getText().matches("^[0-9]{10}$")) {
+            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
+                if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
+//                    if (correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                        if (telefono.getText().matches("^[0-9]{10}$")) {
+                            if (direccion1.getText().matches("[a-z]+$") && direccion2.getText().matches("[a-z]+$")) {
+                                //if (contraseña3.equals(contraseña4)) {
+                                InserBase();
 
+                            } else {
+                                JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(this, "CORREO INGRESADO INCORRECTA");
+//                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTA");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
+    }
     public void InserBase() throws SQLException {
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
@@ -728,10 +756,13 @@ public class modificarAbogado extends javax.swing.JFrame {
     }//GEN-LAST:event_costoKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            InserBase();
-        } catch (SQLException ex) {
-            Logger.getLogger(modificarAbogado.class.getName()).log(Level.SEVERE, null, ex);
+        int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESE HACER ESTOS CAMBIO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == 0) {
+            try {
+                validar();
+            } catch (SQLException ex) {
+                Logger.getLogger(modificarAbogado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

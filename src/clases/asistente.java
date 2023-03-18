@@ -33,7 +33,7 @@ public class asistente extends Persona {
     PostgresConexion conn = new PostgresConexion();
     PostgresConexion conexion = new PostgresConexion();
 
-    private String cod_asist;
+    private int cod_asist;
     private Double sueldo;
     private int experiencia;
     private String titudocu;
@@ -41,7 +41,7 @@ public class asistente extends Persona {
     public asistente() {
     }
 
-    public asistente(String cod_asist, Double sueldo, int experiencia, String titudocu, String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String password, String corre, String foto_perfil, LocalDateTime fecha_nacimiento) {
+    public asistente(int cod_asist, Double sueldo, int experiencia, String titudocu, String cedula, String PrimerNombre, String SegundoNombre, String NombreApellido, String SegundoApellido, int edad, char genero, int FK_direccion, String telefono, String password, String corre, String foto_perfil, LocalDateTime fecha_nacimiento) {
         super(cedula, PrimerNombre, SegundoNombre, NombreApellido, SegundoApellido, edad, genero, FK_direccion, telefono, password, corre, foto_perfil, fecha_nacimiento);
         this.cod_asist = cod_asist;
         this.sueldo = sueldo;
@@ -49,11 +49,11 @@ public class asistente extends Persona {
         this.titudocu = titudocu;
     }
 
-    public String getCod_asist() {
+    public int getCod_asist() {
         return cod_asist;
     }
 
-    public void setCod_asist(String cod_asist) {
+    public void setCod_asist(int cod_asist) {
         this.cod_asist = cod_asist;
     }
 
@@ -82,12 +82,12 @@ public class asistente extends Persona {
     }
 
     public ArrayList Listar() throws SQLException {
-        String script = "SELECT * FROM ASISTENTE";
+        String script = "SELECT * FROM ASISTENTE ORDER BY id_asis";
         ResultSet contenedor = conexion.Consulta(script);
         ArrayList retorno = new ArrayList();
         while (contenedor.next()) {
             asistente insertar = new asistente();
-            insertar.setCod_asist(contenedor.getString("id_asis"));
+            insertar.setCod_asist(contenedor.getInt("id_asis"));
             insertar.setTitudocu(contenedor.getString("titulo_asis"));
             insertar.setExperiencia(contenedor.getInt("years_esperiencia"));
             insertar.setCedula(contenedor.getString("cedula_asis"));
@@ -160,4 +160,13 @@ public class asistente extends Persona {
         String sql = "UPDATE public.asistente SET  titulo_asis='" + getTitudocu() + "', years_esperiencia='" + getExperiencia() + "', prim_nom_asis='" + super.getPrimerNombre() + "', seg_nom_asis='" + super.getSegundoNombre() + "', prim_apell_asis='" + super.getNombreApellido() + "', seg_apell_asis='" + super.getSegundoApellido() + "', edad_asis='" + super.getEdad() + "', genero_asis='" + super.getGenero() + "',  celular='" + super.getTelefono() + "', email='" + super.getCorre() + "', foto='" + super.getFoto_perfil() + "' where cedula_asis='" + super.getCedula() + "'";
         conexion.accion(sql);
     }    
+    public void EliminarAsistente() throws SQLException {
+        String sql = "DELETE FROM public.asistente\n"
+                + "	WHERE id_asis=" + getCod_asist() + "";
+          if(conexion.accion(sql) == null){
+            JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR LA PERSONA DEPENDE DE OTRAS TABLAS");
+        }
+    }
 }

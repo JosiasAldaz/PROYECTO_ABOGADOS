@@ -45,7 +45,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
      */
     public administradorInterfaz() {
         initComponents();
-//        setLocationRelativeTo(this);
+        setBounds(200, 10, 1200, 820);
         questnombre.setVisible(false);
         JPcrud_abg.setVisible(false);
         JP_fondo_especialidad.setVisible(false);
@@ -100,7 +100,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     }
 
-    public void mostrarabogados(ArrayList<abogado> lista_tipo) {
+    public void Listarabogados(ArrayList<abogado> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
         mTabla = (DefaultTableModel) TablaR.getModel();
@@ -120,7 +120,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         UTabla = (DefaultTableModel) jTableUsuario.getModel();
         UTabla.setNumRows(0);
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNuevaUsuario = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), tipos.getCorre()};
+            String[] filaNuevaUsuario = {String.valueOf(tipos.getID_cliente()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getNombreApellido(), tipos.getTelefono(), tipos.getCorre()};
 
             UTabla.addRow(filaNuevaUsuario);
         });
@@ -136,7 +136,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
             if (mostrar.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "NO EXISTE ABOGADOS REGISTRADOS");
             } else {
-                mostrarabogados(mostrar);
+                Listarabogados(mostrar);
             }
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,7 +174,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
                 } else {
                     limpiar();
-                    mostrarabogados(recibir);
+                    Listarabogados(recibir);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,6 +221,32 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     limpiarAbogado();
                     eliminar.Listar();
 
+                } catch (SQLException ex) {
+                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA  ACCION DE ELIMINAR");
+            }
+
+        }
+    }
+
+    public void eliminarAsistente() {
+        asistente eliminar = new asistente();
+        int seleccionado = -1;
+        seleccionado = Tabla_asis.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    System.out.println(Tabla_asis.getValueAt(seleccionado, 0).toString());
+                    eliminar.setCod_asist(Integer.parseInt(Tabla_asis.getValueAt(seleccionado, 0).toString()));
+                    eliminar.EliminarAsistente();
+
                     JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
                 } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -232,6 +258,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
 
         }
+
     }
 
     //BRYAM
@@ -390,18 +417,28 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     public void modificarEpecialidad() {
-        if (TXT_nuevo_tipo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
+        int seleccionado=-1;
+        seleccionado = Tabla_Tipos.getRowCount();
+        if (seleccionado == -1) {
+            if (JTxt_ingreso_diplo.getText().equals("NOMBRE")||JTxt_ingreso_diplo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "DEBE ESCRIBIR UN NUEVO NOMBRE PARA LA ESPECIALIDAD");
 
-        } else {
-            try {
-                change.modificar();
-                mostrarpersonas(change.mostrar());
-                JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
-                questnombre.dispose();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR");
+            } else {
+                try {
+
+                    TIPO_diplomnma nuevo = new TIPO_diplomnma();
+                    nuevo.setID_diploma(Integer.parseInt(Tabla_Tipos.getValueAt(seleccionado, 0).toString()));
+                    nuevo.setNombre_diplo(JTxt_ingreso_diplo.getText());
+                    change.modificar();
+                    mostrarpersonas(change.mostrar());
+                    JOptionPane.showMessageDialog(null, "SE HAN GUARDADO LAS MODIFICACIONES CORRECTAMENTE");
+                    questnombre.dispose();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR");
+                }
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA FILA");
         }
 
     }
@@ -462,7 +499,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
         } else {
             String auxced = Tabla_asis.getValueAt(i, 1).toString();
-            asistente nuevo2=new asistente();
+            asistente nuevo2 = new asistente();
             nuevo2.setCedula(auxced);
             String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + nuevo2.getCedula() + "'");
             ResultSet contenedor = conexion.Consulta(sql);
@@ -1033,13 +1070,13 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jTableUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID_Cliente", "Title 2", "Title 3", "Title 4"
+                "ID_Cliente", "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "CORREO"
             }
         ));
         jScrollPane1.setViewportView(jTableUsuario);
@@ -1088,17 +1125,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jPanelUsuario.setLayout(jPanelUsuarioLayout);
         jPanelUsuarioLayout.setHorizontalGroup(
             jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
-                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                        .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
             .addGroup(jPanelUsuarioLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1106,30 +1132,38 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(324, 324, 324))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
         jPanelUsuarioLayout.setVerticalGroup(
             jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(39, 39, 39)
+                .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUsuarioLayout.createSequentialGroup()
-                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldBuscar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -1355,7 +1389,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA1MouseExited
 
     private void jButtonModificarA16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA16ActionPerformed
+
         eliminarEspecializacion();
+
     }//GEN-LAST:event_jButtonModificarA16ActionPerformed
 
     private void Tabla_TiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_TiposMouseClicked
@@ -1497,9 +1533,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        JP_fondo_especialidad.setVisible(true);
         JPcrud_abg.setVisible(false);
         JPcrud_abg1.setVisible(false);
-        JP_fondo_especialidad.setVisible(true);
+        jPanelUsuario.setVisible(false);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
@@ -1529,7 +1566,11 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA6ActionPerformed
 
     private void jButtonModificarA11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA11ActionPerformed
+
         eliminarAbogado();
+        limpiarAbogado();
+        mostrarAbogados();
+
     }//GEN-LAST:event_jButtonModificarA11ActionPerformed
 
     private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
@@ -1575,7 +1616,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA20ActionPerformed
 
     private void jButtonModificarA21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA21ActionPerformed
-        // TODO add your handling code here:
+        eliminarAsistente();
     }//GEN-LAST:event_jButtonModificarA21ActionPerformed
 
     private void Tabla_asisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_asisMouseClicked
@@ -1601,7 +1642,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         Registro_u nuevo2 = new Registro_u();
-//        nuevo2.AdministradorReg();
+        nuevo2.Botones();
         nuevo2.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1621,8 +1662,9 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+
         eliminarUsuario();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -1633,14 +1675,14 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-             String url = "https://goo.gl/maps/UoBFEarK47ZhZvQU9";
+        String url = "https://goo.gl/maps/UoBFEarK47ZhZvQU9";
         try {
             Desktop.getDesktop().browse(new URI(url));
         } catch (URISyntaxException ex) {
-      
-    }   catch (IOException ex) { 
+
+        } catch (IOException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**

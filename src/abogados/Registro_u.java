@@ -5,12 +5,15 @@
  */
 package abogados;
 
+import static abogados.Regi_Asistente.jTextcedula;
 import clases.Cliente;
 import clases.Direcciones;
 import clases.PostgresConexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,12 +30,14 @@ public class Registro_u extends javax.swing.JFrame {
      */
     public Registro_u() {
         initComponents();
+        this.setLocationRelativeTo(this);
         mostrarContra.setVisible(true);
         ocultarContra.setVisible(false);
+        regresar.setVisible(false);
 
     }
-    
-    public void diasValidacion(){
+
+    public void diasValidacion() {
         if (JBxmes.getSelectedItem().toString().equals("Febrero")) {
             if (Integer.valueOf(Jspdia.getValue().toString()) > 28) {
                 JOptionPane.showMessageDialog(null, "FEBRERO NO TIENE MÁS DE 28 DÍAS, PORFAVOR \n"
@@ -41,8 +46,20 @@ public class Registro_u extends javax.swing.JFrame {
             }
         }
     }
-    
-    public String SeleccionarMes (String mes){
+
+    public void Verificar() throws SQLException {
+        PostgresConexion conexion = new PostgresConexion();
+        String sql = "SELECT FROM CLIENTES WHERE cedula_cli='" + jTxtFldCedula.getText() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        System.out.println(contenedor.toString());
+        if (contenedor.next()) {
+            JOptionPane.showMessageDialog(this, "CLIENTE YA EXISTE");
+        } else {
+            validar();
+        }
+    }
+
+    public String SeleccionarMes(String mes) {
         String retorno = "";
         switch (mes) {
             case "Enero":
@@ -84,63 +101,63 @@ public class Registro_u extends javax.swing.JFrame {
         }
         return retorno;
     }
-    
-    public void validar(){
+
+    public void validar() {
         if (jTxtFldCedula.getText().matches("^[0-9]{10}$")) {
-            if (jTxtFldNombre1.getText().matches("[a-z]+")&& jTxtFldNombre2.getText().matches("[a-z]+")) {
-                if (jTxtFldApellido1.getText().matches("[a-z]+")&& jTxtFldApellido2.getText().matches("[a-z]+")) {
+            if (jTxtFldNombre1.getText().matches("[a-z]+") && jTxtFldNombre2.getText().matches("[a-z]+")) {
+                if (jTxtFldApellido1.getText().matches("[a-z]+") && jTxtFldApellido2.getText().matches("[a-z]+")) {
                     if (jTxtFldCorreo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (jTxtFildTelefono.getText().matches("^[0-9]{10}$")) {
                             if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
                                 Pru();
-                            }else{
+                            } else {
                                 JOptionPane.showMessageDialog(this, "NO COINCIDEN LAS CONTRASEÑAS");
                             }
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
                         }
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(this, "CORREO INCORRECTO");
                     }
-                }else{
-                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTO"); 
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTO");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTO");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "CEDULA INGRESADA INCORRECTA");
         }
     }
-    
-    public void Pru(){
+
+    public void Pru() {
         diasValidacion();
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
         char genero = ' ';
         String contra = new String(jPsswrdFldContraseña1.getPassword());
         if (jRadioButton3.isSelected()) {
-            genero='X';
+            genero = 'X';
         }
         if (jRadioButton1.isSelected()) {
-            genero ='F';
+            genero = 'F';
         }
         if (jRadioButton2.isSelected()) {
             genero = 'M';
         }
         if (dia > 31 || dia < 1) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DIA MAYOR A 1 Y MENOR A 31");
-        }else{
+        } else {
             if (JBxmes.getSelectedItem().toString().equals("SELECCIONE")) {
                 JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN MES PARA LA FECHA DE NACIMIENTO");
-            }else{
+            } else {
                 if (anio >= LocalDate.now().getYear()) {
                     JOptionPane.showMessageDialog(null, "EL AÑO DE NACIMIENTO ES INCORRECTO");
-                }else{
+                } else {
                     String diaF = "";
                     if (Jspdia.getValue().toString().length() == 1) {
-                        diaF = "0"+ Jspdia.getValue().toString();
-                    }else{
+                        diaF = "0" + Jspdia.getValue().toString();
+                    } else {
                         diaF = Jspdia.getValue().toString();
                     }
                     String timechooser = diaF + "/" + SeleccionarMes(JBxmes.getSelectedItem().toString()) + "/" + jYearChooser1.getYear();
@@ -148,15 +165,18 @@ public class Registro_u extends javax.swing.JFrame {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fecha = LocalDate.parse(timechooser, formato);
                     LocalDateTime fechaHora = fecha.atStartOfDay();
+                    LocalDate ahora = LocalDate.now();
+                    Period periodo = Period.between(fecha, ahora);
+                    int auxaedad = periodo.getYears();
                     Direcciones direccion_usuario = new Direcciones();
                     direccion_usuario.setCalle_principal(jTxtFldCallePrincipal.getText());
                     direccion_usuario.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
                     direccion_usuario.setSucursal(false);
-                    try{
+                    try {
                         int id = 0;
                         Cliente USU = new Cliente();
                         direccion_usuario.Ingresar();
-                        
+
                         String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + jTxtFldCallePrincipal.getText() + "' and calle_secundaria ='" + jTxtFldCalleSecundaria.getText() + "'";
                         id = direccion_usuario.Seleccionar(id_direccion);
                         System.out.println(id);
@@ -165,6 +185,7 @@ public class Registro_u extends javax.swing.JFrame {
                         USU.setSegundoNombre(jTxtFldNombre2.getText());
                         USU.setNombreApellido(jTxtFldApellido1.getText());
                         USU.setSegundoApellido(jTxtFldApellido2.getText());
+                        USU.setEdad(auxaedad);
                         USU.setFK_direccion(id);
                         USU.setTelefono(jTxtFildTelefono.getText());
                         USU.setGenero(genero);
@@ -173,20 +194,80 @@ public class Registro_u extends javax.swing.JFrame {
                         USU.setFoto_perfil(JFSfoto_Usuario.getRutaImagen());
                         USU.setFecha_nacimiento(fechaHora);
                         USU.IngresarCliente();
-                    }catch(SQLException ex){
+                    } catch (SQLException ex) {
                         Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
-                        
+
                     }
                 }
             }
         }
     }
-        
-    
-    
-    
-    
+
+    public void Botones() {
+        regresar.setVisible(true);
+        jBttnRegresarPanPrincipal.setVisible(false);
+    }
+//
+//    public void Ingresar_base() {
+//        char genero = ' ';
+//        String contra = new String(jPsswrdFldContraseña2.getPassword());
+//        if (jRadioButton3.isSelected()) {
+//            genero = 'X';
+//        }
+//        if (jRadioButton2.isSelected()) {
+//            genero = 'M';
+//        }
+//        if (jRadioButton1.isSelected()) {
+//            genero = 'F';
+//        }
+//        if (jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || jTxtFldCallePrincipal.getText().equals("") || jTxtFldCalleSecundaria.getText().equals("") || jTxtFildTelefono.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS DATOS");
+//        } else {
+//            if (genero == ' ' || contra.equals("")) {
+//                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
+//            } else {
+////                    INGRESO DE DIRECCION
+//                int id = 0;
+//                Direcciones ubicacion = new Direcciones();
+//                ubicacion.setCalle_principal(jTxtFldCallePrincipal.getText());
+//                ubicacion.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
+//                ubicacion.setSucursal(false);
+//                try {
+//                    ubicacion.Ingresar();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
+//                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
+//
+//                String sql = "SELECT id_direccion from direcciones where calle_principal =" + "'" + jTxtFldCallePrincipal.getText() + "' " + "and calle_secundaria =" + "'" + jTxtFldCalleSecundaria.getText() + "'";
+//                try {
+////                        id = ubicacion.Seleccionar(sql);
+//                    id = ubicacion.Seleccionar(sql);
+//                    System.out.println(id);
+//                    Cliente usuario = new Cliente();
+//                    usuario.setCedula(jTxtFldCedula.getText());
+//                    usuario.setPrimerNombre(jTxtFldNombre1.getText());
+//                    usuario.setSegundoNombre(jTxtFldNombre2.getText());
+//                    usuario.setNombreApellido(jTxtFldApellido1.getText());
+//                    usuario.setSegundoApellido(jTxtFldNombre2.getText());
+//                    usuario.setFK_direccion(id);
+//                    usuario.setTelefono(jTxtFildTelefono.getText());
+//                    usuario.setGenero(genero);
+//                    usuario.setPassword(contra);
+//                    usuario.setCorre(jTxtFldCorreo.getText());
+//                    usuario.IngresarCliente();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                //INGRESO DEL CLIENTE
+//                //INGRESO DEL CLIENTE
+//
+//            }
+//
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -243,6 +324,7 @@ public class Registro_u extends javax.swing.JFrame {
         JBxmes = new javax.swing.JComboBox<>();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jLabel17 = new javax.swing.JLabel();
+        regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -534,6 +616,18 @@ public class Registro_u extends javax.swing.JFrame {
         jLabel17.setText("Dia:");
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, 41));
 
+        regresar.setBackground(new java.awt.Color(245, 222, 179));
+        regresar.setFont(new java.awt.Font("OCR A Extended", 1, 12)); // NOI18N
+        regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regrasar.png"))); // NOI18N
+        regresar.setText("REGRESAR");
+        regresar.setBorder(null);
+        regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 170, 50));
+
         Fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 950, 440));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -551,65 +645,13 @@ public class Registro_u extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        char genero = ' ';
-        String contra = new String(jPsswrdFldContraseña2.getPassword());
-        if (jRadioButton3.isSelected()) {
-            genero = 'X';
-        }
-        if (jRadioButton2.isSelected()) {
-            genero = 'M';
-        }
-        if (jRadioButton1.isSelected()) {
-            genero = 'F';
-        }
-        if (jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldApellido2.getText().equals("") || jTxtFldCedula.getText().equals("") || jTxtFildTelefono.getText().equals("") || jTxtFldCallePrincipal.getText().equals("") || jTxtFldCalleSecundaria.getText().equals("") || jTxtFildTelefono.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS DATOS");
-        } else {
-            if (genero == ' ' || contra.equals("")) {
-                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN GÉNERO Y ESCRIBIR UNA CONTRASEÑA");
-            } else {
-//                    INGRESO DE DIRECCION
-                int id = 0;
-                Direcciones ubicacion = new Direcciones();
-                ubicacion.setCalle_principal(jTxtFldCallePrincipal.getText());
-                ubicacion.setCalle_secundaria(jTxtFldCalleSecundaria.getText());
-                ubicacion.setSucursal(false);
-                try {
-                    ubicacion.Ingresar();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
-                //TRAER EL ID DE LA DIRECCION QUE SE HA INGRESADO
-
-                String sql = "SELECT id_direccion from direcciones where calle_principal =" + "'" + jTxtFldCallePrincipal.getText() + "' " + "and calle_secundaria =" + "'" + jTxtFldCalleSecundaria.getText() + "'";
-                try {
-//                        id = ubicacion.Seleccionar(sql);
-                    id = ubicacion.Seleccionar(sql);
-                    System.out.println(id);
-                    Cliente usuario = new Cliente();
-                    usuario.setCedula(jTxtFldCedula.getText());
-                    usuario.setPrimerNombre(jTxtFldNombre1.getText());
-                    usuario.setSegundoNombre(jTxtFldNombre2.getText());
-                    usuario.setNombreApellido(jTxtFldApellido1.getText());
-                    usuario.setSegundoApellido(jTxtFldNombre2.getText());
-                    usuario.setFK_direccion(id);
-                    usuario.setTelefono(jTxtFildTelefono.getText());
-                    usuario.setGenero(genero);
-                    usuario.setPassword(contra);
-                    usuario.setCorre(jTxtFldCorreo.getText());
-                    usuario.IngresarCliente();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //INGRESO DEL CLIENTE
-                //INGRESO DEL CLIENTE
-
-            }
-
+        try {
+            Verificar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel10MouseClicked
-    
+
     private void jTxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFldCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtFldCorreoActionPerformed
@@ -720,6 +762,10 @@ public class Registro_u extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTxtFldCalleSecundariaKeyTyped
 
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
+        dispose();
+    }//GEN-LAST:event_regresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -755,8 +801,6 @@ public class Registro_u extends javax.swing.JFrame {
             }
         });
     }
-
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -806,5 +850,6 @@ public class Registro_u extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel mostrarContra;
     private javax.swing.JLabel ocultarContra;
+    private javax.swing.JButton regresar;
     // End of variables declaration//GEN-END:variables
 }

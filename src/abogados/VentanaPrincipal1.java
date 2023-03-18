@@ -13,13 +13,14 @@ import java.util.logging.Logger;
  * @author Steven Zhicay
  */
 public class VentanaPrincipal1 extends javax.swing.JFrame {
+
     Cliente usuario = new Cliente();
     int xMouse, yMouse;
 
     public VentanaPrincipal1() {
         initComponents();
-//        setLocationRelativeTo(null);
-        
+        setLocationRelativeTo(null);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -282,8 +283,9 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRegistrarseMouseEntered
 
     private void txtRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRegistrarseMouseClicked
-       VENTANAC ventana = new VENTANAC();
-       ventana.show();
+        VENTANAC ventana = new VENTANAC();
+        ventana.setVisible(true);
+        dispose();
     }//GEN-LAST:event_txtRegistrarseMouseClicked
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
@@ -307,7 +309,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitTxtMouseEntered
 
     private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
-        exitBtn.setBackground(new Color(0,0,102));
+        exitBtn.setBackground(new Color(0, 0, 102));
         exitTxt.setForeground(Color.WHITE);
     }//GEN-LAST:event_exitTxtMouseExited
 
@@ -341,7 +343,7 @@ public class VentanaPrincipal1 extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {                
+            public void run() {
                 new VentanaPrincipal1().setVisible(true);
             }
         });

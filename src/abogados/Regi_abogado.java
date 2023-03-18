@@ -5,10 +5,13 @@
  */
 package abogados;
 
+import static abogados.Regi_Asistente.jTextcedula;
 import clases.Direcciones;
 import clases.Especializacion;
+import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,7 +29,10 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     public Regi_abogado() {
         initComponents();
+        this.setLocationRelativeTo(this);
         Internal.setVisible(false);
+        regresar1.setVisible(false);
+
     }
     Especializacion estatica = new Especializacion();
     ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
@@ -87,8 +93,52 @@ public class Regi_abogado extends javax.swing.JFrame {
     }
 
     public void AdministradorReg() {
+        regresar1.setVisible(true);
         regresar.setVisible(false);
-        
+
+    }
+
+    public void Verificar() throws SQLException {
+        PostgresConexion conexion = new PostgresConexion();
+        String sql = "SELECT FROM ABOGADO WHERE cedula_abg='" + cedula_abogado.getText() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        System.out.println(contenedor.toString());
+        if (contenedor.next()) {
+            System.out.println(contenedor.toString());
+            JOptionPane.showMessageDialog(this, "ASISTENTE YA REGISTRADO");
+        } else {
+            validar();
+        }
+    }
+
+    public void validar() {
+        if (cedula_abogado.getText().matches("^[0-9]{10}$")) {
+            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
+                if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
+                    if (TXT_correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                        if (telefono.getText().matches("^[0-9]{10}$")) {
+                            if (direccion1.getText().matches("[a-z]+$") && direccion2.getText().matches("[a-z]+$")) {
+                                //if (contraseña3.equals(contraseña4)) {
+                                InserBase();
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "DIRECCION INGRESADO INCORRECTA");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "TELEFONO INGRESADO INCORRECTA");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CORREO INGRESADO INCORRECTA");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "APELLIDO INGRESADO INCORRECTA");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE INGRESADO INCORRECTA");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "CEDULA INCORRECTA");
+        }
     }
 
     public void InserBase() {
@@ -210,6 +260,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        regresar1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -366,7 +417,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 650, 480));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 650, 480));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel1.setText("Nombres:");
@@ -379,6 +430,16 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel3.setText("Cédula:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 60, 20));
+
+        regresar1.setBackground(new java.awt.Color(245, 222, 179));
+        regresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regrasar.png"))); // NOI18N
+        regresar1.setText("REGRESAR");
+        regresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 660, 150, 50));
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel5.setText("Género:");
@@ -546,7 +607,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel14.setText("Registro de abogados");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 510, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 950, 160));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 930, 150));
 
         foto.setBackground(new java.awt.Color(211, 211, 211));
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -609,6 +670,11 @@ public class Regi_abogado extends javax.swing.JFrame {
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
         contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        contraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contraseñaMouseClicked(evt);
+            }
+        });
         jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 580, 140, 20));
 
         regresar.setBackground(new java.awt.Color(245, 222, 179));
@@ -620,7 +686,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                 regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 660, 190, 50));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 660, 190, 50));
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel20.setText(" Teléfono:");
@@ -634,7 +700,7 @@ public class Regi_abogado extends javax.swing.JFrame {
         jLabel25.setText("Título:");
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -90, 940, 740));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 940, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -644,7 +710,11 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InserBase();
+        try {
+            Verificar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -832,6 +902,14 @@ public class Regi_abogado extends javax.swing.JFrame {
     private void TIPO_diplomaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TIPO_diplomaAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_TIPO_diplomaAncestorAdded
+
+    private void regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regresar1ActionPerformed
+
+    private void contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMouseClicked
+        contraseña.setText("");
+    }//GEN-LAST:event_contraseñaMouseClicked
     private void TIPO_diplomaActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
@@ -930,6 +1008,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     public static javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre2;
     private javax.swing.JButton regresar;
+    private javax.swing.JButton regresar1;
     private javax.swing.JRadioButton s;
     private javax.swing.JTextField telefono;
     private javax.swing.JTextField titulos1;

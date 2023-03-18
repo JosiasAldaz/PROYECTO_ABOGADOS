@@ -5,12 +5,16 @@
  */
 package abogados;
 
+import clases.Cliente;
+import clases.Direcciones;
 import clases.Label_conborde;
 import clases.MOSTRAR_CLIENTES;
+import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
 import clases.contrato;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,13 +26,13 @@ import javax.swing.JOptionPane;
  *
  * @author LENOVO
  */
-
 public class menuclientes extends javax.swing.JFrame {
-    
-TIPO_diplomnma combo = new TIPO_diplomnma();
-ArrayList <TIPO_diplomnma> combobox = combo.mostrar();
-ArrayList <MOSTRAR_CLIENTES> interfaz = combo.mostrar();
-int indice =0;
+
+    TIPO_diplomnma combo = new TIPO_diplomnma();
+    ArrayList<TIPO_diplomnma> combobox = combo.mostrar();
+    ArrayList<MOSTRAR_CLIENTES> interfaz = combo.mostrar();
+    int indice = 0;
+
     /**
      * Creates new form menuclientes
      */
@@ -37,25 +41,58 @@ int indice =0;
         cargarcombo();
     }
 
-    public void cargarcombo() throws SQLException{
+    public void cargarcombo() throws SQLException {
         combobox = combo.mostrar();
-            combobox.stream().forEach(tipos -> {
-                if (JCB_tipos.getItemCount() == 0) {
-                    JCB_tipos.addItem("SELECCIONE");
-                }
-                JCB_tipos.addItem(tipos.getNombre_diplo());
-            });
+        combobox.stream().forEach(tipos -> {
+            if (JCB_tipos.getItemCount() == 0) {
+                JCB_tipos.addItem("SELECCIONE");
+            }
+            JCB_tipos.addItem(tipos.getNombre_diplo());
+        });
     }
-    
-    public int buscarID_diploma(){
-        int retorno=0;
+
+    public int buscarID_diploma() {
+        int retorno = 0;
         for (TIPO_diplomnma diploma : combobox) {
-    if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
-        retorno = diploma.getID_diploma();
-    }
-    }
+            if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
+                retorno = diploma.getID_diploma();
+            }
+        }
         return retorno;
     }
+
+    public void modificarUsuario() throws SQLException {
+        PostgresConexion conexion = new PostgresConexion();
+        Cliente cli = new Cliente();
+        cli.setID_cliente(Login.cliente.ID_cliente());
+        String sql = "SELECT * FROM CLIENTES WHERE  id_clie= '" + cli.getID_cliente() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+
+            modificarUsuario abrir = new modificarUsuario();
+            abrir.setVisible(true);
+            modificarUsuario.jTxtFldCedula.setText(contenedor.getString("cedula_cli"));
+            modificarUsuario.jTxtFldNombre1.setText(contenedor.getString("prim_nom_cli"));
+            modificarUsuario.jTxtFldNombre2.setText(contenedor.getString("seg_nom_cli"));
+            modificarUsuario.jTxtFldApellido1.setText(contenedor.getString("prim_apell_cli"));
+            modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_apell_cli"));
+            modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_cli"));
+            modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_cli"));
+
+            int k = contenedor.getInt("fk_id_direccion");
+            Direcciones direc = new Direcciones();
+            direc.setId_direccion(k);
+            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+            ResultSet contenedor1 = conexion.Consulta(sql1);
+            while (contenedor1.next()) {
+                modificarUsuario.jTxtFldCallePrincipal.setText(contenedor1.getString("calle_principal"));
+                modificarUsuario.jTxtFldCalleSecundaria.setText(contenedor1.getString("calle_secundaria"));
+
+            }
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -331,80 +368,78 @@ int indice =0;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         indice = indice - 1;
-        if(indice <0){
-            JOptionPane.showMessageDialog(null,"ESTE ES EL PRIMER ABOGADO");
-        }else{
+        if (indice < 0) {
+            JOptionPane.showMessageDialog(null, "ESTE ES EL PRIMER ABOGADO");
+        } else {
             panelSlide.show(indice);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        indice = indice +1;
-        if(indice == interfaz.size()){
-            
-            JOptionPane.showMessageDialog(null,"ESTE ES EL ÚLTIMO ABOGADO");
-        }else{
-            if(indice >= panelSlide.tamaño()){
+        indice = indice + 1;
+        if (indice == interfaz.size()) {
+
+            JOptionPane.showMessageDialog(null, "ESTE ES EL ÚLTIMO ABOGADO");
+        } else {
+            if (indice >= panelSlide.tamaño()) {
                 String nombre = interfaz.get(indice).getNombrecompleto();
                 String especializacion = interfaz.get(indice).getEspecialización();
                 String ruta = interfaz.get(indice).getFoto();
                 String telefono = interfaz.get(indice).getTelefono();
                 String correo = interfaz.get(indice).getCorreo();
                 double costo = interfaz.get(indice).getCostohoras();
-                if (indice % 2 == 0){
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188,143,143), especializacion, ruta, costo, telefono, correo));
-                }else{
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218,165,32), especializacion, ruta, costo, telefono, correo));
+                if (indice % 2 == 0) {
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188, 143, 143), especializacion, ruta, costo, telefono, correo));
+                } else {
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218, 165, 32), especializacion, ruta, costo, telefono, correo));
                 }
-                
+
                 panelSlide.show(indice);
-            }else{
+            } else {
                 panelSlide.show(indice);
             }
-        
+
 //        if(indice % 2 =0){
 //            
 //        }
-        
-        
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        if(JCB_tipos.getSelectedIndex()== 0){
-            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD");
-        }else{
+        if (JCB_tipos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD");
+        } else {
             MOSTRAR_CLIENTES objeto = new MOSTRAR_CLIENTES();
-            
+
             try {
                 interfaz = objeto.mostrarcli(buscarID_diploma());
-                if(interfaz.size()==0){
-                    JOptionPane.showMessageDialog(null,"NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
-                }else{
-                    String nombre =interfaz.get(indice).getNombrecompleto();
+                if (interfaz.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
+                } else {
+                    String nombre = interfaz.get(indice).getNombrecompleto();
                     String especializacion = interfaz.get(indice).getEspecialización();
                     String ruta = interfaz.get(indice).getFoto();
                     String telefono = interfaz.get(indice).getTelefono();
                     String correo = interfaz.get(indice).getCorreo();
                     double costo = interfaz.get(indice).getCostohoras();
-                    JOptionPane.showMessageDialog(null,"TENEMOS DISPONIBLES "+interfaz.size()+" ABOGADOS CON ESTA ESPECIALIDAD");
-                    panelSlide.init(new Paneltest(nombre,new Color(255,228,196),especializacion,ruta,costo,telefono,correo));
+                    JOptionPane.showMessageDialog(null, "TENEMOS DISPONIBLES " + interfaz.size() + " ABOGADOS CON ESTA ESPECIALIDAD");
+                    panelSlide.init(new Paneltest(nombre, new Color(255, 228, 196), especializacion, ruta, costo, telefono, correo));
                 }
-                
-            } catch (SQLException ex){
+
+            } catch (SQLException ex) {
                 Logger.getLogger(menuclientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
-        if(interfaz.size()==0){
-            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD ");
-        }else{
-            
+        if (interfaz.size() == 0) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD ");
+        } else {
+
             int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE CONTRATAR A ESTE ABOGADO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 try {
@@ -436,7 +471,11 @@ int indice =0;
     }//GEN-LAST:event_jButtonActualizar3ActionPerformed
 
     private void jButtonActualizar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            modificarUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(menuclientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonActualizar4ActionPerformed
 
     /**
