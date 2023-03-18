@@ -495,7 +495,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 90)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ABOGADOS-ECU");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 700, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 860, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/maps-and-location.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
