@@ -108,7 +108,7 @@ public class Registro_u extends javax.swing.JFrame {
                 if (jTxtFldApellido1.getText().matches("[a-z]+") && jTxtFldApellido2.getText().matches("[a-z]+")) {
                     if (jTxtFldCorreo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (jTxtFildTelefono.getText().matches("^[0-9]{10}$")) {
-                            if (jPsswrdFldContraseña1.equals(jPsswrdFldContraseña2)) {
+                            if (jPsswrdFldContraseña1.getText().equals(jPsswrdFldContraseña2.getText())) {
                                 Pru();
                             } else {
                                 JOptionPane.showMessageDialog(this, "NO COINCIDEN LAS CONTRASEÑAS");
