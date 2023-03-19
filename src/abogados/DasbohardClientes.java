@@ -326,6 +326,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -560,6 +561,9 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 220, 50));
 
+        jPanel8.setBackground(new java.awt.Color(34, 45, 49));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel37.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -568,13 +572,21 @@ public class DasbohardClientes extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel37MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel37MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel37MouseExited(evt);
+            }
         });
         jLabel37.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jLabel37KeyPressed(evt);
             }
         });
-        jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 220, 40));
+        jPanel8.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
+
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 220, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 760));
 
@@ -1464,6 +1476,14 @@ public class DasbohardClientes extends javax.swing.JFrame {
     jPanel9.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jLabel21MouseEntered
 
+    private void jLabel37MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseEntered
+        jPanel8.setBackground(new Color(145, 145, 145));
+    }//GEN-LAST:event_jLabel37MouseEntered
+
+    private void jLabel37MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseExited
+         jPanel8.setBackground(new Color(34, 45, 49));
+    }//GEN-LAST:event_jLabel37MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1573,6 +1593,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPsswrdFldContraseña1;
     private javax.swing.JPasswordField jPsswrdFldContraseña2;

@@ -32,7 +32,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     public abogadoInterfaz2() {
         initComponents();
-
+        setLocationRelativeTo(this);
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
