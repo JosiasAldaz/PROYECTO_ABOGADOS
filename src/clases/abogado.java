@@ -176,7 +176,7 @@ public class abogado extends Persona {
     
     
     public ArrayList buscar_CLI(String parámetro,String segundo) throws SQLException{
-        String sql= "SELECT id_abg,foto_abg,cedula_abg,prim_nom_abg,prim_apell_abg,gratuidad,costo_x_horas,telefono_abg FROM abogado WHERE "+parámetro+" LIKE"+"'%"+segundo+"%'";
+        String sql= "SELECT id_abg,foto_abg,cedula_abg,prim_nom_abg,prim_apell_abg,gratuidad,costo_x_horas,telefono_abg,correo_abg FROM abogado WHERE "+parámetro+" LIKE"+"'%"+segundo+"%'";
         ResultSet resulset = conexion.Consulta(sql);
         ArrayList <abogado> incremental = new ArrayList();
         while(resulset.next()){
@@ -189,6 +189,7 @@ public class abogado extends Persona {
             usuario.setGratuidad(resulset.getBoolean("gratuidad"));
             usuario.setCost_hora(Double.parseDouble(String.valueOf(resulset.getInt("costo_x_horas"))));
             usuario.setTelefono(resulset.getString("telefono_abg"));
+            usuario.setCorre(resulset.getString("correo_abg"));
             incremental.add(usuario);
         }
         return incremental;
