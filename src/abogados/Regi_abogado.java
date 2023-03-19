@@ -6,6 +6,7 @@
 package abogados;
 
 import static abogados.Regi_Asistente.jTextcedula;
+import static abogados.Regi_Asistente.validarCedula;
 import clases.Direcciones;
 import clases.Especializacion;
 import clases.PostgresConexion;
@@ -37,6 +38,56 @@ public class Regi_abogado extends javax.swing.JFrame {
     Especializacion estatica = new Especializacion();
     ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
 
+      public static boolean validarCedula(String cedula) {
+        // Comprobar que la cédula tenga 10 dígitos
+        if (cedula == null || cedula.length() != 10) {
+            return false;
+        }
+        // Extraer el número de provincia de los primeros dos dígitos
+        int provincia = Integer.parseInt(cedula.substring(0, 2));
+        if (provincia < 1 || provincia > 24) {
+            return false;
+        }
+        // Validar el tercer dígito (debe ser 0, 1, 2 o 3)
+        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+        if (tercerDigito < 0 || tercerDigito > 3) {
+            return false;
+        }
+        // Extraer los nueve primeros dígitos como un número entero
+        int numCedula = Integer.parseInt(cedula.substring(0, 9));
+        // Validar el último dígito usando el algoritmo de validación del Registro Civil
+        int ultimoDigito = Integer.parseInt(cedula.substring(9));
+        int total = 0;
+        int multiplicador = 2;
+        for (int i = 8; i >= 0; i--) {
+            int digito = numCedula % 10;
+            numCedula /= 10;
+            int producto = digito * multiplicador;
+            if (producto > 9) {
+                producto -= 9;
+            }
+            total += producto;
+            multiplicador = (multiplicador == 2) ? 1 : 2;
+        }
+        int digitVerificador = 10 - (total % 10);
+        if (digitVerificador == 10) {
+            digitVerificador = 0;
+        }
+        if (ultimoDigito != digitVerificador) {
+            return false;
+        }
+        // Si llegamos hasta aquí, la cédula es válida
+        return true;
+    }
+          public void valced() throws SQLException {
+        String ced = jTextcedula.getText();
+        boolean esValida = validarCedula(ced);
+        if (esValida) {
+           Verificar();
+        } else {
+            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
+        }
+    }
     public String meschoice(String mes) {
         String retorno = "";
         switch (mes) {
@@ -113,11 +164,11 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     public void validar() {
         if (cedula_abogado.getText().matches("^[0-9]{10}$")) {
-            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
+            if (nombre1.getText().matches("[a-z]+||[A-Z]+") && nombre2.getText().matches("[a-z]+||[A-Z]+")) {
                 if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
                     if (TXT_correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
-                            if (direccion1.getText().matches("[a-z]+$") && direccion2.getText().matches("[a-z]+$")) {
+                            if (direccion1.getText().matches("^[\\w\\s.,-]+$") && direccion2.getText().matches("^[\\w\\s.,-]+$")) {
                                 //if (contraseña3.equals(contraseña4)) {
                                 InserBase();
 
@@ -711,7 +762,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            Verificar();
+            valced();
         } catch (SQLException ex) {
             Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -904,7 +955,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_TIPO_diplomaAncestorAdded
 
     private void regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresar1ActionPerformed
-        // TODO add your handling code here:
+       dispose();
     }//GEN-LAST:event_regresar1ActionPerformed
 
     private void contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMouseClicked

@@ -77,7 +77,11 @@ public class Direcciones {
     public void Ingresar() throws SQLException {
         String sql = "INSERT INTO direcciones(calle_principal,calle_secundaria,sucursal)";
         sql += " VALUES ('" + this.getCalle_principal() + "','" + this.getCalle_secundaria() + "','" + this.getSucursal() + "')";
-        base.accion(sql);
+         if (base.accion(sql) == null) {
+            JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
+        } else {
+            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO DE CLIENTES");
+        }
     }
 
     public int Seleccionar(String select) throws SQLException {

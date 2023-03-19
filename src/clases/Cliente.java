@@ -97,7 +97,7 @@ public class Cliente extends Persona {
     }
 
     public void Modificar_cliente() throws SQLException {
-        String sql = "UPDATE public.Clientes SET prim_nom_cli='" + super.getPrimerNombre() + "', seg_nom_cli='" + super.getSegundoNombre() + "', prim_apell_cli='" + super.getNombreApellido() + "', seg_apell_cli='" + super.getSegundoApellido() + "', edad_cli='" + super.getEdad() + "', genero_cli='" + super.getGenero() + "',  telefono_cli='" + super.getTelefono() + "', foto_cli='" + super.getFoto_perfil() + "',fech_nac_cli='" + super.getFecha_nacimiento() + "' where cedula_cli='" + super.getCedula() + "'";
+        String sql = "UPDATE public.Clientes SET prim_nom_cli=UPPER('" + super.getPrimerNombre() + "'), seg_nom_cli=UPPER('" + super.getSegundoNombre() + "'), prim_apell_cli=UPPER('" + super.getNombreApellido() + "'), seg_apell_cli=UPPER('" + super.getSegundoApellido() + "'), edad_cli='" + super.getEdad() + "', genero_cli='" + super.getGenero() + "',  telefono_cli='" + super.getTelefono() + "', foto_cli='" + super.getFoto_perfil() + "',fech_nac_cli='" + super.getFecha_nacimiento() + "' where cedula_cli='" + super.getCedula() + "'";
         conexion.accion(sql);
 
     }

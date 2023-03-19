@@ -94,11 +94,11 @@ public class modificarAbogado extends javax.swing.JFrame {
     }
 public void validar() throws SQLException {
         if (cedula.getText().matches("^[0-9]{10}$")) {
-            if (nombre1.getText().matches("[a-z]+") && nombre2.getText().matches("[a-z]+")) {
-                if (apellido1.getText().matches("[a-z]+") && apellido2.getText().matches("^[a-z]+")) {
+            if (nombre1.getText().matches("[a-z]+||[A-Z]+") && nombre2.getText().matches("[a-z]+||[A-Z]+")) {
+                if (apellido1.getText().matches("[a-z]+||[A-Z]+") && apellido2.getText().matches("^[a-z]+||[A-Z]+")) {
 //                    if (correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
-                            if (direccion1.getText().matches("[a-z]+$") && direccion2.getText().matches("[a-z]+$")) {
+                            if (direccion1.getText().matches("^[\\w\\s.,-]+$") && direccion2.getText().matches("^[\\w\\s.,-]+$")) {
                                 //if (contraseña3.equals(contraseña4)) {
                                 InserBase();
 
@@ -553,7 +553,6 @@ public void validar() throws SQLException {
 
         contraseña.setEditable(false);
         contraseña.setBackground(new java.awt.Color(211, 211, 211));
-        contraseña.setText("jPasswordField1");
         contraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 140, 20));
 
@@ -780,9 +779,7 @@ public void validar() throws SQLException {
     }//GEN-LAST:event_direccion1KeyTyped
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
-        // TODO add your handling code here:
-        VentanaPrincipal1 principal = new VentanaPrincipal1();
-        principal.setVisible(true);
+       
         dispose();
     }//GEN-LAST:event_regresarActionPerformed
 
