@@ -4,10 +4,12 @@
  */
 package abogados;
 
+import clases.Mostrar_contrato;
 import clases.abogado;
 import desplazable.Desface;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,20 +43,28 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }
 
     ////////////////////////////datos de casos/////////////////////////////////////////////
-    public void mostrarabogados(ArrayList<abogado> lista_tipo) {
+    public void mosterarCONTRATOS(ArrayList<Mostrar_contrato> lista_tipo) {
         // Para darle forma al modelo de la tabla
         DefaultTableModel mTabla;
         mTabla = (DefaultTableModel) contra.getModel();
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getCod_abogado()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getSegundoNombre(), tipos.getNombreApellido(), tipos.getSegundoApellido(), tipos.getTelefono(), String.valueOf(tipos.getCost_hora()), String.valueOf(tipos.getTitulo())};
+            String[] filaNueva = {String.valueOf(tipos.getCedula_cli()), tipos.getNombre_cliu(), tipos.getApellido_cli(), String.valueOf(tipos.getID_contrato()), tipos.getDescripcion(),String.valueOf(tipos.getFecha())};
             mTabla.addRow(filaNueva);
         });
         contra.setModel(mTabla);
         columnascontra();
     }
 
+    public void limpiar() {
+        DefaultTableModel tb = (DefaultTableModel) contra.getModel();
+        int a = contra.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+    }
+    
     public void columnascontra() {
         TableColumnModel columna = contra.getColumnModel();
         columna.getColumn(0).setPreferredWidth(100);
@@ -65,6 +75,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         columna.getColumn(5).setPreferredWidth(150);
     }
 
+    public void mostrarABG(ArrayList<abogado> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) contra.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getCedula()), tipos.getPrimerNombre(),tipos.getNombreApellido(),tipos.getTelefono(),String.valueOf(tipos.isGratuidad()),String.valueOf(tipos.getCost_hora()),tipos.getCorre()};
+            mTabla.addRow(filaNueva);
+        });
+        contra.setModel(mTabla);
+
+    }
+    
     public void moscontra() {
         abogado abg_usuario = new abogado();
         DefaultTableModel modelo = (DefaultTableModel) contra.getModel();
@@ -74,7 +98,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             if (mostrar.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "NO EXISTE CONTRATOS REGISTRADOS");
             } else {
-                mostrarabogados(mostrar);
+                mostrarABG(mostrar);
             }
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,7 +122,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         ContratosVigentes = new javax.swing.JPanel();
         txtID = new javax.swing.JLabel();
-        txtIdContraro = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnMostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -106,6 +129,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnEliminar = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
+        btnEliminar2 = new javax.swing.JButton();
         VentanaContratosEspera = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -173,15 +198,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         ContratosVigentes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtID.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
-        txtID.setText("ID de contrato:");
-        ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 70));
-
-        txtIdContraro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdContraroActionPerformed(evt);
-            }
-        });
-        ContratosVigentes.add(txtIdContraro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 190, 40));
+        txtID.setText("BUSCAR CONTRATOS");
+        ContratosVigentes.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 70));
 
         btnBuscar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -190,12 +208,18 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        ContratosVigentes.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, 40));
+        ContratosVigentes.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 100, 40));
 
         btnMostrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnMostrar.setText("Mostrar");
-        ContratosVigentes.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 264, -1, -1));
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        ContratosVigentes.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, -1, -1));
 
+        contra.setBackground(new java.awt.Color(98, 229, 229));
         contra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -204,12 +228,19 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "null", "null"
+                "CEDULA_CLIENTE", "NOMBRE_CLIENTE", "APELLIDO_CLIENTE", "ID_contrato", "DESCRIPCIÓN", "FECHA DE CONTRATO "
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -224,17 +255,32 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
             contra.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        ContratosVigentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 660, 188));
+        ContratosVigentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 850, 188));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        ContratosVigentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 330, 110));
+        ContratosVigentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 330, 110));
 
         btnEliminar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        ContratosVigentes.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 264, -1, -1));
+        btnEliminar.setText("ACEPTAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        ContratosVigentes.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+        ContratosVigentes.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 210, 40));
+
+        btnEliminar2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnEliminar2.setText("ELIMINAR");
+        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar2ActionPerformed(evt);
+            }
+        });
+        ContratosVigentes.add(btnEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, -1, -1));
 
         jPanel2.add(ContratosVigentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
 
@@ -799,7 +845,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     private void txtContratosVigentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContratosVigentesMouseClicked
         VentanaFondo.setVisible(false);
-
         ContratosVigentes.setVisible(true);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -920,6 +965,58 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        Mostrar_contrato listar = new Mostrar_contrato();
+        try {
+            ArrayList <Mostrar_contrato> lista = listar.motrarCON();
+            limpiar();
+            mosterarCONTRATOS(lista);
+        } catch (SQLException ex) {
+            Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        
+        if(contra.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA FILA EN LA TABLA ");
+        }else{
+            int fila = contra.getSelectedRow();
+            Integer.parseInt(contra.getValueAt(fila, 3).toString());
+            Mostrar_contrato modificar = new Mostrar_contrato();
+            modificar.setID_contrato(Integer.parseInt(contra.getValueAt(fila, 3).toString()));
+            try {
+                modificar.descartar();
+                limpiar();
+                mosterarCONTRATOS(modificar.motrarCON());
+                JOptionPane.showMessageDialog(null, "SE HA ELIMINADO EL REGISTRO CORRECTAMENTE");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR EN LA ELIMINACION");
+                Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if(contra.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA FILA EN LA TABLA ");
+        }else{
+            int fila = contra.getSelectedRow();
+            Integer.parseInt(contra.getValueAt(fila, 3).toString());
+            Mostrar_contrato modificar = new Mostrar_contrato();
+            modificar.setID_contrato(Integer.parseInt(contra.getValueAt(fila, 3).toString()));
+            try {
+                modificar.aceptar();
+                limpiar();
+                mosterarCONTRATOS(modificar.motrarCON());
+                JOptionPane.showMessageDialog(null, "SE HA ACEPTADO EL CONTRATO CORRECTAMENTE");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"HA OCURRIDO UN ERROR EN LA ELIMINACION");
+                Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -969,6 +1066,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -995,6 +1093,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField sesion;
     private javax.swing.JTextField txtAsistenteAsignado;
     private javax.swing.JTextField txtContratosEspera;
@@ -1002,7 +1101,6 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel txtGmail;
     private javax.swing.JLabel txtID;
     private javax.swing.JLabel txtIdAsistente;
-    private javax.swing.JTextField txtIdContraro;
     private javax.swing.JLabel txtIdContratos;
     private javax.swing.JTextField txtModificar;
     private javax.swing.JTextField txtModificar1;

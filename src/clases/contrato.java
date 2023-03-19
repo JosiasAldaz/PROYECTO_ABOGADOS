@@ -22,6 +22,7 @@ public class contrato extends Persona{
     private LocalDateTime fecha_caso;
     private int ID_cli;
     private int id_contra;
+    private String estado;
     PostgresConexion conn = new PostgresConexion();
     PostgresConexion conexion = new PostgresConexion();
 
@@ -101,9 +102,17 @@ public class contrato extends Persona{
         this.conexion = conexion;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public void Insert() throws SQLException{
-        String sql = "INSERT INTO contrato(fecha_cont,descripcón,fk_ida_bg,fk_id_cliente)"
-                +"VALUES('"+getFecha_caso()+"','"+getDescripcion()+"',"+getFK_ID_abg()+","+getID_cli()+")";
+        String sql = "INSERT INTO contrato(fecha_cont,descripcón,fk_ida_bg,fk_id_cliente,estado)"
+                +"VALUES('"+getFecha_caso()+"','"+getDescripcion()+"',"+getFK_ID_abg()+","+getID_cli()+",'"+getEstado()+"')";
         conn.accion(sql);
     }
     

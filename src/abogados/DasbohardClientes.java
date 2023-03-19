@@ -403,7 +403,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(65, 105, 225));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 860, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 890, 40));
 
         JPmenuinicio.setBackground(new java.awt.Color(236, 239, 244));
 
@@ -796,7 +796,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -889,6 +889,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
                     contrato.setDescripcion(descripcion.getText());
                     contrato.setID_cli(Login.cliente.ID_cliente());
                     contrato.setFecha_caso(LocalDateTime.now());
+                    contrato.setEstado("ESPERA");
                     contrato.Insert();
                     JOptionPane.showMessageDialog(null, "SE SOLICITÓ EL CONTRATO AL ABOGADO,"
                         + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
@@ -946,7 +947,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         TXT_cédula.setText(pegar.getCedula());
         TXT_costo.setText(String.valueOf(pegar.getCost_hora()));
         TXT_grauidad.setText(String.valueOf(pegar.isGratuidad()));
-        jDialog1.setBounds(200, 100, 800, 600);
+        jDialog1.setBounds(200, 100, 850, 600);
         jDialog1.setVisible(true);
     }//GEN-LAST:event_TablaRMouseClicked
 
