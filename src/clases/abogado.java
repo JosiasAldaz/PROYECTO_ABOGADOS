@@ -169,4 +169,24 @@ public class abogado extends Persona {
         }
         return retorno;
     }
+    
+    
+    public ArrayList buscar_CLI(String parámetro,String segundo) throws SQLException{
+        String sql= "SELECT id_abg,foto_abg,cedula_abg,prim_nom_abg,prim_apell_abg,gratuidad,costo_x_horas,telefono_abg FROM abogado WHERE "+parámetro+" LIKE"+"'%"+segundo+"%'";
+        ResultSet resulset = conexion.Consulta(sql);
+        ArrayList <abogado> incremental = new ArrayList();
+        while(resulset.next()){
+            abogado usuario = new abogado();
+            usuario.setFoto_perfil(resulset.getString("foto_abg"));
+            usuario.setCod_abogado(resulset.getInt("id_abg"));
+            usuario.setCedula(resulset.getString("cedula_abg"));
+            usuario.setPrimerNombre(resulset.getString("prim_nom_abg"));
+            usuario.setNombreApellido(resulset.getString("prim_apell_abg"));
+            usuario.setGratuidad(resulset.getBoolean("gratuidad"));
+            usuario.setCost_hora(Double.parseDouble(String.valueOf(resulset.getInt("costo_x_horas"))));
+            usuario.setTelefono(resulset.getString("telefono_abg"));
+            incremental.add(usuario);
+        }
+        return incremental;
+    }
 }
