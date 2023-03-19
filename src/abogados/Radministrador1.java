@@ -6,10 +6,14 @@
 package abogados;
 
 import static abogados.Regi_Asistente.jTextcedula;
-import static abogados.Regi_Asistente.validarCedula;
+import static abogados.modificarAbogado.cedula;
+import static abogados.modificarAbogado.direccion1;
+import static abogados.modificarAbogado.direccion2;
 import clases.Administrador;
 import clases.Direcciones;
+import clases.Especializacion;
 import clases.PostgresConexion;
+import clases.abogado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.*;
@@ -22,66 +26,16 @@ import javax.swing.JOptionPane;
  *
  * @author KEVIN SANCHEZ
  */
-public class Radministrador extends javax.swing.JFrame {
+public class Radministrador1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Radministrador
      */
-    public Radministrador() {
+    public Radministrador1() {
         initComponents();
         this.setLocationRelativeTo(this);
         ocultar.setVisible(false);
 
-    }
-      public static boolean validarCedula(String cedula) {
-        // Comprobar que la cédula tenga 10 dígitos
-        if (cedula == null || cedula.length() != 10) {
-            return false;
-        }
-        // Extraer el número de provincia de los primeros dos dígitos
-        int provincia = Integer.parseInt(cedula.substring(0, 2));
-        if (provincia < 1 || provincia > 24) {
-            return false;
-        }
-        // Validar el tercer dígito (debe ser 0, 1, 2 o 3)
-        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
-        if (tercerDigito < 0 || tercerDigito > 3) {
-            return false;
-        }
-        // Extraer los nueve primeros dígitos como un número entero
-        int numCedula = Integer.parseInt(cedula.substring(0, 9));
-        // Validar el último dígito usando el algoritmo de validación del Registro Civil
-        int ultimoDigito = Integer.parseInt(cedula.substring(9));
-        int total = 0;
-        int multiplicador = 2;
-        for (int i = 8; i >= 0; i--) {
-            int digito = numCedula % 10;
-            numCedula /= 10;
-            int producto = digito * multiplicador;
-            if (producto > 9) {
-                producto -= 9;
-            }
-            total += producto;
-            multiplicador = (multiplicador == 2) ? 1 : 2;
-        }
-        int digitVerificador = 10 - (total % 10);
-        if (digitVerificador == 10) {
-            digitVerificador = 0;
-        }
-        if (ultimoDigito != digitVerificador) {
-            return false;
-        }
-        // Si llegamos hasta aquí, la cédula es válida
-        return true;
-    }
-          public void valced() throws SQLException {
-        String ced = jTextcedula.getText();
-        boolean esValida = validarCedula(ced);
-        if (esValida) {
-            Verificar();
-        } else {
-            JOptionPane.showMessageDialog(null, "La cédula no es válida.");
-        }
     }
 
     public void diasvalidacion() {
@@ -137,21 +91,11 @@ public class Radministrador extends javax.swing.JFrame {
         return retorno;
     }
 
-    public void Verificar() throws SQLException {
-        PostgresConexion conexion = new PostgresConexion();
-        String sql = "SELECT FROM ADMINISTRADOR WHERE cedula_admin='" + cedula.getText() + "'";
-        ResultSet contenedor = conexion.Consulta(sql);
-        System.out.println(contenedor.toString());
-        if (contenedor.next()) {
-            JOptionPane.showMessageDialog(this, "ADMINISTRADOR YA EXISTE");
-        } else {
-            validar();
-        }
-    }
 
-    public void validar() {
+
+    public void validar() throws SQLException {
         if (cedula.getText().matches("^[0-9]{10}$")) {
-            if (nombre1.getText().matches("[a-z]+||[A-Z]+") && nombre2.getText().matches("[a-z]+||[A-Z]+")) {
+            if (nombre1.getText().matches("[a-z]+||[A-Z]+$") && nombre2.getText().matches("[a-z]+||[A-Z]+")) {
                 if (apellido1.getText().matches("[a-z]+||[A-Z]+") && apellido2.getText().matches("^[a-z]+||[A-Z]+")) {
                     if (correo.getText().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                         if (telefono.getText().matches("^[0-9]{10}$")) {
@@ -179,7 +123,7 @@ public class Radministrador extends javax.swing.JFrame {
         }
     }
 
-    public void pru() {
+    public void pru() throws SQLException {
         diasvalidacion();
         int anio = jYearChooser1.getYear();
         int dia = Integer.parseInt(Jspdia.getValue().toString());
@@ -217,35 +161,45 @@ public class Radministrador extends javax.swing.JFrame {
                     LocalDate ahora = LocalDate.now();
                     Period periodo = Period.between(fecha, ahora);
                     int auxaedad = periodo.getYears();
-                    Direcciones direccion_admin = new Direcciones();
-                    direccion_admin.setCalle_principal(calle1.getText());
-                    direccion_admin.setCalle_secundaria(calle2.getText());
-                    direccion_admin.setSucursal(false);
-                    try {
-                        int id = 0;
-                        Administrador jefe = new Administrador();
-                        direccion_admin.Ingresar();
-                        //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
-                        String id_direccion = "SELECT id_direccion FROM direcciones where calle_principal ='" + calle1.getText() + "' and calle_secundaria ='" + calle2.getText() + "'";
-                        id = direccion_admin.Seleccionar(id_direccion);
-                        System.out.println(id);
-                        jefe.setCedula(cedula.getText());
-                        jefe.setPrimerNombre(nombre1.getText());
-                        jefe.setSegundoNombre(nombre2.getText());
-                        jefe.setNombreApellido(apellido1.getText());
-                        jefe.setSegundoApellido(apellido2.getText());
-                        jefe.setFK_direccion(id);
-                        jefe.setTelefono(telefono.getText());
-                        jefe.setGenero(genero);
-                        jefe.setEdad(auxaedad);
-                        jefe.setPassword(contra);
-                        jefe.setCorre(correo.getText());
-                        jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
-                        jefe.setFecha_nacimiento(fechaHora);
-                        jefe.Ingresar();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                    PostgresConexion conexion = new PostgresConexion();
+                    Administrador jefe = new Administrador();
+                    jefe.setCedula(cedula.getText());
+                    String sql = "SELECT * FROM ADMINISTRADOR WHERE  cedula_admin='" + jefe.getCedula() + "'";
+                    ResultSet contenedor = conexion.Consulta(sql);
+                    Direcciones direc = new Direcciones();
+                    while (contenedor.next()) {
+                        int k = contenedor.getInt("fk_id_direcciones");
+                        direc.setId_direccion(k);
+                        String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                        ResultSet contenedor1 = conexion.Consulta(sql1);
+                        while (contenedor1.next()) {
+
+                            direc.setCalle_principal(calle1.getText());
+                            direc.setCalle_secundaria(calle2.getText());
+                            direc.setSucursal(false);
+
+                        }
+
+                        try {
+                            direc.modificar_direccion();
+                            //TRAEMOS EL ID DE LA DIRECCION RECIÉN CREADA
+                            
+                            jefe.setPrimerNombre(nombre1.getText());
+                            jefe.setSegundoNombre(nombre2.getText());
+                            jefe.setNombreApellido(apellido1.getText());
+                            jefe.setSegundoApellido(apellido2.getText());
+                            jefe.setTelefono(telefono.getText());
+                            jefe.setGenero(genero);
+                            jefe.setEdad(auxaedad);
+                            jefe.setPassword(contra);
+                            jefe.setCorre(correo.getText());
+                            jefe.setFoto_perfil(JFSfoto_admin.getRutaImagen());
+                            jefe.setFecha_nacimiento(fechaHora);
+                            jefe.ModificarAdministrador();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Radministrador1.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR AL MOMENTO DE INGRESAR LA DIRECCION");
+                        }
                     }
                 }
             }
@@ -565,7 +519,7 @@ public class Radministrador extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(245, 222, 179));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disco-flexible.png"))); // NOI18N
-        jButton3.setText("REGISTRARSE");
+        jButton3.setText("ACTUALIZAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -642,9 +596,9 @@ public class Radministrador extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            valced();
+            validar();
         } catch (SQLException ex) {
-            Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Radministrador1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -751,21 +705,23 @@ public class Radministrador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Radministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Radministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Radministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Radministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Radministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Radministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Radministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Radministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Radministrador().setVisible(true);
+                new Radministrador1().setVisible(true);
             }
         });
     }
@@ -774,15 +730,15 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> JBxmes;
     private rojerusan.RSFotoSquare JFSfoto_admin;
     private javax.swing.JSpinner Jspdia;
-    private javax.swing.JTextField apellido1;
-    private javax.swing.JTextField apellido2;
+    public static javax.swing.JTextField apellido1;
+    public static javax.swing.JTextField apellido2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField calle1;
-    private javax.swing.JTextField calle2;
-    private javax.swing.JTextField cedula;
-    private javax.swing.JPasswordField contraseña3;
-    private javax.swing.JPasswordField contraseña4;
-    private javax.swing.JTextField correo;
+    public static javax.swing.JTextField calle1;
+    public static javax.swing.JTextField calle2;
+    public static javax.swing.JTextField cedula;
+    public static javax.swing.JPasswordField contraseña3;
+    public static javax.swing.JPasswordField contraseña4;
+    public static javax.swing.JTextField correo;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -807,10 +763,10 @@ public class Radministrador extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel mostrar;
-    private javax.swing.JTextField nombre1;
-    private javax.swing.JTextField nombre2;
+    public static javax.swing.JTextField nombre1;
+    public static javax.swing.JTextField nombre2;
     private javax.swing.JLabel ocultar;
     private javax.swing.JButton principalq;
-    private javax.swing.JTextField telefono;
+    public static javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

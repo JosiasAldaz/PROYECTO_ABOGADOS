@@ -154,8 +154,12 @@ public class abogado extends Persona {
     }
 
     public void Modificar_abogado() throws SQLException {
-        String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg='" + super.getPrimerNombre() + "', seg_nom_abg='" + super.getSegundoNombre() + "', prim_apell_abg='" + super.getNombreApellido() + "', seg_apell_abg='" + super.getSegundoApellido() + "', edad_abg='" + super.getEdad()+ "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
-        conexion.accion(sql);
+        String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg= UPPER('" + super.getPrimerNombre() + "'), seg_nom_abg= UPPER('" + super.getSegundoNombre() + "'), prim_apell_abg=UPPER('" + super.getNombreApellido() + "'), seg_apell_abg=UPPER('" + super.getSegundoApellido() + "'), edad_abg='" + super.getEdad()+ "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
+        if (conexion.accion(sql) == null) {
+            JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
+        } else {
+            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO DE CLIENTES");
+        }
     }
     
     public int login_abogado() throws SQLException {

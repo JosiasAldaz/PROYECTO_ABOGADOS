@@ -10,6 +10,7 @@ import static abogados.Modificari_Asistente.jPasscontra2;
 import static abogados.Modificari_Asistente.jTextcedula;
 import static abogados.Modificari_Asistente.jTextcorreo;
 import static abogados.asistenteInterfaz2.cedula_aux11;
+import clases.Administrador;
 import clases.Cliente;
 import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
@@ -52,6 +53,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg1.setVisible(false);
         JPfondo_Inicial.setVisible(true);
         jPanelUsuario.setVisible(false);
+        administrador.setVisible(false);
 
     }
     TIPO_diplomnma change = new TIPO_diplomnma();
@@ -79,6 +81,14 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     //BRYAM USUARIO///
     public void limpiarUsuario() {
+        DefaultTableModel tb = (DefaultTableModel) jTableUsuario.getModel();
+        int a = jTableUsuario.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+    }
+
+    public void limpiarAdministrador() {
         DefaultTableModel tb = (DefaultTableModel) jTableUsuario.getModel();
         int a = jTableUsuario.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -127,6 +137,34 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jTableUsuario.setModel(UTabla);
     }
 
+    public void listarAdmin(ArrayList<Administrador> lista_tipo) {
+        DefaultTableModel UTabla;
+        UTabla = (DefaultTableModel) Tabla_admin.getModel();
+        UTabla.setNumRows(0);
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNuevaUsuario = {String.valueOf(tipos.getID_admin()), tipos.getCedula(), tipos.getPrimerNombre(), tipos.getNombreApellido(), tipos.getTelefono(), String.valueOf(tipos.getEdad()), tipos.getCorre()};
+
+            UTabla.addRow(filaNuevaUsuario);
+        });
+        Tabla_admin.setModel(UTabla);
+    }
+
+    public void mostrarAdmin() {
+        Administrador admin = new Administrador();
+        DefaultTableModel modeloU = (DefaultTableModel) Tabla_admin.getModel();
+        try {
+            ArrayList<Administrador> mostrara = new ArrayList();
+            mostrara = admin.ListarAdministrador();
+            if (mostrara.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO EXISTEN ADMINISTRADORES REGISTRADOS");
+            } else {
+                listarAdmin(mostrara);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);//avisa un posible error
+        }
+    }
+
     public void mostrarAbogados() {
         abogado abg_usuario = new abogado();
         DefaultTableModel modelo = (DefaultTableModel) TablaR.getModel();
@@ -164,7 +202,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         abogado Buscar = new abogado();
         Buscar.setCedula(Bucar_abg.getText());
         if (Bucar_abg.getText().equals("")) {
-            JOptionPane.showConfirmDialog(null, "DEBE INGRESAR UN NOMBRE");
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR LA CEDULA DEL ABOGADO");
         } else {
             try {
                 ArrayList<abogado> recibir = new ArrayList();
@@ -175,6 +213,28 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 } else {
                     limpiar();
                     Listarabogados(recibir);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void buscarAdmin() {
+        Administrador Buscar = new Administrador();
+        Buscar.setCedula(cedula_admin.getText());
+        if (cedula_admin.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR LA CEDULA DEL ADMINISTRADOR QUE BUSCA");
+        } else {
+            try {
+                ArrayList<Administrador> recibir = new ArrayList();
+                recibir = Buscar.buscarAdmin();
+                System.out.println(recibir.size());
+                if (recibir.isEmpty()) {
+
+                } else {
+                    limpiar();
+                    listarAdmin(recibir);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -247,7 +307,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     eliminar.setCod_asist(Integer.parseInt(Tabla_asis.getValueAt(seleccionado, 0).toString()));
                     eliminar.EliminarAsistente();
 
-                    JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
                 } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
@@ -259,6 +318,30 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         }
 
+    }
+
+    public void eliminarAdmin() {
+        Administrador eliminarU = new Administrador();
+        int seleccionadoU = -1;
+        seleccionadoU = Tabla_admin.getSelectedRow();
+        if (seleccionadoU == -1) {
+            JOptionPane.showMessageDialog(null, "Aun no ha seleccionado una fila");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta información?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    System.out.println(Tabla_admin.getValueAt(seleccionadoU, 0).toString());
+                    eliminarU.setID_admin(Integer.parseInt(Tabla_admin.getValueAt(seleccionadoU, 0).toString()));
+                    eliminarU.ELIMINARADMIN();
+                  
+
+                  
+                } catch (SQLException ex) {
+                    Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
+                }
+            }
+        }
     }
 
     //BRYAM
@@ -276,7 +359,6 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     eliminarU.setID_cliente(Integer.parseInt(jTableUsuario.getValueAt(seleccionadoU, 0).toString()));
                     eliminarU.ELIMINARCliente();
                     limpiarUsuario();
-                    eliminarU.IngresarCliente();
 
                     JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
                 } catch (SQLException ex) {
@@ -554,7 +636,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
     }
 
-    public void listarcli() {
+    public void listarAsistente() {
         asistente cli1 = new asistente();
         DefaultTableModel modelo = (DefaultTableModel) Tabla_asis.getModel();
         try {
@@ -567,6 +649,44 @@ public class administradorInterfaz extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void ModificarAdmin() throws SQLException {
+        // Realizar la consulta
+        int i = -1;
+        i = Tabla_admin.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "SELECIONE EL ABOGADO A MODIFICAR");
+        } else {
+            String auxced = Tabla_admin.getValueAt(i, 1).toString();
+            Administrador nuevo2 = new Administrador();
+            nuevo2.setCedula(auxced);
+            String sql = ("SELECT * FROM ADMINISTRADOR WHERE cedula_admin='" + nuevo2.getCedula() + "'");
+            ResultSet contenedor = conexion.Consulta(sql);
+            while (contenedor.next()) {
+                Radministrador1 nuevo1 = new Radministrador1();
+                nuevo1.setVisible(true);
+                Radministrador1.cedula.setText(contenedor.getString("cedula_admin"));
+                Radministrador1.nombre1.setText(contenedor.getString("prim_nom_admin"));
+                Radministrador1.nombre2.setText(contenedor.getString("seg_nom_admin"));
+                Radministrador1.apellido1.setText(contenedor.getString("prim_apell_admin"));
+                Radministrador1.apellido2.setText(contenedor.getString("seg_apell_admin"));
+                Radministrador1.correo.setText(contenedor.getString("correo_admin"));
+                Radministrador1.telefono.setText(contenedor.getString("telefono_admin"));
+                Radministrador1.contraseña3.setText(contenedor.getString("contraseña_admin"));
+                Radministrador1.contraseña4.setText(contenedor.getString("contraseña_admin"));
+                int k = contenedor.getInt("fk_id_direcciones");
+                Direcciones direc = new Direcciones();
+                direc.setId_direccion(k);
+                String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
+                ResultSet contenedor1 = conexion.Consulta(sql1);
+                while (contenedor1.next()) {
+                    Radministrador1.calle1.setText(contenedor1.getString("calle_principal"));
+                    Radministrador1.calle2.setText(contenedor1.getString("calle_secundaria"));
+                }
+            }
+            Radministrador1.cedula.setEnabled(false);
         }
     }
 
@@ -618,6 +738,15 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        administrador = new javax.swing.JPanel();
+        jButtonModificarA22 = new javax.swing.JButton();
+        jButtonModificarA23 = new javax.swing.JButton();
+        Admin_buscar = new javax.swing.JButton();
+        jButtonModificarA25 = new javax.swing.JButton();
+        jButtonModificarA26 = new javax.swing.JButton();
+        jScrollPaneCam3 = new javax.swing.JScrollPane();
+        Tabla_admin = new javax.swing.JTable();
+        cedula_admin = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -631,6 +760,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         questnombre.setTitle("RESULTADO DE LA BUSQUEDA");
@@ -805,6 +936,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         if (TablaR.getColumnModel().getColumnCount() > 0) {
             TablaR.getColumnModel().getColumn(5).setHeaderValue("GRATUIDAD");
             TablaR.getColumnModel().getColumn(6).setHeaderValue("PUNTUACIÓN");
+            TablaR.getColumnModel().getColumn(8).setResizable(false);
             TablaR.getColumnModel().getColumn(8).setHeaderValue("COSTO X HORAS");
         }
 
@@ -1178,6 +1310,124 @@ public class administradorInterfaz extends javax.swing.JFrame {
 
         JPfondo_Inicial.add(jPanelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
 
+        administrador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonModificarA22.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA22.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA22.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA22.setText("INGRESAR");
+        jButtonModificarA22.setBorder(null);
+        jButtonModificarA22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA22ActionPerformed(evt);
+            }
+        });
+        administrador.add(jButtonModificarA22, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 140, 50));
+
+        jButtonModificarA23.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA23.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA23.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA23.setText("MOSTRAR");
+        jButtonModificarA23.setBorder(null);
+        jButtonModificarA23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA23ActionPerformed(evt);
+            }
+        });
+        administrador.add(jButtonModificarA23, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 140, 50));
+
+        Admin_buscar.setBackground(new java.awt.Color(128, 0, 0));
+        Admin_buscar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        Admin_buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Admin_buscar.setText("BUSCAR");
+        Admin_buscar.setBorder(null);
+        Admin_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Admin_buscarActionPerformed(evt);
+            }
+        });
+        administrador.add(Admin_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 140, 50));
+
+        jButtonModificarA25.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA25.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA25.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA25.setText("MODIFICAR");
+        jButtonModificarA25.setBorder(null);
+        jButtonModificarA25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA25ActionPerformed(evt);
+            }
+        });
+        administrador.add(jButtonModificarA25, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 140, 50));
+
+        jButtonModificarA26.setBackground(new java.awt.Color(128, 0, 0));
+        jButtonModificarA26.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA26.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA26.setText("ELIMINAR");
+        jButtonModificarA26.setBorder(null);
+        jButtonModificarA26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA26ActionPerformed(evt);
+            }
+        });
+        administrador.add(jButtonModificarA26, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 450, 140, 50));
+
+        Tabla_admin.setBackground(new java.awt.Color(255, 160, 122));
+        Tabla_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        Tabla_admin.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_ADMIN", "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "EDAD", "CORREO"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla_admin.setRowHeight(30);
+        Tabla_admin.getTableHeader().setReorderingAllowed(false);
+        Tabla_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla_adminMouseClicked(evt);
+            }
+        });
+        jScrollPaneCam3.setViewportView(Tabla_admin);
+
+        administrador.add(jScrollPaneCam3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 880, 290));
+
+        cedula_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cedula_admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cedula_adminActionPerformed(evt);
+            }
+        });
+        administrador.add(cedula_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 170, 40));
+
+        JPfondo_Inicial.add(administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 550));
+
         jPanel1.add(JPfondo_Inicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 980, 550));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escala-de-justicia.png"))); // NOI18N
@@ -1344,14 +1594,63 @@ public class administradorInterfaz extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 40));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 180, 40));
+
+        jPanel7.setBackground(new java.awt.Color(25, 25, 112));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("      ADMINISTRADOR");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel14MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel14MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 550));
 
@@ -1400,7 +1699,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private void jButtonModificarA16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA16ActionPerformed
 
         eliminarEspecializacion();
-        
+
 
     }//GEN-LAST:event_jButtonModificarA16ActionPerformed
 
@@ -1549,6 +1848,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg.setVisible(false);
         JPcrud_abg1.setVisible(false);
         jPanelUsuario.setVisible(false);
+        administrador.setVisible(false);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
@@ -1560,6 +1860,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg1.setVisible(false);
         JPcrud_abg.setVisible(true);
         jPanelUsuario.setVisible(false);
+        administrador.setVisible(false);
 
     }//GEN-LAST:event_jPanel4MouseClicked
 
@@ -1612,7 +1913,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA17ActionPerformed
 
     private void jButtonModificarA18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA18ActionPerformed
-        listarcli();
+        listarAsistente();
     }//GEN-LAST:event_jButtonModificarA18ActionPerformed
 
     private void jButtonModificarA19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA19ActionPerformed
@@ -1644,6 +1945,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg.setVisible(false);
         JPcrud_abg1.setVisible(true);
         jPanelUsuario.setVisible(false);
+        administrador.setVisible(false);
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1684,6 +1986,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
         JPcrud_abg.setVisible(false);
         JPcrud_abg1.setVisible(false);
         jPanelUsuario.setVisible(true);
+        administrador.setVisible(false);
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -1700,6 +2003,67 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private void JP_fondo_especialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JP_fondo_especialidadKeyTyped
 
     }//GEN-LAST:event_JP_fondo_especialidadKeyTyped
+
+    private void jButtonModificarA22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA22ActionPerformed
+        Radministrador nuevo = new Radministrador();
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarA22ActionPerformed
+
+    private void jButtonModificarA23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA23ActionPerformed
+        mostrarAdmin();
+    }//GEN-LAST:event_jButtonModificarA23ActionPerformed
+
+    private void Admin_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_buscarActionPerformed
+        buscarAdmin();
+    }//GEN-LAST:event_Admin_buscarActionPerformed
+
+    private void jButtonModificarA25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA25ActionPerformed
+        try {
+            ModificarAdmin();
+        } catch (SQLException ex) {
+            Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonModificarA25ActionPerformed
+
+    private void jButtonModificarA26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA26ActionPerformed
+        eliminarAdmin();       
+    }//GEN-LAST:event_jButtonModificarA26ActionPerformed
+
+    private void Tabla_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_adminMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla_adminMouseClicked
+
+    private void cedula_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_adminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cedula_adminActionPerformed
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        JP_fondo_especialidad.setVisible(false);
+        JPcrud_abg.setVisible(false);
+        JPcrud_abg1.setVisible(false);
+        jPanelUsuario.setVisible(false);
+        administrador.setVisible(true);
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseEntered
+        jPanel7.setBackground(new Color(135, 206, 250));
+    }//GEN-LAST:event_jLabel14MouseEntered
+
+    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
+        jPanel7.setBackground(new Color(25, 25, 112));
+    }//GEN-LAST:event_jLabel14MouseExited
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+        jPanel7.setBackground(new Color(135, 206, 250));
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+        jPanel7.setBackground(new Color(25, 25, 112));
+    }//GEN-LAST:event_jPanel7MouseExited
 
     /**
      * @param args the command line arguments
@@ -1737,6 +2101,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Admin_buscar;
     private javax.swing.JTextField Bucar_abg;
     private javax.swing.JTextField Bucar_asis;
     private javax.swing.JPanel JP_fondo_especialidad;
@@ -1747,7 +2112,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_nuevo_tipo;
     private javax.swing.JTable TablaR;
     private javax.swing.JTable Tabla_Tipos;
+    private javax.swing.JTable Tabla_admin;
     private javax.swing.JTable Tabla_asis;
+    private javax.swing.JPanel administrador;
+    private javax.swing.JTextField cedula_admin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1765,6 +2133,10 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JButton jButtonModificarA19;
     private javax.swing.JButton jButtonModificarA20;
     private javax.swing.JButton jButtonModificarA21;
+    private javax.swing.JButton jButtonModificarA22;
+    private javax.swing.JButton jButtonModificarA23;
+    private javax.swing.JButton jButtonModificarA25;
+    private javax.swing.JButton jButtonModificarA26;
     private javax.swing.JButton jButtonModificarA6;
     private javax.swing.JButton jButtonModificarA7;
     private javax.swing.JButton jButtonModificarA8;
@@ -1773,6 +2145,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1787,11 +2160,13 @@ public class administradorInterfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelUsuario;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneCam;
     private javax.swing.JScrollPane jScrollPaneCam1;
     private javax.swing.JScrollPane jScrollPaneCam2;
+    private javax.swing.JScrollPane jScrollPaneCam3;
     private javax.swing.JTable jTableUsuario;
     private javax.swing.JTextField jTextFieldBuscar_Usuario;
     private javax.swing.JDialog questnombre;

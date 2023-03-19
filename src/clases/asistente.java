@@ -112,7 +112,11 @@ public class asistente extends Persona {
     public void Ingresar() throws SQLException {
         String sql = "INSERT INTO public.asistente(titulo_asis, years_esperiencia, cedula_asis, contraseña_asis, prim_nom_asis, seg_nom_asis, prim_apell_asis, seg_apell_asis, edad_asis, genero_asis, fk_dir_asis, fecha_inicio, sueldo_asis,celular, email, foto)"
                 + "VALUES ('" + getTitudocu() + "','" + getExperiencia() + "','" + super.getCedula() + "', '" + super.getPassword() + "' , '" + super.getPrimerNombre() + "','" + super.getSegundoNombre() + "' , '" + super.getNombreApellido() + "' ,'" + super.getSegundoApellido() + "','" + super.getEdad() + "' , '" + super.getGenero() + "' , '" + super.getFK_direccion() + "' ,'" + super.getFecha_nacimiento() + "' , '" + getSueldo() + "' , '" + super.getTelefono() + "' , '" + super.getCorre() + "' , '" + super.getFoto_perfil() + "')";
-        conexion.accion(sql);
+        if (conn.accion(sql) == null) {
+            JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
+        } else {
+            JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO DE CLIENTES");
+        }
     }
 
     public int login() throws SQLException {
@@ -157,7 +161,7 @@ public class asistente extends Persona {
     }
 
     public void Modificar_asistente() throws SQLException {
-        String sql = "UPDATE public.asistente SET  titulo_asis='" + getTitudocu() + "', years_esperiencia='" + getExperiencia() + "', prim_nom_asis='" + super.getPrimerNombre() + "', seg_nom_asis='" + super.getSegundoNombre() + "', prim_apell_asis='" + super.getNombreApellido() + "', seg_apell_asis='" + super.getSegundoApellido() + "', edad_asis='" + super.getEdad() + "', genero_asis='" + super.getGenero() + "',  celular='" + super.getTelefono() + "', email='" + super.getCorre() + "', foto='" + super.getFoto_perfil() + "' where cedula_asis='" + super.getCedula() + "'";
+        String sql = "UPDATE public.asistente SET  titulo_asis='" + getTitudocu() + "', years_esperiencia='" + getExperiencia() + "', prim_nom_asis=UPPER('" + super.getPrimerNombre() + "'), seg_nom_asis=UPPER('" + super.getSegundoNombre() + "'), prim_apell_asis=UPPER('" + super.getNombreApellido() + "'), seg_apell_asis=UPPER('" + super.getSegundoApellido() + "'), edad_asis='" + super.getEdad() + "', genero_asis='" + super.getGenero() + "',  celular='" + super.getTelefono() + "', email='" + super.getCorre() + "', foto='" + super.getFoto_perfil() + "' where cedula_asis='" + super.getCedula() + "'";
         conexion.accion(sql);
     }    
     public void EliminarAsistente() throws SQLException {
