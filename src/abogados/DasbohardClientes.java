@@ -5,92 +5,100 @@
  */
 package abogados;
 
-import clases.Cliente;
-import clases.Direcciones;
 import clases.Label_conborde;
 import clases.MOSTRAR_CLIENTES;
-import clases.PostgresConexion;
 import clases.TIPO_diplomnma;
 import clases.abogado;
 import clases.contrato;
 import java.awt.Color;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author LENOVO
  */
 public class DasbohardClientes extends javax.swing.JFrame {
-
+    
     TIPO_diplomnma combo = new TIPO_diplomnma();
     ArrayList<TIPO_diplomnma> combobox = combo.mostrar();
     ArrayList<MOSTRAR_CLIENTES> interfaz = combo.mostrar();
     int indice = 0;
-
+    abogado buscar = new abogado();
     public DasbohardClientes() throws SQLException {
         initComponents();
         cargarcombo();
-        jPanel5.setVisible(false);
+        JPslide.setVisible(false);
+        JPbuscar_abg.setVisible(false);
     }
-
-    public void cargarcombo() throws SQLException {
+    
+    public void cargarcombo() throws SQLException{
         combobox = combo.mostrar();
-        combobox.stream().forEach(tipos -> {
-            if (JCB_tipos.getItemCount() == 0) {
-                JCB_tipos.addItem("SELECCIONE");
-            }
-            JCB_tipos.addItem(tipos.getNombre_diplo());
-        });
+            combobox.stream().forEach(tipos -> {
+                if (JCB_tipos.getItemCount() == 0) {
+                    JCB_tipos.addItem("SELECCIONE");
+                }
+                JCB_tipos.addItem(tipos.getNombre_diplo());
+            });
     }
+    public void mostrarABG(ArrayList<abogado> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) TablaR.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getCedula()), tipos.getPrimerNombre(),tipos.getNombreApellido(),tipos.getTelefono(),String.valueOf(tipos.isGratuidad()),String.valueOf(tipos.getCost_hora())};
+            mTabla.addRow(filaNueva);
+        });
+        TablaR.setModel(mTabla);
 
-    public int buscarID_diploma() {
-        int retorno = 0;
-        for (TIPO_diplomnma diploma : combobox) {
-            if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
-                retorno = diploma.getID_diploma();
-            }
+    }
+    
+    public void limpiar() {
+        DefaultTableModel tb = (DefaultTableModel) TablaR.getModel();
+        int a = TablaR.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
         }
+    }
+    
+    public int buscarID_diploma(){
+        int retorno=0;
+        for (TIPO_diplomnma diploma : combobox) {
+    if (diploma.getNombre_diplo().equals(JCB_tipos.getSelectedItem().toString())) {
+        retorno = diploma.getID_diploma();
+    }
+    }
         return retorno;
     }
 
-    public void modificarUsuario() throws SQLException {
-        PostgresConexion conexion = new PostgresConexion();
-        Cliente cli = new Cliente();
-        cli.setID_cliente(Login.cliente.ID_cliente());
-        String sql = "SELECT * FROM CLIENTES WHERE  id_clie= '" + cli.getID_cliente() + "'";
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-
-            modificarUsuario abrir = new modificarUsuario();
-            abrir.setVisible(true);
-            modificarUsuario.jTxtFldCedula.setText(contenedor.getString("cedula_cli"));
-            modificarUsuario.jTxtFldNombre1.setText(contenedor.getString("prim_nom_cli"));
-            modificarUsuario.jTxtFldNombre2.setText(contenedor.getString("seg_nom_cli"));
-            modificarUsuario.jTxtFldApellido1.setText(contenedor.getString("prim_apell_cli"));
-            modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_apell_cli"));
-            modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_cli"));
-            modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_cli"));
-
-            int k = contenedor.getInt("fk_id_direccion");
-            Direcciones direc = new Direcciones();
-            direc.setId_direccion(k);
-            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
-            ResultSet contenedor1 = conexion.Consulta(sql1);
-            while (contenedor1.next()) {
-                modificarUsuario.jTxtFldCallePrincipal.setText(contenedor1.getString("calle_principal"));
-                modificarUsuario.jTxtFldCalleSecundaria.setText(contenedor1.getString("calle_secundaria"));
-
+    public String parámetro(){
+        String parámetro="";
+            switch(JCb_parámetros.getSelectedItem().toString()){
+                case "SELECCIONE":
+                    parámetro = "INVÁLIDO";
+                    break;
+                case "NOMBRE":
+                    parámetro = "prim_nom_abg";
+                    buscar.setPrimerNombre(jTextField2.getText());
+                    break;
+                case "APELLIDO":
+                    parámetro = "prim_apell_abg";
+                    buscar.setNombreApellido(jTextField2.getText());
+                    break;
+                case "CÉDULA":
+                    parámetro = "cedula_abg";
+                    buscar.setCedula(jTextField2.getText());
+                    break;
             }
-        }
-
+            return parámetro;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,8 +108,8 @@ public class DasbohardClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        jButton3 = new javax.swing.JButton();
+        jDialog1 = new javax.swing.JDialog();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -115,11 +123,9 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        JPmenuinicio = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         interno = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -133,7 +139,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        JPslide = new javax.swing.JPanel();
         panelSlide = new abogados.PanelSlide();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -144,8 +150,32 @@ public class DasbohardClientes extends javax.swing.JFrame {
         descripcion = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jButtonActualizar1 = new javax.swing.JButton();
+        JPbuscar_abg = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPaneCam = new javax.swing.JScrollPane();
+        TablaR = new javax.swing.JTable();
+        JCb_parámetros = new javax.swing.JComboBox<>();
+        jButtonModificarA8 = new javax.swing.JButton();
 
-        jButton3.setText("jButton3");
+        jLabel6.setText("jLabel6");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(299, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(295, 295, 295))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(368, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,22 +214,11 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(34, 45, 49));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel7MouseExited(evt);
-            }
-        });
 
         jLabel22.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("MIS DATOS");
+        jLabel22.setText("BUSCAR");
         jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel22MouseClicked(evt);
@@ -216,19 +235,17 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 220, 50));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 220, 50));
 
         JPanel_explorar.setBackground(new java.awt.Color(34, 45, 49));
         JPanel_explorar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,52 +320,13 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 220, 50));
 
-        jPanel8.setBackground(new java.awt.Color(34, 45, 49));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel8MouseExited(evt);
-            }
-        });
-
-        jLabel23.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("BUSCAR");
-        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel23MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel23MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 220, -1));
-
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 760));
 
         jPanel3.setBackground(new java.awt.Color(65, 105, 225));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 860, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 890, 40));
 
-        jPanel6.setBackground(new java.awt.Color(236, 239, 244));
+        JPmenuinicio.setBackground(new java.awt.Color(236, 239, 244));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 36)); // NOI18N
         jLabel10.setText("DASBOHARD");
@@ -461,23 +439,23 @@ public class DasbohardClientes extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout JPmenuinicioLayout = new javax.swing.GroupLayout(JPmenuinicio);
+        JPmenuinicio.setLayout(JPmenuinicioLayout);
+        JPmenuinicioLayout.setHorizontalGroup(
+            JPmenuinicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPmenuinicioLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(JPmenuinicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(interno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(JPmenuinicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(interno1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(interno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        JPmenuinicioLayout.setVerticalGroup(
+            JPmenuinicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPmenuinicioLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -489,7 +467,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        JPslide.setBackground(new java.awt.Color(255, 255, 255));
 
         panelSlide.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -552,52 +530,52 @@ public class DasbohardClientes extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout JPslideLayout = new javax.swing.GroupLayout(JPslide);
+        JPslide.setLayout(JPslideLayout);
+        JPslideLayout.setHorizontalGroup(
+            JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPslideLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPslideLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGroup(JPslideLayout.createSequentialGroup()
                                 .addComponent(JCB_tipos, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(JPslideLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addGroup(JPslideLayout.createSequentialGroup()
+                                .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+        JPslideLayout.setVerticalGroup(
+            JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPslideLayout.createSequentialGroup()
+                .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPslideLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(JPslideLayout.createSequentialGroup()
                         .addGap(326, 326, 326)
                         .addComponent(jButton1))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(JPslideLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(JPslideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JCB_tipos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(188, 188, 188)
@@ -611,19 +589,127 @@ public class DasbohardClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("INGRESE EL PARÁMETRO DE BUSQUEDA:");
+
+        TablaR.setBackground(new java.awt.Color(255, 160, 122));
+        TablaR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        TablaR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "CEDULA", "NOMBRE", "APELLIDO", "TELEFONO", "GRATUIDAD", "COSTO_X_HORAS"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaR.setRowHeight(30);
+        TablaR.getTableHeader().setReorderingAllowed(false);
+        TablaR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaRMouseClicked(evt);
+            }
+        });
+        jScrollPaneCam.setViewportView(TablaR);
+
+        JCb_parámetros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE", "NOMBRE", "APELLIDO", "CÉDULA" }));
+
+        jButtonModificarA8.setBackground(new java.awt.Color(136, 55, 55));
+        jButtonModificarA8.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jButtonModificarA8.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarA8.setText("BUSCAR");
+        jButtonModificarA8.setBorder(null);
+        jButtonModificarA8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarA8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPbuscar_abgLayout = new javax.swing.GroupLayout(JPbuscar_abg);
+        JPbuscar_abg.setLayout(JPbuscar_abgLayout);
+        JPbuscar_abgLayout.setHorizontalGroup(
+            JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPbuscar_abgLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneCam, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JPbuscar_abgLayout.createSequentialGroup()
+                        .addComponent(JCb_parámetros, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addGroup(JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
+                        .addGap(30, 30, 30)
+                        .addComponent(jButtonModificarA8, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        JPbuscar_abgLayout.setVerticalGroup(
+            JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPbuscar_abgLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonModificarA8, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addGroup(JPbuscar_abgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(JCb_parámetros)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addComponent(jScrollPaneCam, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPslide, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JPmenuinicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(JPbuscar_abg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPslide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JPmenuinicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(JPbuscar_abg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, 720));
@@ -632,7 +718,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -645,76 +731,77 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         indice = indice - 1;
-        if (indice < 0) {
-            JOptionPane.showMessageDialog(null, "ESTE ES EL PRIMER ABOGADO");
-        } else {
+        if(indice <0){
+            JOptionPane.showMessageDialog(null,"ESTE ES EL PRIMER ABOGADO");
+        }else{
             panelSlide.show(indice);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        indice = indice + 1;
-        if (indice == interfaz.size()) {
+        indice = indice +1;
+        if(indice == interfaz.size()){
 
-            JOptionPane.showMessageDialog(null, "ESTE ES EL ÚLTIMO ABOGADO");
-        } else {
-            if (indice >= panelSlide.tamaño()) {
+            JOptionPane.showMessageDialog(null,"ESTE ES EL ÚLTIMO ABOGADO");
+        }else{
+            if(indice >= panelSlide.tamaño()){
                 String nombre = interfaz.get(indice).getNombrecompleto();
                 String especializacion = interfaz.get(indice).getEspecialización();
                 String ruta = interfaz.get(indice).getFoto();
                 String telefono = interfaz.get(indice).getTelefono();
                 String correo = interfaz.get(indice).getCorreo();
                 double costo = interfaz.get(indice).getCostohoras();
-                if (indice % 2 == 0) {
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188, 143, 143), especializacion, ruta, costo, telefono, correo));
-                } else {
-                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218, 165, 32), especializacion, ruta, costo, telefono, correo));
+                if (indice % 2 == 0){
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(188,143,143), especializacion, ruta, costo, telefono, correo));
+                }else{
+                    panelSlide.primerelemento(new Paneltest(nombre, new Color(218,165,32), especializacion, ruta, costo, telefono, correo));
                 }
 
                 panelSlide.show(indice);
-            } else {
+            }else{
                 panelSlide.show(indice);
             }
 
             //        if(indice % 2 =0){
-            //
-            //        }
+                //
+                //        }
+
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        if (JCB_tipos.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD");
-        } else {
+        if(JCB_tipos.getSelectedIndex()== 0){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD");
+        }else{
             MOSTRAR_CLIENTES objeto = new MOSTRAR_CLIENTES();
 
             try {
                 interfaz = objeto.mostrarcli(buscarID_diploma());
-                if (interfaz.size() == 0) {
-                    JOptionPane.showMessageDialog(null, "NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
-                } else {
-                    String nombre = interfaz.get(indice).getNombrecompleto();
+                if(interfaz.size()==0){
+                    JOptionPane.showMessageDialog(null,"NO TENEMOS ABOGADOS REGISTRADOS CON ESTA ESPECIALIDAD");
+                }else{
+                    String nombre =interfaz.get(indice).getNombrecompleto();
                     String especializacion = interfaz.get(indice).getEspecialización();
                     String ruta = interfaz.get(indice).getFoto();
                     String telefono = interfaz.get(indice).getTelefono();
                     String correo = interfaz.get(indice).getCorreo();
                     double costo = interfaz.get(indice).getCostohoras();
-                    JOptionPane.showMessageDialog(null, "TENEMOS DISPONIBLES " + interfaz.size() + " ABOGADOS CON ESTA ESPECIALIDAD");
-                    panelSlide.init(new Paneltest(nombre, new Color(255, 228, 196), especializacion, ruta, costo, telefono, correo));
+                    JOptionPane.showMessageDialog(null,"TENEMOS DISPONIBLES "+interfaz.size()+" ABOGADOS CON ESTA ESPECIALIDAD");
+                    panelSlide.init(new Paneltest(nombre,new Color(255,228,196),especializacion,ruta,costo,telefono,correo));
                 }
 
-            } catch (SQLException ex) {
+            } catch (SQLException ex){
                 Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
-        if (interfaz.size() == 0) {
-            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UNA ESPECIALIDAD ");
-        } else {
+        if(interfaz.size()==0){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA ESPECIALIDAD ");
+        }else{
 
             int response = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE CONTRATAR A ESTE ABOGADO?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
@@ -726,7 +813,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
                     contrato.setFecha_caso(LocalDateTime.now());
                     contrato.Insert();
                     JOptionPane.showMessageDialog(null, "SE SOLICITÓ EL CONTRATO AL ABOGADO,"
-                            + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
+                        + "EN UN PERIODO MÁSIMO DE 24 HORAS TENDRÁ UNA CONFIRMACIÓN");
                 } catch (SQLException ex) {
                     Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "OCURRIO UN ERROR EN EL PROCESO DE ELIMINACION");
@@ -739,79 +826,80 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void JPanel_explorarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel_explorarMouseEntered
-
+        
     }//GEN-LAST:event_JPanel_explorarMouseEntered
 
     private void JPanel_explorarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel_explorarMouseExited
-
+        
     }//GEN-LAST:event_JPanel_explorarMouseExited
 
     private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
-        jPanel9.setBackground(new Color(145, 145, 145));
+        jPanel9.setBackground(new Color(145,145,145));
     }//GEN-LAST:event_jPanel9MouseEntered
 
     private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
-        jPanel9.setBackground(new Color(34, 45, 49));
+        jPanel9.setBackground(new Color(34,45,49));
     }//GEN-LAST:event_jPanel9MouseExited
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-        jPanel5.setVisible(true);
+       JPmenuinicio.setVisible(false);
+       JPslide.setVisible(true);
+       JPbuscar_abg.setVisible(false);
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel20MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseEntered
-        JPanel_explorar.setBackground(new Color(145, 145, 145));
+        JPanel_explorar.setBackground(new Color(145,145,145));
     }//GEN-LAST:event_jLabel20MouseEntered
 
     private void jLabel20MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseExited
-        JPanel_explorar.setBackground(new Color(34, 45, 49));
+        JPanel_explorar.setBackground(new Color(34,45,49));
     }//GEN-LAST:event_jLabel20MouseExited
 
-    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        try {
-            modificarUsuario();
-        } catch (SQLException ex) {
-            Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
+    private void TablaRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRMouseClicked
+        
+    }//GEN-LAST:event_TablaRMouseClicked
+
+    private void jButtonModificarA8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA8ActionPerformed
+
+    }//GEN-LAST:event_jButtonModificarA8ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        
+        if(JCb_parámetros.getSelectedIndex()== -1){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UN PARÁMETRO DE BUSQUEDA");
+        }else{
+            String param1 = parámetro();
+            if(param1.equals("INVÁLIDO")){
+                JOptionPane.showMessageDialog(null,"EL PARÁMETRO NO ES VÁLIDO PARA LA BUSQUEDA");
+            }else{
+                try {
+                    ArrayList <abogado> lista = buscar.buscar_CLI(param1, jTextField2.getText().toUpperCase());
+                    limpiar();
+                    mostrarABG(lista);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-    }//GEN-LAST:event_jLabel22MouseClicked
+    }//GEN-LAST:event_jTextField2KeyTyped
 
-    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
-        jPanel8.setBackground(new Color(145, 145, 145));
-    }//GEN-LAST:event_jPanel8MouseEntered
-
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-        jPanel7.setBackground(new Color(145, 145, 145));
-    }//GEN-LAST:event_jPanel7MouseEntered
-
-    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
-        jPanel8.setBackground(new Color(34, 45, 49));
-    }//GEN-LAST:event_jPanel8MouseExited
-
-    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
-        jPanel7.setBackground(new Color(34, 45, 49));
-    }//GEN-LAST:event_jPanel7MouseExited
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jLabel22MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseEntered
-        jPanel7.setBackground(new Color(145, 145, 145));
+        jPanel7.setBackground(new Color(145,145,145));
     }//GEN-LAST:event_jLabel22MouseEntered
 
-    private void jLabel23MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseEntered
-        jPanel8.setBackground(new Color(145, 145, 145));
-    }//GEN-LAST:event_jLabel23MouseEntered
-
-    private void jLabel23MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseExited
-        jPanel8.setBackground(new Color(34, 45, 49));
-    }//GEN-LAST:event_jLabel23MouseExited
-
     private void jLabel22MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseExited
-        jPanel7.setBackground(new Color(34, 45, 49));    }//GEN-LAST:event_jLabel22MouseExited
+       jPanel7.setBackground(new Color(34,45,49));
+    }//GEN-LAST:event_jLabel22MouseExited
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        try {
-            modificarUsuario();
-        } catch (SQLException ex) {
-            Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jPanel7MouseClicked
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+       JPmenuinicio.setVisible(false);
+       JPslide.setVisible(false);
+       JPbuscar_abg.setVisible(true);
+    }//GEN-LAST:event_jLabel22MouseClicked
 
     /**
      * @param args the command line arguments
@@ -854,17 +942,22 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JCB_tipos;
+    private javax.swing.JComboBox<String> JCb_parámetros;
     private javax.swing.JPanel JPanel_explorar;
+    private javax.swing.JPanel JPbuscar_abg;
+    private javax.swing.JPanel JPmenuinicio;
+    private javax.swing.JPanel JPslide;
+    private javax.swing.JTable TablaR;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JPanel interno;
     private javax.swing.JPanel interno1;
     private javax.swing.JPanel interno2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonActualizar1;
-    private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JButton jButtonModificarA8;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -880,22 +973,22 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneCam;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private abogados.PanelSlide panelSlide;
     // End of variables declaration//GEN-END:variables
 }
