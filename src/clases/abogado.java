@@ -194,4 +194,15 @@ public class abogado extends Persona {
         }
         return incremental;
     }
+    
+    public double precioABG(int id) throws SQLException{
+        String sql = "SELECT costo_x_horas FROM abogado WHERE id_abg ="+id;
+        ResultSet resulset = conexion.Consulta(sql);
+        double retorno =0;
+        while(resulset.next()){
+            retorno = resulset.getDouble("costo_x_horas");
+        }
+        return retorno;
+        
+    }
 }
