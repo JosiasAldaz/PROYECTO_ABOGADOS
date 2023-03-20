@@ -17,6 +17,8 @@ import java.util.ArrayList;
  * @author LENOVO
  */
 public class Mostrar_contrato {
+    private int ID_cliente;
+    private int ID_abg;
     private String nombre_cliu;
     private String apellido_cli;
     private LocalDate fecha;
@@ -72,6 +74,22 @@ public class Mostrar_contrato {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public int getID_cliente() {
+        return ID_cliente;
+    }
+
+    public int getID_abg() {
+        return ID_abg;
+    }
+
+    public void setID_abg(int ID_abg) {
+        this.ID_abg = ID_abg;
+    }
+
+    public void setID_cliente(int ID_cliente) {
+        this.ID_cliente = ID_cliente;
+    }
     
     public ArrayList motrarCON() throws SQLException{
         String select = "SELECT prim_nom_cli,prim_apell_cli,cedula_cli,fecha_cont,contrato.\"descripcón\",contrato.id_contrato FROM clientes JOIN contrato ON contrato.fk_id_cliente = clientes.id_clie\n" +
@@ -101,5 +119,27 @@ public class Mostrar_contrato {
     public void aceptar() throws SQLException{
         String update = "UPDATE contrato set estado = 'ACEPTADO' WHERE id_contrato = "+getID_contrato();
         conn.accion(update);
+    }
+    
+    
+    public ArrayList motrarCONAPROBADOS() throws SQLException{
+        String select = "SELECT id_clie,prim_nom_cli,prim_apell_cli,cedula_cli,fecha_cont,contrato.\"descripcón\",contrato.id_contrato,contrato.fk_ida_bg FROM clientes JOIN contrato ON contrato.fk_id_cliente = clientes.id_clie\n" +
+"                 where contrato.estado = 'ACEPTADO'";
+        ResultSet contenedor = conn.Consulta(select);
+        ArrayList <Mostrar_contrato> listado = new ArrayList();
+        while(contenedor.next()){
+            Mostrar_contrato objeto = new Mostrar_contrato();
+            objeto.setID_abg(contenedor.getInt("fk_ida_bg"));
+            objeto.setID_cliente(contenedor.getInt("id_clie"));
+            objeto.setID_contrato(contenedor.getInt("id_contrato"));
+            objeto.setNombre_cliu(contenedor.getString("prim_nom_cli"));
+            objeto.setApellido_cli(contenedor.getString("prim_apell_cli"));
+            objeto.setDescripcion(contenedor.getString("descripcón"));
+            objeto.setCedula_cli(contenedor.getString("cedula_cli"));
+            java.sql.Timestamp fechaTimestamp = contenedor.getTimestamp("fecha_cont");
+            objeto.setFecha(fechaTimestamp.toLocalDateTime().toLocalDate());
+            listado.add(objeto);
+        }
+        return listado;
     }
 }

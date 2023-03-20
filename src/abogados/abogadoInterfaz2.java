@@ -4,8 +4,11 @@
  */
 package abogados;
 
+import clases.ENC_Factura;
+import clases.MOSTRAR_facturas;
 import clases.Mostrar_contrato;
 import clases.abogado;
+import clases.factura;
 import desplazable.Desface;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +38,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
     public abogadoInterfaz2() {
         initComponents();
-        setLocationRelativeTo(this);
+//        setLocationRelativeTo(this);
         ContratosVigentes.setVisible(false);
         VentanaContratosEspera.setVisible(false);
         VentanaAsistenteAsignado.setVisible(false);
@@ -50,10 +54,24 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         mTabla.setNumRows(0);
         // Uso de una expresion landa
         lista_tipo.stream().forEach(tipos -> {
-            String[] filaNueva = {String.valueOf(tipos.getCedula_cli()), tipos.getNombre_cliu(), tipos.getApellido_cli(), String.valueOf(tipos.getID_contrato()), tipos.getDescripcion(),String.valueOf(tipos.getFecha())};
+            String[] filaNueva = {String.valueOf(tipos.getID_cliente()),String.valueOf(tipos.getCedula_cli()), tipos.getNombre_cliu(), tipos.getApellido_cli(), String.valueOf(tipos.getID_contrato()), tipos.getDescripcion(),String.valueOf(tipos.getFecha())};
             mTabla.addRow(filaNueva);
         });
         contra.setModel(mTabla);
+        columnascontra();
+    }
+    
+    public void mosterarCONTAPROBADOS(ArrayList<Mostrar_contrato> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) contra2.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getID_cliente()),String.valueOf(tipos.getID_abg()),String.valueOf(tipos.getCedula_cli()), tipos.getNombre_cliu(), tipos.getApellido_cli(), String.valueOf(tipos.getID_contrato()), tipos.getDescripcion(),String.valueOf(tipos.getFecha())};
+            mTabla.addRow(filaNueva);
+        });
+        contra2.setModel(mTabla);
         columnascontra();
     }
 
@@ -63,6 +81,20 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         for (int i = a; i >= 0; i--) {
             tb.removeRow(tb.getRowCount() - 1);
         }
+    }
+    
+    public void mosterarFACTURAS(ArrayList<MOSTRAR_facturas> lista_tipo) {
+        // Para darle forma al modelo de la tabla
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) contra1.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getID_fact()),String.valueOf(tipos.getID_cliente()),String.valueOf(tipos.getFecha()) , String.valueOf(tipos.getSubtotal()), String.valueOf(tipos.getTotal()), tipos.getNombre(),tipos.getApellido()};
+            mTabla.addRow(filaNueva);
+        });
+        contra1.setModel(mTabla);
+        columnascontra();
     }
     
     public void columnascontra() {
@@ -116,6 +148,7 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        btnAsignar1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         VentanaFondo = new javax.swing.JPanel();
@@ -142,20 +175,19 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnRechazar = new javax.swing.JButton();
         VentanaAsistenteAsignado = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        txtIdAsistente = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        txtTipoContratos1 = new javax.swing.JLabel();
-        TipoContrato1 = new javax.swing.JComboBox<>();
         btnAsignar = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtGmail = new javax.swing.JLabel();
         txtWhatsapp = new javax.swing.JLabel();
+        btnAsignar2 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        contra1 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        contra2 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        btnAsignar3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -168,6 +200,14 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtOficinaAsignada = new javax.swing.JTextField();
         sesion = new javax.swing.JTextField();
         txtModificar1 = new javax.swing.JTextField();
+
+        btnAsignar1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnAsignar1.setText("CREAR FACTURA");
+        btnAsignar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignar1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -388,64 +428,17 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
 
         VentanaAsistenteAsignado.setBackground(new java.awt.Color(0, 102, 102));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable3);
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable4);
-
-        txtIdAsistente.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtIdAsistente.setText("ID Asistente: ");
-
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        txtTipoContratos1.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        txtTipoContratos1.setText("Tipo de Contratos:");
-
-        TipoContrato1.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
-        TipoContrato1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TipoContrato1ActionPerformed(evt);
-            }
-        });
-
         btnAsignar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnAsignar.setText("Asignar");
+        btnAsignar.setText("CREAR FACTURA");
         btnAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsignarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnEliminar1.setText("Eliminar");
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
             }
         });
 
@@ -461,61 +454,137 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         txtWhatsapp.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         txtWhatsapp.setText("Whatsapp");
 
+        btnAsignar2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnAsignar2.setText("MOSTRAR");
+        btnAsignar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignar2ActionPerformed(evt);
+            }
+        });
+
+        contra1.setBackground(new java.awt.Color(98, 229, 229));
+        contra1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_FACTA", "ID_CLIENTE", "FECHA_FACTURA", "SUB_TOTAL", "TOTAL", "NOMBRE_CLIENTE", "APELLIDO_CLIENTE"
+            }
+        ));
+        contra1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(contra1);
+        if (contra1.getColumnModel().getColumnCount() > 0) {
+            contra1.getColumnModel().getColumn(0).setResizable(false);
+            contra1.getColumnModel().getColumn(1).setResizable(false);
+            contra1.getColumnModel().getColumn(2).setResizable(false);
+            contra1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        contra2.setBackground(new java.awt.Color(98, 229, 229));
+        contra2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_cliente", "ID_abg", "CEDULA_CLIENTE", "NOMBRE_CLIENTE", "APELLIDO_CLIENTE", "ID_contrato", "DESCRIPCIÓN", "FECHA DE CONTRATO "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, false, true, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        contra2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(contra2);
+        if (contra2.getColumnModel().getColumnCount() > 0) {
+            contra2.getColumnModel().getColumn(0).setResizable(false);
+            contra2.getColumnModel().getColumn(1).setResizable(false);
+            contra2.getColumnModel().getColumn(2).setResizable(false);
+            contra2.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("FACTURAS REALIZADAS:");
+
+        btnAsignar3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnAsignar3.setText("MOSTRAR");
+        btnAsignar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignar3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout VentanaAsistenteAsignadoLayout = new javax.swing.GroupLayout(VentanaAsistenteAsignado);
         VentanaAsistenteAsignado.setLayout(VentanaAsistenteAsignadoLayout);
         VentanaAsistenteAsignadoLayout.setHorizontalGroup(
             VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5)
+            .addComponent(jScrollPane6)
             .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                        .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtTipoContratos1)
-                                        .addComponent(txtIdAsistente))
-                                    .addComponent(btnAsignar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(TipoContrato1, 0, 131, Short.MAX_VALUE)
-                                        .addComponent(jTextField2))
-                                    .addComponent(btnEliminar1))
-                                .addGap(175, 175, 175)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtWhatsapp)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAsignar2)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnAsignar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaAsistenteAsignadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtGmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAsignar3)
+                    .addComponent(txtWhatsapp))
+                .addGap(506, 506, 506))
         );
         VentanaAsistenteAsignadoLayout.setVerticalGroup(
             VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIdAsistente)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTipoContratos1)
-                    .addComponent(TipoContrato1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(50, 50, 50)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                            .addComponent(btnAsignar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAsignar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164)
+                .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaAsistenteAsignadoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaAsistenteAsignadoLayout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,14 +593,13 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
                                 .addComponent(txtGmail)
                                 .addContainerGap())))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaAsistenteAsignadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
                         .addGroup(VentanaAsistenteAsignadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaAsistenteAsignadoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtWhatsapp)
                                 .addContainerGap())))))
-            .addComponent(jScrollPane5)
         );
 
         jPanel2.add(VentanaAsistenteAsignado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 510));
@@ -850,17 +918,30 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         VentanaAsistenteAsignado.setVisible(false);
     }//GEN-LAST:event_txtContratosVigentesMouseClicked
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
-
     private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
-        // TODO add your handling code here:
+        factura factura = new factura();
+        int select = contra2.getSelectedRow();
+        if(select == -1){
+            JOptionPane.showMessageDialog(null,"DEBE SELECCIONAR UNA FILA DE LA TABLA ");
+        }else{
+            System.out.println(contra2.getValueAt(select, 0).toString());
+            factura.setFK_cliente(Integer.parseInt(contra2.getValueAt(select, 0).toString()));
+            factura.setFK_abg(Integer.parseInt(contra2.getValueAt(select, 1).toString()));
+            LocalDate fechafact = LocalDate.now();
+            factura.setFecha(fechafact);
+            try {
+                factura.ingresarFACTURA();
+                factura.setFK_id_encabezado(factura.ID_ENCA());
+                abogado consultarprecio = new abogado();
+                factura.setSub_total(consultarprecio.precioABG(Integer.parseInt(contra2.getValueAt(select, 1).toString())));
+                factura.setTotal(factura.calculartotal());
+                factura.cuerpofact();
+                JOptionPane.showMessageDialog(null,"SE HA GENERADO CORRECTAMENTE LA FACTURA");
+            } catch (SQLException ex) {
+                Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnAsignarActionPerformed
-
-    private void TipoContrato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoContrato1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TipoContrato1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -1017,6 +1098,30 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnAsignar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAsignar1ActionPerformed
+
+    private void btnAsignar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignar2ActionPerformed
+        Mostrar_contrato listar = new Mostrar_contrato();
+        try {
+            ArrayList <Mostrar_contrato> lista = listar.motrarCONAPROBADOS();
+            limpiar();
+            mosterarCONTAPROBADOS(lista);
+        } catch (SQLException ex) {
+            Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAsignar2ActionPerformed
+
+    private void btnAsignar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignar3ActionPerformed
+        MOSTRAR_facturas mostrar = new MOSTRAR_facturas();
+        try {
+            mosterarFACTURAS(mostrar.MOSTRAR_FACTURA());
+        } catch (SQLException ex) {
+            Logger.getLogger(abogadoInterfaz2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAsignar3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1057,21 +1162,24 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JPanel ContratosVigentes;
     private javax.swing.JPanel MenuDesplegable;
     private javax.swing.JComboBox<String> TipoContrato;
-    private javax.swing.JComboBox<String> TipoContrato1;
     private javax.swing.JPanel VentanaAsistenteAsignado;
     private javax.swing.JPanel VentanaContratosEspera;
     private javax.swing.JPanel VentanaFondo;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAsignar;
+    private javax.swing.JButton btnAsignar1;
+    private javax.swing.JButton btnAsignar2;
+    private javax.swing.JButton btnAsignar3;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnRechazar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTable contra;
+    private javax.swing.JTable contra1;
+    private javax.swing.JTable contra2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1080,16 +1188,15 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -1100,13 +1207,11 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtContratosVigentes;
     private javax.swing.JLabel txtGmail;
     private javax.swing.JLabel txtID;
-    private javax.swing.JLabel txtIdAsistente;
     private javax.swing.JLabel txtIdContratos;
     private javax.swing.JTextField txtModificar;
     private javax.swing.JTextField txtModificar1;
     private javax.swing.JTextField txtOficinaAsignada;
     private javax.swing.JLabel txtTipoContratos;
-    private javax.swing.JLabel txtTipoContratos1;
     private javax.swing.JLabel txtWhatsapp;
     // End of variables declaration//GEN-END:variables
 }
