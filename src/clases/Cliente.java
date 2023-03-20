@@ -40,7 +40,7 @@ public class Cliente extends Persona {
 
     public void IngresarCliente() throws SQLException {
         String sql = "INSERT INTO public.clientes(cedula_cli,contraseña_cli,prim_nom_cli,seg_nom_cli,prim_apell_cli,seg_apell_cli,edad_cli,genero_cli,fk_id_direccion,telefono_cli,correo_cli,foto_cli,fech_nac_cli)";
-        sql += " VALUES ('" + super.getCedula() + "','" + super.getPassword() + "',UPPER('" + super.getPrimerNombre() + "'),UPPER('" + super.getSegundoNombre() + "'),UPPER('" + super.getNombreApellido() + "'),UPPER('" + super.getSegundoApellido() + "')," + super.getEdad() + ",UPPER('" + super.getGenero() + "')," + super.getFK_direccion() + ",'" + super.getTelefono() + "','" + super.getCorre() +"','"+ super.getFoto_perfil() + "','"+ super.getFecha_nacimiento() + "')";
+        sql += " VALUES ('" + super.getCedula() + "','" + super.getPassword() + "',UPPER('" + super.getPrimerNombre() + "'),UPPER('" + super.getSegundoNombre() + "'),UPPER('" + super.getNombreApellido() + "'),UPPER('" + super.getSegundoApellido() + "')," + super.getEdad() + ",UPPER('" + super.getGenero() + "'),'" + super.getFK_direccion() + "','" + super.getTelefono() + "','" + super.getCorre() +"','"+ super.getFoto_perfil() + "','"+ super.getFecha_nacimiento() + "')";
         if (base.accion(sql) == null) {
             JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
         } else {
@@ -91,8 +91,8 @@ public class Cliente extends Persona {
     }
 
     public void ELIMINARCliente() throws SQLException {
-        String sql = "DELETE FROM public.abogado\n"
-                + "	WHERE id_usu=" + ID_cliente + "";
+        String sql = "DELETE FROM public.clientes\n"
+                + "	WHERE id_clie=" + ID_cliente + "";
         conexion.accion(sql);
     }
 

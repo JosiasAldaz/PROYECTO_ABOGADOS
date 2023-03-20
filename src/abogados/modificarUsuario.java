@@ -367,6 +367,11 @@ public class modificarUsuario extends javax.swing.JFrame {
         jPsswrdFldContraseña2.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña2.setText("jPasswordField1");
         jPsswrdFldContraseña2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        jPsswrdFldContraseña2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPsswrdFldContraseña2MouseClicked(evt);
+            }
+        });
         jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 100, 20));
 
         jLblCorreo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -419,6 +424,11 @@ public class modificarUsuario extends javax.swing.JFrame {
         jPsswrdFldContraseña1.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña1.setText("jPasswordField1");
         jPsswrdFldContraseña1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        jPsswrdFldContraseña1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPsswrdFldContraseña1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 100, 20));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
@@ -625,6 +635,14 @@ public class modificarUsuario extends javax.swing.JFrame {
     private void jBttnRegresarPanPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRegresarPanPrincipal1ActionPerformed
         dispose();
     }//GEN-LAST:event_jBttnRegresarPanPrincipal1ActionPerformed
+
+    private void jPsswrdFldContraseña1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsswrdFldContraseña1MouseClicked
+       jPsswrdFldContraseña1.setText("");
+    }//GEN-LAST:event_jPsswrdFldContraseña1MouseClicked
+
+    private void jPsswrdFldContraseña2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsswrdFldContraseña2MouseClicked
+        jPsswrdFldContraseña2.setText("");
+    }//GEN-LAST:event_jPsswrdFldContraseña2MouseClicked
 
     /**
      * @param args the command line arguments

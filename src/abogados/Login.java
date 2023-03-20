@@ -1,5 +1,7 @@
 package abogados;
 
+
+
 import clases.Administrador;
 import clases.Cliente;
 import clases.abogado;

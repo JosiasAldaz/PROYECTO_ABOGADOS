@@ -1004,9 +1004,8 @@ public class abogadoInterfaz2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModificarMouseEntered
 
     private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
-        modificarAbogado modificarA = new modificarAbogado();
-        modificarA.setVisible(true);
-        //Poner más ventanas
+      
+    
     }//GEN-LAST:event_txtModificarMouseClicked
 
     private void txtAsistenteAsignadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAsistenteAsignadoActionPerformed

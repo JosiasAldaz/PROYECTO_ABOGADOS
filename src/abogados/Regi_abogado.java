@@ -38,7 +38,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     Especializacion estatica = new Especializacion();
     ArrayList<TIPO_diplomnma> rellenar = new ArrayList();
 
-      public static boolean validarCedula(String cedula) {
+    public static boolean validarCedula(String cedula) {
         // Comprobar que la cédula tenga 10 dígitos
         if (cedula == null || cedula.length() != 10) {
             return false;
@@ -79,15 +79,17 @@ public class Regi_abogado extends javax.swing.JFrame {
         // Si llegamos hasta aquí, la cédula es válida
         return true;
     }
-          public void valced() throws SQLException {
-        String ced = jTextcedula.getText();
+
+    public void valced() throws SQLException {
+        String ced = cedula_abogado.getText();
         boolean esValida = validarCedula(ced);
         if (esValida) {
-           Verificar();
+            Verificar();
         } else {
             JOptionPane.showMessageDialog(null, "La cédula no es válida.");
         }
     }
+
     public String meschoice(String mes) {
         String retorno = "";
         switch (mes) {
@@ -258,7 +260,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                         nuevo.setGenero(genero);
                         nuevo.setGratuidad(auxGratudad);
                         nuevo.setFecha_nacimiento(fechaHora);
-                        nuevo.setTitulo(TXT_correo.getText());
+                        nuevo.setTitulo(titulos1.getText());
                         nuevo.setFoto_perfil(foto.getRutaImagen());
                         nuevo.setFK_direccion(id);
                         nuevo.setTelefono(telefono.getText());
@@ -271,7 +273,7 @@ public class Regi_abogado extends javax.swing.JFrame {
                             estatica.setFK_id_agb(nuevo.Seleccionar(selecABG));
                             estatica.Ingresar_Especialidad();
                         }
-                        JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+                     
 
                     } catch (SQLException e) {
                         JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO");
@@ -468,7 +470,7 @@ public class Regi_abogado extends javax.swing.JFrame {
 
         Internal.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 650, 480));
+        jPanel1.add(Internal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 650, 480));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
         jLabel1.setText("Nombres:");
@@ -761,11 +763,18 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            valced();
-        } catch (SQLException ex) {
-            Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+        if (buttonGroup2.isSelected(null)||cedula_abogado.getText().equals("") || nombre1.getText().equals("") || nombre2.getText().equals("") || apellido1.getText().equals("") || direccion1.getText().equals("") || direccion2.getText().equals("") || costo.getText().equals("") || TXT_correo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "CAMPOS VACIOS NO ES POSIBLE REGISTRAR ABOGADO");
+        } else {
+            try {
+                valced();
+               
+            } catch (SQLException ex) {
+                Logger.getLogger(Regi_abogado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -955,7 +964,7 @@ public class Regi_abogado extends javax.swing.JFrame {
     }//GEN-LAST:event_TIPO_diplomaAncestorAdded
 
     private void regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresar1ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_regresar1ActionPerformed
 
     private void contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMouseClicked

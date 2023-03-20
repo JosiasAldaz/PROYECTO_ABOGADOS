@@ -1,5 +1,6 @@
 package clases;
 
+import abogados.Login;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -95,15 +96,20 @@ public class abogado extends Persona {
     public void Insertar() throws SQLException {
         String sql = "INSERT INTO abogado( titulo_abg, costo_x_horas, gratuidad, cedula_abg,contraseña_abg, prim_nom_abg, seg_nom_abg, prim_apell_abg, seg_apell_abg, fecha_naci_abg, genero_abg, fk_id_direcc_abg, telefono_abg, foto_abg,correo_abg) "
                 + "VALUES ('" + getTitulo() + "'," + getCost_hora() + "," + isGratuidad() + ",'" + super.getCedula() + "','" + super.getPassword() + "', UPPER('" + super.getPrimerNombre() + "'), UPPER('" + super.getSegundoNombre() + "'), UPPER('" + super.getNombreApellido() + "'), UPPER('" + super.getSegundoApellido() + "'),'" + super.getFecha_nacimiento() + "','" + super.getGenero() + "','" + super.getFK_direccion() + "','" + super.getTelefono() + "','" + super.getFoto_perfil() + "','" + super.getCorre() + "')";
-        conexion.accion(sql);
+        if (conexion.accion(sql) == null) {
+            JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ECU-ABOGADOS");
+        } else {
+            JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO");
+        }
     }
 
     public void ELIMINARABOGADO() throws SQLException {
         String sql = "DELETE FROM public.abogado\n"
                 + "	WHERE id_abg=" + cod_abogado + "";
-        if(conexion.accion(sql) == null){
+        if (conexion.accion(sql) == null) {
             JOptionPane.showMessageDialog(null, "La persona fue eliminada exitosamente");
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO");
         }
     }
@@ -154,14 +160,14 @@ public class abogado extends Persona {
     }
 
     public void Modificar_abogado() throws SQLException {
-        String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg= UPPER('" + super.getPrimerNombre() + "'), seg_nom_abg= UPPER('" + super.getSegundoNombre() + "'), prim_apell_abg=UPPER('" + super.getNombreApellido() + "'), seg_apell_abg=UPPER('" + super.getSegundoApellido() + "'), edad_abg='" + super.getEdad()+ "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
+        String sql = "UPDATE public.abogado SET  titulo_abg='" + getTitulo() + "', costo_x_horas='" + getCost_hora() + "' , gratuidad='" + isGratuidad() + "', prim_nom_abg= UPPER('" + super.getPrimerNombre() + "'), seg_nom_abg= UPPER('" + super.getSegundoNombre() + "'), prim_apell_abg=UPPER('" + super.getNombreApellido() + "'), seg_apell_abg=UPPER('" + super.getSegundoApellido() + "'), edad_abg='" + super.getEdad() + "', genero_abg='" + super.getGenero() + "',  telefono_abg='" + super.getTelefono() + "', foto_abg='" + super.getFoto_perfil() + "' where cedula_abg='" + super.getCedula() + "'";
         if (conexion.accion(sql) == null) {
             JOptionPane.showMessageDialog(null, "SE HA REALIZADO EL INGRESO CORRECTAMENTE");
         } else {
             JOptionPane.showMessageDialog(null, "HA OCURRIDO UN ERROR EN EL INGRESO DE CLIENTES");
         }
     }
-    
+
     public int login_abogado() throws SQLException {
         int retorno;
         String loggin = "SELECT * FROM abogado WHERE cedula_abg = '" + super.getCedula() + "' and contraseña_abg = '" + super.getPassword() + "'";
@@ -173,13 +179,12 @@ public class abogado extends Persona {
         }
         return retorno;
     }
-    
-    
-    public ArrayList buscar_CLI(String parámetro,String segundo) throws SQLException{
-        String sql= "SELECT id_abg,foto_abg,cedula_abg,prim_nom_abg,prim_apell_abg,gratuidad,costo_x_horas,telefono_abg,correo_abg FROM abogado WHERE "+parámetro+" LIKE"+"'%"+segundo+"%'";
+
+    public ArrayList buscar_CLI(String parámetro, String segundo) throws SQLException {
+        String sql = "SELECT id_abg,foto_abg,cedula_abg,prim_nom_abg,prim_apell_abg,gratuidad,costo_x_horas,telefono_abg,correo_abg FROM abogado WHERE " + parámetro + " LIKE" + "'%" + segundo + "%'";
         ResultSet resulset = conexion.Consulta(sql);
-        ArrayList <abogado> incremental = new ArrayList();
-        while(resulset.next()){
+        ArrayList<abogado> incremental = new ArrayList();
+        while (resulset.next()) {
             abogado usuario = new abogado();
             usuario.setFoto_perfil(resulset.getString("foto_abg"));
             usuario.setCod_abogado(resulset.getInt("id_abg"));
@@ -194,15 +199,15 @@ public class abogado extends Persona {
         }
         return incremental;
     }
-    
-    public double precioABG(int id) throws SQLException{
-        String sql = "SELECT costo_x_horas FROM abogado WHERE id_abg ="+id;
+
+    public double precioABG(int id) throws SQLException {
+        String sql = "SELECT costo_x_horas FROM abogado WHERE id_abg =" + id;
         ResultSet resulset = conexion.Consulta(sql);
-        double retorno =0;
-        while(resulset.next()){
+        double retorno = 0;
+        while (resulset.next()) {
             retorno = resulset.getDouble("costo_x_horas");
         }
         return retorno;
-        
+
     }
 }

@@ -711,43 +711,13 @@ public class Datos_asis extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarActionPerformed
 //////////////////////////////////////////////////////////
 
-    public void prue() throws SQLException {
-        // Realizar la consulta
-        String cedulaingre = jTextcedula.getText();
-        String sql = ("SELECT * FROM asistente WHERE cedula_asis='" + cedulaingre + "'");
-        ResultSet contenedor = conexion.Consulta(sql);
-        while (contenedor.next()) {
-            Datos_asis.jTextcedula.setText(contenedor.getString("cedula_asis"));
-            Datos_asis.jTextnom1.setText(contenedor.getString("prim_nom_asis"));
-            Datos_asis.jTextnom2.setText(contenedor.getString("seg_nom_asis"));
-            Datos_asis.jTextape1.setText(contenedor.getString("prim_apell_asis"));
-            Datos_asis.jTextape2.setText(contenedor.getString("seg_apell_asis"));
-            Datos_asis.jTextcorreo.setText(contenedor.getString("email"));
-            Datos_asis.jTextsueldo.setText(contenedor.getString("sueldo_asis"));
-            Datos_asis.jTextcelular.setText(contenedor.getString("celular"));
-            Datos_asis.jPasscontra.setText(contenedor.getString("contraseña_asis"));
-            Datos_asis.jPasscontra2.setText(contenedor.getString("contraseña_asis"));
-            Datos_asis.jTxtFldAñosExperiencia.setText(contenedor.getString("years_esperiencia"));
-            Datos_asis.jTxtFldTituloAsistente.setText(contenedor.getString("titulo_asis"));
-            Datos_asis.calleprinci.setText(contenedor.getString("titulo_asis"));
-            int k = contenedor.getInt("fk_dir_asis");
-            Direcciones direc = new Direcciones();
-            direc.setId_direccion(k);
-            String sql1 = "SELECT * FROM public.direcciones WHERE id_direccion='" + direc.getId_direccion() + "'";
-            ResultSet contenedor1 = conexion.Consulta(sql1);
-            while (contenedor1.next()) {
-                Datos_asis.calleprinci.setText(contenedor1.getString("calle_principal"));
-                Datos_asis.callesecu.setText(contenedor1.getString("calle_secundaria"));
-            }
-        }
-    }
+ 
 ///////////////////////////////////////////////////metodos///
 
     public void valced() throws SQLException {
         String ced = jTextcedula.getText();
         boolean esValida = validarCedula(ced);
         if (esValida) {
-            prue();
         } else {
             JOptionPane.showMessageDialog(null, "La cédula no es válida.");
         }

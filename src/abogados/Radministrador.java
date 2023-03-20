@@ -7,6 +7,7 @@ package abogados;
 
 import static abogados.Regi_Asistente.jTextcedula;
 import static abogados.Regi_Asistente.validarCedula;
+import static abogados.Regi_abogado.nombre1;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.PostgresConexion;
@@ -33,7 +34,8 @@ public class Radministrador extends javax.swing.JFrame {
         ocultar.setVisible(false);
 
     }
-      public static boolean validarCedula(String cedula) {
+
+    public static boolean validarCedula(String cedula) {
         // Comprobar que la cédula tenga 10 dígitos
         if (cedula == null || cedula.length() != 10) {
             return false;
@@ -74,7 +76,8 @@ public class Radministrador extends javax.swing.JFrame {
         // Si llegamos hasta aquí, la cédula es válida
         return true;
     }
-          public void valced() throws SQLException {
+
+    public void valced() throws SQLException {
         String ced = jTextcedula.getText();
         boolean esValida = validarCedula(ced);
         if (esValida) {
@@ -641,10 +644,14 @@ public class Radministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JBxmesMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            valced();
-        } catch (SQLException ex) {
-            Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+        if (buttonGroup1.isSelected(null) || cedula.getText().equals("") || nombre1.getText().equals("") || nombre2.getText().equals("") || apellido1.getText().equals("")  || apellido2.getText().equals("")|| calle1.getText().equals("") || calle2.getText().equals("") || telefono.getText().equals("") || correo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "CAMPOS VACIOS NO ES POSIBLE REGISTRAR ADMINISTRADOR");
+        } else {
+            try {
+                valced();
+            } catch (SQLException ex) {
+                Logger.getLogger(Radministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

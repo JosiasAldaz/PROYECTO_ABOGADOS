@@ -81,7 +81,7 @@ public class Registro_u extends javax.swing.JFrame {
     }
 
     public void valced() throws SQLException {
-        String ced = jTextcedula.getText();
+        String ced = jTxtFldCedula.getText();
         boolean esValida = validarCedula(ced);
         if (esValida) {
             Verificar();
@@ -550,6 +550,11 @@ public class Registro_u extends javax.swing.JFrame {
         jPsswrdFldContraseña2.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña2.setText("jPasswordField1");
         jPsswrdFldContraseña2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        jPsswrdFldContraseña2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPsswrdFldContraseña2MouseClicked(evt);
+            }
+        });
         jPanel2.add(jPsswrdFldContraseña2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 100, 20));
 
         jLblCorreo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18)); // NOI18N
@@ -602,6 +607,11 @@ public class Registro_u extends javax.swing.JFrame {
         jPsswrdFldContraseña1.setBackground(new java.awt.Color(211, 211, 211));
         jPsswrdFldContraseña1.setText("jPasswordField1");
         jPsswrdFldContraseña1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        jPsswrdFldContraseña1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPsswrdFldContraseña1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jPsswrdFldContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 100, 20));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
@@ -698,10 +708,14 @@ public class Registro_u extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        try {
-            valced();
-        } catch (SQLException ex) {
-            Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+        if (jTextcedula.getText().equals("") || jTxtFldNombre1.getText().equals("") || jTxtFldNombre2.getText().equals("") || jTxtFldApellido1.getText().equals("") || jTxtFldCallePrincipal.getText().equals("") || jTxtFldCalleSecundaria.getText().equals("") || jTxtFildTelefono.getText().equals("") || jTxtFldCorreo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "CAMPOS VACIOS NO ES POSIBLE REGISTRAR CLIENTE");
+        } else {
+            try {
+                valced();
+            } catch (SQLException ex) {
+                Logger.getLogger(Registro_u.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jLabel10MouseClicked
 
@@ -818,6 +832,14 @@ public class Registro_u extends javax.swing.JFrame {
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         dispose();
     }//GEN-LAST:event_regresarActionPerformed
+
+    private void jPsswrdFldContraseña1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsswrdFldContraseña1MouseClicked
+        jPsswrdFldContraseña2.setText("");
+    }//GEN-LAST:event_jPsswrdFldContraseña1MouseClicked
+
+    private void jPsswrdFldContraseña2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPsswrdFldContraseña2MouseClicked
+        jPsswrdFldContraseña2.setText("");
+    }//GEN-LAST:event_jPsswrdFldContraseña2MouseClicked
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ package abogados;
 
 import static abogados.Login.admin;
 import static abogados.Login.as;
+import static abogados.Regi_abogado.nombre1;
 import clases.Administrador;
 import clases.Direcciones;
 import clases.PostgresConexion;
@@ -329,7 +330,7 @@ public class Regi_Asistente extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 250, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 250, 40));
 
         mostrarasis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraseña.png"))); // NOI18N
         mostrarasis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -429,11 +430,14 @@ public class Regi_Asistente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
-
-        try {
-            Verificar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+        if (jTextcedula.getText().equals("") || jTextnom1.getText().equals("") || jTextnom2.getText().equals("") || jTextape1.getText().equals("") || calleprinci.getText().equals("") || callesecu.getText().equals("") || jTextcelular.getText().equals("") || jTextcorreo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "CAMPOS VACIOS NO ES POSIBLE REGISTRAR ASISTENTE");
+        } else {
+            try {
+                Verificar();
+            } catch (SQLException ex) {
+                Logger.getLogger(Regi_Asistente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_registroActionPerformed
 
