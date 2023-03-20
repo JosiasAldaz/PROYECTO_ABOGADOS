@@ -14,6 +14,7 @@ import static abogados.modificarUsuario.jTxtFldCedula;
 import static abogados.modificarUsuario.jTxtFldCorreo;
 import static abogados.modificarUsuario.jTxtFldNombre1;
 import static abogados.modificarUsuario.jTxtFldNombre2;
+import clases.Administrador;
 import clases.Cliente;
 import clases.Direcciones;
 import clases.Label_conborde;
@@ -277,7 +278,6 @@ public class DasbohardClientes extends javax.swing.JFrame {
         ResultSet contenedor = conexion.Consulta(sql);
         while (contenedor.next()) {
 
-          
             jTxtFldCedula.setText(contenedor.getString("cedula_cli"));
             jTxtFldNombre1.setText(contenedor.getString("prim_nom_cli"));
             jTxtFldNombre2.setText(contenedor.getString("seg_nom_cli"));
@@ -300,6 +300,46 @@ public class DasbohardClientes extends javax.swing.JFrame {
             }
         }
 
+    }
+
+    public void ListarContra(ArrayList<contrato> lista_tipo) {
+
+        DefaultTableModel mTabla;
+        mTabla = (DefaultTableModel) tabla_noti.getModel();
+        mTabla.setNumRows(0);
+        // Uso de una expresion landa
+        lista_tipo.stream().forEach(tipos -> {
+            String[] filaNueva = {String.valueOf(tipos.getID_cli()), String.valueOf(tipos.getFK_ID_abg()), String.valueOf(tipos.getId_contra()), tipos.getEstado(), String.valueOf(tipos.getFecha_caso())};
+            mTabla.addRow(filaNueva);
+        });
+        tabla_noti.setModel(mTabla);
+
+    }
+
+    public void mostrarcontra() throws SQLException {
+        PostgresConexion conexion = new PostgresConexion();
+        Cliente cli = new Cliente();
+        cli.setID_cliente(Login.cliente.ID_cliente());
+         contrato nuevo = new contrato();
+        String sql = "SELECT * FROM CLIENTES WHERE  id_clie= '" + cli.getID_cliente() + "'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        while (contenedor.next()) {
+            int id_clie = contenedor.getInt("id_clie");
+           
+            nuevo.setID_cli(id_clie);
+            DefaultTableModel modeloU = (DefaultTableModel) tabla_noti.getModel();
+            try {
+                ArrayList<contrato> mostrara = new ArrayList();
+                mostrara = nuevo.ListarConCli();
+                if (mostrara.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "NO EXISTEN ADMINISTRADORES REGISTRADOS");
+                } else {
+                    ListarContra(mostrara);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(administradorInterfaz.class.getName()).log(Level.SEVERE, null, ex);//avisa un posible error
+            }
+        }
     }
 
     /**
@@ -404,6 +444,10 @@ public class DasbohardClientes extends javax.swing.JFrame {
         TablaR = new javax.swing.JTable();
         JCb_parámetros = new javax.swing.JComboBox<>();
         jButtonModificarA8 = new javax.swing.JButton();
+        solicitudes = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_noti = new javax.swing.JTable();
+        jLabel38 = new javax.swing.JLabel();
 
         jLabel6.setText("jLabel6");
 
@@ -539,6 +583,9 @@ public class DasbohardClientes extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("NOTIFICAIONES");
         jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel21MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel21MouseEntered(evt);
             }
@@ -1131,6 +1178,29 @@ public class DasbohardClientes extends javax.swing.JFrame {
 
         jPanel4.add(JPbuscar_abg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        solicitudes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabla_noti.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID_CLIENTE", "ID_ABOGADO", "ID_CASO", "ESTADO"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla_noti);
+
+        solicitudes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 704, 94));
+
+        jLabel38.setFont(new java.awt.Font("SimSun", 0, 48)); // NOI18N
+        jLabel38.setText("NOTIFICACIONES");
+        solicitudes.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 362, 110));
+
+        jPanel4.add(solicitudes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 980, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1260,10 +1330,11 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel9MouseExited
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-       JPmenuinicio.setVisible(false);
+        JPmenuinicio.setVisible(false);
         JPslide.setVisible(true);
         JPbuscar_abg.setVisible(false);
         MODIFICAR_USUARIO.setVisible(false);
+        solicitudes.setVisible(false);
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel20MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseEntered
@@ -1319,6 +1390,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
         JPslide.setVisible(false);
         JPbuscar_abg.setVisible(true);
         MODIFICAR_USUARIO.setVisible(false);
+        solicitudes.setVisible(false);
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jTxtFldNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFldNombre1KeyTyped
@@ -1448,12 +1520,13 @@ public class DasbohardClientes extends javax.swing.JFrame {
         JPslide.setVisible(false);
         JPbuscar_abg.setVisible(false);
         MODIFICAR_USUARIO.setVisible(true);
+        solicitudes.setVisible(false);
         try {
             modificarUsuario();
         } catch (SQLException ex) {
             Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }//GEN-LAST:event_jLabel37MouseClicked
 
     private void jLabel37KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel37KeyPressed
@@ -1461,8 +1534,21 @@ public class DasbohardClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel37KeyPressed
 
     private void jLabel21MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseEntered
-    jPanel9.setBackground(new Color(145, 145, 145));
+        jPanel9.setBackground(new Color(145, 145, 145));
     }//GEN-LAST:event_jLabel21MouseEntered
+
+    private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
+        JPmenuinicio.setVisible(false);
+        JPslide.setVisible(false);
+        JPbuscar_abg.setVisible(false);
+        MODIFICAR_USUARIO.setVisible(false);
+        solicitudes.setVisible(true);
+        try {
+            mostrarcontra();
+        } catch (SQLException ex) {
+            Logger.getLogger(DasbohardClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel21MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1559,6 +1645,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1581,6 +1668,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneCam;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
@@ -1598,5 +1686,7 @@ public class DasbohardClientes extends javax.swing.JFrame {
     private javax.swing.JLabel mostrarContra;
     private javax.swing.JLabel ocultarContra;
     private abogados.PanelSlide panelSlide;
+    private javax.swing.JPanel solicitudes;
+    private javax.swing.JTable tabla_noti;
     // End of variables declaration//GEN-END:variables
 }

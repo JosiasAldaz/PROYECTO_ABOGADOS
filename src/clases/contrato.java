@@ -131,4 +131,21 @@ public class contrato extends Persona{
         
         return retorno;
     }
+
+    public ArrayList ListarConCli() throws SQLException {
+        String sql = "SELECT * FROM CONTRATO WHERE  fk_id_cliente='" +getID_cli()+"'";
+        ResultSet contenedor = conexion.Consulta(sql);
+        ArrayList retorno = new ArrayList();
+        while (contenedor.next()) {
+            contrato insertar = new contrato();
+            insertar.setId_contra(contenedor.getInt("id_contrato"));
+//            insertar.setDescripcion(contenedor.getString("descripcon"));
+            insertar.setFK_ID_abg(contenedor.getInt("fk_ida_bg"));
+            insertar.setID_cli(contenedor.getInt("fk_id_cliente"));
+            insertar.setEstado(contenedor.getString("estado"));
+            retorno.add(insertar);
+        }
+        
+        return retorno;
+    }
 }
