@@ -32,6 +32,7 @@ public class modificarUsuario extends javax.swing.JFrame {
     public modificarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ocultarContra.setVisible(false);
     }
 
     public String SeleccionarMes(String mes) {
@@ -704,8 +705,8 @@ public class modificarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLblCorreo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPsswrdFldContraseña1;
-    private javax.swing.JPasswordField jPsswrdFldContraseña2;
+    public static javax.swing.JPasswordField jPsswrdFldContraseña1;
+    public static javax.swing.JPasswordField jPsswrdFldContraseña2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;

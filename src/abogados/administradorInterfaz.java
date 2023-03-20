@@ -391,6 +391,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 modificarAbogado.telefono.setText(contenedor.getString("telefono_abg"));
                 modificarAbogado.titulos.setText(contenedor.getString("titulo_abg"));
                 modificarAbogado.costo.setText(contenedor.getString("costo_x_horas"));
+                modificarAbogado.contraseña.setText(contenedor.getString("contraseña_abg"));
                 int k = contenedor.getInt("fk_id_direcc_abg");
                 Direcciones direc = new Direcciones();
                 direc.setId_direccion(k);
@@ -439,7 +440,8 @@ public class administradorInterfaz extends javax.swing.JFrame {
                 modificarUsuario.jTxtFldApellido2.setText(contenedor.getString("seg_apell_cli"));
                 modificarUsuario.jTxtFildTelefono.setText(contenedor.getString("telefono_cli"));
                 modificarUsuario.jTxtFldCorreo.setText(contenedor.getString("correo_cli"));
-
+                modificarUsuario.jPsswrdFldContraseña1.setText(contenedor.getString("contraseña_cli"));
+                modificarUsuario.jPsswrdFldContraseña2.setText(contenedor.getString("contraseña_cli"));
                 int k = contenedor.getInt("fk_id_direccion");
                 Direcciones direc = new Direcciones();
                 direc.setId_direccion(k);
@@ -614,10 +616,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
                     Modificari_Asistente.calleprinci.setText(contenedor1.getString("calle_principal"));
                     Modificari_Asistente.callesecu.setText(contenedor1.getString("calle_secundaria"));
                 }
-                jTextcedula.setEnabled(false);
-                jTextcorreo.setEnabled(false);
-                jPasscontra.setEnabled(false);
-                jPasscontra2.setEnabled(false);
+               
             }
         }
     }
@@ -1887,6 +1886,7 @@ public class administradorInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarA11ActionPerformed
 
     private void jButtonModificarA9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarA9ActionPerformed
+      
         try {
             moificarAbogado();
         } catch (SQLException ex) {
